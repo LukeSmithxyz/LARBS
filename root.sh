@@ -26,8 +26,39 @@ echo "$USER:$(cat pass1)" | chpasswd
 #I shred the password for safety's sake.
 shred -u pass1
 shred -u pass2
-printf "${BLUE}Now installing main programs.\n${NC}"
-pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager qutebrowser imagemagick transmission-cli atool libcaca compton transset-df blender gimp texlive-most texlive-lang markdown mupdf evince rsync git youtube-dl youtube-viewer noto-fonts-cjk noto-fonts-emoji cups screenfetch scrot unzip unrar biber ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r
+
+cmd=(dialog --separate-output --checklist "Select options:" 22 76 16)
+options=(1 "LaTeX packages" off    # any option can be set to default to "on"
+         2 "Libreoffice Suite" off
+         3 "GIMP" off
+         4 "Blender" off)
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+printf "\n${BLUE}Now installing main programs.\n${NC}"
+pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager qutebrowser imagemagick transmission-cli atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer noto-fonts-cjk noto-fonts-emoji cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r
+for choice in $choices
+do
+    case $choice in
+        1)
+	    printf "\n${BLUE}Now installing LaTeX packages...\n${NC}"
+	    pacman --noconfirm --needed -S texlive-most texlive-lang biber
+            ;;
+        2)
+	    printf "\n${BLUE}Now installing Libreoffice suite...\n${NC}"
+	    pacman --noconfirm --needed -S libreoffice-fresh
+            ;;
+        3)
+	    printf "\n${BLUE}Now installing GIMP...\n${NC}"
+	    pacman --noconfirm --needed -S gimp
+            ;;
+        4)
+	    printf "\n${BLUE}Now installing Blender...\n${NC}"
+	    pacman --noconfirm --needed -S blender
+            ;;
+    esac
+done
+
+#pacman --noconfirm --needed -S projectm-pulseaudio
 
 printf "${BLUE}Enabling Network Manager...\n${NC}"
 systemctl enable NetworkManager
@@ -40,5 +71,6 @@ printf "${BLUE}Running script as new user $USER...\n${NC}"
 cp /etc/sudoers /etc/sudoers.prelarbs
 echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 sudo -u $USER bash /home/$USER/user.sh
-curl http://lukesmith.xyz/larbs/sudoers > /etc/sudoers
-dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 10 60
+curl http://lukesmith.xyz/larbs/sudoers.sh > /etc/sudoers
+chown root:root /etc/sudoers.file
+dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 20 80
