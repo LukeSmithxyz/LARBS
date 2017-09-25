@@ -71,6 +71,7 @@ printf "${BLUE}Running script as new user $USER...\n${NC}"
 cp /etc/sudoers /etc/sudoers.prelarbs
 echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 sudo -u $USER bash /home/$USER/user.sh
-curl http://lukesmith.xyz/larbs/sudoers.sh > /etc/sudoers
-chown root:root /etc/sudoers.file
+
+echo -e "root ALL=(ALL) ALL\n%wheel ALL=(ALL) ALL\n%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager\nDefaults !tty_tickets"
+
 dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 20 80
