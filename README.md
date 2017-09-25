@@ -15,8 +15,8 @@ I've also documented the configuration fairly well, check out the documentation 
 Once you've installed a fresh install of Arch Linux with an internet connection, but before making your user, just run the following in the command line as  root:
 
 ```
-curl -O http://lukesmith.xyz/larbs/1.sh #Downloads the script.
-bash 1.sh #To run it.
+curl -O http://lukesmith.xyz/larbs/root.sh #Downloads the script.
+bash root.sh #To run it.
 ```
 
 This will prompt you to create a user and a password and install all of the basic pacakges in the Arch repos.
