@@ -51,6 +51,10 @@ We're basically on Version 2.0 now, which is still pretty primitive. Specificall
 
 Regardless, since you can never predict the non-predicted, I'll probably add in more trouble-shooting later, but right now it should work 95% of the time.
 
+## >still using systemd botnet distro and/or not a 100% free-as-in-freedumb Parabola GANOO slash Linocks
+
+I do plan on making an alternative script option for Parabola sooner or later, after all Parabola *is* the distro I actually use. If you want to use Arch OpenRC or another Arch-based non-systemd distro, I think this script still *should* work, although you may have to manually enable Network Manager or Pulseaudio. I haven't tested this though. If you have, tell me the results and I might implement it.
+
 ## Bugs?
 
 ### When I type `startx` I get some kind of non-descript error!
