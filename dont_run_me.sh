@@ -48,10 +48,7 @@ mount /dev/sda4 /mnt/home
 pacstrap /mnt base
 genfstab -U /mnt >> /mnt/etc/fstab
 
-curl http://lukesmith.xyz/larbs/chroot.sh > /mnt/chroot.sh
-arch-chroot /mnt bash chroot.sh
-
-rm /mnt/chroot.sh
+curl http://lukesmith.xyz/larbs/root.sh > /mnt/root.sh && arch-chroot /mnt bash root.sh && rm /mnt/root.sh
 
 echo "Eject CD/ROM? [y/N]"
 read yn
