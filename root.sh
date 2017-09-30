@@ -34,12 +34,15 @@ options=(1 "LaTeX packages" off
          3 "GIMP" off
          4 "Blender" off
 	 5 "Emacs" off
-	 6 "Fonts for Asian languages and emojis" off)
+	 6 "Fonts for unicode and other languages" off
+	 7 "transmission torrent client" off
+	 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+echo $choices > /home/$USER/choices
 clear
 printf "\n${BLUE}Now installing main programs.\n${NC}"
 
-pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick transmission-cli atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (echo "Error installing basic packages. Check your internet connection and pacman keyring." >> LARBS.log && error)
+pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (echo "Error installing basic packages. Check your internet connection and pacman keyring." >> LARBS.log && error)
 
 for choice in $choices
 do
@@ -68,6 +71,9 @@ do
 	    printf "\n${BLUE}Now installing extra fonts...\n${NC}"
 	    pacman --noconfirm --needed -S noto-fonts-cjk noto-fonts-emoji
 	    ;;
+	7)
+	    printf "\n${BLUE}Now installing transmission...\n${NC}"
+	    pacman --noconfirm --needed -S transmission-cli
     esac
 done
 

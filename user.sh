@@ -17,8 +17,26 @@ aurinstall packer || echo "Error installing packer." && exit
 
 printf "${BLUE}Installing AUR programs...\n${NC}"
 printf "${BLUE}(May take some time.)\n${NC}"
-packer --noconfirm -S i3-gaps vim-pathogen vim-live-latex-preview neofetch i3lock tamzen-font-git neomutt transmission-remote-cli-git unclutter-xfixes-git urxvt-resize-font-git ttf-ancient-fonts polybar-git python-pywal xfce-theme-blackbird || echo "Error installing AUR packages. Check your internet connections and pacman keys." && exit
+packer --noconfirm -S i3-gaps vim-pathogen neofetch i3lock tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird || echo "Error installing AUR packages. Check your internet connections and pacman keys." && exit
 #packer --noconfirm -S ncpamixer-git speedometer cli-visualizer
+choices=$(cat choices)
+for choice in $choices
+do
+    case $choice in
+        1)
+		printf "\n${BLUE}Now installing LaTeX packages...\n${NC}"
+		packer --noconfirm -S vim-live-latex-preview
+        	;;
+	6)
+		printf "\n${BLUE}Now installing extra fonts...\n${NC}"
+		pacman --noconfirm --needed -S ttf-ancient-fonts
+		;;
+	7)
+	    printf "\n${BLUE}Now installing transmission-remote-cli...\n${NC}"
+		packer --noconfirm -S transmission-remote-cli-git
+		;;
+    esac
+done
 
 printf "${BLUE}Downloading config files...\n${NC}"
 git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$USER && rm -rf voidrice

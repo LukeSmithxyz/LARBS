@@ -8,7 +8,7 @@ I've also documented the configuration fairly well, check out the documentation 
 
 ## What do you get?
 
-[My dotfiles](https://github.com/lukesmithxyz/voidrice) and all their requisite programs installed without a problem.
+[My dotfiles](https://github.com/lukesmithxyz/voidrice) and all their requisite programs installed without a problem. Effectively, this is an Arch Linux ricing desktop environment.
 
 All the core stuff we be installed without prompt, but you'll have the option to install some of the larger non-essential packages (LaTeX, LibreOffice, Blender, etc.).
 
