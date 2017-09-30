@@ -8,7 +8,9 @@ I've also documented the configuration fairly well, check out the documentation 
 
 ## What do you get?
 
-[My dotfiles](https://github.com/lukesmithxyz/voidrice) and all their requisite programs installed without a problem. It'll just take some time because I include *everything* I use, ever. All LaTeX packages, Blender, etc.
+[My dotfiles](https://github.com/lukesmithxyz/voidrice) and all their requisite programs installed without a problem.
+
+All the core stuff we be installed without prompt, but you'll have the option to install some of the larger non-essential packages (LaTeX, LibreOffice, Blender, etc.).
 
 ## Installation
 
@@ -23,7 +25,7 @@ This will prompt you to create a user and a password and install all of the basi
 
 In the process, it will also download another script to be run as the user (this is all automated). This will install `packer`, an AUR helper, and will use it to install the last few (very important) programs from the AUR.
 
-Finally, it will use `git` to download my [Voidrice](https://github.com/lukesmithxyz/voidrice) dotfiles and will plop them in your home directory for instant use!
+Finally, it will use `git` to download my [Voidrice](https://github.com/lukesmithxyz/voidrice) dotfiles and will plop them in their proper location for instant use!
 
 Then, finally, once that all is done, you should be able to type `startx` to begin the graphical environment. Congrats!
 
@@ -47,13 +49,7 @@ Additionally, if you've put your password in a terminal window already, you will
 
 ## Version
 
-We're basically on Version 2.0 now, which is still pretty primitive. Specifically, I haven't really added any error-handling into the script because so long as you have an internet connection and Arch doesn't mess up an update, you shouldn't have any errors anyway.
-
-Regardless, since you can never predict the non-predicted, I'll probably add in more trouble-shooting later, but right now it should work 95% of the time.
-
-## >still using systemd botnet distro and/or not a 100% free-as-in-freedumb Parabola GANOO slash Linocks
-
-I do plan on making an alternative script option for Parabola sooner or later, after all Parabola *is* the distro I actually use. If you want to use Arch OpenRC or another Arch-based non-systemd distro, I think this script still *should* work, although you may have to manually enable Network Manager or Pulseaudio. I haven't tested this though. If you have, tell me the results and I might implement it.
+We're basically on Version 2.0 now, which is still pretty primitive. I'm adding some error handling, if the script fails, check the contents of LARBS.log in whatever directory you've run the script. Still, this script is still in the Wild West, so I recommend only running it on fresh installs.
 
 ## Bugs?
 
@@ -72,3 +68,7 @@ Regardless, it's generally safe to rerun the script if something temporary went 
 ```
 userdel USER
 ```
+
+### >still using systemd botnet distro and/or not a 100% free-as-in-freedumb Parabola GANOO slash Linocks
+
+I do plan on making an alternative script option for Parabola sooner or later, after all Parabola *is* the distro I actually use. If you want to use Arch OpenRC or another Arch-based non-systemd distro, I think this script still *should* work, although you may have to manually enable Network Manager or Pulseaudio. I haven't tested this though. If you have, tell me the results and I might implement it.

@@ -1,10 +1,11 @@
 #!/bin/bash
-pacman -S --noconfirm dialog
+pacman -S --noconfirm dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m'
-#printf "This should have ${BLUE}Blue\n${NC} and ${RED}Red${NC} text."
-#printf "\n${BLUE}Now installing main programs...\n${NC}\n"
+
+error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Check the LARBS.log file for more information" 10 60 && clear && exit ;}
+
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
 dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> name
@@ -37,7 +38,9 @@ options=(1 "LaTeX packages" off
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 printf "\n${BLUE}Now installing main programs.\n${NC}"
-pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick transmission-cli atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || echo "Error installing basic packages. Check your internet connection and pacman keyring." && exit
+
+pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick transmission-cli atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (echo "Error installing basic packages. Check your internet connection and pacman keyring." >> LARBS.log && error)
+
 for choice in $choices
 do
     case $choice in
@@ -57,11 +60,11 @@ do
 	    printf "\n${BLUE}Now installing Blender...\n${NC}"
 	    pacman --noconfirm --needed -S blender
             ;;
-    5)
+	5)
 	    printf "\n${BLUE}Now installing Emacs...\n${NC}"
 	    pacman --noconfirm --needed -S emacs
 	    ;;
-    6)
+	6)
 	    printf "\n${BLUE}Now installing extra fonts...\n${NC}"
 	    pacman --noconfirm --needed -S noto-fonts-cjk noto-fonts-emoji
 	    ;;
@@ -111,7 +114,7 @@ printf "${BLUE}Running script as new user $USER...\n${NC}"
 cp /etc/sudoers /etc/sudoers.prelarbs
 echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-sudo -u $USER bash /home/$USER/user.sh
+sudo -u $USER bash /home/$USER/user.sh || (echo "Error in the user install script. This might be because of a problem in your internet connection or pacman keyring or in an AUR package." >> LARBS.log && error)
 
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers > /etc/sudoers 
 
