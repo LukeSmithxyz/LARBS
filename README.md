@@ -12,6 +12,8 @@ I've also documented the configuration fairly well, check out the documentation 
 
 All the core stuff we be installed without prompt, but you'll have the option to install some of the larger non-essential packages (LaTeX, LibreOffice, Blender, etc.).
 
+Really, the goal of this script is to start a kind of Linux meta-distribution which makes the more nuanced aspects of an advanced Linux setup available to even Linux newbies.
+
 ## Installation
 
 Once you've installed a fresh install of Arch Linux with an internet connection, but before making your user, just run the following in the command line as  root:
