@@ -81,7 +81,7 @@ brow=(dialog --separate-output --checklist "Select a browser (none or multiple p
 options=(1 "qutebrowser" off    # any option can be set to default to "on"
          2 "Firefox" off
          #3 "Palemoon" off
-         #4 "Firefox" off
+         #4 "Waterfox" off
 	 )
 browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
@@ -114,13 +114,14 @@ systemctl enable NetworkManager
 systemctl start NetworkManager
 
 printf "${BLUE}Downloading next portion of script...\n${NC}"
-curl http://lukesmith.xyz/larbs/user.sh > /home/$USER/user.sh
-
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/user.sh > /home/$USER/user.sh 
 printf "${BLUE}Running script as new user $USER...\n${NC}"
 cp /etc/sudoers /etc/sudoers.prelarbs
 echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 sudo -u $USER bash /home/$USER/user.sh || (echo "Error in the user install script. This might be because of a problem in your internet connection or pacman keyring or in an AUR package." >> LARBS.log && error)
+cat /home$USER/LARBS.log >> LARBS.log && rm /home/$USER/LARBS.log
+rm /home/$USER/user.sh
 
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers > /etc/sudoers 
 
