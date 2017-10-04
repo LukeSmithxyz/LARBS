@@ -40,6 +40,16 @@ options=(1 "LaTeX packages" off
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 echo $choices > /home/$USER/choices
 clear
+
+brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
+options=(1 "qutebrowser" off    # any option can be set to default to "on"
+         2 "Firefox" off
+         #3 "Palemoon" off
+         #4 "Waterfox" off
+	 )
+browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+
 printf "\n${BLUE}Now installing main programs.\n${NC}"
 
 pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (echo "Error installing basic packages. Check your internet connection and pacman keyring." >> LARBS.log && error)
@@ -77,14 +87,6 @@ do
     esac
 done
 
-brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
-options=(1 "qutebrowser" off    # any option can be set to default to "on"
-         2 "Firefox" off
-         #3 "Palemoon" off
-         #4 "Waterfox" off
-	 )
-browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
-clear
 for choice in $browch
 do
     case $choice in
