@@ -14,12 +14,21 @@ pulseaudio --start
 printf "${BLUE}Installing packer as an AUR manager...\n${NC}"
 
 aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
+qm=$(pacman -Qm | awk '{print $1}')
 
-aurinstall packer || (echo "Error installing packer." >> LARBS.log && error)
+aurcheck() {
+if [[ $qm = *"$1"* ]]; then
+	echo $1 already installed.
+else
+	aurinstall $1
+fi
+;}
+
+aurcheck packer || (echo "Error installing packer." >> LARBS.log && error)
 
 printf "${BLUE}Installing AUR programs...\n${NC}"
 printf "${BLUE}(May take some time.)\n${NC}"
-packer --noconfirm -S i3-gaps vim-pathogen neofetch i3lock tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird || (echo "Error installing AUR packages. Check your internet connections and pacman keys." >> LARBS.log && error)
+aurcheck i3-gaps vim-pathogen neofetch i3lock tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird || (echo "Error installing AUR packages. Check your internet connections and pacman keys." >> LARBS.log && error)
 #packer --noconfirm -S ncpamixer-git speedometer cli-visualizer
 choices=$(cat choices)
 for choice in $choices
@@ -27,15 +36,15 @@ do
     case $choice in
         1)
 		printf "\n${BLUE}Now installing LaTeX packages...\n${NC}"
-		packer --noconfirm -S vim-live-latex-preview
+		aurcheck vim-live-latex-preview
         	;;
 	6)
 		printf "\n${BLUE}Now installing extra fonts...\n${NC}"
-		pacman --noconfirm --needed -S ttf-ancient-fonts
+		aurcheck ttf-ancient-fonts
 		;;
 	7)
 	    printf "\n${BLUE}Now installing transmission-remote-cli...\n${NC}"
-		packer --noconfirm -S transmission-remote-cli-git
+		aurcheck transmission-remote-cli-git
 		;;
     esac
 done
