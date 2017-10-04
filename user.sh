@@ -22,7 +22,7 @@ if [[ $qm = *"$1"* ]]; then
 else
 	aurinstall $1
 fi
-;}
+}
 
 aurcheck packer || (echo "Error installing packer." >> LARBS.log && error)
 
