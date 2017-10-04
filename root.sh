@@ -44,10 +44,11 @@ clear
 brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
 options=(1 "qutebrowser" off    # any option can be set to default to "on"
          2 "Firefox" off
-         #3 "Palemoon" off
-         #4 "Waterfox" off
+         3 "Palemoon" off
+         4 "Waterfox" off
 	 )
 browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
+echo $browch > /home/$USER/browch
 clear
 
 printf "\n${BLUE}Now installing main programs.\n${NC}"

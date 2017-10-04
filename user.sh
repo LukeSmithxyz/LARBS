@@ -48,6 +48,21 @@ do
 		;;
     esac
 done
+browsers=$(cat browch)
+for choice in $browsers
+do
+	case $choice in
+		3)
+			printf "\n${BLUE}Now installing Palemoon...\n${NC}"
+			aurcheck palemoon-bin
+			;;
+		4)
+			printf "\n${BLUE}Now installing Waterfox...\n${NC}"
+			aurcheck waterfox-bin
+			;;
+	esac
+done
+
 
 printf "${BLUE}Downloading config files...\n${NC}"
 git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$USER && rm -rf voidrice
