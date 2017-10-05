@@ -16,6 +16,8 @@ dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "Have you seen this fi
 
 dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "Do you think I'm meming? Only select yes to DELET your entire /dev/sda and reinstall Arch.\n\nTo stop this script, press no."  10 60 || exit
 
+dialog --no-cancel --inputbox "Enter a name for your computer." 10 60 2> comp
+
 timedatectl set-ntp true
 
 cat <<EOF | fdisk /dev/sda
@@ -53,6 +55,8 @@ mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 mkdir /mnt/home
 mount /dev/sda4 /mnt/home
+
+cat comp > /mnt/etc/hostname && rm comp
 
 pacstrap /mnt base base-devel
 

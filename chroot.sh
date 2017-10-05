@@ -1,4 +1,4 @@
-#Potential variables: timezone, hostname
+#Potential variables: timezone, lang and local
 
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 
@@ -8,7 +8,7 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "en_US ISO-8859-1" >> /etc/locale.gen
 locale-gen
 
-echo "test" > /etc/hostname
+#echo "test" > /etc/hostname
 
 pacman -S networkmanager
 systemctl enable NetworkManager
