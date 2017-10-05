@@ -62,6 +62,7 @@ do
 	case $choice in
 		3)
 			printf "\n${BLUE}Now installing Palemoon...\n${NC}"
+			$ gpg --recv-keys 865E6C87C65285EC
 			aurcheck palemoon-bin
 			;;
 		4)
