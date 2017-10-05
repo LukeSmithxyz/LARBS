@@ -27,9 +27,9 @@ echo "$USER:$(cat pass1)" | chpasswd
 shred -u pass1
 shred -u pass2
 
-touch .firstime
+touch .firstrun
 curl -O http://lukesmith.xyz/larbs/install_packages.sh && bash install_packages.sh
-rm .firstime
+rm .firstrun
 
 printf "${BLUE}Enabling Network Manager...\n${NC}"
 systemctl enable NetworkManager
