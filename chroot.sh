@@ -1,5 +1,7 @@
 #Potential variables: timezone, lang and local
 
+passwd
+
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 
 hwclock --systohc

@@ -1,35 +1,38 @@
 # Luke's Auto-Rice Bootstraping Scripts (LARBS)
 
-When you've installed Arch Linux 6 gorrillian times like me, you get pretty sick of having to reproduce your favorite configuration on fresh installs over and over. When you're a C-list YouTube celebrity, it gets even more difficult when literally thousands of people ask you how to do X or get Y.
+This is a set of scripts either can either (1) install Arch Linux automatically with a typical Arch ISOed USB, and perhaps more prominently (2) automatically install and configure all of the prerequisites for an advanced Linux desktop environment, using my configs [here](https://github.com/LukeSmithxyz/voidrice) as a base.
 
-The LARBS are a final solution to all of that. These scripts are to be run on a fresh install of Arch Linux, and they create a user, install all required programs and set up dotfiles directly from Github to give normal people a fairly sleek Linux configuration without hundreds of autsitic hours. I did the work, so why should you?
-
-I've also documented the configuration fairly well, check out the documentation on my **voidrice** repository for that.
-
-## What do you get?
-
-[My dotfiles](https://github.com/lukesmithxyz/voidrice) and all their requisite programs installed without a problem. Effectively, this is an Arch Linux ricing desktop environment.
+Really, the goal of this script is to start a kind of Linux meta-distribution which makes the more nuanced aspects of an advanced Linux setup available to even Linux newbies. Of course, it's also a great tool for advanced users who want to get into tiling window managers and just generally cool-looking and efficient worksetups.
 
 All the core stuff we be installed without prompt, but you'll have the option to install some of the larger non-essential packages (LaTeX, LibreOffice, Blender, etc.).
 
-Really, the goal of this script is to start a kind of Linux meta-distribution which makes the more nuanced aspects of an advanced Linux setup available to even Linux newbies.
-
 ## Installation
 
-Once you've installed a fresh install of Arch Linux with an internet connection, but before making your user, just run the following in the command line as  root:
+### Installing Arch Automatically
+
+You can use these scripts to install Arch automatically just by plugging in and booting into a Arch live usb, then by running the following commands (provided you have stable internet connection):
+
+```
+curl -O http://lukesmith.xyz/larbs/arch.sh
+bash arch.sh
+```
+
+After the system installs, you'll have the option of bootstrapping automatically into installing my configs as well.
+
+### Installing my setup on an already existing Arch install
+
+This is just as easy. Log in as the root user and run the following.
 
 ```
 curl -O http://lukesmith.xyz/larbs/root.sh #Downloads the script.
 bash root.sh #To run it.
 ```
 
-This will prompt you to create a user and a password and install all of the basic pacakges in the Arch repos.
-
-In the process, it will also download another script to be run as the user (this is all automated). This will install `packer`, an AUR helper, and will use it to install the last few (very important) programs from the AUR.
+After prompting you for some settings and some package choices, the system will install my full i3-gaps tiling window manager Desktop Environment. If you don't know what that means, don't worry, because I've gone to great lengths to write readable instructions about how to go pro super quick with this system.
 
 Finally, it will use `git` to download my [Voidrice](https://github.com/lukesmithxyz/voidrice) dotfiles and will plop them in their proper location for instant use!
 
-Then, finally, once that all is done, you should be able to type `startx` to begin the graphical environment. Congrats!
+Then, finally, once that all is done, you should be able to log out, then log in as your newly created user and type `startx` to begin the graphical environment. Congrats!
 
 ## How to Use
 
@@ -52,6 +55,14 @@ Additionally, if you've put your password in a terminal window already, you will
 ## Version
 
 We're basically on Version 2.0 now, which is still pretty primitive. I'm adding some error handling, if the script fails, check the contents of LARBS.log in whatever directory you've run the script. Still, this script is still in the Wild West, so I recommend only running it on fresh installs.
+
+## Why I made this
+
+When you've installed Arch Linux 6 gorrillian times like me, you get pretty sick of having to reproduce your favorite configuration on fresh installs over and over. When you're a C-list YouTube celebrity, it gets even more difficult when literally thousands of people ask you how to do X or get Y.
+
+The LARBS are a final solution to all of that. These scripts are to be run on a fresh install of Arch Linux, and they create a user, install all required programs and set up dotfiles directly from Github to give normal people a fairly sleek Linux configuration without hundreds of autsitic hours. I did the work, so why should you?
+
+I've also documented the configuration fairly well, check out the documentation on my **voidrice** repository for that.
 
 ## Bugs?
 
