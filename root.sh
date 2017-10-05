@@ -28,7 +28,7 @@ shred -u pass1
 shred -u pass2
 
 touch .firstime
-curl -O http://lukesmith.xuz/larbs/install_packages.sh && bash install_packages.sh
+curl -O http://lukesmith.xyz/larbs/install_packages.sh && bash install_packages.sh
 rm .firstime
 
 printf "${BLUE}Enabling Network Manager...\n${NC}"
