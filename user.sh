@@ -10,7 +10,7 @@ error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Ch
 printf "${BLUE}Activating Pulseaudio if not already active...\n${NC}"
 pulseaudio --start
 
-curl -O http://lukesmith.xyz/aur_install.sh && bash aur_install.sh
+curl -O http://lukesmith.xyz/larbs/aur_install.sh && bash aur_install.sh
 rm aur_install.sh
 
 printf "${BLUE}Downloading config files...\n${NC}"
