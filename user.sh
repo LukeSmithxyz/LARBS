@@ -15,21 +15,26 @@ printf "${BLUE}Installing packer as an AUR manager...\n${NC}"
 
 aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
 qm=$(pacman -Qm | awk '{print $1}')
-
 aurcheck() {
-if [[ $qm = *"$1"* ]]; then
-	echo $1 already installed.
+for arg in "$@"
+do
+if [[ $qm = *"$arg"* ]]; then
+	echo $arg already installed.
 else
-	aurinstall $1
+	echo $arg not installed
+	aurinstall $arg
 fi
+done
 }
-
 aurcheck packer || (echo "Error installing packer." >> LARBS.log && error)
 
 printf "${BLUE}Installing AUR programs...\n${NC}"
 printf "${BLUE}(May take some time.)\n${NC}"
+
 aurcheck i3-gaps vim-pathogen neofetch i3lock tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird || (echo "Error installing AUR packages. Check your internet connections and pacman keys." >> LARBS.log && error)
+
 #packer --noconfirm -S ncpamixer-git speedometer cli-visualizer
+
 choices=$(cat choices)
 for choice in $choices
 do
