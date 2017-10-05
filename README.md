@@ -10,11 +10,11 @@ All the core stuff we be installed without prompt, but you'll have the option to
 
 ### Installing Arch Automatically
 
-You can use these scripts to install Arch automatically just by plugging in and booting into a Arch live usb, then by running the following commands (provided you have stable internet connection):
+You can use these scripts to install Arch automatically just by plugging in and booting into a Arch live USB, then by running the following commands (provided you have stable internet connection):
 
 ```
-curl -O http://lukesmith.xyz/larbs/arch.sh
-bash arch.sh
+curl -O http://lukesmith.xyz/larbs/arch.sh #Downloads the script.
+bash arch.sh #Runs it.
 ```
 
 After the system installs, you'll have the option of bootstrapping automatically into installing my configs as well.
@@ -25,10 +25,10 @@ This is just as easy. Log in as the root user and run the following.
 
 ```
 curl -O http://lukesmith.xyz/larbs/root.sh #Downloads the script.
-bash root.sh #To run it.
+bash root.sh #Runs it.
 ```
 
-After prompting you for some settings and some package choices, the system will install my full i3-gaps tiling window manager Desktop Environment. If you don't know what that means, don't worry, because I've gone to great lengths to write readable instructions about how to go pro super quick with this system.
+After prompting you for some settings and some package choices, the system will install my full i3-gaps tiling window manager Desktop Environment. If you don't know what that means, don't worry, because I've gone to great lengths to write readable instructions about how to go PRO super quick with this system.
 
 Finally, it will use `git` to download my [Voidrice](https://github.com/lukesmithxyz/voidrice) dotfiles and will plop them in their proper location for instant use!
 
@@ -72,15 +72,7 @@ Some computers might require some additional drivers to run a graphical environm
 
 ### I have some other problem and it didn't install correctly.
 
-In normal circumstances, there are two main causes of misinstalls: faulty internet connections and errors with particular package upgrades or with the pacman keyring.
-
-Check yourself if the former may be at fault, but feel free to inform me in the latter case; I may be able to provide a quick fix.
-
-Regardless, it's generally safe to rerun the script if something temporary went wrong, although you may want to delete the user created before rerunning:
-
-```
-userdel USER
-```
+In normal circumstances, there are two main causes of misinstalls: faulty internet connections and errors with particular package upgrades or with the pacman keyring. Check yourself if the former may be at fault, but feel free to inform me in the latter case; I may be able to provide a quick fix.
 
 ### >still using systemd botnet distro and/or not a 100% free-as-in-freedumb Parabola GANOO slash Linocks
 

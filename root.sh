@@ -9,7 +9,6 @@ error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Ch
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
 dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> name
-clear 
 dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 2> pass1
 dialog --no-cancel --passwordbox "Reype password." 10 60 2> pass2
 
@@ -28,106 +27,14 @@ echo "$USER:$(cat pass1)" | chpasswd
 shred -u pass1
 shred -u pass2
 
-cmd=(dialog --separate-output --checklist "Select additional packages to install with <SPACE>:" 22 76 16)
-options=(1 "LaTeX packages" off
-         2 "Libreoffice Suite" off
-         3 "GIMP" off
-         4 "Blender" off
-	 5 "Emacs" off
-	 6 "Fonts for unicode and other languages" off
-	 7 "transmission torrent client" off
-	 )
-choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-echo $choices > /home/$USER/choices
-clear
-
-brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
-options=(1 "qutebrowser" off    # any option can be set to default to "on"
-         2 "Firefox" off
-         3 "Palemoon" off
-         4 "Waterfox" off
-	 )
-browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
-echo $browch > /home/$USER/browch
-clear
-
-dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you'll can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
-
-
-printf "\n${BLUE}Now installing main programs.\n${NC}"
-
-pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (echo "Error installing basic packages. Check your internet connection and pacman keyring." >> LARBS.log && error)
-
-for choice in $choices
-do
-    case $choice in
-        1)
-	    printf "\n${BLUE}Now installing LaTeX packages...\n${NC}"
-	    pacman --noconfirm --needed -S texlive-most texlive-lang biber
-            ;;
-        2)
-	    printf "\n${BLUE}Now installing Libreoffice suite...\n${NC}"
-	    pacman --noconfirm --needed -S libreoffice-fresh
-            ;;
-        3)
-	    printf "\n${BLUE}Now installing GIMP...\n${NC}"
-	    pacman --noconfirm --needed -S gimp
-            ;;
-        4)
-	    printf "\n${BLUE}Now installing Blender...\n${NC}"
-	    pacman --noconfirm --needed -S blender
-            ;;
-	5)
-	    printf "\n${BLUE}Now installing Emacs...\n${NC}"
-	    pacman --noconfirm --needed -S emacs
-	    ;;
-	6)
-	    printf "\n${BLUE}Now installing extra fonts...\n${NC}"
-	    pacman --noconfirm --needed -S noto-fonts-cjk noto-fonts-emoji
-	    ;;
-	7)
-	    printf "\n${BLUE}Now installing transmission...\n${NC}"
-	    pacman --noconfirm --needed -S transmission-cli
-    esac
-done
-
-for choice in $browch
-do
-    case $choice in
-        1)
-	    printf "\n${BLUE}Now installing qutebrowser...\n${NC}"
-	    pacman --noconfirm --needed -S qutebrowser gst-libav gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
-            ;;
-        2)
-	    printf "\n${BLUE}Now installing Firefox...\n${NC}"
-	    pacman --noconfirm --needed -S firefox
-            ;;
-        3)
-	    printf "\n${BLUE}Now installing Palemoon...\n${NC}"
-	    pacman --noconfirm --needed -S palemoon-bin
-            ;;
-        4)
-	    printf "\n${BLUE}Now installing Waterfox...\n${NC}"
-	    pacman --noconfirm --needed -S waterfox-bin
-            ;;
-    esac
-done
-
-#pacman --noconfirm --needed -S projectm-pulseaudio
+touch .firstime
+curl -O http://lukesmith.xuz/larbs/install_packages.sh && bash install_packages.sh
+rm .firstime
 
 printf "${BLUE}Enabling Network Manager...\n${NC}"
 systemctl enable NetworkManager
 systemctl start NetworkManager
 
-printf "${BLUE}Downloading next portion of script...\n${NC}"
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/user.sh > /home/$USER/user.sh 
-printf "${BLUE}Running script as new user $USER...\n${NC}"
-cp /etc/sudoers /etc/sudoers.prelarbs
-echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-sudo -u $USER bash /home/$USER/user.sh || (echo "Error in the user install script. This might be because of a problem in your internet connection or pacman keyring or in an AUR package." >> LARBS.log && error)
-cat /home$USER/LARBS.log >> LARBS.log && rm /home/$USER/LARBS.log
-rm /home/$USER/user.sh
 
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers > /etc/sudoers 
 
