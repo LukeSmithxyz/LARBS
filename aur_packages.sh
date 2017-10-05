@@ -5,7 +5,8 @@ NC='\033[0m'
 printf "${BLUE}Changing directory to /home/$USER...\n${NC}"
 cd /home/$USER
 
-error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Check the LARBS.log file for more information" 10 60 && clear && exit ;}
+error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Check the LARBS.log file for more information" 10 60 ;}
+#error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Check the LARBS.log file for more information" 10 60 && clear && exit ;}
 
 printf "${BLUE}Installing packer as an AUR manager...\n${NC}"
 
