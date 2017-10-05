@@ -64,26 +64,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 curl http://lukesmith.xyz/larbs/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
 
-echo "Eject CD/ROM? [y/N]"
-read yn
-case $yn in
-	[Yy]* ) eject ;;
-	[yes]* ) eject ;;
-	[Yes]* ) eject ;;
-esac
-
-echo "Reboot now? [y/N]"
-read yn
-case $yn in
-	[Yy]* ) reboot ;;
-	[yes]* ) reboot ;;
-	[Yes]* ) reboot ;;
-esac
-
-echo "Return to chroot environment? [y/N]"
-read yn
-case $yn in
-	[Yy]* ) arch-chroot /mnt ;;
-	[yes]* ) arch-chroot /mnt ;;
-	[Yes]* ) arch-chroot /mnt ;;
-esac
+dialog --defaultno --title "Final Qs" --yesno "Eject CD/ROM (if any)?"  5 30 && eject
+dialog --defaultno --title "Final Qs" --yesno "Reboot computer?"  5 30 && reboot
+dialog --defaultno --title "Final Qs" --yesno "Return to chroot environment?"  6 30 && arch-chroot /mnt
+clear
