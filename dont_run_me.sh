@@ -54,12 +54,11 @@ mount /dev/sda1 /mnt/boot
 mkdir /mnt/home
 mount /dev/sda4 /mnt/home
 
+pacstrap /mnt base base-devel
 
-
-pacstrap /mnt base
 genfstab -U /mnt >> /mnt/etc/fstab
 
-curl http://lukesmith.xyz/larbs/root.sh > /mnt/root.sh && arch-chroot /mnt bash root.sh && rm /mnt/root.sh
+curl http://lukesmith.xyz/larbs/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
 
 grubinst() { pacman -S grub && grub-install --target=i386-pc /dev/sda ;}
 
