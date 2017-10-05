@@ -33,7 +33,7 @@ printf "${BLUE}(May take some time.)\n${NC}"
 #Add the needed gpg key for neomutt
 gpg --recv-keys 5FAF0A6EE7371805
 
-aurcheck i3-gaps vim-pathogen neofetch i3lock tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird || (echo "Error installing AUR packages. Check your internet connections and pacman keys." >> LARBS.log && error)
+aurcheck i3-gaps vim-pathogen neofetch i3lock tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird || (echo "Error installing AUR packages. Check your internet connections and pacman keys." >> LARBS.log)
 
 #packer --noconfirm -S ncpamixer-git speedometer cli-visualizer
 
