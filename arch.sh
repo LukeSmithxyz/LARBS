@@ -64,16 +64,6 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 curl http://lukesmith.xyz/larbs/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
 
-grubinst() { pacman -S grub && grub-install --target=i386-pc /dev/sda ;}
-
-echo "Install and configure GRUB bootloader? [y/N]"
-read yn
-case $yn in
-	[Yy]* ) grubinst ;;
-	[yes]* ) grubinst ;;
-	[Yes]* ) grubinst ;;
-esac
-
 echo "Eject CD/ROM? [y/N]"
 read yn
 case $yn in
