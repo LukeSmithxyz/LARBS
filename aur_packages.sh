@@ -37,7 +37,7 @@ blue \(This may take some time.\)
 #Add the needed gpg key for neomutt
 gpg --recv-keys 5FAF0A6EE7371805
 
-aurcheck packer i3-gaps vim-pathogen neofetch tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird 
+aurcheck packer i3-gaps vim-pathogen neofetch tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird || red Error with basic AUR installations...
 #Also installing i3lock, since i3-gaps was only just now installed.
 sudo pacman -S --noconfirm --needed i3lock
 

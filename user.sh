@@ -1,14 +1,17 @@
 #!/bin/bash
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m'
+
+blue() { printf "\033[0;34m $* \033[0m\n" && (echo $* >> LARBS.log) ;}
+red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
+
+USER=$(cat .firstrun)
 blue Changing directory to /home/$USER...
+
 cd /home/$USER
 
 error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Check the LARBS.log file for more information" 10 60 && clear && exit ;}
 
 blue Activating Pulseaudio if not already active...
-pulseaudio --start
+pulseaudio --start && blue Pulseaudio enabled...
 
 curl -O http://lukesmith.xyz/larbs/aur_install.sh && bash aur_install.sh
 rm aur_install.sh
