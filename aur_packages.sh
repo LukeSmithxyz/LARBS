@@ -43,32 +43,32 @@ sudo pacman -S i3lock
 
 #packer --noconfirm -S ncpamixer-git speedometer cli-visualizer
 
-choices=$(cat .choices)
-for choice in $choices
-do
-    case $choice in
-        1)
-		aurcheck vim-live-latex-preview
-		git clone https://github.com/lukesmithxyz/latex-templates.git && mkdir -p /home/$USER/Documents/LaTeX && rsync -va latex-templates /home/$USER/Documents/LaTeX && rm -rf latex-templates
-        	;;
-	6)
-		aurcheck ttf-ancient-fonts
-		;;
-	7)
-		aurcheck transmission-remote-cli-git
-		;;
-    esac
-done
-browsers=$(cat .browch)
-for choice in $browsers
-do
-	case $choice in
-		3)
-			$ gpg --recv-keys 865E6C87C65285EC
-			aurcheck palemoon-bin
-			;;
-		4)
-			aurcheck waterfox-bin
-			;;
-	esac
-done
+#choices=$(cat .choices)
+#for choice in $choices
+#do
+    #case $choice in
+        #1)
+		#aurcheck vim-live-latex-preview
+		#git clone https://github.com/lukesmithxyz/latex-templates.git && mkdir -p /home/$USER/Documents/LaTeX && rsync -va latex-templates /home/$USER/Documents/LaTeX && rm -rf latex-templates
+        	#;;
+	#6)
+		#aurcheck ttf-ancient-fonts
+		#;;
+	#7)
+		#aurcheck transmission-remote-cli-git
+		#;;
+    #esac
+#done
+#browsers=$(cat .browch)
+#for choice in $browsers
+#do
+	#case $choice in
+		#3)
+			#$ gpg --recv-keys 865E6C87C65285EC
+			#aurcheck palemoon-bin
+			#;;
+		#4)
+			#aurcheck waterfox-bin
+			#;;
+	#esac
+#done
