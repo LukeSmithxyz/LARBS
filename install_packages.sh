@@ -1,6 +1,6 @@
 #!/bin/bash
-blue() { printf "\033[0;34m $* \033[0m\n" && (echo $* >> LARBS.log) ;}
-red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
+blue() { printf "\033[0;34m $* \033[0m\n" && (chmod 777 LARBS.log && echo $* >> LARBS.log) ;}
+red() { printf "\033[0;31m $* \033[0m\n" && (chmod 777 LARBS.log && echo ERROR: $* >> LARBS.log) ;}
 sudo pacman -S --noconfirm dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 
 error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Check the LARBS.log file for more information" 10 60 && clear && exit ;}
@@ -100,9 +100,7 @@ then
 else
 	USER=$(cat .name)
 	blue Downloading next portion of the script \(aur_packages.sh\)...
-	curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/aur_packages.sh > /home/$USER/aur_packages.sh && blue Running aur_packages as $(whoami)...
+	curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/aur_packages.sh > /home/$USER/aur_packages.sh && blue Running aur_packages as $USER...
 	sudo -u $USER bash /home/$USER/aur_packages.sh || red Error when running aur_packages...
 	rm /home/$USER/aur_packages.sh
 fi
-
-clear
