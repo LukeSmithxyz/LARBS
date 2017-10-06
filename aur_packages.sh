@@ -18,9 +18,9 @@ else
 	blue Now installing $arg...
 	if [[ -e /usr/bin/packer ]]
 	then
-		(packer --noconfirm -S $arg && printf "${BLUE}\n$arg now installed.\n${NC}") || red Error installing $arg.
+		(packer --noconfirm -S $arg && blue $arg now installed) || red Error installing $arg.
 	else
-		(aurinstall $arg && printf "${BLUE}\n$arg now installed.\n${NC}") || red Error installing $arg.
+		(aurinstall $arg && blue $arg now installed) || red Error installing $arg.
 	fi
 
 fi
@@ -48,16 +48,13 @@ for choice in $choices
 do
     case $choice in
         1)
-		printf "\n${BLUE}Now installing LaTeX packages...\n${NC}"
 		aurcheck vim-live-latex-preview
 		git clone https://github.com/lukesmithxyz/latex-templates.git && mkdir -p /home/$USER/Documents/LaTeX && rsync -va latex-templates /home/$USER/Documents/LaTeX && rm -rf latex-templates
         	;;
 	6)
-		printf "\n${BLUE}Now installing extra fonts...\n${NC}"
 		aurcheck ttf-ancient-fonts
 		;;
 	7)
-	    printf "\n${BLUE}Now installing transmission-remote-cli...\n${NC}"
 		aurcheck transmission-remote-cli-git
 		;;
     esac
@@ -67,12 +64,10 @@ for choice in $browsers
 do
 	case $choice in
 		3)
-			printf "\n${BLUE}Now installing Palemoon...\n${NC}"
 			$ gpg --recv-keys 865E6C87C65285EC
 			aurcheck palemoon-bin
 			;;
 		4)
-			printf "\n${BLUE}Now installing Waterfox...\n${NC}"
 			aurcheck waterfox-bin
 			;;
 	esac
