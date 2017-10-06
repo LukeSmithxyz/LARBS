@@ -16,7 +16,7 @@ options=(1 "LaTeX packages" off
 	 7 "transmission torrent client" off
 	 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-echo $choices > /home/$USER/choices
+echo $choices > /home/$USER/.choices
 clear
 
 brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
@@ -26,7 +26,7 @@ options=(1 "qutebrowser" off    # any option can be set to default to "on"
          4 "Waterfox" off
 	 )
 browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
-echo $browch > /home/$USER/browch
+echo $browch > /home/$USER/.browch
 clear
 
 #If this is the first run, install all core programs.
@@ -92,22 +92,19 @@ do
     esac
 done
 
+#Packages I may later add:
 #pacman --noconfirm --needed -S projectm-pulseaudio
 
 if [[ -e .firstrun ]]
 then
-	printf "${BLUE}Downloading next portion of script...\n${NC}"
-	curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/user.sh > /home/$USER/user.sh 
-	printf "${BLUE}Running script as new user $USER...\n${NC}"
-	sudo -u $USER bash /home/$USER/user.sh || (echo "Error in the user install script. This might be because of a problem in your internet connection or pacman keyring or in an AUR package." >> LARBS.log && error)
-	cat /home$USER/LARBS.log >> LARBS.log && rm /home/$USER/LARBS.log
+	blue Downloading next portion of the script \(user.sh\)...
+	curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/user.sh > /home/$USER/user.sh && blue Running user.sh script as $(whoami)...
+	sudo -u $USER bash /home/$USER/user.sh || red Error when running user.sh...
 	rm /home/$USER/user.sh
 else
-	printf "${BLUE}Downloading next portion of script...\n${NC}"
-	curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/aur_packages.sh > /home/$USER/aur_packages.sh 
-	printf "${BLUE}Running script as new user $USER...\n${NC}"
-	sudo -u $USER bash /home/$USER/aur_packages.sh || (echo "Error in the user install script. This might be because of a problem in your internet connection or pacman keyring or in an AUR package." >> LARBS.log && error)
-	cat /home$USER/LARBS.log >> LARBS.log && rm /home/$USER/LARBS.log
+	blue Downloading next portion of the script \(aur_packages.sh\)...
+	curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/aur_packages.sh > /home/$USER/aur_packages.sh && blue Running aur_packages as $(whoami)...
+	sudo -u $USER bash /home/$USER/aur_packages.sh || red Error when running aur_packages...
 	rm /home/$USER/aur_packages.sh
 fi
 
