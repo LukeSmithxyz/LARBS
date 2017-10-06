@@ -56,13 +56,14 @@ mount /dev/sda1 /mnt/boot
 mkdir /mnt/home
 mount /dev/sda4 /mnt/home
 
-cat comp > /mnt/etc/hostname && rm comp
 
 pacstrap /mnt base base-devel
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
 curl http://lukesmith.xyz/larbs/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
+
+cat comp > /mnt/etc/hostname && rm comp
 
 dialog --defaultno --title "Final Qs" --yesno "Eject CD/ROM (if any)?"  5 30 && eject
 dialog --defaultno --title "Final Qs" --yesno "Reboot computer?"  5 30 && reboot
