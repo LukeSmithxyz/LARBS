@@ -10,10 +10,8 @@ error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Ch
 blue Activating Pulseaudio if not already active...
 pulseaudio --start
 
-#curl -O http://lukesmith.xyz/larbs/aur_install.sh && bash aur_install.sh
-#rm aur_install.sh
-curl -O http://lukesmith.xyz/larbs/install_packages.sh
-bash install_packages.sh
+curl -O http://lukesmith.xyz/larbs/aur_install.sh && bash aur_install.sh
+rm aur_install.sh
 
 blue Downloading config files...
 git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$USER && rm -rf voidrice
