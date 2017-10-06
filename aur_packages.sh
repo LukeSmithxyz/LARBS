@@ -39,7 +39,7 @@ gpg --recv-keys 5FAF0A6EE7371805
 
 aurcheck packer i3-gaps vim-pathogen neofetch tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird 
 #Also installing i3lock, since i3-gaps was only just now installed.
-sudo pacman -S i3lock
+sudo pacman -S --noconfirm --needed i3lock
 
 #packer --noconfirm -S ncpamixer-git speedometer cli-visualizer
 
@@ -64,7 +64,7 @@ for choice in $browsers
 do
 	case $choice in
 		3)
-			$ gpg --recv-keys 865E6C87C65285EC
+			gpg --recv-keys 865E6C87C65285EC
 			aurcheck palemoon-bin
 			;;
 		4)
