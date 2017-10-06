@@ -1,8 +1,7 @@
 #!/bin/bash
+blue() { printf "\033[0;34m $* \033[0m\n" && (echo $* >> LARBS.log) ;}
+red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
 pacman -S --noconfirm dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m'
 
 error() { dialog --title "Error!" --msgbox "We've run into a fatal-ish error. Check the LARBS.log file for more information" 10 60 && clear && exit ;}
 
@@ -33,7 +32,7 @@ clear
 if [[ -e .firstrun ]]
 then
 	dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you'll can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
-	printf "\n${BLUE}Now installing main programs.\n${NC}"
+	blue Now installing main programs...
 	pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (echo "Error installing basic packages. Check your internet connection and pacman keyring." >> LARBS.log && error)
 fi
 
@@ -41,31 +40,31 @@ for choice in $choices
 do
     case $choice in
         1)
-	    printf "\n${BLUE}Now installing LaTeX packages...\n${NC}"
+	    blue Now installing LaTeX packages...
 	    pacman --noconfirm --needed -S texlive-most texlive-lang biber
             ;;
         2)
-	    printf "\n${BLUE}Now installing Libreoffice suite...\n${NC}"
+	    blue Now installing LibreOffice Suite...
 	    pacman --noconfirm --needed -S libreoffice-fresh
             ;;
         3)
-	    printf "\n${BLUE}Now installing GIMP...\n${NC}"
+	    blue Now installing GIMP...
 	    pacman --noconfirm --needed -S gimp
             ;;
         4)
-	    printf "\n${BLUE}Now installing Blender...\n${NC}"
+	    blue Now installing Blender...
 	    pacman --noconfirm --needed -S blender
             ;;
 	5)
-	    printf "\n${BLUE}Now installing Emacs...\n${NC}"
+	    blue Now installing Emacs...
 	    pacman --noconfirm --needed -S emacs
 	    ;;
 	6)
-	    printf "\n${BLUE}Now installing extra fonts...\n${NC}"
+	    blue Now installing extra fonts...
 	    pacman --noconfirm --needed -S noto-fonts-cjk noto-fonts-emoji
 	    ;;
 	7)
-	    printf "\n${BLUE}Now installing transmission...\n${NC}"
+	    blue Now installing transmission...
 	    pacman --noconfirm --needed -S transmission-cli
     esac
 done
@@ -74,19 +73,19 @@ for choice in $browch
 do
     case $choice in
         1)
-	    printf "\n${BLUE}Now installing qutebrowser...\n${NC}"
+		blue Now installing qutebrowser...
 	    pacman --noconfirm --needed -S qutebrowser gst-libav gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
             ;;
         2)
-	    printf "\n${BLUE}Now installing Firefox...\n${NC}"
+		blue Now installing Firefox...
 	    pacman --noconfirm --needed -S firefox
             ;;
         3)
-	    printf "\n${BLUE}Now installing Palemoon...\n${NC}"
+		blue Now installing Palemoon...
 	    pacman --noconfirm --needed -S palemoon-bin
             ;;
         4)
-	    printf "\n${BLUE}Now installing Waterfox...\n${NC}"
+		blue Now installing Waterfox...
 	    pacman --noconfirm --needed -S waterfox-bin
             ;;
     esac
