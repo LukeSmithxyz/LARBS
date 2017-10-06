@@ -17,6 +17,7 @@ options=(1 "LaTeX packages" off
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 rm -f /home/$USER/.choices #Needed if write protected from root script.
 echo $choices > /home/$USER/.choices
+chmod 777 /home/$USER/.choices
 clear
 
 brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
@@ -28,6 +29,7 @@ options=(1 "qutebrowser" off    # any option can be set to default to "on"
 browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
 rm -f /home/$USER/.browch #Needed if write protected from root script.
 echo $browch > /home/$USER/.browch
+chmod 777 /home/$USER/.browch
 clear
 
 #If this is the first run, install all core programs.
