@@ -1,5 +1,5 @@
 #!/bin/bash
-pacman -S --noconfirm dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
+pacman -S --noconfirm --needed dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m'
