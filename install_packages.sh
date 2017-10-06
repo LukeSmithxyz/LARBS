@@ -15,6 +15,7 @@ options=(1 "LaTeX packages" off
 	 7 "transmission torrent client" off
 	 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+rm -f /home/$USER/.choices #Needed if write protected from root script.
 echo $choices > /home/$USER/.choices
 clear
 
@@ -25,6 +26,7 @@ options=(1 "qutebrowser" off    # any option can be set to default to "on"
          4 "Waterfox" off
 	 )
 browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
+rm -f /home/$USER/.browch #Needed if write protected from root script.
 echo $browch > /home/$USER/.browch
 clear
 
