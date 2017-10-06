@@ -19,7 +19,6 @@ do
 done
 
 USER=$(cat name)
-rm name
 useradd -m -g wheel -s /bin/bash $USER
 
 echo "$USER:$(cat pass1)" | chpasswd
@@ -27,7 +26,7 @@ echo "$USER:$(cat pass1)" | chpasswd
 shred -u pass1
 shred -u pass2
 
-touch .firstrun
+echo $USER > .firstrun
 curl -O http://lukesmith.xyz/larbs/install_packages.sh && bash install_packages.sh
 rm .firstrun
 
