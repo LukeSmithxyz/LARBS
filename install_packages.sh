@@ -80,14 +80,6 @@ do
 		blue Now installing Firefox...
 	    pacman --noconfirm --needed -S firefox
             ;;
-        3)
-		blue Now installing Palemoon...
-	    pacman --noconfirm --needed -S palemoon-bin
-            ;;
-        4)
-		blue Now installing Waterfox...
-	    pacman --noconfirm --needed -S waterfox-bin
-            ;;
     esac
 done
 
