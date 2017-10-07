@@ -1,7 +1,7 @@
 #!/bin/bash
 
-blue() { printf "\033[0;34m $* \033[0m\n" && (echo $* >> LARBS.log) ;}
-red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
+blue() { printf "\033[0;34m $* \033[0m\n" && (sudo echo $* >> LARBS.log) ;}
+red() { printf "\033[0;31m $* \033[0m\n" && (sudo echo ERROR: $* >> LARBS.log) ;}
 
 #Install an AUR package manually.
 aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
