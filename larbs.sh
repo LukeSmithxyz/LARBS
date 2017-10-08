@@ -17,8 +17,8 @@ do
 	dialog --no-cancel --passwordbox "Reype password." 10 60 2> .pass2
 done
 
-NAME=$(cat .name)
 chmod 777 .name
+NAME=$(cat /.name)
 useradd -m -g wheel -s /bin/bash $NAME
 
 echo "$NAME:$(cat .pass1)" | chpasswd
