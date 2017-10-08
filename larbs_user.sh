@@ -3,7 +3,7 @@
 blue() { printf "\033[0;34m $* \033[0m\n" ;}
 red() { printf "\033[0;31m $* \033[0m\n" ;}
 
-NAME=$(cat .name)
+NAME=$(cat /.name)
 rm -f .name
 blue Changing directory to /home/$NAME...
 
