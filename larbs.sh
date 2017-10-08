@@ -6,24 +6,24 @@ red() { printf "\033[0;31m $* \033[0m\n" && (chmod 777 LARBS.log && echo ERROR: 
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
-dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> name
+dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> .name
 
-dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 2> pass1
-dialog --no-cancel --passwordbox "Reype password." 10 60 2> pass2
+dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 2> .pass1
+dialog --no-cancel --passwordbox "Reype password." 10 60 2> .pass2
 
-while [ $(cat pass1) != $(cat pass2) ]
+while [ $(cat .pass1) != $(cat .pass2) ]
 do
-	dialog --no-cancel --passwordbox "Passwords do not match.\n\nEnter password again." 10 60 2> pass1
-	dialog --no-cancel --passwordbox "Reype password." 10 60 2> pass2
+	dialog --no-cancel --passwordbox "Passwords do not match.\n\nEnter password again." 10 60 2> .pass1
+	dialog --no-cancel --passwordbox "Reype password." 10 60 2> .pass2
 done
 
-NAME=$(cat name)
+NAME=$(cat .name)
 useradd -m -g wheel -s /bin/bash $NAME
 
-echo "$NAME:$(cat pass1)" | chpasswd
+echo "$NAME:$(cat .pass1)" | chpasswd
 #I shred the password for safety's sake.
-shred -u pass1
-shred -u pass2
+shred -u .pass1
+shred -u .pass2
 
 cmd=(dialog --separate-output --checklist "Select additional packages to install with <SPACE>:" 22 76 16)
 options=(1 "LaTeX packages" off
@@ -106,6 +106,7 @@ done
 #pacman --noconfirm --needed -S projectm-pulseaudio
 
 blue Downloading next portion of the script \(user.sh\)...
+echo $NAME > /home/$NAME/.name && chmod 777 /home/$NAME/.name
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/user.sh > /home/$NAME/user.sh && blue Running user.sh script as $NAME...
 sudo -u $NAME bash /home/$NAME/user.sh || red Error when running user.sh...
 rm -f /home/$NAME/user.sh
