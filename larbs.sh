@@ -18,6 +18,7 @@ do
 done
 
 NAME=$(cat .name)
+chmod 777 .name
 useradd -m -g wheel -s /bin/bash $NAME
 
 echo "$NAME:$(cat .pass1)" | chpasswd
@@ -106,7 +107,6 @@ done
 #pacman --noconfirm --needed -S projectm-pulseaudio
 
 blue Downloading next portion of the script \(user.sh\)...
-echo $NAME > /home/$NAME/.name && chmod 777 /home/$NAME/.name
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/user.sh > /home/$NAME/user.sh && blue Running user.sh script as $NAME...
 sudo -u $NAME bash /home/$NAME/user.sh || red Error when running user.sh...
 rm -f /home/$NAME/user.sh
