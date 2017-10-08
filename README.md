@@ -24,8 +24,8 @@ After the system installs, you'll have the option of bootstrapping automatically
 This is just as easy. Log in as the root user and run the following.
 
 ```
-curl -O http://lukesmith.xyz/larbs/root.sh #Downloads the script.
-bash root.sh #Runs it.
+curl -O http://larbs.xyz/larbs.sh #Downloads the script.
+bash larbs.sh #Runs it.
 ```
 
 After prompting you for some settings and some package choices, the system will install my full i3-gaps tiling window manager Desktop Environment. If you don't know what that means, don't worry, because I've gone to great lengths to write readable instructions about how to go PRO super quick with this system.
