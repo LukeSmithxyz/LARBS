@@ -1,7 +1,7 @@
 #!/bin/bash
 
-blue() { printf "\033[0;34m $* \033[0m\n" && (echo $* >> LARBS.log) ;}
-red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
+blue() { printf "\033[0;34m $* \033[0m\n" ;}
+red() { printf "\033[0;31m $* \033[0m\n" ;}
 
 NAME=$(cat .name)
 rm -f .name
