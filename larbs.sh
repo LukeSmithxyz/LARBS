@@ -6,7 +6,7 @@ red() { printf "\033[0;31m $* \033[0m\n" && (chmod 777 LARBS.log && echo ERROR: 
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
-dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> .name
+dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> /.name
 
 dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 2> .pass1
 dialog --no-cancel --passwordbox "Reype password." 10 60 2> .pass2
@@ -119,5 +119,5 @@ systemctl start NetworkManager
 
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers > /etc/sudoers 
 
-dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 12 80
-clear
+#dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 12 80
+#clear
