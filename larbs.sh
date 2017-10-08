@@ -19,6 +19,7 @@ done
 
 chmod 777 .name
 NAME=$(cat /.name)
+rm /.name
 useradd -m -g wheel -s /bin/bash $NAME
 
 echo "$NAME:$(cat .pass1)" | chpasswd
@@ -106,11 +107,12 @@ done
 #Packages I may later add:
 #pacman --noconfirm --needed -S projectm-pulseaudio
 
+cd /tmp
+blue Changin working directory to /tmp/...
 blue Downloading next portion of the script \(larbs_user.sh\)...
-chmod 777 /
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/larbs_user.sh > /home/$NAME/larbs_user.sh && blue Running larbs_user.sh script as $NAME...
-sudo -u $NAME bash /home/$NAME/larbs_user.sh || red Error when running larbs_user.sh...
-rm -f /home/$NAME/larbs_user.sh
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/larbs_user.sh > /tmp/larbs_user.sh && blue Running larbs_user.sh script as $NAME...
+sudo -u $NAME bash /tmp/larbs_user.sh || red Error when running larbs_user.sh...
+rm -f /tmp/larbs_user.sh
 
 printf "${BLUE}Enabling Network Manager...\n${NC}"
 systemctl enable NetworkManager

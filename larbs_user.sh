@@ -3,17 +3,7 @@
 blue() { printf "\033[0;34m $* \033[0m\n" ;}
 red() { printf "\033[0;31m $* \033[0m\n" ;}
 
-NAME=$(cat /.name)
-rm -f .name
-pwd
-pwd
-pwd
-blue Changing directory to /home/$NAME...
-pwd
-pwd
-pwd
-
-cd /home/$NAME
+NAME=$(whoami)
 
 blue Activating Pulseaudio if not already active...
 pulseaudio --start && blue Pulseaudio enabled...
@@ -42,8 +32,6 @@ fi
 done
 }
 
-blue Changing directory to /home/$NAME...
-cd /home/$NAME || red Could not cd to /home/$NAME. Does user and home directory exist?
 
 blue Installing AUR programs...
 blue \(This may take some time.\)
