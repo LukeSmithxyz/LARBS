@@ -5,7 +5,13 @@ red() { printf "\033[0;31m $* \033[0m\n" ;}
 
 NAME=$(cat /.name)
 rm -f .name
+pwd
+pwd
+pwd
 blue Changing directory to /home/$NAME...
+pwd
+pwd
+pwd
 
 cd /home/$NAME
 
