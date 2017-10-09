@@ -1,5 +1,7 @@
 # Luke's Auto-Rice Bootstraping Scripts (LARBS)
 
+[Official Website: larbs.xyz](http://larbs.xyz)
+
 This is a set of scripts either can either (1) install Arch Linux automatically with a typical Arch ISOed USB, and perhaps more prominently (2) automatically install and configure all of the prerequisites for an advanced Linux desktop environment, using my configs [here](https://github.com/LukeSmithxyz/voidrice) as a base.
 
 Really, the goal of this script is to start a kind of Linux meta-distribution which makes the more nuanced aspects of an advanced Linux setup available to even Linux newbies. Of course, it's also a great tool for advanced users who want to get into tiling window managers and just generally cool-looking and efficient worksetups.
