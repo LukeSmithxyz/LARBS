@@ -36,6 +36,8 @@ done
 blue Installing AUR programs...
 blue \(This may take some time.\)
 
+cowsay -f bud-frogs "Now installing AUR programs."
+
 gpg --recv-keys 5FAF0A6EE7371805 #Add the needed gpg key for neomutt
 
 aurcheck packer i3-gaps vim-pathogen neofetch tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar-git python-pywal xfce-theme-blackbird || red Error with basic AUR installations...
@@ -63,6 +65,29 @@ do
 		;;
     esac
 done
+cat << "EOF"
+         ▄              ▄
+        ▌▒█           ▄▀▒▌
+        ▌▒▒▀▄       ▄▀▒▒▒▐
+       ▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐
+     ▄▄▀▒▒▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐
+   ▄▀▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▀██▀▒▌
+  ▐▒▒▒▄▄▄▒▒▒▒▒▒▒▒▒▒▒▒▒▀▄▒▒▌
+  ▌▒▒▐▄█▀▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐
+ ▐▒▒▒▒▒▒▒▒▒▒▒▌██▀▒▒▒▒▒▒▒▒▀▄▌
+ ▌▒▀▄██▄▒▒▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▌
+ ▌▀▐▄█▄█▌▄▒▀▒▒▒▒▒▒░░░░░░▒▒▒▐
+▐▒▀▐▀▐▀▒▒▄▄▒▄▒▒▒▒▒░░░░░░▒▒▒▒▌
+▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒░░░░░░▒▒▒▐
+ ▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒▒▒░░░░▒▒▒▒▌
+ ▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▐
+  ▀▄▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▄▒▒▒▒▌
+    ▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀
+   ▐▀▒▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀
+  ▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▀▀
+EOF
+
+
 
 browsers=$(cat /tmp/.browch)
 for choice in $browsers

@@ -5,7 +5,7 @@ red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> /tmp/LARBS.lo
 echo "LARBS started $(date)" >> /tmp/LARBS.log
 chmod 777 /tmp/LARBS.log
 
-pacman -S --noconfirm --needed dialog cowsay figlet || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
+pacman -S --noconfirm --needed dialog cowsay || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
@@ -54,7 +54,37 @@ echo $browch > /tmp/.browch
 
 dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you'll can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
 
-echo Ready? | figlet && sleep 1 && echo Set? | figlet && sleep 1 && echo GO!!! | figlet
+clear
+
+cat << "EOF"
+					  
+ mmmmm                    #           mmm 
+ #   "#  mmm    mmm    mmm#  m   m   "   #
+ #mmmm" #"  #  "   #  #" "#  "m m"    m#" 
+ #   "m #""""  m"""#  #   #   #m#     "   
+ #    " "#mm"  "mm"#  "#m##   "#      #   
+			      m"          
+EOF
+sleep 1
+cat << "EOF"
+			    
+  mmmm           m      mmm 
+ #"   "  mmm   mm#mm   "   #
+ "#mmm  #"  #    #      m#" 
+     "# #""""    #      "   
+ "mmm#" "#mm"    "mm    #   
+EOF
+sleep 1
+cat << "EOF"
+
+
+   mmm   mmmm    m   
+ m"   " m"  "m   #   
+ #   mm #    #   #   
+ #    # #    #   "   
+  "mmm"  #mm#    #   
+EOF
+sleep .5
 cat << "EOF"
 			
 
@@ -74,6 +104,7 @@ cat << "EOF"
           --==~_==- =__ ~-=  - -    .'       `---'
 
 EOF
+sleep .5
 
 blue Now installing main programs...
 
@@ -119,6 +150,8 @@ do
     esac
 done
 
+cowsay -f dragon-and-cow "Now installing browser(s)"
+
 for choice in $browch
 do
     case $choice in
@@ -132,6 +165,8 @@ do
             ;;
     esac
 done
+
+cowsay -f flaming-sheep ">tfw too hot to handle"
 
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers_tmp > /etc/sudoers 
 
@@ -152,3 +187,4 @@ curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers > /etc/
 
 dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 12 80
 clear
+
