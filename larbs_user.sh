@@ -66,6 +66,7 @@ do
     esac
 done
 cat << "EOF"
+
          ▄              ▄
         ▌▒█           ▄▀▒▌
         ▌▒▒▀▄       ▄▀▒▒▒▐
@@ -85,6 +86,7 @@ cat << "EOF"
     ▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀
    ▐▀▒▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀
   ▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▀▀
+
 EOF
 
 
@@ -94,7 +96,7 @@ for choice in $browsers
 do
 	case $choice in
 		3)
-			gpg --recv-keys 865E6C87C65285EC
+			gpg --recv-keys 865E6C87C65285EC #Key required for Palemoon install.
 			aurcheck palemoon-bin
 			;;
 		4)
