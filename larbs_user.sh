@@ -1,7 +1,7 @@
 #!/bin/bash
 
-blue() { printf "\033[0;34m $* \033[0m\n" && (echo $* >> LARBS.log) ;}
-red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
+blue() { printf "\n\033[0;34m $* \033[0m\n\n" && (echo $* >> LARBS.log) ;}
+red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> LARBS.log) ;}
 
 NAME=$(whoami)
 
@@ -45,7 +45,6 @@ sudo pacman -S --noconfirm --needed i3lock
 #packer --noconfirm -S ncpamixer-git speedometer cli-visualizer
 
 choices=$(cat /tmp/.choices)
-rm /tmp/.choices
 for choice in $choices
 do
     case $choice in
@@ -59,11 +58,13 @@ do
 	7)
 		aurcheck transmission-remote-cli-git
 		;;
+	8)
+		aurcheck bash-pipes cli-visualizer speedometer
+		;;
     esac
 done
 
 browsers=$(cat /tmp/.browch)
-rm /tmp/.browch
 for choice in $browsers
 do
 	case $choice in

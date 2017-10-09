@@ -2,8 +2,8 @@
 cd /
 pacman -S --noconfirm --needed dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 
-blue() { printf "\033[0;34m $* \033[0m\n" && (echo $* >> LARBS.log) ;}
-red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
+blue() { printf "\n\033[0;34m $* \033[0m\n\n" && (echo $* >> LARBS.log) ;}
+red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> LARBS.log) ;}
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
@@ -36,21 +36,20 @@ options=(1 "LaTeX packages" off
 	 5 "Emacs" off
 	 6 "Fonts for unicode and other languages" off
 	 7 "transmission torrent client" off
+	 8 "Music visualizers and decoration" off
 	 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-echo $choices > /tmp/.choices && chmod 777 /tmp/.choices
+echo $choices > /tmp/.choices
 
 brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
-options=(1 "qutebrowser" off    # any option can be set to default to "on"
+options=(1 "qutebrowser" off
          2 "Firefox" off
          3 "Palemoon" off
          4 "Waterfox" off
 	 )
 browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
-#rm -f /home/$NAME/.browch #Needed if write protected from root script.
-echo $browch > /tmp/.browch && chmod 777 /tmp/.browch
+echo $browch > /tmp/.browch
 
-#If this is the first run, install all core programs.
 dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you'll can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
 
 blue Now installing main programs...
@@ -87,6 +86,11 @@ do
 	7)
 	    blue Now installing transmission...
 	    sudo pacman --noconfirm --needed -S transmission-cli
+	    ;;
+	8)
+		blue Now installing visualizers and decoration...
+		sudo pacman --noconfirm --needed -S projectm-pulseaudio cmatrix asciiquarium
+		;;
     esac
 done
 
@@ -103,9 +107,6 @@ do
             ;;
     esac
 done
-
-#Packages I may later add:
-#pacman --noconfirm --needed -S projectm-pulseaudio
 
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers_tmp > /etc/sudoers 
 
