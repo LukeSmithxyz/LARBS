@@ -55,6 +55,25 @@ echo $browch > /tmp/.browch
 dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you'll can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
 
 echo Ready? | figlet && sleep 1 && echo Set? | figlet && sleep 1 && echo GO!!! | figlet
+cat << "EOF"
+			
+
+                      -     =    .--._
+                - - ~_=  =~_- = - `.  `-.
+              ==~_ = =_  ~ -   =  .-'    `.
+            --=~_ - ~  == - =   .'      _..:._
+           ---=~ _~  = =-  =   `.  .--.'      `.
+          --=_-=- ~= _ - =  -  _.'  `.      .--.:
+            -=_~ -- = =  ~-  .'      :     :    :
+             -=-_ ~=  = - _-`--.     :  .--:    D
+               -=~ _=  =  -~_=  `;  .'.:   ,`---'@
+             --=_= = ~-   -=   .'  .'  `._ `-.__.'
+            --== ~_ - =  =-  .'  .'     _.`---'
+           --=~_= = - = ~  .'--''   .   `-..__.--.
+          jgs--==~ _= - ~-=  =-~_-   `-..___(  ===;
+          --==~_==- =__ ~-=  - -    .'       `---'
+
+EOF
 
 blue Now installing main programs...
 
