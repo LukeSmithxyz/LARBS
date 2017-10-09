@@ -10,17 +10,6 @@ All the core stuff we be installed without prompt, but you'll have the option to
 
 ## Installation
 
-### Installing Arch Automatically
-
-You can use these scripts to install Arch automatically just by plugging in and booting into a Arch live USB, then by running the following commands (provided you have stable internet connection):
-
-```
-curl -O http://lukesmith.xyz/larbs/arch.sh #Downloads the script.
-bash arch.sh #Runs it.
-```
-
-After the system installs, you'll have the option of bootstrapping automatically into installing my configs as well.
-
 ### Installing my setup on an already existing Arch install
 
 This is just as easy. Log in as the root user and run the following.
@@ -35,6 +24,18 @@ After prompting you for some settings and some package choices, the system will 
 Finally, it will use `git` to download my [Voidrice](https://github.com/lukesmithxyz/voidrice) dotfiles and will plop them in their proper location for instant use!
 
 Then, finally, once that all is done, you should be able to log out, then log in as your newly created user and type `startx` to begin the graphical environment. Congrats!
+
+
+### Installing Arch Automatically
+
+I also have a script here for installing Arch automatically. I *only* wrote this script so I could quickly install then test the other scripts on new computers, but theoretically you could use it as well. *BUT* this is a lazy, pre-alpha script which does not give you many options (it automatically chooses the New York time zone, US English, GRUB, Network Manager, etc). Even more important, it automatically partitions /dev/sda without asking, so unless, you have no non-backed up data on your machine, I don't advise running it unless you don't mind a full wipe. That said, you can run it like this after booting into an Arch live environment:
+
+```
+curl -O http://lukesmith.xyz/larbs/arch.sh #Downloads the script.
+bash arch.sh #Runs it.
+```
+
+After the system installs, you'll have the option of bootstrapping automatically into installing my configs as well.
 
 ## How to Use
 
