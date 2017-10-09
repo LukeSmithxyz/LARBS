@@ -1,7 +1,7 @@
 #!/bin/bash
 
-blue() { printf "\n\033[0;34m $* \033[0m\n\n" && (echo $* >> LARBS.log) ;}
-red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> LARBS.log) ;}
+blue() { printf "\n\033[0;34m $* \033[0m\n\n" && (echo $* >> /tmp/LARBS.log) ;}
+red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> /tmp/LARBS.log) ;}
 
 NAME=$(whoami)
 

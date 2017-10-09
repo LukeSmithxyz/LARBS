@@ -1,9 +1,12 @@
 #!/bin/bash
+echo "LARBS started $(date)" >> /tmp/LARBS.log
+chmod 777 /tmp/LARBS.log
+
 cd /
 pacman -S --noconfirm --needed dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 
-blue() { printf "\n\033[0;34m $* \033[0m\n\n" && (echo $* >> LARBS.log) ;}
-red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> LARBS.log) ;}
+blue() { printf "\n\033[0;34m $* \033[0m\n\n" && (echo $* >> /tmp/LARBS.log) ;}
+red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> /tmp/LARBS.log) ;}
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
@@ -111,14 +114,11 @@ done
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers_tmp > /etc/sudoers 
 
 cd /tmp
-blue Changin working directory to /tmp/...
+blue Changing working directory to /tmp/...
 blue Downloading next portion of the script \(larbs_user.sh\)...
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/larbs_user.sh > /tmp/larbs_user.sh && blue Running larbs_user.sh script as $NAME...
 sudo -u $NAME bash /tmp/larbs_user.sh || red Error when running larbs_user.sh...
 rm -f /tmp/larbs_user.sh
-
-cat /tmp/LARBS.log >> /LARBS.log
-cp /LARBS.log LARBS.log && chmod 777 LARBS.log
 
 
 blue Enabling Network Manager...
