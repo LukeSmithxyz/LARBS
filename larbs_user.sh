@@ -44,8 +44,8 @@ sudo pacman -S --noconfirm --needed i3lock
 
 #packer --noconfirm -S ncpamixer-git speedometer cli-visualizer
 
-choices=$(cat .choices)
-rm .choices
+choices=$(cat /tmp/.choices)
+rm /tmp/.choices
 for choice in $choices
 do
     case $choice in
@@ -62,8 +62,8 @@ do
     esac
 done
 
-browsers=$(cat .browch)
-rm .browch
+browsers=$(cat /tmp/.browch)
+rm /tmp/.browch
 for choice in $browsers
 do
 	case $choice in

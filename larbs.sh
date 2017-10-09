@@ -7,26 +7,26 @@ red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
-dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> /.name
+dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> /tmp/.name
 
-dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 2> .pass1
-dialog --no-cancel --passwordbox "Reype password." 10 60 2> .pass2
+dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 2> /tmp/.pass1
+dialog --no-cancel --passwordbox "Reype password." 10 60 2> /tmp/.pass2
 
-while [ $(cat .pass1) != $(cat .pass2) ]
+while [ $(cat /tmp/.pass1) != $(cat /tmp/.pass2) ]
 do
-	dialog --no-cancel --passwordbox "Passwords do not match.\n\nEnter password again." 10 60 2> .pass1
-	dialog --no-cancel --passwordbox "Reype password." 10 60 2> .pass2
+	dialog --no-cancel --passwordbox "Passwords do not match.\n\nEnter password again." 10 60 2> /tmp/.pass1
+	dialog --no-cancel --passwordbox "Reype password." 10 60 2> /tmp/.pass2
 done
 
-chmod 777 .name
-NAME=$(cat /.name)
-rm /.name
+chmod 777 /tmp/.name
+NAME=$(cat /tmp/.name)
+shred -u /tmp/.name
 useradd -m -g wheel -s /bin/bash $NAME
 
-echo "$NAME:$(cat .pass1)" | chpasswd
+echo "$NAME:$(cat /tmp/.pass1)" | chpasswd
 #I shred the password for safety's sake.
-shred -u .pass1
-shred -u .pass2
+shred -u /tmp/.pass1
+shred -u /tmp/.pass2
 
 cmd=(dialog --separate-output --checklist "Select additional packages to install with <SPACE>:" 22 76 16)
 options=(1 "LaTeX packages" off
@@ -38,8 +38,7 @@ options=(1 "LaTeX packages" off
 	 7 "transmission torrent client" off
 	 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-#rm -f /home/$NAME/.choices #Needed if write protected from root script.
-echo $choices > /home/$NAME/.choices && chmod 777 /home/$NAME/.choices
+echo $choices > /tmp/.choices && chmod 777 /tmp/.choices
 
 brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
 options=(1 "qutebrowser" off    # any option can be set to default to "on"
@@ -49,7 +48,7 @@ options=(1 "qutebrowser" off    # any option can be set to default to "on"
 	 )
 browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
 #rm -f /home/$NAME/.browch #Needed if write protected from root script.
-echo $browch > /home/$NAME/.browch &&chmod 777 /home/$NAME/.browch
+echo $browch > /tmp/.browch && chmod 777 /tmp/.browch
 
 #If this is the first run, install all core programs.
 dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you'll can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
