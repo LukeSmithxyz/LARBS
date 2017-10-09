@@ -1,7 +1,7 @@
 #!/bin/bash
 
-blue() { printf "\033[0;34m $* \033[0m\n" ;}
-red() { printf "\033[0;31m $* \033[0m\n" ;}
+blue() { printf "\033[0;34m $* \033[0m\n" && (echo $* >> LARBS.log) ;}
+red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
 
 NAME=$(whoami)
 
@@ -81,4 +81,5 @@ blue Downloading config files...
 git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$NAME && rm -rf voidrice
 
 blue Generating bash/ranger/qutebrowser shortcuts...
+cd /home/$NAME/
 python /home/$NAME/.config/Scripts/shortcuts.py

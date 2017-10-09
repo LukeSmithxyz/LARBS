@@ -1,8 +1,9 @@
 #!/bin/bash
+cd /
 pacman -S --noconfirm --needed dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 
-blue() { printf "\033[0;34m $* \033[0m\n" && (chmod 777 LARBS.log && echo $* >> LARBS.log) ;}
-red() { printf "\033[0;31m $* \033[0m\n" && (chmod 777 LARBS.log && echo ERROR: $* >> LARBS.log) ;}
+blue() { printf "\033[0;34m $* \033[0m\n" && (echo $* >> LARBS.log) ;}
+red() { printf "\033[0;31m $* \033[0m\n" && (echo ERROR: $* >> LARBS.log) ;}
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
@@ -114,7 +115,11 @@ curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/larbs_user.sh >
 sudo -u $NAME bash /tmp/larbs_user.sh || red Error when running larbs_user.sh...
 rm -f /tmp/larbs_user.sh
 
-printf "${BLUE}Enabling Network Manager...\n${NC}"
+cat /tmp/LARBS.log >> /LARBS.log
+cp /LARBS.log LARBS.log && chmod 777 LARBS.log
+
+
+blue Enabling Network Manager...
 systemctl enable NetworkManager
 systemctl start NetworkManager
 
