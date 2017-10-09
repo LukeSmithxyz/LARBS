@@ -108,6 +108,8 @@ done
 #Packages I may later add:
 #pacman --noconfirm --needed -S projectm-pulseaudio
 
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers_tmp > /etc/sudoers 
+
 cd /tmp
 blue Changin working directory to /tmp/...
 blue Downloading next portion of the script \(larbs_user.sh\)...
