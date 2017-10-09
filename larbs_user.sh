@@ -36,7 +36,18 @@ done
 blue Installing AUR programs...
 blue \(This may take some time.\)
 
-cowsay -f bud-frogs "Now installing AUR programs."
+cat << "EOF"
+ ______________________________ 
+< Now installing AUR programs. >
+ ------------------------------ 
+     \
+      \
+          oO)-.                       .-(Oo
+         /__  _\                     /_  __\
+         \  \(  |     ()~()         |  )/  /
+          \__|\ |    (-___-)        | /|__/
+          '  '--'    ==`-'==        '--'  '
+EOF
 
 gpg --recv-keys 5FAF0A6EE7371805 #Add the needed gpg key for neomutt
 

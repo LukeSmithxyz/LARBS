@@ -5,7 +5,7 @@ red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> /tmp/LARBS.lo
 echo "LARBS started $(date)" >> /tmp/LARBS.log
 chmod 777 /tmp/LARBS.log
 
-pacman -S --noconfirm --needed dialog cowsay || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
+pacman -S --noconfirm --needed dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
@@ -110,7 +110,27 @@ blue Now installing main programs...
 
 pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (red Error installing basic packages. Check your internet connection and pacman keyring.)
 
-cowsay -f milk "Drink whole milk every day!"
+cat << "EOF"
+ _____________________________ 
+< Drink whole milk every day! >
+ ----------------------------- 
+ \     ____________ 
+  \    |__________|
+      /           /\
+     /           /  \
+    /___________/___/|
+    |          |     |
+    |  ==\ /== |     |
+    |   O   O  | \ \ |
+    |     <    |  \ \|
+   /|          |   \ \
+  / |  \_____/ |   / /
+ / /|          |  / /|
+/||\|          | /||\/
+    -------------|   
+        | |    | | 
+       <__/    \__>
+EOF
 
 for choice in $choices
 do
@@ -150,7 +170,27 @@ do
     esac
 done
 
-cowsay -f dragon-and-cow "Now installing browser(s)"
+cat << "EOF"
+ ___________________________ 
+< Now installing browser(s) >
+ --------------------------- 
+                       \                    ^    /^
+                        \                  / \  // \
+                         \   |\___/|      /   \//  .\
+                          \  /O  O  \__  /    //  | \ \           *----*
+                            /     /  \/_/    //   |  \  \          \   |
+                            @___@`    \/_   //    |   \   \         \/\ \
+                           0/0/|       \/_ //     |    \    \         \  \
+                       0/0/0/0/|        \///      |     \     \       |  |
+                    0/0/0/0/0/_|_ /   (  //       |      \     _\     |  /
+                 0/0/0/0/0/0/`/,_ _ _/  ) ; -.    |    _ _\.-~       /   /
+                             ,-}        _      *-.|.-~-.           .~    ~
+            \     \__/        `/\      /                 ~-. _ .-~      /
+             \____(oo)           *.   }            {                   /
+             (    (--)          .----~-.\        \-`                 .~
+             //__\\  \__ Ack!   ///.----..<        \             _ -~
+            //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~
+EOF
 
 for choice in $browch
 do
@@ -166,7 +206,21 @@ do
     esac
 done
 
-cowsay -f flaming-sheep ">tfw too hot to handle"
+cat << "EOF"
+ ________________________ 
+< >tfw too hot to handle >
+ ------------------------ 
+  \            .    .     .   
+   \      .  . .     `  ,     
+    \    .; .  : .' :  :  : . 
+     \   i..`: i` i.i.,i  i . 
+      \   `,--.|i |i|ii|ii|i: 
+           UooU\.'@@@@@@`.||' 
+           \__/(@@@@@@@@@@)'  
+                (@@@@@@@@)    
+                `YY~~~~YY'    
+                 ||    ||     
+EOF
 
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers_tmp > /etc/sudoers 
 
