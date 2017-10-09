@@ -108,7 +108,7 @@ sleep .5
 
 blue Now installing main programs...
 
-pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (red Error installing basic packages. Check your internet connection and pacman keyring.)
+pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (red Error installing basic packages. Check your internet connection and pacman keyring.)
 
 cowsay -f milk "Drink whole milk every day!"
 
@@ -145,7 +145,7 @@ do
 	    ;;
 	8)
 		blue Now installing visualizers and decoration...
-		pacman --noconfirm --needed -S projectm-pulseaudio cmatrix asciiquarium
+		pacman --noconfirm --needed -S projectm-pulseaudio cmatrix asciiquarium screenfetch
 		;;
     esac
 done
