@@ -1,12 +1,11 @@
 #!/bin/bash
+blue() { printf "\n\033[0;34m $* \033[0m\n\n" && (echo $* >> /tmp/LARBS.log) ;}
+red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> /tmp/LARBS.log) ;}
+
 echo "LARBS started $(date)" >> /tmp/LARBS.log
 chmod 777 /tmp/LARBS.log
 
-cd /
-pacman -S --noconfirm --needed dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
-
-blue() { printf "\n\033[0;34m $* \033[0m\n\n" && (echo $* >> /tmp/LARBS.log) ;}
-red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> /tmp/LARBS.log) ;}
+pacman -S --noconfirm --needed dialog cowsay || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
@@ -55,44 +54,47 @@ echo $browch > /tmp/.browch
 
 dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you'll can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
 
+echo Ready? | figlet && sleep 1 && echo Set? | figlet && sleep 1 && echo GO!!! | figlet
+pacman --noconfirm --needed -S lolcat
+
 blue Now installing main programs...
 
-sudo pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc || (red Error installing basic packages. Check your internet connection and pacman keyring.)
+(pacman --noconfirm --needed -S base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsbeuter mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups screenfetch scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools fzf r pandoc | lolcat) || (red Error installing basic packages. Check your internet connection and pacman keyring.)
 
 for choice in $choices
 do
     case $choice in
         1)
 	    blue Now installing LaTeX packages...
-	    sudo pacman --noconfirm --needed -S texlive-most texlive-lang biber
+	    pacman --noconfirm --needed -S texlive-most texlive-lang biber
             ;;
         2)
 	    blue Now installing LibreOffice Suite...
-	    sudo pacman --noconfirm --needed -S libreoffice-fresh
+	    pacman --noconfirm --needed -S libreoffice-fresh
             ;;
         3)
 	    blue Now installing GIMP...
-	    sudo pacman --noconfirm --needed -S gimp
+	    pacman --noconfirm --needed -S gimp
             ;;
         4)
 	    blue Now installing Blender...
-	    sudo pacman --noconfirm --needed -S blender
+	    pacman --noconfirm --needed -S blender
             ;;
 	5)
 	    blue Now installing Emacs...
-	    sudo pacman --noconfirm --needed -S emacs
+	    pacman --noconfirm --needed -S emacs
 	    ;;
 	6)
 	    blue Now installing extra fonts...
-	    sudo pacman --noconfirm --needed -S noto-fonts-cjk noto-fonts-emoji
+	    pacman --noconfirm --needed -S noto-fonts-cjk noto-fonts-emoji
 	    ;;
 	7)
 	    blue Now installing transmission...
-	    sudo pacman --noconfirm --needed -S transmission-cli
+	    pacman --noconfirm --needed -S transmission-cli
 	    ;;
 	8)
 		blue Now installing visualizers and decoration...
-		sudo pacman --noconfirm --needed -S projectm-pulseaudio cmatrix asciiquarium
+		pacman --noconfirm --needed -S projectm-pulseaudio cmatrix asciiquarium
 		;;
     esac
 done
@@ -102,11 +104,11 @@ do
     case $choice in
         1)
 		blue Now installing qutebrowser...
-	    sudo pacman --noconfirm --needed -S qutebrowser gst-libav gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
+	    pacman --noconfirm --needed -S qutebrowser gst-libav gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
             ;;
         2)
 		blue Now installing Firefox...
-	    sudo pacman --noconfirm --needed -S firefox
+	    pacman --noconfirm --needed -S firefox
             ;;
     esac
 done
