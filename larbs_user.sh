@@ -23,7 +23,7 @@ else
 	blue Now installing $arg...
 	if [[ -e /usr/bin/packer ]]
 	then
-		(sudo packer --noconfirm -S $arg && blue $arg now installed) || red Error installing $arg.
+		(packer --noconfirm -S $arg && blue $arg now installed) || red Error installing $arg.
 	else
 		(aurinstall $arg && blue $arg now installed) || red Error installing $arg.
 	fi
