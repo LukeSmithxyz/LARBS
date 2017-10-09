@@ -5,7 +5,7 @@ red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> /tmp/LARBS.lo
 echo "LARBS started $(date)" >> /tmp/LARBS.log
 chmod 777 /tmp/LARBS.log
 
-pacman -S --noconfirm --needed dialog cowsay || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
+pacman -S --noconfirm --needed dialog cowsay figlet || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?" && exit)
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
@@ -55,7 +55,6 @@ echo $browch > /tmp/.browch
 dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you'll can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
 
 echo Ready? | figlet && sleep 1 && echo Set? | figlet && sleep 1 && echo GO!!! | figlet
-pacman --noconfirm --needed -S lolcat
 
 blue Now installing main programs...
 
