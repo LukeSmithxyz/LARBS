@@ -75,14 +75,16 @@ cat << "EOF"
  "mmm#" "#mm"    "mm    #   
 EOF
 sleep 1
+
+#Prints metal gay
 cat << "EOF"
-
-
-   mmm   mmmm    m   
- m"   " m"  "m   #   
- #   mm #    #   #   
- #    # #    #   "   
-  "mmm"  #mm#    #   
+                     
+   [0;1;34;94mmmm[0m   [0;34mmmmm[0m    [0;34mm[0m   
+ [0;34mm"[0m   [0;34m"[0m [0;34mm"[0m  [0;34m"m[0m   [0;37m#[0m   
+ [0;34m#[0m   [0;34mmm[0m [0;37m#[0m    [0;37m#[0m   [0;37m#[0m   
+ [0;37m#[0m    [0;37m#[0m [0;37m#[0m    [0;37m#[0m   [0;1;30;90m"[0m   
+  [0;37m"mmm"[0m  [0;1;30;90m#mm#[0m    [0;1;30;90m#[0m   
+                     
 EOF
 sleep .5
 cat << "EOF"
@@ -170,6 +172,7 @@ do
     esac
 done
 
+#Prints gay [autism intensifies]
 cat << "EOF"
 
                                                                                                                                             
@@ -221,6 +224,15 @@ curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/larbs_user.sh >
 sudo -u $NAME bash /tmp/larbs_user.sh || red Error when running larbs_user.sh...
 rm -f /tmp/larbs_user.sh
 
+#Prints gay "ALMOST THERE!"
+cat << "EOF"
+   [0;1;33;93mm[0;1;32;92mm[0m   [0;1;34;94mm[0m      [0;1;33;93mm[0m    [0;1;34;94mm[0m  [0;1;35;95mm[0;1;31;91mmm[0;1;33;93mm[0m   [0;1;36;96mmm[0;1;34;94mmm[0m [0;1;35;95mm[0;1;31;91mmm[0;1;33;93mmm[0;1;32;92mmm[0m       [0;1;31;91mm[0;1;33;93mmm[0;1;32;92mmm[0;1;36;96mmm[0m [0;1;34;94mm[0m    [0;1;33;93mm[0m [0;1;32;92mmm[0;1;36;96mmm[0;1;34;94mmm[0m [0;1;35;95mm[0;1;31;91mmm[0;1;33;93mmm[0m  [0;1;36;96mmm[0;1;34;94mmm[0;1;35;95mmm[0m   [0;1;33;93mm[0m   
+   [0;1;32;92m#[0;1;36;96m#[0m   [0;1;35;95m#[0m      [0;1;32;92m#[0;1;36;96m#[0m  [0;1;34;94m#[0;1;35;95m#[0m [0;1;31;91mm"[0m  [0;1;32;92m"m[0m [0;1;36;96m#[0;1;34;94m"[0m   [0;1;31;91m"[0m   [0;1;32;92m#[0m             [0;1;36;96m#[0m    [0;1;35;95m#[0m    [0;1;32;92m#[0m [0;1;36;96m#[0m      [0;1;31;91m#[0m   [0;1;32;92m"[0;1;36;96m#[0m [0;1;34;94m#[0m        [0;1;32;92m#[0m   
+  [0;1;36;96m#[0m  [0;1;34;94m#[0m  [0;1;31;91m#[0m      [0;1;36;96m#[0m [0;1;34;94m#[0;1;35;95m#[0m [0;1;31;91m#[0m [0;1;33;93m#[0m    [0;1;36;96m#[0m [0;1;34;94m"[0;1;35;95m#m[0;1;31;91mmm[0m    [0;1;36;96m#[0m             [0;1;34;94m#[0m    [0;1;31;91m#[0;1;33;93mmm[0;1;32;92mmm[0;1;36;96m#[0m [0;1;34;94m#m[0;1;35;95mmm[0;1;31;91mmm[0m [0;1;33;93m#[0;1;32;92mmm[0;1;36;96mmm[0;1;34;94m"[0m [0;1;35;95m#m[0;1;31;91mmm[0;1;33;93mmm[0m   [0;1;36;96m#[0m   
+  [0;1;34;94m#m[0;1;35;95mm#[0m  [0;1;33;93m#[0m      [0;1;34;94m#[0m [0;1;35;95m"[0;1;31;91m"[0m [0;1;33;93m#[0m [0;1;32;92m#[0m    [0;1;34;94m#[0m     [0;1;33;93m"[0;1;32;92m#[0m   [0;1;34;94m#[0m             [0;1;35;95m#[0m    [0;1;33;93m#[0m    [0;1;34;94m#[0m [0;1;35;95m#[0m      [0;1;32;92m#[0m   [0;1;34;94m"[0;1;35;95mm[0m [0;1;31;91m#[0m        [0;1;34;94m"[0m   
+ [0;1;34;94m#[0m    [0;1;33;93m#[0m [0;1;32;92m#m[0;1;36;96mmm[0;1;34;94mmm[0m [0;1;35;95m#[0m    [0;1;32;92m#[0m  [0;1;36;96m#[0;1;34;94mmm[0;1;35;95m#[0m  [0;1;31;91m"[0;1;33;93mmm[0;1;32;92mm#[0;1;36;96m"[0m   [0;1;35;95m#[0m             [0;1;31;91m#[0m    [0;1;32;92m#[0m    [0;1;35;95m#[0m [0;1;31;91m#m[0;1;33;93mmm[0;1;32;92mmm[0m [0;1;36;96m#[0m    [0;1;31;91m"[0m [0;1;33;93m#m[0;1;32;92mmm[0;1;36;96mmm[0m   [0;1;35;95m#[0m   
+EOF
+                                                                                           
 
 blue Enabling Network Manager...
 systemctl enable NetworkManager
@@ -235,4 +247,3 @@ curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers > /etc/
 
 dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 12 80
 clear
-
