@@ -19,6 +19,10 @@ footer img {
 	padding: 10px;
 }
 
+#prev {
+	max-width: 650px;
+}
+
 footer {
 	font-size: xx-large;
 	font-weight: bold;
