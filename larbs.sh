@@ -52,7 +52,7 @@ options=(1 "qutebrowser" off
 browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
 echo $browch > /tmp/.browch
 
-dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you'll can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
+dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
 
 clear
 
