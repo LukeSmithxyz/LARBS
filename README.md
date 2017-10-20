@@ -31,7 +31,7 @@ Then, finally, once that all is done, you should be able to log out, then log in
 I also have a script here for installing Arch automatically. I *only* wrote this script so I could quickly install then test the other scripts on new computers, but theoretically you could use it as well. *BUT* this is a lazy, pre-alpha script which does not give you many options (it automatically chooses the New York time zone, US English, GRUB, Network Manager, etc). Even more important, it automatically partitions /dev/sda without asking, so unless, you have no non-backed up data on your machine, I don't advise running it unless you don't mind a full wipe. That said, you can run it like this after booting into an Arch live environment:
 
 ```
-curl -O http://lukesmith.xyz/larbs/arch.sh #Downloads the script.
+curl -O http://larbs.xyz/arch.sh #Downloads the script.
 bash arch.sh #Runs it.
 ```
 
