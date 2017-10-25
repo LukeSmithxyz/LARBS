@@ -110,7 +110,7 @@ sleep .5
 
 blue Now installing main programs...
 
-pacman --noconfirm --needed -Sy base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsboat mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools r pandoc python-dbus python-gobject xf86-video-intel || (red Error installing basic packages. Check your internet connection and pacman keyring.)
+pacman --noconfirm --needed -Sy base-devel xorg-xinit xorg-server rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa wireless_tools arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsboat mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools r pandoc python-dbus python-gobject xf86-video-intel || (red Error installing basic packages. Check your internet connection and pacman keyring.)
 pacman --noconfirm --needed -S fzf || (red Error with peripheral programs.)
 
 cat << "EOF"
