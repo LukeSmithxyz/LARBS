@@ -85,7 +85,7 @@ root ALL=(ALL) ALL
  #%wheel ALL=(ALL) NOPASSWD: ALL
 
 ##Here I give wheel users the ability to run core non-harmless commands without a password.
- %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager
+ %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart
 
 #This keeps you from needing to reinsert your passwords in each different terminal a wheel user uses sudo in.
 Defaults !tty_tickets
