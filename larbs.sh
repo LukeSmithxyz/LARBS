@@ -17,7 +17,7 @@ dialog --no-cancel --passwordbox "Reype password." 10 60 2> /tmp/.pass2
 while [ $(cat /tmp/.pass1) != $(cat /tmp/.pass2) ]
 do
 	dialog --no-cancel --passwordbox "Passwords do not match.\n\nEnter password again." 10 60 2> /tmp/.pass1
-	dialog --no-cancel --passwordbox "Reype password." 10 60 2> /tmp/.pass2
+	dialog --no-cancel --passwordbox "Retype password." 10 60 2> /tmp/.pass2
 done
 
 chmod 777 /tmp/.name
