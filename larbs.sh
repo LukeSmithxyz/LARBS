@@ -108,9 +108,89 @@ cat << "EOF"
 EOF
 sleep .5
 
-blue Now installing main programs...
 
-pacman --noconfirm --needed -Sy base-devel xorg-xinit xorg-server noto-fonts rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa wireless_tools arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsboat mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools r pandoc python-dbus python-gobject xf86-video-intel || (red Error installing basic packages. Check your internet connection and pacman keyring.)
+blue \[1\/6\] Now installing main programs \(system basics\)...
+pacman --noconfirm --needed -Sy \
+	base-devel \
+	xorg-xinit \
+	xorg-server \
+	compton \
+	arandr \
+	noto-fonts \
+	rxvt-unicode \
+	unzip \
+	unrar \ 
+	wget \
+	atool \
+	ntfs-3g \
+	xf86-video-intel \
+ 	dosfstools \
+	cups \
+	transset-df \
+	htop || (red Error installing system basics. Check your internet connection and pacman keyring.)
+
+
+blue \[2\/6\] Now installing main programs \(productivity\)...
+pacman --noconfirm --needed -Sy \
+	calcurse \
+	ranger \
+	vim \
+	tmux \
+	rofi \
+	poppler \
+	mupdf \
+	evince \
+	pandoc || (red Error installing productivity packages. Check your internet connection and pacman keyring.)
+
+
+blue \[3\/6\] Now installing main programs \(network and internet\)...
+pacman --noconfirm --needed -Sy \
+	wireless_tools \
+	network-manager-applet \
+	networkmanager \
+	w3m \
+	offlineimap \
+	msmtp \
+	notmuch \
+	notmuch-mutt \
+	rsync \
+	newsboat || (red Error installing network packages. Check your internet connection and pacman keyring.)
+
+
+blue \[4\/6\] Now installing main programs \(graphics\)...
+pacman --noconfirm --needed -Sy \
+	feh \
+	imagemagick \
+	scrot \
+	libcaca || (red Error installing graphic packages. Check your internet connection and pacman keyring.)
+
+
+blue \[5\/6\] Now installing main programs \(audio\)...
+pacman --noconfirm --needed -Sy \
+	ffmpeg \
+	pulseaudio \
+	pulseaudio-alsa \
+	pavucontrol \
+	pamixer \
+	mpd \
+	mpc \
+	ncmpcpp \
+	youtube-dl \
+	youtube-viewer \
+	mediainfo \
+	mpv || (red Error installing audio packages. Check your internet connection and pacman keyring.)
+
+
+blue \[6\/6\] Now installing main programs \(devel\)...
+pacman --noconfirm --needed -Sy \
+	python-dbus \
+	python-gobject \
+	markdown \
+	git \
+	r \
+	highlight || (red Error installing devel packages. Check your internet connection and pacman keyring.)
+
+
 pacman --noconfirm --needed -S fzf || (red Error with peripheral programs.)
 
 cat << "EOF"
