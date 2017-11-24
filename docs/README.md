@@ -145,8 +145,7 @@ internet connections and errors with particular package upgrades or with the
 pacman keyring. Check yourself if the former may be at fault, but feel free to
 inform me in the latter case; I may be able to provide a quick fix.
 
-### >still using systemd botnet distro and/or not a 100% free-as-in-freedumb
-    Parabola GANOO slash Linocks
+### >still using systemd botnet distro and/or not a 100% free-as-in-freedumb Parabola GANOO slash Linocks
 
 I do plan on making an alternative script option for Parabola sooner or later,
 after all Parabola *is* the distro I actually use. If you want to use Arch
