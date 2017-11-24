@@ -42,7 +42,7 @@ Blender, etc.).
 This is just as easy. Log in as the root user and run the following.
 
 ```sh
-curl -O http://larbs.xyz/larbs.sh #Downloads the script.
+curl -LO http://larbs.xyz/larbs.sh #Downloads the script.
 bash larbs.sh #Runs it.
 ```
 
