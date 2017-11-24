@@ -12,7 +12,7 @@ dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Sc
 dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> /tmp/.name
 
 dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 2> /tmp/.pass1
-dialog --no-cancel --passwordbox "Reype password." 10 60 2> /tmp/.pass2
+dialog --no-cancel --passwordbox "Retype password." 10 60 2> /tmp/.pass2
 
 while [ $(cat /tmp/.pass1) != $(cat /tmp/.pass2) ]
 do
