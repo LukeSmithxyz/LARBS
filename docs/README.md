@@ -72,7 +72,7 @@ mind a full wipe. That said, you can run it like this after booting into an Arch
 live environment:
 
 ```sh
-curl -O http://larbs.xyz/arch.sh #Downloads the script.
+curl -LO http://larbs.xyz/arch.sh #Downloads the script.
 bash arch.sh #Runs it.
 ```
 
