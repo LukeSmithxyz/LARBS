@@ -1,1 +1,0 @@
-docs/LICENSE.md
