@@ -12,12 +12,12 @@ dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Sc
 dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 2> /tmp/.name
 
 dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 2> /tmp/.pass1
-dialog --no-cancel --passwordbox "Reype password." 10 60 2> /tmp/.pass2
+dialog --no-cancel --passwordbox "Retype password." 10 60 2> /tmp/.pass2
 
 while [ $(cat /tmp/.pass1) != $(cat /tmp/.pass2) ]
 do
 	dialog --no-cancel --passwordbox "Passwords do not match.\n\nEnter password again." 10 60 2> /tmp/.pass1
-	dialog --no-cancel --passwordbox "Reype password." 10 60 2> /tmp/.pass2
+	dialog --no-cancel --passwordbox "Retype password." 10 60 2> /tmp/.pass2
 done
 
 chmod 777 /tmp/.name
@@ -108,9 +108,89 @@ cat << "EOF"
 EOF
 sleep .5
 
-blue Now installing main programs...
 
-pacman --noconfirm --needed -Sy base-devel xorg-xinit xorg-server noto-fonts rxvt-unicode feh ffmpeg pulseaudio pulseaudio-alsa wireless_tools arandr pavucontrol pamixer mpv wget rofi vim w3m ranger mediainfo poppler highlight tmux calcurse htop newsboat mpd mpc ncmpcpp network-manager-applet networkmanager imagemagick atool libcaca compton transset-df markdown mupdf evince rsync git youtube-dl youtube-viewer cups scrot unzip unrar ntfs-3g offlineimap msmtp notmuch notmuch-mutt dosfstools r pandoc python-dbus python-gobject xf86-video-intel || (red Error installing basic packages. Check your internet connection and pacman keyring.)
+blue \[1\/6\] Now installing main programs \(system basics\)...
+pacman --noconfirm --needed -Sy \
+	base-devel \
+	xorg-xinit \
+	xorg-server \
+	compton \
+	arandr \
+	noto-fonts \
+	rxvt-unicode \
+	unzip \
+	unrar \ 
+	wget \
+	atool \
+	ntfs-3g \
+	xf86-video-intel \
+ 	dosfstools \
+	cups \
+	transset-df \
+	htop || (red Error installing system basics. Check your internet connection and pacman keyring.)
+
+
+blue \[2\/6\] Now installing main programs \(productivity\)...
+pacman --noconfirm --needed -Sy \
+	calcurse \
+	ranger \
+	vim \
+	tmux \
+	rofi \
+	poppler \
+	mupdf \
+	evince \
+	pandoc || (red Error installing productivity packages. Check your internet connection and pacman keyring.)
+
+
+blue \[3\/6\] Now installing main programs \(network and internet\)...
+pacman --noconfirm --needed -Sy \
+	wireless_tools \
+	network-manager-applet \
+	networkmanager \
+	w3m \
+	offlineimap \
+	msmtp \
+	notmuch \
+	notmuch-mutt \
+	rsync \
+	newsboat || (red Error installing network packages. Check your internet connection and pacman keyring.)
+
+
+blue \[4\/6\] Now installing main programs \(graphics\)...
+pacman --noconfirm --needed -Sy \
+	feh \
+	imagemagick \
+	scrot \
+	libcaca || (red Error installing graphic packages. Check your internet connection and pacman keyring.)
+
+
+blue \[5\/6\] Now installing main programs \(audio\)...
+pacman --noconfirm --needed -Sy \
+	ffmpeg \
+	pulseaudio \
+	pulseaudio-alsa \
+	pavucontrol \
+	pamixer \
+	mpd \
+	mpc \
+	ncmpcpp \
+	youtube-dl \
+	youtube-viewer \
+	mediainfo \
+	mpv || (red Error installing audio packages. Check your internet connection and pacman keyring.)
+
+
+blue \[6\/6\] Now installing main programs \(devel\)...
+pacman --noconfirm --needed -Sy \
+	python-dbus \
+	python-gobject \
+	markdown \
+	git \
+	r \
+	highlight || (red Error installing devel packages. Check your internet connection and pacman keyring.)
+
+
 pacman --noconfirm --needed -S fzf || (red Error with peripheral programs.)
 
 cat << "EOF"
@@ -234,12 +314,12 @@ cat << "EOF"
                  ||    ||     
 EOF
 
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers_tmp > /etc/sudoers 
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/sudoers_tmp > /etc/sudoers 
 
 cd /tmp
 blue Changing working directory to /tmp/...
 blue Downloading next portion of the script \(larbs_user.sh\)...
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/larbs_user.sh > /tmp/larbs_user.sh && blue Running larbs_user.sh script as $NAME...
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/larbs_user.sh > /tmp/larbs_user.sh && blue Running larbs_user.sh script as $NAME...
 sudo -u $NAME bash /tmp/larbs_user.sh || red Error when running larbs_user.sh...
 rm -f /tmp/larbs_user.sh
 
@@ -262,7 +342,7 @@ rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 blue Implementing temporary sudoers file...
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers > /etc/sudoers 
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/sudoers > /etc/sudoers 
 
 dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 12 80
 clear
