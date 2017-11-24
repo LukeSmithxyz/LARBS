@@ -314,12 +314,12 @@ cat << "EOF"
                  ||    ||     
 EOF
 
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers_tmp > /etc/sudoers 
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/sudoers_tmp > /etc/sudoers 
 
 cd /tmp
 blue Changing working directory to /tmp/...
 blue Downloading next portion of the script \(larbs_user.sh\)...
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/larbs_user.sh > /tmp/larbs_user.sh && blue Running larbs_user.sh script as $NAME...
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/larbs_user.sh > /tmp/larbs_user.sh && blue Running larbs_user.sh script as $NAME...
 sudo -u $NAME bash /tmp/larbs_user.sh || red Error when running larbs_user.sh...
 rm -f /tmp/larbs_user.sh
 
@@ -342,7 +342,7 @@ rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 blue Implementing temporary sudoers file...
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/sudoers > /etc/sudoers 
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/sudoers > /etc/sudoers 
 
 dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 12 80
 clear
