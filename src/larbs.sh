@@ -185,7 +185,7 @@ blue \[6\/6\] Now installing main programs \(devel\)...
 pacman --noconfirm --needed -Sy \
 	python-dbus \
 	python-gobject \
-	markdown \
+	discount \
 	git \
 	r \
 	highlight || (red Error installing devel packages. Check your internet connection and pacman keyring.)
