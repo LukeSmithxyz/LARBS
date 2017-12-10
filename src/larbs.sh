@@ -119,7 +119,7 @@ pacman --noconfirm --needed -Sy \
 	noto-fonts \
 	rxvt-unicode \
 	unzip \
-	unrar \ 
+	unrar \
 	wget \
 	atool \
 	ntfs-3g \
