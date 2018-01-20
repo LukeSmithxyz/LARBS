@@ -1,0 +1,8 @@
+# LARBS WELCOME:
+exec_always $term -n welcome -e welcome
+for_window [instance="welcome"] floating enable
+for_window [instance="welcome"] resize set 625 400
+for_window [instance="welcome"] border pixel 0
+
+# WARNING! While the above welcome message is there, do not place commands below it!
+# They will be deleted by the "hello" bash command.
