@@ -99,5 +99,7 @@ EOF
 blue Downloading config files...
 git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$NAME && rm -rf voidrice
 
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/testing/src/welcome_i3 >> /home/$NAME/.config/i3/config
+
 blue Generating bash/ranger/qutebrowser shortcuts...
 bash /home/$NAME/.config/Scripts/shortcuts.sh
