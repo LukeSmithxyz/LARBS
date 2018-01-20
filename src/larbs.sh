@@ -43,15 +43,6 @@ options=(1 "LaTeX packages" off
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 echo $choices > /tmp/.choices
 
-brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
-options=(1 "qutebrowser" off
-         2 "Firefox" off
-         3 "Palemoon" off
-         4 "Waterfox" off
-	 )
-browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
-echo $browch > /tmp/.browch
-
 dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
 
 clear
@@ -153,6 +144,7 @@ pacman --noconfirm --needed -Sy \
 	msmtp \
 	notmuch \
 	notmuch-mutt \
+	qutebrowser \
 	rsync \
 	newsboat || (red Error installing network packages. Check your internet connection and pacman keyring.)
 
@@ -283,20 +275,6 @@ cat << "EOF"
    [0;1;31;91m"[0;1;33;93m"[0m                                                                                                                                  [0;1;31;91m"[0;1;33;93m"[0m
 
 EOF
-
-for choice in $browch
-do
-    case $choice in
-        1)
-		blue Now installing qutebrowser...
-	    pacman --noconfirm --needed -S qutebrowser gst-libav gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
-            ;;
-        2)
-		blue Now installing Firefox...
-	    pacman --noconfirm --needed -S firefox
-            ;;
-    esac
-done
 
 cat << "EOF"
  ________________________
