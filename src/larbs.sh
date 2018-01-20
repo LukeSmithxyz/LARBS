@@ -108,8 +108,6 @@ pacman --noconfirm --needed -Sy \
 	compton \
 	arandr \
 	noto-fonts \
-	rxvt-unicode \
-	urxvt-perls \
 	unzip \
 	unrar \
 	wget \
