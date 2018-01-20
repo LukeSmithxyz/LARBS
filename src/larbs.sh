@@ -101,6 +101,15 @@ sleep .5
 
 
 blue \[1\/6\] Now installing main programs \(system basics\)...
+
+pacman --noconfirm --needed -Sy git
+
+cd /tmp
+git clone https://github.com/lukesmithxyz/st.git
+cd st
+patch < patches/transparency.diff
+make && make install
+
 pacman --noconfirm --needed -Sy \
 	base-devel \
 	xorg-xinit \
@@ -176,7 +185,6 @@ pacman --noconfirm --needed -Sy \
 	python-dbus \
 	python-gobject \
 	discount \
-	git \
 	r \
 	highlight || (red Error installing devel packages. Check your internet connection and pacman keyring.)
 
