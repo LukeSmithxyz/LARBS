@@ -47,7 +47,7 @@ EOF
 
 gpg --recv-keys 5FAF0A6EE7371805 #Add the needed gpg key for neomutt
 
-aurcheck packer i3-gaps siji-git vim-pathogen neomutt unclutter-xfixes-git polybar  xfce-theme-blackbird fzf-git || red Error with basic AUR installations...
+aurcheck packer i3-gaps siji-git vim-pathogen neomutt unclutter-xfixes-git polybar  xfce-theme-blackbird || red Error with basic AUR installations...
 #Also installing i3lock, since i3-gaps was only just now installed.
 sudo pacman -S --noconfirm --needed i3lock
 
@@ -97,7 +97,7 @@ cat << "EOF"
 EOF
 
 blue Downloading config files...
-git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$NAME && rm -rf voidrice
+git clone -b testing https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$NAME && rm -rf voidrice
 
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/testing/src/welcome_i3 >> /home/$NAME/.config/i3/config
 
