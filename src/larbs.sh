@@ -37,7 +37,7 @@ options=(1 "LaTeX packages" off
          4 "Blender" off
 	 5 "Emacs" off
 	 6 "Fonts for unicode and other languages" off
-	 7 "transmission torrent client" off
+	 7 "Transmission torrent client" off
 	 8 "Music visualizers and decoration" off
 	 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -102,20 +102,21 @@ sleep .5
 
 blue \[1\/6\] Now installing main programs \(system basics\)...
 
-pacman --noconfirm --needed -Sy git
+pacman --noconfirm --needed -Sy git base-devel
 
 cd /tmp
 git clone https://github.com/lukesmithxyz/st.git
 cd st
 patch < patches/transparency.diff
 make && make install
+cd /tmp
 
 pacman --noconfirm --needed -Sy \
-	base-devel \
 	xorg-xinit \
 	xorg-server \
 	compton \
 	arandr \
+	ttf-inconsolata \
 	noto-fonts \
 	unzip \
 	unrar \
@@ -169,7 +170,6 @@ pacman --noconfirm --needed -Sy \
 	ffmpeg \
 	pulseaudio \
 	pulseaudio-alsa \
-	pavucontrol \
 	pamixer \
 	mpd \
 	mpc \
@@ -303,7 +303,7 @@ curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/sudoers_tmp
 cd /tmp
 blue Changing working directory to /tmp/...
 blue Downloading next portion of the script \(larbs_user.sh\)...
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/larbs_user.sh > /tmp/larbs_user.sh && blue Running larbs_user.sh script as $NAME...
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/testing/src/larbs_user.sh > /tmp/larbs_user.sh && blue Running larbs_user.sh script as $NAME...
 sudo -u $NAME bash /tmp/larbs_user.sh || red Error when running larbs_user.sh...
 rm -f /tmp/larbs_user.sh
 
