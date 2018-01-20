@@ -108,7 +108,8 @@ cd /tmp
 git clone https://github.com/lukesmithxyz/st.git
 cd st
 patch < patches/transparency.diff
-make && make install
+make
+make install
 cd /tmp
 
 pacman --noconfirm --needed -Sy \
