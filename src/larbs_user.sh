@@ -96,22 +96,6 @@ cat << "EOF"
 
 EOF
 
-
-
-browsers=$(cat /tmp/.browch)
-for choice in $browsers
-do
-	case $choice in
-		3)
-			gpg --recv-keys 865E6C87C65285EC #Key required for Palemoon install.
-			aurcheck palemoon-bin
-			;;
-		4)
-			aurcheck waterfox-bin
-			;;
-	esac
-done
-
 blue Downloading config files...
 git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$NAME && rm -rf voidrice
 
