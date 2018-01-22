@@ -47,11 +47,11 @@ EOF
 
 gpg --recv-keys 5FAF0A6EE7371805 #Add the needed gpg key for neomutt
 
-aurcheck packer i3-gaps siji-git vim-pathogen tamzen-font-git neomutt unclutter-xfixes-git urxvt-resize-font-git polybar python-pywal xfce-theme-blackbird fzf-git || red Error with basic AUR installations...
+aurcheck packer i3-gaps siji-git vim-pathogen neomutt unclutter-xfixes-git polybar  xfce-theme-blackbird || red Error with basic AUR installations...
 #Also installing i3lock, since i3-gaps was only just now installed.
 sudo pacman -S --noconfirm --needed i3lock
 
-#packer --noconfirm -S ncpamixer-git speedometer cli-visualizer
+packer --noconfirm -S ncpamixer-git
 
 choices=$(cat /tmp/.choices)
 for choice in $choices
@@ -96,25 +96,10 @@ cat << "EOF"
 
 EOF
 
-
-
-browsers=$(cat /tmp/.browch)
-for choice in $browsers
-do
-	case $choice in
-		3)
-			gpg --recv-keys 865E6C87C65285EC #Key required for Palemoon install.
-			aurcheck palemoon-bin
-			;;
-		4)
-			aurcheck waterfox-bin
-			;;
-	esac
-done
-
 blue Downloading config files...
 git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$NAME && rm -rf voidrice
 
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$NAME/.config/i3/config
+
 blue Generating bash/ranger/qutebrowser shortcuts...
-cd /home/$NAME/
-python /home/$NAME/.config/Scripts/shortcuts.py
+bash /home/$NAME/.config/Scripts/shortcuts.sh
