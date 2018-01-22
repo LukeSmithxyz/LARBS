@@ -16,6 +16,15 @@ dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "Do you think I'm memi
 
 dialog --no-cancel --inputbox "Enter a name for your computer." 10 60 2> comp
 
+dialog --no-cancel --inputbox "Enter partitionsize in gb, separated by space (swap & root)." 10 60 2>psize
+
+IFS=' ' read -ra SIZE <<< $(cat psize)
+
+re='^[0-9]+$'
+if ! [ ${#SIZE[@]} -eq 2 ] || ! [[ ${SIZE[0]} =~ $re ]] || ! [[ ${SIZE[1]} =~ $re ]] ; then
+    SIZE=(12 25);
+fi
+
 timedatectl set-ntp true
 
 cat <<EOF | fdisk /dev/sda
@@ -29,12 +38,12 @@ n
 p
 
 
-+12G
++${SIZE[0]}G
 n
 p
 
 
-+25G
++${SIZE[1]}G
 n
 p
 
