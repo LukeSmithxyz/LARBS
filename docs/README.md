@@ -128,24 +128,7 @@ why should you?
 I've also documented the configuration fairly well, check out the documentation
 on my **voidrice** repository for that.
 
-
-## Bugs?
-
-### When I type `startx` I get some kind of non-descript error!
-
-Some computers might require some additional drivers to run a graphical
-environment, for example, some ThinkPads might require you to install
-`xf86-video-intel`. If you search your model or graphics card along with "Arch
-Linux" on your preferred search engine, you'll probably get the answer fast.
-
-### I have some other problem and it didn't install correctly.
-
-In normal circumstances, there are two main causes of misinstalls: faulty
-internet connections and errors with particular package upgrades or with the
-pacman keyring. Check yourself if the former may be at fault, but feel free to
-inform me in the latter case; I may be able to provide a quick fix.
-
-### >still using systemd botnet distro and/or not a 100% free-as-in-freedumb Parabola GANOO slash Linocks
+## >still using systemd botnet distro and/or not a 100% free-as-in-freedumb Parabola GANOO slash Linocks
 
 I do plan on making an alternative script option for Parabola sooner or later,
 after all Parabola *is* the distro I actually use. If you want to use Arch
