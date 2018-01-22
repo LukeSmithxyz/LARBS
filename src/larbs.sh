@@ -37,20 +37,11 @@ options=(1 "LaTeX packages" off
          4 "Blender" off
 	 5 "Emacs" off
 	 6 "Fonts for unicode and other languages" off
-	 7 "transmission torrent client" off
+	 7 "Transmission torrent client" off
 	 8 "Music visualizers and decoration" off
 	 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 echo $choices > /tmp/.choices
-
-brow=(dialog --separate-output --checklist "Select a browser (none or multiple possible):" 22 76 16)
-options=(1 "qutebrowser" off
-         2 "Firefox" off
-         3 "Palemoon" off
-         4 "Waterfox" off
-	 )
-browch=$("${brow[@]}" "${options[@]}" 2>&1 >/dev/tty)
-echo $browch > /tmp/.browch
 
 dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60
 
@@ -110,15 +101,16 @@ sleep .5
 
 
 blue \[1\/6\] Now installing main programs \(system basics\)...
+
+pacman --noconfirm --needed -Sy git base-devel
+
 pacman --noconfirm --needed -Sy \
-	base-devel \
 	xorg-xinit \
 	xorg-server \
 	compton \
 	arandr \
+	ttf-inconsolata \
 	noto-fonts \
-	rxvt-unicode \
-	urxvt-perls \
 	unzip \
 	unrar \
 	wget \
@@ -153,6 +145,7 @@ pacman --noconfirm --needed -Sy \
 	msmtp \
 	notmuch \
 	notmuch-mutt \
+	qutebrowser \
 	rsync \
 	newsboat || (red Error installing network packages. Check your internet connection and pacman keyring.)
 
@@ -170,7 +163,6 @@ pacman --noconfirm --needed -Sy \
 	ffmpeg \
 	pulseaudio \
 	pulseaudio-alsa \
-	pavucontrol \
 	pamixer \
 	mpd \
 	mpc \
@@ -186,7 +178,6 @@ pacman --noconfirm --needed -Sy \
 	python-dbus \
 	python-gobject \
 	discount \
-	git \
 	r \
 	highlight || (red Error installing devel packages. Check your internet connection and pacman keyring.)
 
@@ -284,20 +275,6 @@ cat << "EOF"
 
 EOF
 
-for choice in $browch
-do
-    case $choice in
-        1)
-		blue Now installing qutebrowser...
-	    pacman --noconfirm --needed -S qutebrowser gst-libav gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
-            ;;
-        2)
-		blue Now installing Firefox...
-	    pacman --noconfirm --needed -S firefox
-            ;;
-    esac
-done
-
 cat << "EOF"
  ________________________
 < >tfw too hot to handle >
@@ -340,6 +317,15 @@ cat << "EOF"
  [0;1;34;94m#[0m    [0;1;33;93m#[0m [0;1;32;92m#m[0;1;36;96mmm[0;1;34;94mmm[0m [0;1;35;95m#[0m    [0;1;32;92m#[0m  [0;1;36;96m#[0;1;34;94mmm[0;1;35;95m#[0m  [0;1;31;91m"[0;1;33;93mmm[0;1;32;92mm#[0;1;36;96m"[0m   [0;1;35;95m#[0m             [0;1;31;91m#[0m    [0;1;32;92m#[0m    [0;1;35;95m#[0m [0;1;31;91m#m[0;1;33;93mmm[0;1;32;92mmm[0m [0;1;36;96m#[0m    [0;1;31;91m"[0m [0;1;33;93m#m[0;1;32;92mmm[0;1;36;96mmm[0m   [0;1;35;95m#[0m
 EOF
 
+blue Installing st...
+
+cd /tmp
+git clone https://github.com/lukesmithxyz/st.git
+cd st
+patch < patches/transparency.diff
+make
+make install
+cd /tmp
 
 blue Enabling Network Manager...
 systemctl enable NetworkManager
