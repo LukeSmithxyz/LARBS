@@ -319,8 +319,6 @@ make
 make install
 cd /tmp
 
-
-
 blue Enabling Network Manager...
 systemctl enable NetworkManager
 systemctl start NetworkManager
