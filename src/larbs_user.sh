@@ -32,6 +32,10 @@ fi
 done
 }
 
+blue "Adjusting config files for your internet interfaces..."
+wifi=$(ls /sys/class/net | grep wl)
+eth=$(ls /sys/class/net | grep eth)
+sed -e "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$NAME/.config/polybar/config /home/$NAME/.bashrc
 
 blue Installing AUR programs...
 blue \(This may take some time.\)
@@ -44,7 +48,7 @@ cat << "EOF"
  [0;1;34;94m#[0m    [0;1;33;93m#[0m [0;1;32;92m"m[0;1;36;96mmm[0;1;34;94mm"[0m [0;1;35;95m#[0m    [0;1;32;92m"[0m          [0;1;33;93m#[0m    [0;1;34;94mmm[0;1;35;95m#m[0;1;31;91mm[0m  [0;1;33;93m#[0m    [0;1;34;94m#[0m [0;1;35;95m#m[0;1;31;91mmm[0;1;33;93mmm[0m   [0;1;36;96m#[0m
 EOF
 
-gpg --recv-keys 5FAF0A6EE7371805 #Add the needed gpg key for neomutt
+#gpg --recv-keys 5FAF0A6EE7371805 #Add the needed gpg key for neomutt
 
 aurcheck packer i3-gaps siji-git vim-pathogen neomutt unclutter-xfixes-git polybar xfce-theme-blackbird htop-vim-git ncpamixer-git || red Error with basic AUR installations...
 #Also installing i3lock, since i3-gaps was only just now installed.
@@ -96,7 +100,8 @@ EOF
 blue Downloading config files...
 git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$NAME && rm -rf voidrice
 
+blue "Preparing welcome message..."
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$NAME/.config/i3/config
 
-blue Generating bash/ranger/qutebrowser shortcuts...
+blue "Generating bash/ranger/qutebrowser shortcuts..."
 bash /home/$NAME/.config/Scripts/shortcuts.sh
