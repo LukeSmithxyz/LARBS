@@ -102,9 +102,11 @@ sleep .5
 
 blue \[1\/6\] Now installing main programs \(system basics\)...
 
-pacman --noconfirm --needed -Sy git base-devel
+pacman --noconfirm -Sy archlinux-keyring
 
 pacman --noconfirm --needed -Sy \
+	base-devel \
+	git \
 	xorg-xinit \
 	xorg-server \
 	compton \
