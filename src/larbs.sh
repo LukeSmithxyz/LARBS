@@ -119,10 +119,7 @@ pacman --noconfirm --needed -Sy \
 	atool \
 	ntfs-3g \
 	xf86-video-intel \
- 	dosfstools \
-	cups \
-	transset-df \
-	htop || (red Error installing system basics. Check your internet connection and pacman keyring.)
+ 	dosfstools || (red Error installing system basics. Check your internet connection and pacman keyring.)
 
 
 blue \[2\/6\] Now installing main programs \(productivity\)...
