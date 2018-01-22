@@ -104,14 +104,6 @@ blue \[1\/6\] Now installing main programs \(system basics\)...
 
 pacman --noconfirm --needed -Sy git base-devel
 
-cd /tmp
-git clone https://github.com/lukesmithxyz/st.git
-cd st
-patch < patches/transparency.diff
-make
-make install
-cd /tmp
-
 pacman --noconfirm --needed -Sy \
 	xorg-xinit \
 	xorg-server \
@@ -316,6 +308,17 @@ cat << "EOF"
   [0;1;34;94m#m[0;1;35;95mm#[0m  [0;1;33;93m#[0m      [0;1;34;94m#[0m [0;1;35;95m"[0;1;31;91m"[0m [0;1;33;93m#[0m [0;1;32;92m#[0m    [0;1;34;94m#[0m     [0;1;33;93m"[0;1;32;92m#[0m   [0;1;34;94m#[0m             [0;1;35;95m#[0m    [0;1;33;93m#[0m    [0;1;34;94m#[0m [0;1;35;95m#[0m      [0;1;32;92m#[0m   [0;1;34;94m"[0;1;35;95mm[0m [0;1;31;91m#[0m        [0;1;34;94m"[0m
  [0;1;34;94m#[0m    [0;1;33;93m#[0m [0;1;32;92m#m[0;1;36;96mmm[0;1;34;94mmm[0m [0;1;35;95m#[0m    [0;1;32;92m#[0m  [0;1;36;96m#[0;1;34;94mmm[0;1;35;95m#[0m  [0;1;31;91m"[0;1;33;93mmm[0;1;32;92mm#[0;1;36;96m"[0m   [0;1;35;95m#[0m             [0;1;31;91m#[0m    [0;1;32;92m#[0m    [0;1;35;95m#[0m [0;1;31;91m#m[0;1;33;93mmm[0;1;32;92mmm[0m [0;1;36;96m#[0m    [0;1;31;91m"[0m [0;1;33;93m#m[0;1;32;92mmm[0;1;36;96mmm[0m   [0;1;35;95m#[0m
 EOF
+
+blue Installing st...
+
+cd /tmp
+git clone https://github.com/lukesmithxyz/st.git
+cd st
+patch < patches/transparency.diff
+make
+make install
+cd /tmp
+
 
 
 blue Enabling Network Manager...
