@@ -316,6 +316,14 @@ EOF
 
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/sudoers_tmp > /etc/sudoers
 
+blue Installing st...
+cd /tmp
+git clone https://github.com/LukeSmithxyz/st.git
+cd st
+patch < patches/transparency.diff
+make
+make install
+
 cd /tmp
 blue Changing working directory to /tmp/...
 blue Downloading next portion of the script \(larbs_user.sh\)...
