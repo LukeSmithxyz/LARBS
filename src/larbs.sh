@@ -112,6 +112,7 @@ pacman --noconfirm --needed -Sy \
 	compton \
 	arandr \
 	ttf-inconsolata \
+	ttf-linux-libertine \
 	noto-fonts \
 	unzip \
 	unrar \
