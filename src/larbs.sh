@@ -119,6 +119,7 @@ pacman --noconfirm --needed -Sy \
 	wget \
 	atool \
 	ntfs-3g \
+	gnome-keyring \
  	dosfstools || (red Error installing system basics. Check your internet connection and pacman keyring.)
 
 
