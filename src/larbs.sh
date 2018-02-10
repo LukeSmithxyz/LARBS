@@ -142,7 +142,6 @@ pacman --noconfirm --needed -Sy \
 	networkmanager \
 	w3m \
 	offlineimap \
-	msmtp \
 	notmuch \
 	notmuch-mutt \
 	qutebrowser \
