@@ -100,6 +100,9 @@ EOF
 blue Downloading config files...
 git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$NAME && rm -rf voidrice
 
+blue Downloading email setup...
+git clone https://github.com/lukesmithxyz/mutt-wizard.git /home/$NAME/.config/mutt
+
 blue "Preparing welcome message..."
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$NAME/.config/i3/config
 
