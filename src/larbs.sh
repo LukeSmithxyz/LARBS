@@ -109,6 +109,7 @@ pacman --noconfirm --needed -Sy \
 	git \
 	xorg-xinit \
 	xorg-server \
+	xorg-xdpyinfo \
 	compton \
 	arandr \
 	ttf-inconsolata \
@@ -153,6 +154,7 @@ blue \[4\/6\] Now installing main programs \(graphics\)...
 pacman --noconfirm --needed -Sy \
 	feh \
 	imagemagick \
+	screenkey \
 	scrot \
 	libcaca || (red Error installing graphic packages. Check your internet connection and pacman keyring.)
 
