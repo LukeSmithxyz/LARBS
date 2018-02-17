@@ -69,7 +69,7 @@ do
 		aurcheck transmission-remote-cli-git
 		;;
 	8)
-		aurcheck bash-pipes cli-visualizer speedometer neofetch
+		aurcheck bash-pipes cli-visualizer speedometer neofetch screenkey
 		;;
     esac
 done
