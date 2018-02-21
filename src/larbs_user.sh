@@ -103,8 +103,15 @@ git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /h
 blue Downloading email setup...
 git clone https://github.com/lukesmithxyz/mutt-wizard.git /home/$NAME/.config/mutt
 
-blue "Preparing welcome message..."
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$NAME/.config/i3/config
+blue Downloading shortcut sync...
+git clone https://github.com/LukeSmithxyz/shortcut-sync.git &&
+	rsync shortcut-sync/shortcuts.sh ~/.scripts/ &&
+	rsync shortcut-sync/folders ~/.scripts/ &&
+	rsync shortcut-sync/configs ~/.scripts/ &&
+	rm -rf shortcut-sync/
 
 blue "Generating bash/ranger/qutebrowser shortcuts..."
 bash /home/$NAME/.config/Scripts/shortcuts.sh
+
+blue "Preparing welcome message..."
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$NAME/.config/i3/config
