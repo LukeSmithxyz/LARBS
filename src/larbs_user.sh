@@ -111,7 +111,7 @@ git clone https://github.com/LukeSmithxyz/shortcut-sync.git &&
 	rm -rf shortcut-sync/
 
 blue "Generating bash/ranger/qutebrowser shortcuts..."
-bash /home/$NAME/.config/Scripts/shortcuts.sh
+bash /home/$NAME/.scripts/shortcuts.sh
 
 blue "Preparing welcome message..."
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$NAME/.config/i3/config
