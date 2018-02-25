@@ -5,9 +5,6 @@ red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> /tmp/LARBS.lo
 
 NAME=$(whoami)
 
-blue Activating Pulseaudio if not already active...
-pulseaudio --start && blue Pulseaudio enabled...
-
 #Install an AUR package manually.
 aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
 
@@ -115,3 +112,7 @@ bash /home/$NAME/.scripts/shortcuts.sh
 
 blue "Preparing welcome message..."
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$NAME/.config/i3/config
+
+blue "Reseting Pulseaudio..."
+killall pulseaudio
+pulseaudio --start
