@@ -39,6 +39,7 @@ options=(1 "LaTeX packages" off
 	 6 "Fonts for unicode and other languages" off
 	 7 "Transmission torrent client" off
 	 8 "Music visualizers and decoration" off
+	 9 "Pandoc for document management" off
 	 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 echo $choices > /tmp/.choices
@@ -132,8 +133,7 @@ pacman --noconfirm --needed -Sy \
 	tmux \
 	rofi \
 	poppler \
-	mupdf \
-	pandoc || (red Error installing productivity packages. Check your internet connection and pacman keyring.)
+	mupdf || (red Error installing productivity packages. Check your internet connection and pacman keyring.)
 
 
 blue \[3\/6\] Now installing main programs \(network and internet\)...
@@ -259,6 +259,9 @@ EOF
 		blue Now installing visualizers and decoration...
 		pacman --noconfirm --needed -S projectm-pulseaudio cmatrix asciiquarium screenfetch
 		;;
+	9)
+		blue Now installing pandoc...
+		pacman --noconfirm --needed -S pandoc pandoc-citeproc
     esac
 done
 
