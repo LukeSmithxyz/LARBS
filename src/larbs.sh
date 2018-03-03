@@ -18,12 +18,12 @@ do
 done
 
 dialog --infobox "Adding user \"$name\"..." 4 50
-useradd -m -g wheel -s /bin/bash $name
-echo "$name:$pass1" | chpasswd
+useradd -m -g wheel -s /bin/bash $name >/dev/tty6
+echo "$name:$pass1" | chpasswd >/dev/tty6
 
 cmd=(dialog --separate-output --nocancel  --buildlist "Press <SPACE> to select the packages you want to install. LARBS will install all the packages you put in the right column.
 
-Use `^` and `$` to move to the left and right columns respectively. Press <ENTER> when done." 22 76 16)
+Use \"^\" and \"\$\" to move to the left and right columns respectively. Press <ENTER> when done." 22 76 16)
 options=(X "LaTeX packages" off
          L "Libreoffice" off
          G "GIMP" off
@@ -34,11 +34,11 @@ options=(X "LaTeX packages" off
 	 D "Music visualizers and decoration" off
 	 P "Pandoc for document management" off
 	 )
-choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty6)
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
 let="\(\|[a-z]\|$(echo $choices | sed -e "s/ /\\\|/g")\)"
 
-dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60 || clear && exit
+dialog --title "Let's get this party started!" --msgbox "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you can relax even more with your complete system.\n\nNow just press <OK> and the system will begin installation!" 13 60 || (clear && exit)
 
 clear
 
@@ -55,7 +55,7 @@ installProgram() { ( (pacman --noconfirm --needed -S $1 &>/dev/tty6 && echo $1 i
 for x in $(cat /tmp/progs.csv | grep -G ",$let," | awk -F, {'print $1'})
 do
 	n=$((n+1))
-	dialog --infobox "Downloading and installing program $n out of $count: $x..." 10 60
+	dialog --title "LARBS Installation" --infobox "Downloading and installing program $n out of $count: $x...\n\nThe first programs will take more time due to dependencies. You can watch the output on tty6." 8 70
 	installProgram $x >/dev/tty6
 done
 
