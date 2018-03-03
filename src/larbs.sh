@@ -62,7 +62,10 @@ done
 dialog --infobox "Preparing the user script..." 4 40
 curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/sudoers_tmp > /etc/sudoers
 cd /tmp
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/larbs_user.sh > /tmp/larbs_user.sh
+if [ $1 = "devel" ]
+then curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/devel/src/larbs_user.sh > /tmp/larbs_user.sh;
+else curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/larbs_user.sh > /tmp/larbs_user.sh;
+fi
 sudo -u $name bash /tmp/larbs_user.sh
 rm -f /tmp/larbs_user.sh
 
