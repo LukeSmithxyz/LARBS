@@ -6,3 +6,4 @@ RewriteRule ^([^\.]+)$ $1.html [NC,L]
 Redirect /larbs.sh https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/src/larbs.sh
 Redirect /arch.sh https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/src/arch.sh
 Redirect /testing.sh https://raw.githubusercontent.com/LukeSmithxyz/LARBS/testing/src/larbs.sh
+Redirect /devel.sh https://raw.githubusercontent.com/LukeSmithxyz/LARBS/devel/src/larbs.sh
