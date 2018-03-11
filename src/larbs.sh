@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "LARBS started $(date)" >> /tmp/LARBS.log && chmod 777 /tmp/LARBS.log
-
 pacman -S --noconfirm --needed dialog || (echo "Error at script start: Are you sure you're running this as the root user? Are you sure you're using an Arch-based distro? ;-) Are you sure you have an internet connection?" && exit)
 
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
@@ -32,7 +30,7 @@ options=(X "LaTeX packages" off
 	 F "Fonts for unicode and other languages" off
 	 T "Transmission torrent client" off
 	 D "Music visualizers and decoration" off
-	 P "Pandoc for document management" off
+	 P "Pandoc and R/Rmarkdown" off
 	 )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -77,6 +75,8 @@ patch < patches/transparency.diff >/dev/tty6
 make >/dev/tty6
 make install >/dev/tty6
 cd /tmp
+
+# R markdown install.
 
 dialog --infobox "Enabling Network Manager..." 4 40
 systemctl enable NetworkManager

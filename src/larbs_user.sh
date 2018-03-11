@@ -12,16 +12,10 @@ if [[ $qm = *"$arg"* ]]; then
 	echo $arg is already installed.
 else
 	echo $arg not installed.
-	echo Now installing $arg...
-	(packer --noconfirm -S $arg && echo $arg now installed) || (aurinstall $arg && echo $arg now installed)
+	packer --noconfirm -S $arg >/dev/null || aurinstall $arg
 fi
 done
 }
-
-echo "Adjusting config files for your internet interfaces..."
-wifi=$(ls /sys/class/net | grep wl)
-eth=$(ls /sys/class/net | grep eth)
-sed -e "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$(whoami)/.config/polybar/config /home/$(whoami)/.bashrc
 
 dialog --infobox "Installing \"packer\", an AUR helper..." 10 60
 aurcheck packer >/dev/null
@@ -40,6 +34,12 @@ echo Downloading config files...
 git clone https://github.com/lukesmithxyz/voidrice.git >/dev/null &&
 	rsync -va voidrice/ /home/$(whoami) >/dev/null &&
 	rm -rf voidrice >/dev/null
+
+dialog --infobox "Now compiling polybar. This is the last program, but may take some time..." 10 60
+wifi=$(ls /sys/class/net | grep wl)
+eth=$(ls /sys/class/net | grep eth)
+sed -e "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$(whoami)/.config/polybar/config /home/$(whoami)/.bashrc
+packer --noconfig -S polybar
 
 echo Downloading email setup...
 git clone https://github.com/lukesmithxyz/mutt-wizard.git /home/$(whoami)/.config/mutt >/dev/null
