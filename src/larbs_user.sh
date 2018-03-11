@@ -1,10 +1,5 @@
 #!/bin/bash
 
-blue() { printf "\n\033[0;34m $* \033[0m\n\n" && (echo $* >> /tmp/LARBS.log) ;}
-red() { printf "\n\033[0;31m $* \033[0m\n\n" && (echo ERROR: $* >> /tmp/LARBS.log) ;}
-
-NAME=$(whoami)
-
 #Install an AUR package manually.
 aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
 
@@ -16,103 +11,50 @@ do
 if [[ $qm = *"$arg"* ]]; then
 	echo $arg is already installed.
 else
-	echo $arg not installed
-	blue Now installing $arg...
-	if [[ -e /usr/bin/packer ]]
-	then
-		(packer --noconfirm -S $arg && blue $arg now installed) || red Error installing $arg.
-	else
-		(aurinstall $arg && blue $arg now installed) || red Error installing $arg.
-	fi
-
+	echo $arg not installed.
+	packer --noconfirm -S $arg >/dev/null || aurinstall $arg
 fi
 done
 }
 
-blue "Adjusting config files for your internet interfaces..."
+dialog --infobox "Installing \"packer\", an AUR helper..." 10 60
+aurcheck packer >/dev/null
+
+count=$(cat /tmp/aur_queue | wc -l)
+n=0
+
+for prog in $(cat /tmp/aur_queue)
+do
+	n=$((n+1))
+	dialog --infobox "Downloading and installing program $n out of $count: $prog..." 10 60
+	aurcheck $prog >/dev/null
+done
+
+echo Downloading config files...
+git clone https://github.com/lukesmithxyz/voidrice.git >/dev/null &&
+	rsync -va voidrice/ /home/$(whoami) >/dev/null &&
+	rm -rf voidrice >/dev/null
+
+dialog --infobox "Now compiling polybar. This is the last program, but may take some time..." 10 60
 wifi=$(ls /sys/class/net | grep wl)
 eth=$(ls /sys/class/net | grep eth)
-sed -e "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$NAME/.config/polybar/config /home/$NAME/.bashrc
+sed -e "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$(whoami)/.config/polybar/config /home/$(whoami)/.bashrc
+packer --noconfirm -S polybar || packer --noconfirm -S polybar-git
 
-blue Installing AUR programs...
-blue \(This may take some time.\)
+echo Downloading email setup...
+git clone https://github.com/lukesmithxyz/mutt-wizard.git /home/$(whoami)/.config/mutt >/dev/null
 
-cat << "EOF"
-   [0;1;33;93mm[0;1;32;92mm[0m   [0;1;34;94mm[0m    [0;1;31;91mm[0m [0;1;33;93mm[0;1;32;92mmm[0;1;36;96mmm[0m        [0;1;32;92mmm[0;1;36;96mmm[0;1;34;94mmm[0;1;35;95mm[0m [0;1;31;91mmm[0;1;33;93mmm[0;1;32;92mm[0m  [0;1;36;96mm[0m    [0;1;31;91mm[0m [0;1;33;93mmm[0;1;32;92mmm[0;1;36;96mmm[0m   [0;1;35;95mm[0m
-   [0;1;32;92m#[0;1;36;96m#[0m   [0;1;35;95m#[0m    [0;1;33;93m#[0m [0;1;32;92m#[0m   [0;1;34;94m"[0;1;35;95m#[0m          [0;1;34;94m#[0m      [0;1;32;92m#[0m    [0;1;34;94m#[0;1;35;95m#[0m  [0;1;31;91m#[0;1;33;93m#[0m [0;1;32;92m#[0m        [0;1;31;91m#[0m
-  [0;1;36;96m#[0m  [0;1;34;94m#[0m  [0;1;31;91m#[0m    [0;1;32;92m#[0m [0;1;36;96m#[0;1;34;94mmm[0;1;35;95mmm[0;1;31;91m"[0m          [0;1;35;95m#[0m      [0;1;36;96m#[0m    [0;1;35;95m#[0m [0;1;31;91m#[0;1;33;93m#[0m [0;1;32;92m#[0m [0;1;36;96m#m[0;1;34;94mmm[0;1;35;95mmm[0m   [0;1;33;93m#[0m
-  [0;1;34;94m#m[0;1;35;95mm#[0m  [0;1;33;93m#[0m    [0;1;36;96m#[0m [0;1;34;94m#[0m   [0;1;31;91m"[0;1;33;93mm[0m          [0;1;31;91m#[0m      [0;1;34;94m#[0m    [0;1;31;91m#[0m [0;1;33;93m"[0;1;32;92m"[0m [0;1;36;96m#[0m [0;1;34;94m#[0m        [0;1;32;92m"[0m
- [0;1;34;94m#[0m    [0;1;33;93m#[0m [0;1;32;92m"m[0;1;36;96mmm[0;1;34;94mm"[0m [0;1;35;95m#[0m    [0;1;32;92m"[0m          [0;1;33;93m#[0m    [0;1;34;94mmm[0;1;35;95m#m[0;1;31;91mm[0m  [0;1;33;93m#[0m    [0;1;34;94m#[0m [0;1;35;95m#m[0;1;31;91mmm[0;1;33;93mmm[0m   [0;1;36;96m#[0m
-EOF
+dialog --infobox "Generating bash/ranger/qutebrowser shortcuts..." 4 60
+git clone https://github.com/LukeSmithxyz/shortcut-sync.git >/dev/null &&
+	rsync shortcut-sync/shortcuts.sh ~/.scripts/ >/dev/null &&
+	rsync shortcut-sync/folders ~/.scripts/ >/dev/null &&
+	rsync shortcut-sync/configs ~/.scripts/ >/dev/null &&
+	bash /home/$(whoami)/.scripts/shortcuts.sh >/dev/null &&
+	rm -rf shortcut-sync/ >/dev/null
 
-#gpg --recv-keys 5FAF0A6EE7371805 #Add the needed gpg key for neomutt
+dialog --infobox "Preparing welcome message..." 4 50
+curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$(whoami)/.config/i3/config
 
-aurcheck packer i3-gaps siji-git vim-pathogen neomutt unclutter-xfixes-git polybar xfce-theme-blackbird htop-vim-git ncpamixer-git urlview sc-im || red Error with basic AUR installations...
-#Also installing i3lock, since i3-gaps was only just now installed.
-sudo pacman -S --noconfirm --needed i3lock
-
-choices=$(cat /tmp/.choices)
-for choice in $choices
-do
-    case $choice in
-        1)
-		aurcheck vim-live-latex-preview
-		git clone https://github.com/lukesmithxyz/latex-templates.git && mkdir -p /home/$NAME/Documents/LaTeX && rsync -va latex-templates /home/$NAME/Documents/LaTeX && rm -rf latex-templates
-        	;;
-	6)
-		aurcheck ttf-ancient-fonts
-		;;
-	7)
-		aurcheck transmission-remote-cli-git
-		;;
-	8)
-		aurcheck bash-pipes cli-visualizer speedometer neofetch screenkey
-		;;
-    esac
-done
-cat << "EOF"
-
-         ▄              ▄
-        ▌▒█           ▄▀▒▌
-        ▌▒▒▀▄       ▄▀▒▒▒▐
-       ▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐
-     ▄▄▀▒▒▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐
-   ▄▀▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▀██▀▒▌
-  ▐▒▒▒▄▄▄▒▒▒▒▒▒▒▒▒▒▒▒▒▀▄▒▒▌
-  ▌▒▒▐▄█▀▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐
- ▐▒▒▒▒▒▒▒▒▒▒▒▌██▀▒▒▒▒▒▒▒▒▀▄▌
- ▌▒▀▄██▄▒▒▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▌
- ▌▀▐▄█▄█▌▄▒▀▒▒▒▒▒▒░░░░░░▒▒▒▐
-▐▒▀▐▀▐▀▒▒▄▄▒▄▒▒▒▒▒░░░░░░▒▒▒▒▌
-▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒░░░░░░▒▒▒▐
- ▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒▒▒░░░░▒▒▒▒▌
- ▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▐
-  ▀▄▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▄▒▒▒▒▌
-    ▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀
-   ▐▀▒▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀
-  ▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▀▀
-
-EOF
-
-blue Downloading config files...
-git clone https://github.com/lukesmithxyz/voidrice.git && rsync -va voidrice/ /home/$NAME && rm -rf voidrice
-
-blue Downloading email setup...
-git clone https://github.com/lukesmithxyz/mutt-wizard.git /home/$NAME/.config/mutt
-
-blue Downloading shortcut sync...
-git clone https://github.com/LukeSmithxyz/shortcut-sync.git &&
-	rsync shortcut-sync/shortcuts.sh ~/.scripts/ &&
-	rsync shortcut-sync/folders ~/.scripts/ &&
-	rsync shortcut-sync/configs ~/.scripts/ &&
-	rm -rf shortcut-sync/
-
-blue "Generating bash/ranger/qutebrowser shortcuts..."
-bash /home/$NAME/.scripts/shortcuts.sh
-
-blue "Preparing welcome message..."
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$NAME/.config/i3/config
-
-blue "Reseting Pulseaudio..."
-killall pulseaudio
-pulseaudio --start
+dialog --infobox "Reseting Pulseaudio..." 4 50
+killall pulseaudio >/dev/null
+pulseaudio --start >/dev/null
