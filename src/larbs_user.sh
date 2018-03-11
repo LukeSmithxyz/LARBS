@@ -38,7 +38,7 @@ git clone https://github.com/lukesmithxyz/voidrice.git >/dev/null &&
 dialog --infobox "Now compiling polybar. This is the last program, but may take some time..." 10 60
 wifi=$(ls /sys/class/net | grep wl)
 eth=$(ls /sys/class/net | grep eth)
-sed -e "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$(whoami)/.config/polybar/config /home/$(whoami)/.bashrc
+sed -i "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$(whoami)/.config/polybar/config /home/$(whoami)/.bashrc
 packer --noconfirm -S polybar || packer --noconfirm -S polybar-git
 
 echo Downloading email setup...
