@@ -39,7 +39,7 @@ dialog --infobox "Now compiling polybar. This is the last program, but may take 
 wifi=$(ls /sys/class/net | grep wl)
 eth=$(ls /sys/class/net | grep eth)
 sed -e "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$(whoami)/.config/polybar/config /home/$(whoami)/.bashrc
-packer --noconfig -S polybar
+packer --noconfig -S polybar-git
 
 echo Downloading email setup...
 git clone https://github.com/lukesmithxyz/mutt-wizard.git /home/$(whoami)/.config/mutt >/dev/null
