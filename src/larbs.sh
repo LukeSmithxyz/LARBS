@@ -69,11 +69,11 @@ rm -f /tmp/larbs_user.sh
 
 dialog --infobox "Installing \"st\" from source..." 4 40
 cd /tmp
-git clone https://github.com/lukesmithxyz/st.git >/dev/tty6
+git clone https://github.com/lukesmithxyz/st.git
 cd st
-patch < patches/transparency.diff >/dev/tty6
-make >/dev/tty6
-make install >/dev/tty6
+patch < patches/transparency.diff
+make
+make install
 cd /tmp
 
 # R markdown install.
