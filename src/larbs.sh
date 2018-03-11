@@ -69,9 +69,9 @@ rm -f /tmp/larbs_user.sh
 
 dialog --infobox "Installing \"st\" from source..." 4 40
 cd /tmp
+rm -rf st
 git clone https://github.com/lukesmithxyz/st.git
 cd st
-patch < patches/transparency.diff
 make
 make install
 cd /tmp
