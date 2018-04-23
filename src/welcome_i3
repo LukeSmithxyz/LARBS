@@ -7,3 +7,4 @@ for_window [instance="welcome"] resize set 625 400
 for_window [instance="welcome"] border pixel 0
 # WARNING! While the above welcome message is there, do not place commands below it!
 # They will be deleted by the "hello" bash command.
+exec --no-startup-id notify-send -i ~/.scripts/larbs.png "Welcome to LARBS!"

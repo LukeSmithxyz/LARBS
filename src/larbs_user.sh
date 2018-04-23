@@ -35,15 +35,15 @@ git clone https://github.com/lukesmithxyz/voidrice.git >/dev/null &&
 	rsync -va voidrice/ /home/$(whoami) >/dev/null &&
 	rm -rf voidrice >/dev/null
 
-dialog --infobox "Now compiling polybar. This is the last program, but may take some time..." 10 60
-wifi=$(ls /sys/class/net | grep wl)
-eth=$(ls /sys/class/net | grep e)
-bat=$(ls /sys/class/power_supply | grep BAT)
-adp=$(ls /sys/class/power_supply | grep ADP)
-bl=$(ls /sys/class/backlight | grep _backlight)
-sed -i "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$(whoami)/.config/polybar/config /home/$(whoami)/.bashrc
-sed -i "s/BAT0/$bat/g; s/ADP1/$adp/g; s/intel_backlight/$bl/g" /home/$(whoami)/.config/polybar/config
-packer --noconfirm -S polybar || packer --noconfirm -S polybar-git
+#dialog --infobox "Now compiling polybar. This is the last program, but may take some time..." 10 60
+#wifi=$(ls /sys/class/net | grep wl)
+#eth=$(ls /sys/class/net | grep e)
+#bat=$(ls /sys/class/power_supply | grep BAT)
+#adp=$(ls /sys/class/power_supply | grep ADP)
+#bl=$(ls /sys/class/backlight | grep _backlight)
+#sed -i "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$(whoami)/.config/polybar/config /home/$(whoami)/.bashrc
+#sed -i "s/BAT0/$bat/g; s/ADP1/$adp/g; s/intel_backlight/$bl/g" /home/$(whoami)/.config/polybar/config
+#packer --noconfirm -S polybar || packer --noconfirm -S polybar-git
 
 echo Downloading email setup...
 git clone https://github.com/lukesmithxyz/mutt-wizard.git /home/$(whoami)/.config/mutt >/dev/null
@@ -57,7 +57,8 @@ git clone https://github.com/LukeSmithxyz/shortcut-sync.git >/dev/null &&
 	rm -rf shortcut-sync/ >/dev/null
 
 dialog --infobox "Preparing welcome message..." 4 50
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/welcome_i3 >> /home/$(whoami)/.config/i3/config
+
+echo "exec_always --no-startup-id notify-send -i ~/.scripts/larbs.png '<b>Welcome to LARBS:</b> Press Super+F1 for the manual.' -t 10000"  >> /home/$(whoami)/.config/i3/config
 
 dialog --infobox "Reseting Pulseaudio..." 4 50
 killall pulseaudio >/dev/null
