@@ -1,6 +1,6 @@
 # Luke's Auto-Rice Bootstraping Scripts (LARBS)
 
-[Official Website: larbs.xyz](https://larbs.xyz)
+[Official Website: larbs.xyz](http://larbs.xyz)
 
 This is a set of scripts either can either (1) install Arch Linux automatically
 with a typical Arch ISOed USB, and perhaps more prominently (2) automatically
@@ -42,7 +42,7 @@ Blender, etc.).
 This is just as easy. Log in as the root user and run the following.
 
 ```sh
-curl -LO https://larbs.xyz/larbs.sh #Downloads the script.
+curl -LO lukesmith.xyz/larbs.sh #Downloads the script.
 bash larbs.sh #Runs it.
 ```
 
@@ -72,7 +72,7 @@ mind a full wipe. That said, you can run it like this after booting into an Arch
 live environment:
 
 ```sh
-curl -LO https://larbs.xyz/arch.sh #Downloads the script.
+curl -LO lukesmith.xyz/arch.sh #Downloads the script.
 bash arch.sh #Runs it.
 ```
 
