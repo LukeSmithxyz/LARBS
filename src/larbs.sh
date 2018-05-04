@@ -75,6 +75,15 @@ make
 make install
 cd /tmp
 
+dialog --infobox "Installing \"dmenu\" from source..." 4 40
+cd /tmp
+rm -rf dmenu
+git clone https://github.com/lukesmithxyz/dmenu.git
+cd dmenu
+make
+make install
+cd /tmp
+
 # R markdown install.
 
 dialog --infobox "Enabling Network Manager..." 4 40
