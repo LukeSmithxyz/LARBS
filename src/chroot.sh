@@ -2,7 +2,9 @@
 
 passwd
 
-ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+TZuser=$(cat tzfinal.tmp)
+
+ln -sf /usr/share/zoneinfo/$TZuser /etc/localtime
 
 hwclock --systohc
 
