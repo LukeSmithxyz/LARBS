@@ -19,7 +19,6 @@ as a base.
  - [Permission Details (sudoers file)](#permission-details-sudoers-file)
  - [Version](#version)
  - [Why I made this](#why-i-made-this)
- - [Bugs?](#bugs)
 
 
 ## About
