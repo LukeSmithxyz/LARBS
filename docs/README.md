@@ -9,18 +9,6 @@ environment, using my configs [here](https://github.com/LukeSmithxyz/voidrice)
 as a base.
 
 
-## Table of Contents
-
- - [About](#about)
- - [Installation](#installation)
-   - [On an already existing Arch install](#on-an-already-existing-arch-install)
-   - [Installing Arch automatically](#installing-arch-automatically)
- - [How to Use](#how-to-use)
- - [Permission Details (sudoers file)](#permission-details-sudoers-file)
- - [Version](#version)
- - [Why I made this](#why-i-made-this)
-
-
 ## About
 
 Really, the goal of this script is to start a kind of Linux meta-distribution
@@ -31,8 +19,13 @@ efficient worksetups.
 
 All the core stuff we be installed without prompt, but you'll have the option
 to install some of the larger non-essential packages (LaTeX, LibreOffice,
-Blender, etc.).
+emacs, etc.).
 
+## Requirements
+
+An already installed Arch Linux or derivative system (works on Manjaro and Antergos as well). Works on Parabola too, but due to repository differences, some minor programs might not install. Check the program list.
+
+If you have a non-systemd system, you might also have to manually set up Pulseaudio and Network Manager after running the script.
 
 ## Installation
 
@@ -78,6 +71,7 @@ bash arch.sh #Runs it.
 After the system installs, you'll have the option of bootstrapping automatically
 into installing my configs as well.
 
+Don't be worried if the installation of the first programs seems to take a while. As general dependencies are installed, things will move very quickly. Still, since this is a total online install, it might take a little longer than just installing a distro from an ISO.
 
 ## How to Use
 
@@ -105,10 +99,28 @@ not need to repeat putting it in in other terminal windows.
 
 ## Version
 
-We're basically on Version 2.0 now, which is still pretty primitive. I'm adding
-some error handling, if the script fails, check the contents of LARBS.log in
-whatever directory you've run the script. Still, this script is still in the
-Wild West, so I recommend only running it on fresh installs.
+We're close to what can be called LARBS 2.0, and here are some of the major changes since the original version.
+
+
+- Deployment of my new mutt-wizard for secure offline email configuration instead of config files for the user to manually edit.
+- System is more minimalist/suckless.
+- Luke's build of st is now the default terminal, instead of urxvt.
+- Polybar replaced by i3blocks (with many custom modules), which is lighter on resources and requires fewer dependencies. The polybar build also often failed to build on some machines.
+- Switch from mocp to mpd/ncmpcpp for music.
+- dmenu is used instead of rofi for simplicity's sake.
+- Firefox instead of qutebrowser for default browser (qutebrowser configs remain)
+- Extensive implementation of dmenu, including for mounting/unmounting drives, display selection, confirmation for shutdown and other crucial commands, link handling and screen/audio recording.
+- Updates to config files can be pulled with git now.
+- i3 window resize now intuitive directions
+- Removal of a lot of brainlethood in the original design, where I relocated configs for alleged extensibility's sake. That's all been fixed now.
+- Configs for the new versions of qutebrowser, newsboat/newsbeuter, neomutt, etc.
+- Link handling scripts for mutt, newsboat and vim
+- vi mode is now default in bash (with retention of emacs-mode ctrl-l)
+- Caps lock functions both as a super key and escape key with xcape.
+- Use of the much better, newer version of my shortcut-sync.
+- Use of Luke's `mutt-wizard`.
+- And the repository is *significantly* smaller than it was before, meaning a faster download.
+- A million and one other tweaks and bug fixes.
 
 
 ## Why I made this
@@ -127,12 +139,9 @@ why should you?
 I've also documented the configuration fairly well, check out the documentation
 on my **voidrice** repository for that.
 
-## >still using systemd botnet distro and/or not a 100% free-as-in-freedumb Parabola GANOO slash Linocks
+## Customization
 
-I do plan on making an alternative script option for Parabola sooner or later,
-after all Parabola *is* the distro I actually use. If you want to use Arch
-OpenRC or another Arch-based non-systemd distro, I think this script still
-*should* work, although you may have to manually enable Network Manager or
-Pulseaudio. I haven't tested this though. If you have, tell me the results and
-I might implement it.
+You can clone and edit the scripts to meet your own requirements, it's simple enough to use your own dotfiles by changing the relevant lines in `larbs_user.sh` and the desired programs in `progs.csv`. Be sure make sure to refer to your offline versions of these files in the scripts if you do so.
+
+In the future, I'm planning even more customization, including the automatic generation of the programs menu, so that should make specialized deployments even easier.
 
