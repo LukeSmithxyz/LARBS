@@ -69,7 +69,7 @@ rm -f /tmp/larbs_user.sh
 dialog --infobox "Installing \"st\" from source..." 4 40
 cd /tmp
 rm -rf st
-git clone https://github.com/lukesmithxyz/st.git
+git clone --depth 1 https://github.com/lukesmithxyz/st.git
 cd st
 make
 make install
@@ -78,7 +78,7 @@ cd /tmp
 dialog --infobox "Installing \"dmenu\" from source..." 4 40
 cd /tmp
 rm -rf dmenu
-git clone https://github.com/lukesmithxyz/dmenu.git
+git clone --depth 1 https://github.com/lukesmithxyz/dmenu.git
 cd dmenu
 make
 make install

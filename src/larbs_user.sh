@@ -31,7 +31,7 @@ do
 done
 
 echo Downloading config files...
-git clone https://github.com/lukesmithxyz/voidrice.git >/dev/null &&
+git clone --depth 1 https://github.com/lukesmithxyz/voidrice.git >/dev/null &&
 	rsync -va voidrice/ /home/$(whoami) >/dev/null &&
 	rm -rf voidrice >/dev/null
 
@@ -46,10 +46,10 @@ git clone https://github.com/lukesmithxyz/voidrice.git >/dev/null &&
 #packer --noconfirm -S polybar || packer --noconfirm -S polybar-git
 
 echo Downloading email setup...
-git clone https://github.com/lukesmithxyz/mutt-wizard.git /home/$(whoami)/.config/mutt >/dev/null
+git clone --depth 1 https://github.com/lukesmithxyz/mutt-wizard.git /home/$(whoami)/.config/mutt >/dev/null
 
 dialog --infobox "Generating bash/ranger/qutebrowser shortcuts..." 4 60
-git clone https://github.com/LukeSmithxyz/shortcut-sync.git >/dev/null &&
+git clone --depth 1 https://github.com/LukeSmithxyz/shortcut-sync.git >/dev/null &&
 	rsync shortcut-sync/shortcuts.sh ~/.scripts/ >/dev/null &&
 	rsync shortcut-sync/folders ~/.scripts/ >/dev/null &&
 	rsync shortcut-sync/configs ~/.scripts/ >/dev/null &&
