@@ -95,3 +95,5 @@ xssstate,,screen idle detection
 youtube-dl,,downloads youtube videos
 youtube-viewer,,watch YT videos without browser
 zathura,,pdf reader
+zathura-djvu,,djvu reader
+zathura-pdf-mupdf,,pdf compatibility
