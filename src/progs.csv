@@ -24,6 +24,7 @@ gimp,G,image modification
 git,,dling config repos
 gnome-keyring,,system keyring
 gnome-themes-extra,,for dark GTK theme
+gvim,,text editor
 highlight,r,ranger previews highlighted
 htop-vim-git,D,system info
 i3-gaps,,window manager
@@ -81,7 +82,6 @@ unzip,,extraction
 urlview,,url parser for terminal apps
 urxvt-perls,U,perl scripts for urxvt
 urxvt-resize-font-git,U,resize urxvt font
-vim,,text editor
 vim-live-latex-preview,X,latex preview
 vim-pathogen,,vim package manager
 w3m,?,
