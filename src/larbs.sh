@@ -63,7 +63,7 @@ do
 done
 
 dialog --infobox "Preparing the user script..." 4 40
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/sudoers_tmp > /etc/sudoers
+echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 cd /tmp
 if [ $1 = "devel" ]
 then curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/devel/src/larbs_user.sh > /tmp/larbs_user.sh;
@@ -101,7 +101,8 @@ rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 dialog --infobox "Updating sudoers file..." 4 40
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/sudoers > /etc/sudoers
+sed -e "/^%wheel.*ALL$/d" /etc/sudoers
+echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart, /usr/bin/pacman -Syyu --noconfirm" >> /etc/sudoers
 
 dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\n\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment.\n\n-Luke" 12 80
 clear
