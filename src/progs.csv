@@ -13,6 +13,7 @@ compton,,transparency and removing tearing
 discount,?,
 dmenu,,command runner
 dosfstools,,file system compatibility
+dunst,,notification system
 emacs,E,everything
 exfat-utils,,file system compatibility
 feh,,image viewer
