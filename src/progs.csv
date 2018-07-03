@@ -60,6 +60,7 @@ projectm-pulseaudio,D,music/audio visualizer
 pulseaudio,,audio system
 pulseaudio-alsa,,audio system
 pulsemixer,,audio system manager
+python-pywal,,colorscheme generator
 r,P,statistics and calculator
 ranger,r,file manager
 rsync,,
