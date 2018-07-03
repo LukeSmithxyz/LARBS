@@ -35,16 +35,6 @@ git clone --depth 1 https://github.com/lukesmithxyz/voidrice.git >/dev/null &&
 	rsync -va voidrice/ /home/$(whoami) >/dev/null &&
 	rm -rf voidrice >/dev/null
 
-#dialog --infobox "Now compiling polybar. This is the last program, but may take some time..." 10 60
-#wifi=$(ls /sys/class/net | grep wl)
-#eth=$(ls /sys/class/net | grep e)
-#bat=$(ls /sys/class/power_supply | grep BAT)
-#adp=$(ls /sys/class/power_supply | grep ADP)
-#bl=$(ls /sys/class/backlight | grep _backlight)
-#sed -i "s/wlp3s0/$wifi/g; s/enp0s25/$eth/g" /home/$(whoami)/.config/polybar/config /home/$(whoami)/.bashrc
-#sed -i "s/BAT0/$bat/g; s/ADP1/$adp/g; s/intel_backlight/$bl/g" /home/$(whoami)/.config/polybar/config
-#packer --noconfirm -S polybar || packer --noconfirm -S polybar-git
-
 echo Downloading email setup...
 git clone --depth 1 https://github.com/lukesmithxyz/mutt-wizard.git /home/$(whoami)/.config/mutt >/dev/null
 
