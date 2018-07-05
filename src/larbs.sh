@@ -90,7 +90,12 @@ make
 make install
 cd /tmp
 
-# R markdown install.
+# Install R Markdown if R was chosen and installed.
+[[ -e /usr/bin/R ]] && (
+dialog --infobox "Installing R Markdown..." 4 40
+cp /home/$name/.Rprofile ~ 2>/dev/tty6
+echo "install.packages('rmarkdown')" | R -q --no-save 2>/dev/null)
+
 
 dialog --infobox "Enabling Network Manager..." 4 40
 systemctl enable NetworkManager
