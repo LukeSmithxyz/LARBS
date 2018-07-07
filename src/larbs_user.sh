@@ -30,12 +30,12 @@ do
 	aurcheck $prog >/dev/null
 done
 
-echo Downloading config files...
+dialog --infobox "Downloading and installing config files..." 4 60
 git clone --depth 1 https://github.com/lukesmithxyz/voidrice.git >/dev/null &&
 	rsync -va voidrice/ /home/$(whoami) >/dev/null &&
 	rm -rf voidrice >/dev/null
 
-echo Downloading email setup...
+dialog --infobox "Readying mutt-wizard..." 4 60
 git clone --depth 1 https://github.com/lukesmithxyz/mutt-wizard.git /home/$(whoami)/.config/mutt >/dev/null
 
 dialog --infobox "Generating bash/ranger/qutebrowser shortcuts..." 4 60
