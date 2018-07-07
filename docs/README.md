@@ -23,9 +23,12 @@ emacs, etc.).
 
 ## Requirements
 
-An already installed Arch Linux or derivative system (works on Manjaro and Antergos as well). Works on Parabola too, but due to repository differences, some minor programs might not install. Check the program list.
+An already installed Arch Linux or derivative system (works on Manjaro and
+Antergos as well). Works on Parabola too, but due to repository differences,
+some minor programs might not install. Check the program list.
 
-If you have a non-systemd system, you might also have to manually set up Pulseaudio and Network Manager after running the script.
+If you have a non-systemd system, you might also have to manually set up
+Pulseaudio and Network Manager after running the script.
 
 ## Installation
 
@@ -71,7 +74,10 @@ bash arch.sh #Runs it.
 After the system installs, you'll have the option of bootstrapping automatically
 into installing my configs as well.
 
-Don't be worried if the installation of the first programs seems to take a while. As general dependencies are installed, things will move very quickly. Still, since this is a total online install, it might take a little longer than just installing a distro from an ISO.
+Don't be worried if the installation of the first programs seems to take a
+while. As general dependencies are installed, things will move very quickly.
+Still, since this is a total online install, it might take a little longer than
+just installing a distro from an ISO.
 
 ## How to Use
 
@@ -99,28 +105,57 @@ not need to repeat putting it in in other terminal windows.
 
 ## Version
 
-We're close to what can be called LARBS 2.0, and here are some of the major changes since the original version.
+We're close to what can be called LARBS 2.0, and here are some of the major
+changes since the original version.
 
-
-- Deployment of my new mutt-wizard for secure offline email configuration instead of config files for the user to manually edit.
+- Deployment of my new mutt-wizard for secure offline email configuration
+  instead of config files for the user to manually edit.
 - System is more minimalist/suckless.
-- Luke's build of st is now the default terminal, instead of urxvt.
-- Polybar replaced by i3blocks (with many custom modules), which is lighter on resources and requires fewer dependencies. The polybar build also often failed to build on some machines.
+- Luke's build of st is now the default terminal, instead of urxvt. This
+  includes:
+  	- Full unicode compatibility
+	- vim-like bindings
+	- Scrollback with keys and mouse, clipboard use and other add ons to
+	  the default st build
+	- Xresources colors, allowing the use of wal/pywal
+- i3status is the status bar instead of Polybar, which was bloated and failed
+  to build on many machines. The new i3status includes the modules below, all
+  of which are constructed to be as minimal and light on system resources as
+  possible:
+  	- Weather forecasts using `wttr.in`, with highs, lows and rain chance.
+	- Current song information from `mpd`
+	- Unread mail from Luke's `mutt-wizard`
+	- Possible pacman updates
+	- Status of torrents in transmission-daemon
+	- Expected date, time, battery, internet and volume modules
 - Switch from mocp to mpd/ncmpcpp for music.
 - dmenu is used instead of rofi for simplicity's sake.
-- Firefox instead of qutebrowser for default browser (qutebrowser configs remain)
-- Extensive implementation of dmenu, including for mounting/unmounting drives, display selection, confirmation for shutdown and other crucial commands, link handling and screen/audio recording.
+- Firefox instead of qutebrowser for default browser (qutebrowser configs
+  remain for qutebrowser afeccionados)
+- Extensive implementation of dmenu, including for mounting/unmounting drives,
+  display selection, confirmation for shutdown and other crucial commands, link
+  handling and screen/audio recording.
 - Updates to config files can be pulled with git now.
 - i3 window resize now intuitive directions
-- Removal of a lot of brainlethood in the original design, where I relocated configs for alleged extensibility's sake. That's all been fixed now.
-- Configs for the new versions of qutebrowser, newsboat/newsbeuter, neomutt, etc.
+- Removal of a lot of brainlethood in the original design, where I relocated
+  configs for alleged extensibility's sake. That's all been fixed now.
+- Configs for the new versions of qutebrowser, newsboat/newsbeuter, neomutt,
+  etc.
 - Link handling scripts for mutt, newsboat and vim
 - vi mode is now default in bash (with retention of emacs-mode ctrl-l)
 - Caps lock functions both as a super key and escape key with xcape.
 - Use of the much better, newer version of my shortcut-sync.
-- Use of Luke's `mutt-wizard`.
-- And the repository is *significantly* smaller than it was before, meaning a faster download.
+- And the repository is *significantly* smaller than it was before, meaning a
+  faster download.
 - A million and one other tweaks and bug fixes.
+
+### Soon to be added features
+
+- A custom build of Firefox with privacy and efficiently settings and add-ons
+  for clean and flexible navigation without crap in your face.
+- A little script that can stream tutorial videos directly about specific parts
+  of the system.
+- A terminal command that shows important bindings for major programs.
 
 
 ## Why I made this
@@ -133,7 +168,7 @@ literally thousands of people ask you how to do X or get Y.
 The LARBS are a final solution to all of that. These scripts are to be run on a
 fresh install of Arch Linux, and they create a user, install all required
 programs and set up dotfiles directly from Github to give normal people a fairly
-sleek Linux configuration without hundreds of autsitic hours. I did the work, so
+sleek Linux configuration without hundreds of autistic hours. I did the work, so
 why should you?
 
 I've also documented the configuration fairly well, check out the documentation
@@ -144,4 +179,3 @@ on my **voidrice** repository for that.
 You can clone and edit the scripts to meet your own requirements, it's simple enough to use your own dotfiles by changing the relevant lines in `larbs_user.sh` and the desired programs in `progs.csv`. Be sure make sure to refer to your offline versions of these files in the scripts if you do so.
 
 In the future, I'm planning even more customization, including the automatic generation of the programs menu, so that should make specialized deployments even easier.
-
