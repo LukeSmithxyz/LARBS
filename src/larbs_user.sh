@@ -47,9 +47,9 @@ git clone --depth 1 https://github.com/LukeSmithxyz/shortcut-sync.git >/dev/null
 	rm -rf shortcut-sync/ >/dev/null
 
 dialog --infobox "Creating LARBS Firefox profile..." 4 60
+mkdir -p ~/.mozilla/firefox
 git clone --depth 1 https://github.com/LukeSmithxyz/mozilla-larbs.git >/dev/null &&
-	rsync -r mozilla-larbs/firefox/larbs.default ~/.mozilla/firefox/ &&
-	rsync mozilla-larbs/firefox/profiles.ini ~/.mozilla/firefox/
+	rsync -r mozilla-larbs/firefox/* ~/.mozilla/firefox/
 
 dialog --infobox "Preparing welcome message..." 4 50
 
