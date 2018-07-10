@@ -2,24 +2,23 @@
 
 [Official Website: larbs.xyz](http://larbs.xyz)
 
-This is a set of scripts either can either (1) install Arch Linux automatically
-with a typical Arch ISOed USB, and perhaps more prominently (2) automatically
-install and configure all of the prerequisites for an advanced Linux desktop
-environment, using my configs [here](https://github.com/LukeSmithxyz/voidrice)
-as a base.
+LARBS is a quick series of scripts deployable on a fresh installation of Arch
+Linux. They automatically install and setup a fully-featured, but still
+lightweight tiling window manager "suite", meant to be minimal and
+keyboard-based.
 
+LARBS is also intensely well-documented. Users can press `super+F1` at any time
+to view a full guide and explanation of the keyboard shortcuts. The only
+advised foreknowledge for potential users is a general familiarity with vim.
 
-## About
+Now there are also small scripts like `getkeys` which display the default
+bindings for the different terminal programs used by the system. Users can also
+press `super+shift+e` at any time to watch a growing list of tutorial videos on
+the same programs and other basic concepts from [my YouTube channel](https://youtube.com/c/lukesmithxyz).
 
-Really, the goal of this script is to start a kind of Linux meta-distribution
-which makes the more nuanced aspects of an advanced Linux setup available to
-even Linux newbies. Of course, it's also a great tool for advanced users who
-want to get into tiling window managers and just generally cool-looking and
-efficient worksetups.
-
-All the core stuff we be installed without prompt, but you'll have the option
-to install some of the larger non-essential packages (LaTeX, LibreOffice,
-emacs, etc.).
+You can also easily fork these scripts for your own purposes to deploy your own
+configs if you like. All the actual scripts do is install a `.csv` list of
+programs of your choice and set up system basics.
 
 ## Requirements
 
@@ -34,25 +33,18 @@ Pulseaudio and Network Manager after running the script.
 
 ### On an already existing Arch install
 
-This is just as easy. Log in as the root user and run the following.
+Boot up a fresh Arch install and run the following as the root user.
 
 ```sh
 curl -LO lukesmith.xyz/larbs.sh #Downloads the script.
 bash larbs.sh #Runs it.
 ```
 
-After prompting you for some settings and some package choices, the system will
-install my full i3-gaps tiling window manager Desktop Environment. If you don't
-know what that means, don't worry, because I've gone to great lengths to write
-readable instructions about how to go PRO super quick with this system.
-
-Finally, it will use `git` to download my
-[Voidrice](https://github.com/lukesmithxyz/voidrice)
-dotfiles and will plop them in their proper location for instant use!
-
-Then, finally, once that all is done, you should be able to log out, then log in
-as your newly created user and type `startx` to begin the graphical environment.
-Congrats!
+Once that all is done, you should be able to log out, then log in as your newly
+created user and type `startx` to begin the graphical environment.  Congrats!
+Note that if the graphical environment doesn't start correctly, you might want
+to see what kind of drivers your computer needs to run Arch and install them
+via `pacman` manually.
 
 ### Installing Arch automatically
 
@@ -79,38 +71,21 @@ while. As general dependencies are installed, things will move very quickly.
 Still, since this is a total online install, it might take a little longer than
 just installing a distro from an ISO.
 
-## How to Use
+## Details
 
-Once you're in the environment, just type `Super` / `Mod` / `Windows` + `F1` to
-pull up a document that will explain everything.
+In addition to installing all the needed dependencies, LARBS also:
 
-
-## Permission Details (sudoers file)
-
-These script will give your new created user (and those others you put in the
-`wheel` group) sudo access (with a password), but will also allow some commands
-to be run without any password confirmation. Those include:
-
-+ `shutdown`
-+ `reboot`
-+ `pacman -Syyu`/`pacman -Syu`
-+ `packer -Syyu`/`packer -Syu`
-+ `mount`
-+ `umount`
-+ `systemctl restart NetworkManager`
-
-Additionally, if you've put your password in a terminal window already, you will
-not need to repeat putting it in in other terminal windows.
-
+- Enables `wheel` users to run basic commands without passwords including
+  shuttting down, rebooting and updating packages.
+- Installs and enables NetworkManager and Pulseaudio.
+- Disables the beep.
 
 ## Version
 
 We're close to what can be called LARBS 2.0, and here are some of the major
 changes since the original version.
 
-- Deployment of my new mutt-wizard for secure offline email configuration
-  instead of config files for the user to manually edit.
-- System is more minimalist/suckless.
+- More documentation in the `getkeys` program and `mod+shift-e`.
 - Luke's build of st is now the default terminal, instead of urxvt. This
   includes:
   	- Full unicode compatibility
@@ -129,9 +104,14 @@ changes since the original version.
 	- Status of torrents in transmission-daemon
 	- Expected date, time, battery, internet and volume modules
 - Switch from mocp to mpd/ncmpcpp for music.
+- System is more minimalist/suckless.
 - dmenu is used instead of rofi for simplicity's sake.
+- Deployment of my new mutt-wizard for secure offline email configuration
+  instead of config files for the user to manually edit.
 - Firefox instead of qutebrowser for default browser (qutebrowser configs
   remain for qutebrowser afeccionados)
+- A default profile of Firefox including some privacy features, an ad-blocker
+  and VimVixen, for vim-based keyboard shortcuts.
 - Extensive implementation of dmenu, including for mounting/unmounting drives,
   display selection, confirmation for shutdown and other crucial commands, link
   handling and screen/audio recording.
@@ -151,31 +131,5 @@ changes since the original version.
 
 ### Soon to be added features
 
-- A custom build of Firefox with privacy and efficiently settings and add-ons
-  for clean and flexible navigation without crap in your face.
-- A little script that can stream tutorial videos directly about specific parts
-  of the system.
-- A terminal command that shows important bindings for major programs.
-
-
-## Why I made this
-
-When you've installed Arch Linux 6 gorrillian times like me, you get pretty sick
-of having to reproduce your favorite configuration on fresh installs over and
-over. When you're a C-list YouTube celebrity, it gets even more difficult when
-literally thousands of people ask you how to do X or get Y.
-
-The LARBS are a final solution to all of that. These scripts are to be run on a
-fresh install of Arch Linux, and they create a user, install all required
-programs and set up dotfiles directly from Github to give normal people a fairly
-sleek Linux configuration without hundreds of autistic hours. I did the work, so
-why should you?
-
-I've also documented the configuration fairly well, check out the documentation
-on my **voidrice** repository for that.
-
-## Customization
-
-You can clone and edit the scripts to meet your own requirements, it's simple enough to use your own dotfiles by changing the relevant lines in `larbs_user.sh` and the desired programs in `progs.csv`. Be sure make sure to refer to your offline versions of these files in the scripts if you do so.
-
-In the future, I'm planning even more customization, including the automatic generation of the programs menu, so that should make specialized deployments even easier.
+*At this point, all the planned features are there, and it's now just an issue
+of fine-tuning them.*
