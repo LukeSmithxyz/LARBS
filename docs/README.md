@@ -5,7 +5,10 @@
 LARBS is a quick series of scripts deployable on a fresh installation of Arch
 Linux. They automatically install and setup a fully-featured, but still
 lightweight tiling window manager "suite", meant to be minimal and
-keyboard-based.
+keyboard-based. It is based on
+[my dotfiles](https://github.com/lukesmithxyz/voidrice) and install programs
+that can be seen
+[here](https://github.com/LukeSmithxyz/LARBS/blob/master/src/progs.csv).
 
 LARBS is also intensely well-documented. Users can press `super+F1` at any time
 to view a full guide and explanation of the keyboard shortcuts. The only
