@@ -3,6 +3,7 @@
 ,base-devel,sudo and compilation software
 ,calcurse,calendar
 ,compton,transparency and removing tearing
+,cronie,cron manager
 ,dmenu,command runner
 ,dosfstools,file system compatibility
 ,dunst,notification system
@@ -63,48 +64,3 @@
 ,atool,ranger archive previews
 ,fzf,ranger fuzzy finder
 ,highlight,ranger previews highlighted
-
-
-D,asciiquarium,terminal screensaver
-D,bash-pipes,terminal screensaver
-D,cli-visualizer,music/audio visualizer
-D,cmatrix,terminal screensaver
-D,figlet,text decoration
-D,htop-vim-git,system info lock screen
-D,imagemagick,image conversion and modification
-D,neofetch,system stats
-D,projectm-pulseaudio,music/audio visualizer
-D,screenfetch,system stats
-D,scrot,screenshots
-
-T,transmission-cli,torrent
-T,transmission-remote-cli-git,torrent interface
-
-L,libreoffice-fresh,office suite
-
-X,biber,LaTeX references
-X,texlive-lang,LaTeX packages
-X,texlive-most,LaTeX packages
-X,vim-live-latex-preview,latex preview
-
-B,blender,video modification and modelling
-
-G,gimp,image modification
-
-F,noto-fonts,Near Eastern Fonts
-F,noto-fonts-cjk,East Asian fonts
-F,ttf-ancient-fonts,rare and ancient fonts
-
-E,neomutt,email client
-E,notmuch,email system (indexing and search)
-E,notmuch-mutt,email system (indexing and search)
-E,offlineimap,email system (mail sync)
-
-P,pandoc,file conversion
-P,pandoc-citeproc,citations through pandoc
-
-R,r,statistics and calculator
-
-U,rxvt-unicode,alternate terminal
-U,urxvt-perls,perl scripts for urxvt
-U,urxvt-resize-font-git,resize urxvt font
