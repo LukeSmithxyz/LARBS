@@ -1,0 +1,109 @@
+,arandr,gui adjustment of screen
+,base-devel,sudo and compilation software
+,calcurse,calendar
+,compton,transparency and removing tearing
+,dmenu,command runner
+,dosfstools,file system compatibility
+,dunst,notification system
+,exfat-utils,file system compatibility
+,feh,image viewer
+,ffmpeg,audio/video recording and splicing
+,firefox,default browser
+,git,dling config repos
+,gnome-keyring,system keyring
+,gnome-themes-extra,for dark GTK theme
+,gvim,text editor
+,i3-gaps,window manager
+,i3blocks,status bar
+,i3lock,screen lock
+,mpc,music daemon control
+,mpd,music daemon
+,mpv,video/gif player
+,ncmpcpp,music player
+,network-manager-applet,GUI wifi manager
+,networkmanager,network manager
+,newsboat,RSS reader
+,ttf-emojione-color,emoji fonts
+,ntfs-3g,file system compatibility
+,packer,AUR manager
+,pamixer,audio system control
+,pulseaudio,audio system
+,pulseaudio-alsa,audio system
+,pulsemixer,audio system manager
+,python-pywal,colorscheme generator
+,rsync,
+,sc-im,spreadsheet manager
+,screenkey,screencasting keyboard view
+,speedometer,internet traffic view
+,tmux,multiplexer and dropdown
+,ttf-inconsolata,mono font
+,ttf-linux-libertine,non-mono fonts
+,unclutter-xfixes-git,hides mouse if idle
+,unrar,extraction
+,unzip,extraction
+,urlview,url parser for terminal apps
+,vim-pathogen,vim package manager
+,w3m,,
+,wget,
+,xcape,for double mapping of escape
+,xdotool,moving windows on command
+,xorg-server,graphical environment
+,xorg-xdpyinfo,screencasting
+,xorg-xinit,graphical environment
+,xssstate,screen idle detection
+,youtube-dl,downloads youtube videos
+,youtube-viewer,watch YT videos without browser
+,zathura,pdf reader
+,zathura-djvu,djvu reader
+,zathura-pdf-mupdf,pdf compatibility
+,poppler,ranger pdf previews
+,ranger,file manager
+,mediainfo,ranger audio/video info preview
+,atool,ranger archive previews
+,fzf,ranger fuzzy finder
+,highlight,ranger previews highlighted
+
+
+D,asciiquarium,terminal screensaver
+D,bash-pipes,terminal screensaver
+D,cli-visualizer,music/audio visualizer
+D,cmatrix,terminal screensaver
+D,figlet,text decoration
+D,htop-vim-git,system info
+ lock screen",D,imagemagick,"image conversion and modification
+D,neofetch,system stats
+D,projectm-pulseaudio,music/audio visualizer
+D,screenfetch,system stats
+D,scrot,screenshots
+
+T,transmission-cli,torrent
+T,transmission-remote-cli-git,torrent interface
+
+L,libreoffice-fresh,office suite
+
+X,biber,LaTeX references
+X,texlive-lang,LaTeX packages
+X,texlive-most,LaTeX packages
+X,vim-live-latex-preview,latex preview
+
+B,blender,video modification and modelling
+
+G,gimp,image modification
+
+F,noto-fonts,Near Eastern Fonts
+F,noto-fonts-cjk,East Asian fonts
+F,ttf-ancient-fonts,rare and ancient fonts
+
+E,neomutt,email client
+E,notmuch,email system (indexing and search)
+E,notmuch-mutt,email system (indexing and search)
+E,offlineimap,email system (mail sync)
+
+P,pandoc,file conversion
+P,pandoc-citeproc,citations through pandoc
+
+R,r,statistics and calculator
+
+U,rxvt-unicode,alternate terminal
+U,urxvt-perls,perl scripts for urxvt
+U,urxvt-resize-font-git,resize urxvt font
