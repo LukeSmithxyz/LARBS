@@ -22,7 +22,7 @@
 ,ncmpcpp,music player
 ,networkmanager,network manager
 ,newsboat,RSS reader
-,ttf-emojione-color,emoji fonts
+,ttf-emojione,emoji fonts
 ,ntfs-3g,file system compatibility
 ,packer,AUR manager
 ,pamixer,audio system control
