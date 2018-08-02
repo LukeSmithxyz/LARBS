@@ -17,6 +17,19 @@ dialog --defaultno --title "Time Zone select" --yesno "Do you want use the defau
 
 dialog --no-cancel --inputbox "Enter partitionsize in gb, separated by space (swap & root)." 10 60 2>psize
 
+pass1=$(dialog --no-cancel --passwordbox "Enter a root password." 10 60 3>&1 1>&2 2>&3 3>&1)
+pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
+
+while true; do
+	[[ "$pass1" != "" && "$pass1" == "$pass2" ]] && break
+	pass1=$(dialog --no-cancel --passwordbox "Passwords do not match or are not present.\n\nEnter password again." 10 60 3>&1 1>&2 2>&3 3>&1)
+	pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
+done
+
+export pass="$pass1"
+
+
+
 IFS=' ' read -ra SIZE <<< $(cat psize)
 
 re='^[0-9]+$'
@@ -66,11 +79,36 @@ mount /dev/sda4 /mnt/home
 pacstrap /mnt base base-devel
 
 genfstab -U /mnt >> /mnt/etc/fstab
-cat tz.tmp > /mnt/tzfinal.tmp
+cp tz.tmp /mnt/tzfinal.tmp
 rm tz.tmp
-mv comp /mnt/etc/hostname
-curl https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
+curl https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/src/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
 
+### BEGIN
+arch-chroot /mnt echo "root:$pass" | chpasswd
+
+TZuser=$(cat tzfinal.tmp)
+
+ln -sf /usr/share/zoneinfo/$TZuser /etc/localtime
+
+hwclock --systohc
+
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "en_US ISO-8859-1" >> /etc/locale.gen
+locale-gen
+
+pacman --noconfirm --needed -S networkmanager
+systemctl enable NetworkManager
+systemctl start NetworkManager
+
+pacman --noconfirm --needed -S grub && grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
+
+pacman --noconfirm --needed -S dialog
+larbs() { curl -O https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/src/larbs.sh && bash larbs.sh ;}
+dialog --title "Install Luke's Rice" --yesno "This install script will easily let you access Luke's Auto-Rice Boostrapping Scripts (LARBS) which automatically install a full Arch Linux i3-gaps desktop environment.\n\nIf you'd like to install this, select yes, otherwise select no.\n\nLuke"  15 60 && larbs
+### END
+
+
+mv comp /mnt/etc/hostname
 
 dialog --defaultno --title "Final Qs" --yesno "Reboot computer?"  5 30 && reboot
 dialog --defaultno --title "Final Qs" --yesno "Return to chroot environment?"  6 30 && arch-chroot /mnt
