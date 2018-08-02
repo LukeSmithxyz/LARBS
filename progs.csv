@@ -69,8 +69,8 @@ D,bash-pipes,terminal screensaver
 D,cli-visualizer,music/audio visualizer
 D,cmatrix,terminal screensaver
 D,figlet,text decoration
-D,htop-vim-git,system info
- lock screen",D,imagemagick,"image conversion and modification
+D,htop-vim-git,system info lock screen,
+D,imagemagick,image conversion and modification
 D,neofetch,system stats
 D,projectm-pulseaudio,music/audio visualizer
 D,screenfetch,system stats
