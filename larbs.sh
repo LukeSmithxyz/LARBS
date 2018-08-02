@@ -102,8 +102,6 @@ rm -rf /tmp/dotfiles/
 sudo -u $name git clone --depth 1 $dotfilesrepo /tmp/dotfiles &>/dev/null &&
 	sudo -u $name rsync -rl /tmp/dotfiles/ /home/$name
 
-sudo -u $name curl -s https://raw.githubusercontent.com/LukeSmithxyz/shortcut-sync/master/shortcuts.sh > /home/$name/.scripts/shortcuts.sh && chown $name:wheel /home/$name/.scripts/shortcuts.sh && chmod +x /home/$name/.scripts/shortcuts.sh
-
 dialog --infobox "Preparing welcome message..." 4 50
 echo "exec_always --no-startup-id notify-send -i ~/.scripts/larbs.png '<b>Welcome to LARBS:</b> Press Super+F1 for the manual.' -t 10000"  >> /home/$name/.config/i3/config
 
