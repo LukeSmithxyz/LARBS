@@ -1,3 +1,4 @@
+~,NAME,PURPOSE
 ,arandr,gui adjustment of screen
 ,base-devel,sudo and compilation software
 ,calcurse,calendar
@@ -43,7 +44,7 @@
 ,unzip,extraction
 ,urlview,url parser for terminal apps
 ,vim-pathogen,vim package manager
-,w3m,,
+,w3m,
 ,wget,
 ,xcape,for double mapping of escape
 ,xdotool,moving windows on command
@@ -69,7 +70,7 @@ D,bash-pipes,terminal screensaver
 D,cli-visualizer,music/audio visualizer
 D,cmatrix,terminal screensaver
 D,figlet,text decoration
-D,htop-vim-git,system info lock screen,
+D,htop-vim-git,system info lock screen
 D,imagemagick,image conversion and modification
 D,neofetch,system stats
 D,projectm-pulseaudio,music/audio visualizer
