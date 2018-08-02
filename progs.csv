@@ -21,6 +21,7 @@
 ,mpv,video/gif player
 ,ncmpcpp,music player
 ,networkmanager,network manager
+,network-manager-applet,status bar internet applet
 ,newsboat,RSS reader
 ,ttf-emojione,emoji fonts
 ,ntfs-3g,file system compatibility
