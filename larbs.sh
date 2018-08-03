@@ -3,29 +3,21 @@
 # You can provide a custom repository with -r or a custom programs csv with -p.
 # Otherwise, the script will use my defaults.
 
-### DEPENDENCIES: git, make and rsync. Make sure these are either in the progs.csv file or installed beforehand.
+### DEPENDENCIES: git and make . Make sure these are either in the progs.csv file or installed beforehand.
 
 ###
 ### OPTIONS AND VARIABLES ###
 ###
 
-while getopts ":a:r:p:h" o; do
-	case "${o}" in
-	h)
-		echo -e "Optional arguments for custom use:\n-r: Dotfiles repository\n-p: Dependencies and programs csv (url)\n-a: AUR helper (must have pacman-like syntax)\n-h show this message" && exit ;;
-	r)
-		dotfilesrepo=${OPTARG} ;;
-	p)
-		progsfile=${OPTARG} ;;
-	a)
-		aurhelper=${OPTARG} ;;
-	*)
-		echo "-$OPTARG is not a valid option." && exit ;;
-	esac
-done
+while getopts ":a:r:p:h" o; do case "${o}" in
+	h) echo -e "Optional arguments for custom use:\n-r: Dotfiles repository\n-p: Dependencies and programs csv (url)\n-a: AUR helper (must have pacman-like syntax, specifically, \`-S\` to install)\n-h: Show this message" && exit ;;
+	r) dotfilesrepo=${OPTARG} ;;
+	p) progsfile=${OPTARG} ;;
+	a) aurhelper=${OPTARG} ;;
+	*) echo "-$OPTARG is not a valid option." && exit ;;
+esac done
 
 # DEFAULTS:
-
 [ -z ${dotfilesrepo+x} ] && dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
 [ -z ${progsfile+x} ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv"
 [ -z ${aurhelper+x} ] && aurhelper="packer"
@@ -78,31 +70,38 @@ adduserandpass() { \
 	echo "$name:$pass1" | chpasswd
 	unset pass1 pass2 ;}
 
-packerwrapper() { \
-	# INPUT: a list of programs
-	# OUTPUT: put uninstalled progs in $mainqueue or $aurqueue depending on
-	# if they're in the main repos or the AUR.
-	posprogs=$(pacman -Sl | awk '{print $2}')
-	for arg in "$@"; do
-	pacman -Q "$arg" &>/dev/null && continue
-	pacman -Qg "$arg" &>/dev/null && continue
-	grep "^$arg$" <<< $posprogs &>/dev/null  && mainqueue="$mainqueue $arg" && continue
-	aurqueue="$aurqueue $arg"
-	done ;}
-
-programinventory() { \
-	dialog --infobox "Getting program list..." 4 40
-	packerwrapper $(curl -sL $progsfile | grep ^, | cut -d ',' -f2)
-	}
-
-gitinstall() { for gitrepo in $@; do
+gitmakeinstall() {
 	dir=$(mktemp -d)
-	dialog --infobox "Installing \"$(basename $gitrepo)\" from source..." 4 40
-	git clone --depth 1 "$gitrepo" $dir
+	dialog --title "LARBS Installation" --infobox "Installing \`$(basename $1)\` via \`git\` and \`make\`. $1 ${@:2}." 4 40
+	git clone --depth 1 "$1" $dir &>/dev/null
 	cd $dir
 	make &>/dev/null
 	make install &>/dev/null
-	done ;}
+	cd /tmp ;}
+
+maininstall() { # Installs all needed programs from main repo.
+	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total). $1 ${@:2}." 5 70
+	pacman --noconfirm --needed -S "$1" &>/dev/null
+	}
+
+aurinstall() { \
+	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 ${@:2}." 5 70
+	grep "^$1$" <<< "$aurinstalled" && return
+	sudo -u $name $aurhelper -S --noconfirm "$1" &>/dev/null
+	}
+
+installationloop() { \
+	curl -Ls "$progsfile" > /tmp/progs.csv
+	total=$(wc -l < /tmp/progs.csv)
+	aurinstalled=$(pacman -Qm | awk '{print $1}')
+	while IFS=, read -r tag program comment; do
+	n=$((n+1))
+	case "$tag" in
+	"") maininstall "$program" "$comment" ;;
+	"A") aurinstall "$program" "$comment" ;;
+	"G") gitmakeinstall "$program" "$comment" ;;
+	esac
+	done <<< $(cat /tmp/progs.csv) ;}
 
 serviceinit() { for service in $@; do
 	dialog --infobox "Enabling \"$service\"..." 4 40
@@ -111,7 +110,7 @@ serviceinit() { for service in $@; do
 	done ;}
 
 newperms() { # Set special sudoers settings for install (or after).
-	sed -e "/#LARBS/d" /etc/sudoers
+	sed -i "/#LARBS/d" /etc/sudoers
 	echo "$@ #LARBS" >> /etc/sudoers ;}
 
 systembeepoff() { dialog --infobox "Getting rid of that retarded error beep sound..." 10 50
@@ -123,7 +122,7 @@ installdotfiles() { # Download $dotfilesrepo and install them in user's home.
 	dialog --infobox "Downloading and installing config files..." 4 60
 	rm -rf /tmp/dotfiles/
 	sudo -u $name git clone --depth 1 $dotfilesrepo /tmp/dotfiles &>/dev/null &&
-	sudo -u $name rsync -rl /tmp/dotfiles/ /home/$name
+	sudo -u $name cp -rT /tmp/dotfiles/ /home/$name
 	}
 
 resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
@@ -139,25 +138,7 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 	sudo -u $name tar -xvf $1.tar.gz &>/dev/null &&
 	cd $1 &&
 	sudo -u $name makepkg --noconfirm -si &>/dev/null
-	cd /tmp)
-	}
-
-installmainprograms() { # Installs all needed programs from main repo.
-	count=$(echo "$mainqueue" | wc -w)
-	for x in $mainqueue; do
-		n=$((n+1))
-		dialog --title "LARBS Installation" --infobox "Downloading and installing program $n out of $count: $x...\n\nThe first programs will take more time due to dependencies." 7 70
-		pacman --noconfirm --needed -S "$x" &>/dev/null
-	done ;}
-
-installaurprograms() { \
-	count=$(echo "$aurqueue" | wc -w)
-	n=0
-	for prog in $aurqueue; do
-		n=$((n+1))
-		dialog --infobox "Downloading and installing AUR program $n out of $count: $prog..." 6 70
-		sudo -u $name $aurhelper -S --noconfirm "$prog" &>/dev/null
-	done ;}
+	cd /tmp) ;}
 
 finalize(){ \
 	dialog --infobox "Preparing welcome message..." 4 50
@@ -170,10 +151,6 @@ finalize(){ \
 ###
 ### This is how everything happens in an intuitive format and order.
 ###
-
-# NOTE: If you're deploying a system that doesn't require AUR packages, you
-# don't need to include `installaurprograms` `manualinstall $aurhelper`
-# (obviously), but also `getpermissions`.
 
 # Check if user is root on Arch distro. Install dialog.
 initialcheck
@@ -197,31 +174,22 @@ adduserandpass
 # Refresh Arch keyrings.
 refreshkeys
 
-# Checks progs and current programs to see what's needed.
-programinventory
-
-# Must be run sometime after `programinventory`.
-# This will usually be the longest command by a large margin.
-installmainprograms
-
 # Allow user to run sudo without password. Since AUR programs must be installed
 # in a fakeroot environment, this is required for all builds with AUR.
 newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
 
-# Install AUR helper. Needs sudo w/o passwd.
 manualinstall $aurhelper
 
-# $aurhelper must be installed to run this. Needs sudo w/o passwd.
-installaurprograms
+# The command that does all the installing. Reads the progs.csv file and
+# installs each needed program the way required. Be sure to run this only after
+# the user has been created and has priviledges to run sudo without a password
+# and all build dependencies are installed.
+installationloop
 
 installdotfiles
 
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [[ -f /usr/bin/pulseaudio ]] && resetpulse
-
-# Must be run sometime after `userandpassword`.
-# git and rsync must be installed.
-gitinstall https://github.com/lukesmithxyz/st.git https://github.com/lukesmithxyz/dmenu.git
 
 # Enable services here.
 serviceinit NetworkManager cronie
@@ -229,13 +197,10 @@ serviceinit NetworkManager cronie
 # Most important command! Get rid of the beep!
 systembeepoff
 
-# Should only be run after `installaurprograms`. Not strictly necessary if you
-# want the more permissive sudo settings set above.
 # This line, overwriting the `newperms` command above will allow the user to run
 # serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
 newperms "%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart, /usr/bin/pacman -Syyu --noconfirm"
 
 # Last message! Install complete!
 finalize
-
 clear

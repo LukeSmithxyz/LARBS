@@ -1,67 +1,66 @@
-~,NAME,PURPOSE
-,arandr,gui adjustment of screen
-,base-devel,sudo and compilation software
-,calcurse,calendar
-,compton,transparency and removing tearing
-,cronie,cron manager
-,dmenu,command runner
-,dosfstools,file system compatibility
-,dunst,notification system
-,exfat-utils,file system compatibility
-,feh,image viewer
-,ffmpeg,audio/video recording and splicing
-,firefox,default browser
-,git,dling config repos
-,gnome-keyring,system keyring
-,gnome-themes-extra,for dark GTK theme
-,gvim,text editor
-,i3-gaps,window manager
-,i3blocks,status bar
-,i3lock,screen lock
-,mpc,music daemon control
-,mpd,music daemon
-,mpv,video/gif player
-,ncmpcpp,music player
-,networkmanager,network manager
-,network-manager-applet,status bar internet applet
-,newsboat,RSS reader
-,ttf-emojione,emoji fonts
-,ntfs-3g,file system compatibility
-,packer,AUR manager
-,pamixer,audio system control
-,pulseaudio,audio system
-,pulseaudio-alsa,audio system
-,pulsemixer,audio system manager
-,python-pywal,colorscheme generator
-,rsync,
-,sc-im,spreadsheet manager
-,screenkey,screencasting keyboard view
-,scrot,screenshoter
-,speedometer,internet traffic view
-,tmux,multiplexer and dropdown
-,ttf-inconsolata,mono font
-,ttf-linux-libertine,non-mono fonts
-,unclutter-xfixes-git,hides mouse if idle
-,unrar,extraction
-,unzip,extraction
-,urlview,url parser for terminal apps
-,vim-pathogen,vim package manager
-,w3m,
-,wget,
-,xcape,for double mapping of escape
-,xdotool,moving windows on command
-,xorg-server,graphical environment
-,xorg-xdpyinfo,screencasting
-,xorg-xinit,graphical environment
-,xssstate,screen idle detection
-,youtube-dl,downloads youtube videos
-,youtube-viewer,watch YT videos without browser
-,zathura,pdf reader
-,zathura-djvu,djvu reader
-,zathura-pdf-mupdf,pdf compatibility
-,poppler,ranger pdf previews
-,ranger,file manager
-,mediainfo,ranger audio/video info preview
-,atool,ranger archive previews
-,fzf,ranger fuzzy finder
-,highlight,ranger previews highlighted
+TAG,NAME,PURPOSE
+,base-devel,is a group package with sudo and compilation software
+,git,is a version control system
+,i3-gaps,is the main graphical user interface and window manager
+A,packer,can install packages from the AUR
+,xorg-server,is the graphical server
+,xorg-xdpyinfo,retrieves screen information for some scripts
+,xorg-xinit,starts the graphical server
+G,https://github.com/lukesmithxyz/st.git,is my custom build of suckless's terminal emulator
+G,https://github.com/lukesmithxyz/dmenu.git,runs commands and provides a UI for selection
+,ranger,the file manager
+,arandr,is a UI for screen adjustment
+,calcurse,is a lightweight terminal-based calendar
+,compton,for transparency and removing screen-tearing
+,cronie,manages scheduled tasks
+,dosfstools,allows your computer to access dos-like filesystems
+,dunst,is a suckless notification system
+,exfat-utils,allows management of FAT drives
+,feh,is a minimal image viewer
+,ffmpeg,can record and splice video and audio on the command line
+,firefox,is the only program on LARBS your girlfriend has ever heard of
+,gnome-keyring,serves as the system keyring
+,gnome-themes-extra,gives the dark GTK theme used in LARBS
+,gvim,provides a build of vim with the ability to copy and paste between other programs
+,i3blocks,is the status bar
+,i3lock,is the screen lock
+,mpd,is a lightweight music daemon
+,mpc,is a terminal interface for mpd
+,mpv,is the patrician's choice video/gif player
+,ncmpcpp,a ncurses interface for music, with extensive views, tag editing and more
+,networkmanager,does exactly what it sounds like
+,network-manager-applet,appears in the top right corner and manages the wi-fi connection
+,newsboat,is a terminal RSS client
+A,ttf-emojione,is a package that gives the system unicode symbols and emojis used in the status bar and elsewhere.
+,ntfs-3g,allows accessing NTFS partitions
+,pulseaudio,is the audio system (>inb4 bloat)
+,pulseaudio-alsa,is an audio interface with ALSA
+,pamixer,is a terminal audio control interface
+,pulsemixer,is an intuitive ncurses audio controller
+,python-pywal,generates color schemes based on your wallpaper
+A,sc-im,is an Excel-like terminal spreadsheet manager
+A,htop-vim-git,provides system usage information and displays processes
+,scrot,can take quick screenshots at your request
+,tmux,is a terminal multiplexer and the dropdown window in LARBS
+,ttf-inconsolata,is the monospace font of LARBS
+,ttf-linux-libertine,provides the sans and serif fonts for LARBS
+A,unclutter-xfixes-git,hides an inactive mouse
+,unrar,extracts rar's
+,unzip,unzips zips
+A,urlview,parses URLs in the terminal allowing keyboard-based selection
+A,vim-pathogen,manages vim plugins
+,w3m,is a terminal browser which can also view images
+,wget,downloads sites and files on the command line
+,xcape,gives the special escape/super mappings of LARBS
+,xdotool,provides window action utilities on the command line.
+,xssstate,times out the screen if locked
+,youtube-dl,can download any YouTube video, playlist or channel when given the link
+,youtube-viewer,is a terminal interface for watching YouTube videos without a browser
+,zathura,is a pdf viewer with vim-like bindings
+,zathura-djvu,gives zathura the ability to read .djvu files
+,zathura-pdf-mupdf,allows mupdf pdf compatibility in zathura
+,poppler,manipulates .pdfs and gives .pdf previews in ranger
+,mediainfo,shows audio and video information and is used by ranger as well
+,atool,manages and gives information about archives
+,fzf,is a fuzzy finder tool
+,highlight,can highlight code output
