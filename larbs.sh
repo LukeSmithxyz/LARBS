@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Luke's Auto Rice Boostrapping Script (LARBS)
+# by Luke Smith <luke@lukesmith.xyz>
+# License: GNU GPLv3
+
 # You can provide a custom repository with -r or a custom programs csv with -p.
 # Otherwise, the script will use my defaults.
 
@@ -10,7 +14,7 @@
 ###
 
 while getopts ":a:r:p:h" o; do case "${o}" in
-	h) echo -e "Optional arguments for custom use:\n-r: Dotfiles repository (local file or url)\n-p: Dependencies and programs csv (local file or url)\n-a: AUR helper (must have pacman-like syntax, specifically, \`-S\` to install)\n-h: Show this message" && exit ;;
+	h) echo -e "Optional arguments for custom use:\n  -r: Dotfiles repository (local file or url)\n  -p: Dependencies and programs csv (local file or url)\n  -a: AUR helper (must have pacman-like syntax)\n  -h: Show this message" && exit ;;
 	r) dotfilesrepo=${OPTARG} && git ls-remote $dotfilesrepo || exit ;;
 	p) progsfile=${OPTARG} ;;
 	a) aurhelper=${OPTARG} ;;
@@ -65,7 +69,7 @@ usercheck() { \
 adduserandpass() { \
 	# Adds user `$name` with password $pass1.
 	dialog --infobox "Adding user \"$name\"..." 4 50
-	useradd -m -g wheel -s /bin/bash $name ||
+	useradd -m -g wheel -s /bin/bash $name &>/dev/null ||
 	usermod -a -G wheel $name
 	echo "$name:$pass1" | chpasswd
 	unset pass1 pass2 ;}
