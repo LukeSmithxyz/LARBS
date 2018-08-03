@@ -72,7 +72,7 @@ adduserandpass() { \
 
 gitmakeinstall() {
 	dir=$(mktemp -d)
-	dialog --title "LARBS Installation" --infobox "Installing \`$(basename $1)\` ($n of $total) via \`git\` and \`make\`. $1 ${@:2}." 5 70
+	dialog --title "LARBS Installation" --infobox "Installing \`$(basename $1)\` ($n of $total) via \`git\` and \`make\`. $(basename $1) ${@:2}." 5 70
 	git clone --depth 1 "$1" $dir &>/dev/null
 	cd $dir
 	make &>/dev/null
