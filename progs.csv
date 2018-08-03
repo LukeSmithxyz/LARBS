@@ -1,4 +1,4 @@
-TAG,NAME IN REPO,PURPOSE (should be a verb phrase to sound right while installing)
+TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
 ,base-devel,is a group package with sudo and compilation software
 ,git,is a version control system
 ,i3-gaps,is the main graphical user interface and window manager
