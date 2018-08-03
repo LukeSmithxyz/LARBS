@@ -11,7 +11,7 @@
 
 while getopts ":a:r:p:h" o; do case "${o}" in
 	h) echo -e "Optional arguments for custom use:\n-r: Dotfiles repository\n-p: Dependencies and programs csv (url)\n-a: AUR helper (must have pacman-like syntax, specifically, \`-S\` to install)\n-h: Show this message" && exit ;;
-	r) dotfilesrepo=${OPTARG} ;;
+	r) dotfilesrepo=${OPTARG} && git ls-remote $dotfilesrepo || exit ;;
 	p) progsfile=${OPTARG} ;;
 	a) aurhelper=${OPTARG} ;;
 	*) echo "-$OPTARG is not a valid option." && exit ;;
@@ -26,7 +26,7 @@ esac done
 ### FUNCTIONS ###
 ###
 
-initialcheck() { pacman -S --noconfirm --needed dialog || { echo "Error at script start: Are you sure you're running this as the root user? Are you sure you're using an Arch-based distro? ;-) Are you sure you have an internet connection?"; exit; } ;}
+initialcheck() { pacman -S --noconfirm --needed dialog || { echo "Are you sure you're running this as the root user? Are you sure you're using an Arch-based distro? ;-) Are you sure you have an internet connection?"; exit; } ;}
 
 preinstallmsg() { \
 	dialog --title "Let's get this party started!" --yes-label "Let's go!" --no-label "No, nevermind!" --yesno "The rest of the installation will now be totally automated, so you can sit back and relax.\n\nIt will take some time, but when done, you can relax even more with your complete system.\n\nNow just press <Let's go!> and the system will begin installation!" 13 60 || { clear; exit; }
