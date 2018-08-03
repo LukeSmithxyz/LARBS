@@ -27,7 +27,7 @@ G,https://github.com/lukesmithxyz/dmenu.git,runs commands and provides a UI for 
 ,mpd,is a lightweight music daemon
 ,mpc,is a terminal interface for mpd
 ,mpv,is the patrician's choice video/gif player
-,ncmpcpp,a ncurses interface for music, with extensive views, tag editing and more
+,ncmpcpp,a ncurses interface for music with multiple formats and a powerful tag editor
 ,networkmanager,does exactly what it sounds like
 ,network-manager-applet,appears in the top right corner and manages the wi-fi connection
 ,newsboat,is a terminal RSS client
@@ -54,7 +54,7 @@ A,vim-pathogen,manages vim plugins
 ,xcape,gives the special escape/super mappings of LARBS
 ,xdotool,provides window action utilities on the command line.
 ,xssstate,times out the screen if locked
-,youtube-dl,can download any YouTube video, playlist or channel when given the link
+,youtube-dl,can download any YouTube video (or playlist or channel) when given the link
 ,youtube-viewer,is a terminal interface for watching YouTube videos without a browser
 ,zathura,is a pdf viewer with vim-like bindings
 ,zathura-djvu,gives zathura the ability to read .djvu files
