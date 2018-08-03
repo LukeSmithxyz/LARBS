@@ -120,8 +120,9 @@ systembeepoff() { dialog --infobox "Getting rid of that retarded error beep soun
 putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriting conflicts
 	dialog --infobox "Downloading and installing config files..." 4 60
 	dir=$(mktemp -d)
-	sudo -u $name git clone --depth 1 $1 $dir &>/dev/null &&
-	sudo -u $name cp -rT $dir $2
+	chown -R $name:wheel $dir
+	sudo -u $name git clone --depth 1 $1 $dir/gitrepo &>/dev/null &&
+	sudo -u $name cp -rT $dir/gitrepo $2
 	}
 
 resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
