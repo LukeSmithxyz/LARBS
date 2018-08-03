@@ -3,7 +3,7 @@
 
 ## Installation:
 
-On an Arch bash distribution as root, run the following:
+On an Arch based distribution as root, run the following:
 
 ```
 curl -LO lukesmith.xyz/larbs.sh
