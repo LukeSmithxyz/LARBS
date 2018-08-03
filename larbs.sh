@@ -100,8 +100,8 @@ gitinstall() { for gitrepo in $@; do
 	dialog --infobox "Installing \"$(basename $gitrepo)\" from source..." 4 40
 	git clone --depth 1 "$gitrepo" $dir
 	cd $dir
-	make
-	make install
+	make &>/dev/null
+	make install &>/dev/null
 	done ;}
 
 serviceinit() { for service in $@; do
