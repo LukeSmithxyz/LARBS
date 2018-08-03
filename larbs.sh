@@ -117,12 +117,11 @@ systembeepoff() { dialog --infobox "Getting rid of that retarded error beep soun
 	rmmod pcspkr
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;}
 
-installdotfiles() { # Download $dotfilesrepo and install them in user's home.
-	# Downloading and installing dotfiles
+putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriting conflicts
 	dialog --infobox "Downloading and installing config files..." 4 60
-	rm -rf /tmp/dotfiles/
-	sudo -u $name git clone --depth 1 $dotfilesrepo /tmp/dotfiles &>/dev/null &&
-	sudo -u $name cp -rT /tmp/dotfiles/ /home/$name
+	dir=$(mktemp -d)
+	sudo -u $name git clone --depth 1 $1 $dir &>/dev/null &&
+	sudo -u $name cp -rT $dir $2
 	}
 
 resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
@@ -186,7 +185,11 @@ manualinstall $aurhelper
 # and all build dependencies are installed.
 installationloop
 
-installdotfiles
+# Install the dotfiles in the user's home directory
+putgitrepo "$dotfilesrepo" "/home/$name"
+
+# Install the LARBS Firefox profile in ~/.mozilla/firefox/
+putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozilla/firefox"
 
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [[ -f /usr/bin/pulseaudio ]] && resetpulse
