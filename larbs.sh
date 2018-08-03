@@ -155,7 +155,7 @@ installaurprograms() { \
 	n=0
 	for prog in $aurqueue; do
 		n=$((n+1))
-		dialog --infobox "Downloading and installing program $n out of $count: $prog..." 10 60
+		dialog --infobox "Downloading and installing AUR program $n out of $count: $prog..." 6 70
 		sudo -u $name $aurhelper -S --noconfirm "$prog" &>/dev/null
 	done ;}
 
