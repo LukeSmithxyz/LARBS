@@ -1,92 +1,47 @@
 # Luke's Auto-Rice Bootstraping Scripts (LARBS)
 
-[Official Website: larbs.xyz](http://larbs.xyz)
 
-LARBS is a quick series of scripts deployable on a fresh installation of Arch
-Linux. They automatically install and setup a fully-featured, but still
-lightweight tiling window manager "suite", meant to be minimal and
-keyboard-based. It is based on
-[my dotfiles](https://github.com/lukesmithxyz/voidrice) and install programs
-that can be seen
-[here](https://github.com/LukeSmithxyz/LARBS/blob/master/src/progs.csv).
+## Installation:
 
-LARBS is also intensely well-documented. Users can press `super+F1` at any time
-to view a full guide and explanation of the keyboard shortcuts. The only
-advised foreknowledge for potential users is a general familiarity with vim.
+On an Arch bash distribution as root, run the following:
 
-Now there are also small scripts like `getkeys` which display the default
-bindings for the different terminal programs used by the system. Users can also
-press `super+shift+e` at any time to watch a growing list of tutorial videos on
-the same programs and other basic concepts from [my YouTube channel](https://youtube.com/c/lukesmithxyz).
-
-You can also easily fork these scripts for your own purposes to deploy your own
-configs if you like. All the actual scripts do is install a `.csv` list of
-programs of your choice and set up system basics.
-
-## Requirements
-
-An already installed Arch Linux or derivative system (works on Manjaro and
-Antergos as well). Works on Parabola too, but due to repository differences,
-some minor programs might not install. Check the program list.
-
-If you have a non-systemd system, you might also have to manually set up
-Pulseaudio and Network Manager after running the script.
-
-## Installation
-
-### On an already existing Arch install
-
-Boot up a fresh Arch install and run the following as the root user.
-
-```sh
-curl -LO lukesmith.xyz/larbs.sh #Downloads the script.
-bash larbs.sh #Runs it.
+```
+curl -LO lukesmith.xyz/larbs.sh
+bash larbs.sh
 ```
 
-Once that all is done, you should be able to log out, then log in as your newly
-created user and type `startx` to begin the graphical environment.  Congrats!
-Note that if the graphical environment doesn't start correctly, you might want
-to see what kind of drivers your computer needs to run Arch and install them
-via `pacman` manually.
+That's it.
 
-### Installing Arch automatically
+## What is LARBS?
 
-I also have a script here for installing Arch automatically. I *only* wrote this
-script so I could quickly install then test the other scripts on new computers,
-but theoretically you could use it as well. *BUT* this is a lazy, pre-alpha
-script which does not give you many options (it automatically chooses the New
-York time zone, US English, GRUB, Network Manager, etc). Even more important, it
-automatically partitions /dev/sda without asking, so unless, you have no
-non-backed up data on your machine, I don't advise running it unless you don't
-mind a full wipe. That said, you can run it like this after booting into an Arch
-live environment:
+LARBS is a script that autoinstalls and autoconfigures a fully-functioning
+and minimal terminal-and-vim-based Arch Linux environment.
 
-```sh
-curl -LO lukesmith.xyz/arch.sh #Downloads the script.
-bash arch.sh #Runs it.
-```
+LARBS was originally intended to be run on a fresh install of Arch Linux, and
+provides you with a fully configured diving-board for work or more
+customization. But LARBS also works on already configured systems *and* other
+Arch-based distros such as Manjaro, Antergos and Parabola (although Parabola,
+which uses slightly different repositories might miss one or two minor
+programs).
 
-After the system installs, you'll have the option of bootstrapping automatically
-into installing my configs as well.
+Here are some of the things LARBS sets up:
 
-Don't be worried if the installation of the first programs seems to take a
-while. As general dependencies are installed, things will move very quickly.
-Still, since this is a total online install, it might take a little longer than
-just installing a distro from an ISO.
+- Installs i3-gaps, a tiling window manager, with my fully featured
+  configuration along with dozens of lightweight and vim-centric terminal
+  applications that replace the more over-encumbering
+  programs on most machines.
+- Massive documentation making use even for novices seamless. A help document
+  with all bindings for the window manager accessible with `Super+F1` at all
+  times, as well as commands such as `getkeys` which print the default bindings
+  of terminal applications. You can even stream instructional videos on topics
+  with `Super+Shift+E`.
+- Installs [my dotfiles](https://github.com/lukesmithxyz/voidrice) giving as
+  popularized on [my YouTube channel](https://youtube.com/c/Lukesmithxyz).
+- Sets up system requirements such as users, permissions, networking, audio and
+  an AUR manager.
+- All done behind a `dialog` based user interface.
 
-## Details
-
-In addition to installing all the needed dependencies, LARBS also:
-
-- Enables `wheel` users to run basic commands without passwords including
-  shuttting down, rebooting and updating packages.
-- Installs and enables NetworkManager and Pulseaudio.
-- Disables the beep.
-
-## Version
-
-We're close to what can be called LARBS 2.0, and here are some of the major
-changes since the original version.
+## Changes since first release
 
 - More documentation in the `getkeys` program and `mod+shift-e`.
 - Luke's build of st is now the default terminal, instead of urxvt. This
@@ -131,3 +86,59 @@ changes since the original version.
 - And the repository is *significantly* smaller than it was before, meaning a
   faster download.
 - A million and one other tweaks and bug fixes.
+
+## Customization
+
+By default, LARBS uses the programs [here in progs.csv](progs.csv) and installs
+[my dotfiles repo (voidrice) here](https://github.com/lukesmithxyz/voidrice),
+but you can easily change this by either modifying the default variables at the
+beginning of the script or giving the script one of these options:
+
+- `-r`: custom dotfiles repository (URL)
+- `-p`: custom programs list/dependencies (local file or URL)
+- `-a`: a custom AUR helper (must be able to install with `-S` unless you
+  change the relevant line in the script
+
+### The `progs.csv` list
+
+LARBS will parse the given programs list and install all given programs. Note
+that the programs file must be a three column `.csv`.
+
+The first column is a "tag" that determines how the program is installed, ""
+(blank) for the main repository, `A` for via the AUR or `G` if the program is a
+git repository that is meant to be `make && sudo make install`ed.
+
+The second column is the name of the program in the repository, or the link to
+the git repository, and the third comment is a description (should be a verb
+phrase) that describes the program. During installation, LARBS will print out
+this information in a grammatical sentence. It also doubles as documentation
+for people who read the csv or who want to install my dotfiles manually.
+
+Depending on your own build, you may want to tactically order the programs in
+your programs file. LARBS will install from the top to the bottom.
+
+As it is now, don't include commas in your program descriptions since this is
+a csv. LARBS will not parse it correctly (I think...). It won't crash, but the
+dialog display will be truncated. You're welcome to pull a fix for this, but
+please make the end result take csvs of consensus format, since I want my progs
+file to be a true csv so it will display properly on Github (trust me it
+counts!).
+
+### The script itself
+
+The script is broken up extensively into functions for easier readability and
+trouble-shooting. Most everything should be self-explanitory.
+
+The main work is done by the `installationloop` function, which iterates
+through the programs file and determines based on the tag of each program,
+which commands to run to install it. You can easily add new methods of
+installations and tags as well.
+
+Note that programs from the AUR can only be built by a non-root user. What
+LARBS does to bypass this by default is to temporarily allow the newly created
+user to use `sudo` without a password (so the user won't be prompted for a
+password multiple times in installation). This is done ad-hocly, but
+effectively with the `newperms` function. At the end of installation,
+`newperms` removes those settings, giving the user the ability to run only
+several basic sudo commands without a password (`shutdown`, `reboot`,
+`pacman -Syu`).
