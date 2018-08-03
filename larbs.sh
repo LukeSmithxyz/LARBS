@@ -101,7 +101,7 @@ installationloop() { \
 	"A") aurinstall "$program" "$comment" ;;
 	"G") gitmakeinstall "$program" "$comment" ;;
 	esac
-	done <<< $(cat /tmp/progs.csv) ;}
+	done < /tmp/progs.csv ;}
 
 serviceinit() { for service in $@; do
 	dialog --infobox "Enabling \"$service\"..." 4 40
