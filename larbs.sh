@@ -70,7 +70,7 @@ adduserandpass() { \
 	# Adds user `$name` with password $pass1.
 	dialog --infobox "Adding user \"$name\"..." 4 50
 	useradd -m -g wheel -s /bin/bash $name &>/dev/null ||
-	usermod -a -G wheel $name
+	usermod -a -G wheel $name && mkdir -p /home/$name && chown $name:wheel /home/$name
 	echo "$name:$pass1" | chpasswd
 	unset pass1 pass2 ;}
 
