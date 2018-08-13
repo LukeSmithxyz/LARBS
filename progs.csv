@@ -19,6 +19,7 @@ G,https://github.com/lukesmithxyz/dmenu.git,runs commands and provides a UI for 
 ,feh,is a minimal image viewer
 ,ffmpeg,can record and splice video and audio on the command line
 ,firefox,is the only program on LARBS your girlfriend has ever heard of
+A,gitkraken,is a proprietary GUI for git.
 ,gnome-keyring,serves as the system keyring
 ,gnome-themes-extra,gives the dark GTK theme used in LARBS
 ,gvim,provides a build of vim with the ability to copy and paste between other programs
