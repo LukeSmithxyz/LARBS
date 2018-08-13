@@ -25,6 +25,7 @@ A,gitkraken,is a proprietary GUI for git.
 ,gvim,provides a build of vim with the ability to copy and paste between other programs
 ,i3blocks,is the status bar
 ,i3lock,is the screen lock
+A,moolticute,is a gui & daemon to interact with mooltipass hardware password manager.
 ,mpd,is a lightweight music daemon
 ,mpc,is a terminal interface for mpd
 ,mpv,is the patrician's choice video/gif player
