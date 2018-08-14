@@ -8,8 +8,6 @@ A,packer,can install packages from the AUR
 ,xorg-xinit,starts the graphical server
 G,https://github.com/lukesmithxyz/st.git,is my custom build of suckless's terminal emulator
 G,https://github.com/lukesmithxyz/dmenu.git,runs commands and provides a UI for selection
-,ttf-inconsolata,is the monospace font of LARBS
-,ttf-linux-libertine,provides the sans and serif fonts for LARBS
 ,ranger,is an extensive terminal file manager that everyone likes
 ,arandr,is a UI for screen adjustment
 ,calcurse,is a lightweight terminal-based calendar
@@ -21,11 +19,13 @@ G,https://github.com/lukesmithxyz/dmenu.git,runs commands and provides a UI for 
 ,feh,is a minimal image viewer
 ,ffmpeg,can record and splice video and audio on the command line
 ,firefox,is the only program on LARBS your girlfriend has ever heard of
+A,gitkraken,is a proprietary GUI for git.
 ,gnome-keyring,serves as the system keyring
 ,gnome-themes-extra,gives the dark GTK theme used in LARBS
 ,gvim,provides a build of vim with the ability to copy and paste between other programs
 ,i3blocks,is the status bar
 ,i3lock,is the screen lock
+A,moolticute,is a gui & daemon to interact with mooltipass hardware password manager.
 ,mpd,is a lightweight music daemon
 ,mpc,is a terminal interface for mpd
 ,mpv,is the patrician's choice video/gif player
@@ -33,7 +33,8 @@ G,https://github.com/lukesmithxyz/dmenu.git,runs commands and provides a UI for 
 ,networkmanager,does exactly what it sounds like
 ,network-manager-applet,appears in the top right corner and manages the wi-fi connection
 ,newsboat,is a terminal RSS client
-A,ttf-emojione,is a package that gives the system unicode symbols and emojis used in the status bar and elsewhere.
+,noto-fonts,is a Google font.
+,noto-fonts-emoji,is a Google emoji font.
 ,ntfs-3g,allows accessing NTFS partitions
 ,pulseaudio,is the audio system (>inb4 bloat)
 ,pulseaudio-alsa,is an audio interface with ALSA

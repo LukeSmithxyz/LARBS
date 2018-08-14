@@ -13,9 +13,10 @@
 ### OPTIONS AND VARIABLES ###
 ###
 
-while getopts ":a:r:p:h" o; do case "${o}" in
-	h) echo -e "Optional arguments for custom use:\n  -r: Dotfiles repository (local file or url)\n  -p: Dependencies and programs csv (local file or url)\n  -a: AUR helper (must have pacman-like syntax)\n  -h: Show this message" && exit ;;
+while getopts ":a:r:m:p:h" o; do case "${o}" in
+	h) echo -e "Optional arguments for custom use:\n  -r: Dotfiles repository (local file or url)\n  -m: Mozillarbs repository (local file or url)\n  -p: Dependencies and programs csv (local file or url)\n  -a: AUR helper (must have pacman-like syntax)\n  -h: Show this message" && exit ;;
 	r) dotfilesrepo=${OPTARG} && git ls-remote $dotfilesrepo || exit ;;
+	m) mozillarbs=${OPTARG} && git ls-remote $mozillarbs || exit ;;
 	p) progsfile=${OPTARG} ;;
 	a) aurhelper=${OPTARG} ;;
 	*) echo "-$OPTARG is not a valid option." && exit ;;
@@ -23,6 +24,7 @@ esac done
 
 # DEFAULTS:
 [ -z ${dotfilesrepo+x} ] && dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
+[ -z ${mozillarbs+x} ] && mozillarbs="https://github.com/lukesmithxyz/mozillarbs.git"
 [ -z ${progsfile+x} ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv"
 [ -z ${aurhelper+x} ] && aurhelper="packer"
 
@@ -195,7 +197,7 @@ installationloop
 putgitrepo "$dotfilesrepo" "/home/$name"
 
 # Install the LARBS Firefox profile in ~/.mozilla/firefox/
-putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozilla/firefox"
+putgitrepo "$mozillarbs" "/home/$name/.mozilla/firefox"
 
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [[ -f /usr/bin/pulseaudio ]] && resetpulse
