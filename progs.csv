@@ -2,7 +2,6 @@ TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right wh
 ,base-devel,is a group package with sudo and compilation software
 ,git,is a version control system
 ,i3-gaps,is the main graphical user interface and window manager
-A,packer,can install packages from the AUR
 ,xorg-server,is the graphical server
 ,xorg-xdpyinfo,retrieves screen information for some scripts
 ,xorg-xinit,starts the graphical server
