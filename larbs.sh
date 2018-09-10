@@ -136,7 +136,7 @@ resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
 
 manualinstall() { # Installs $1 manually if not installed. Used only for AUR helper here.
 	[[ -f /usr/bin/$1 ]] || (
-	dialog --infobox "Installing \"$1\", an AUR helper..." 10 60
+	dialog --infobox "Installing \"$1\", an AUR helper..." 8 50
 	cd /tmp
 	rm -rf /tmp/"$1"*
 	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz &&
