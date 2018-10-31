@@ -4,6 +4,7 @@ TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right wh
 ,i3-gaps,is the main graphical user interface and window manager
 ,xorg-server,is the graphical server
 ,xorg-xdpyinfo,retrieves screen information for some scripts
+,xorg-xwininfo,allows querying information about windows
 ,xorg-xinit,starts the graphical server
 G,https://github.com/lukesmithxyz/st.git,is my custom build of suckless's terminal emulator
 G,https://github.com/lukesmithxyz/dmenu.git,runs commands and provides a UI for selection
