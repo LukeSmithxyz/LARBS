@@ -7,7 +7,7 @@
 # You can provide a custom repository with -r or a custom programs csv with -p.
 # Otherwise, the script will use my defaults.
 
-### DEPENDENCIES: git and make . Make sure these are either in the progs.csv file or installed beforehand.
+### DEPENDENCIES: git and make. Make sure these either are among the first in the progs.csv file or installed manually beforehand.
 
 ###
 ### OPTIONS AND VARIABLES ###
