@@ -48,7 +48,7 @@ A,htop-vim-git,provides system usage information and displays processes
 A,unclutter-xfixes-git,hides an inactive mouse
 ,unrar,extracts rar's
 ,unzip,unzips zips
-A,urlview,parses URLs in the terminal allowing keyboard-based selection
+A,urlscan,parses URLs in the terminal allowing keyboard-based selection
 A,vim-pathogen,manages vim plugins
 ,w3m,is a terminal browser which can also view images
 ,wget,downloads sites and files on the command line
