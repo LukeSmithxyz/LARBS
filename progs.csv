@@ -53,6 +53,7 @@ A,vim-pathogen,manages vim plugins
 ,w3m,is a terminal browser which can also view images
 ,wget,downloads sites and files on the command line
 ,xcape,gives the special escape/super mappings of LARBS
+,xclip,allows for copying and pasting from the command line.
 ,xdotool,provides window action utilities on the command line.
 ,xssstate,times out the screen if locked
 ,youtube-dl,can download any YouTube video (or playlist or channel) when given the link
