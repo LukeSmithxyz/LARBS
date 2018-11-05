@@ -67,3 +67,4 @@ A,vim-pathogen,manages vim plugins.
 ,highlight,can highlight code output.
 G,https://github.com/alexanderjeurissen/ranger_devicons.git,gives folder and file icons in ranger.
 A,task-spooler,queues commands or files for download.
+A,simple-mtpfs,mounts mtp drives.
