@@ -197,8 +197,17 @@ putgitrepo "$dotfilesrepo" "/home/$name"
 # Install the LARBS Firefox profile in ~/.mozilla/firefox/
 putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozilla/firefox"
 
+# Installation of the post-install wizard
+#putgitrepo "https://github.com/LukeSmithxyz/arch-postinstall-wizard" "/home/$name/larbs-wizard"
+#ln -T /home/$name/.larbs-wizard/wizard.sh postinstall-wizard.sh
+
+#
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [[ -f /usr/bin/pulseaudio ]] && resetpulse
+
+# Install vim `plugged` plugins.
+dialog --info "Installing vim plugins..." 4 50
+sudo -u "$name" vim -E -c "PlugUpdate|visual|q|q" >/dev/null
 
 # Enable services here.
 serviceinit NetworkManager cronie
