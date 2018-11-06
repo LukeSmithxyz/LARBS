@@ -206,8 +206,8 @@ putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozill
 [[ -f /usr/bin/pulseaudio ]] && resetpulse
 
 # Install vim `plugged` plugins.
-dialog --info "Installing vim plugins..." 4 50
-sudo -u "$name" vim -E -c "PlugUpdate|visual|q|q" >/dev/null
+# dialog --infobox "Installing vim plugins..." 4 50
+# sudo -u "$name" vim -E -c "PlugUpdate|visual|q|q" >/dev/null
 
 # Enable services here.
 serviceinit NetworkManager cronie
