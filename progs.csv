@@ -13,8 +13,7 @@ G,https://github.com/lukesmithxyz/dmenu.git,runs commands and provides a UI for 
 ,ranger,is an extensive terminal file manager that everyone likes.
 ,arandr,is a UI for screen adjustment.
 ,calcurse,is a lightweight terminal-based calendar.
-,compton,for transparency and removing screen-tearing.
-,cronie,manages scheduled tasks.
+,xcompmgr,for transparency and removing screen-tearing.
 ,dosfstools,allows your computer to access dos-like filesystems.
 ,dunst,is a suckless notification system.
 ,exfat-utils,allows management of FAT drives.
