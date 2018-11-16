@@ -24,12 +24,6 @@ Arch-based distros such as Manjaro, Antergos and Parabola (although Parabola,
 which uses slightly different repositories might miss one or two minor
 programs).
 
-LARBS, in its default form where it installs my own dotfiles, is not
-compatible with or maintained for Virtual Machines. Due to particularities of
-i3 on Arch Linux within a Virtual Machines, X will not start properly. If you
-know a fix for this, feel free to share, but I do not use Virtual Machines so
-am not planning on troubleshooting a fix.
-
 Here are some of the things LARBS sets up:
 
 - Installs i3-gaps, a tiling window manager, with my fully featured
