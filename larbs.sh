@@ -183,6 +183,9 @@ refreshkeys
 # in a fakeroot environment, this is required for all builds with AUR.
 newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
 
+dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` for build software." 5 70
+pacman --noconfirm --needed -S base-devel &>/dev/null
+
 manualinstall $aurhelper
 
 # The command that does all the installing. Reads the progs.csv file and
