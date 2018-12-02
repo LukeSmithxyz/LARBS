@@ -1,5 +1,5 @@
 html {
-	background: black;
+	background: linear-gradient(darkblue, orange) fixed;
 	padding-bottom: 400px;
 }
 body {
