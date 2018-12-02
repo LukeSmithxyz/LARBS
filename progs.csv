@@ -36,7 +36,7 @@ A,ttf-symbola,needed provides unicode and emoji symbols.
 ,pulseaudio,is the audio system (>inb4 bloat).
 ,pulseaudio-alsa,is an audio interface with ALSA.
 ,pulsemixer,is an intuitive ncurses audio controller.
-,python-pywal,generates color schemes based on your wallpaper.
+,imagemagick,is a terminal image-manipulator providing some ranger shortcuts and the lockscreen in LARBS.
 A,sc-im,is an Excel-like terminal spreadsheet manager.
 A,htop-vim-git,provides system usage information and displays processes.
 ,scrot,can take quick screenshots at your request.
