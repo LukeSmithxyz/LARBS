@@ -44,7 +44,6 @@ A,unclutter-xfixes-git,hides an inactive mouse.
 ,unzip,unzips zips.
 A,urlscan,parses URLs in the terminal allowing keyboard-based selection.
 ,w3m,is a terminal browser which can also view images.
-,wget,downloads sites and files on the command line.
 ,xcape,gives the special escape/super mappings of LARBS.
 ,xclip,allows for copying and pasting from the command line.
 ,xdotool,provides window action utilities on the command line.
