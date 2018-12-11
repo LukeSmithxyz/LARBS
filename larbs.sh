@@ -7,8 +7,6 @@
 # You can provide a custom repository with -r or a custom programs csv with -p.
 # Otherwise, the script will use my defaults.
 
-### DEPENDENCIES: git and make. Make sure these either are among the first in the progs.csv file or installed manually beforehand.
-
 ###
 ### OPTIONS AND VARIABLES ###
 ###
@@ -183,8 +181,8 @@ refreshkeys
 # in a fakeroot environment, this is required for all builds with AUR.
 newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
 
-dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` for build software." 5 70
-pacman --noconfirm --needed -S base-devel &>/dev/null
+dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
+pacman --noconfirm --needed -S base-devel git &>/dev/null
 
 manualinstall $aurhelper
 
