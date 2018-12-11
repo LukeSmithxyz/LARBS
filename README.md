@@ -142,3 +142,10 @@ effectively with the `newperms` function. At the end of installation,
 `newperms` removes those settings, giving the user the ability to run only
 several basic sudo commands without a password (`shutdown`, `reboot`,
 `pacman -Syu`).
+
+## To-do list
+
+- Provide documentation on how to update dotfiles from remote repository.
+- Enable tap to click.
+- Keyboard luminosity script.
+- Add notification icons?
