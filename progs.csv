@@ -45,6 +45,7 @@ A,urlscan,parses URLs in the terminal allowing keyboard-based selection.
 ,xcape,gives the special escape/super mappings of LARBS.
 ,xclip,allows for copying and pasting from the command line.
 ,xdotool,provides window action utilities on the command line.
+,xorg-xdpyinfo,aids with resolution determination and screen recording.
 ,xssstate,times out the screen if locked.
 ,youtube-dl,can download any YouTube video (or playlist or channel) when given the link.
 ,youtube-viewer,is a terminal interface for watching YouTube videos without a browser.
