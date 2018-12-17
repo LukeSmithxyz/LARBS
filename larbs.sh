@@ -98,6 +98,7 @@ installationloop() { \
 	aurinstalled=$(pacman -Qm | awk '{print $1}')
 	while IFS=, read -r tag program comment; do
 	n=$((n+1))
+	echo "$comment" | grep "^\".*\"$" >/dev/null && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 	case "$tag" in
 	"") maininstall "$program" "$comment" ;;
 	"A") aurinstall "$program" "$comment" ;;
