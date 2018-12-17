@@ -117,12 +117,7 @@ for people who read the csv or who want to install my dotfiles manually.
 Depending on your own build, you may want to tactically order the programs in
 your programs file. LARBS will install from the top to the bottom.
 
-As it is now, don't include commas in your program descriptions since this is
-a csv. LARBS will not parse it correctly (I think...). It won't crash, but the
-dialog display will be truncated. You're welcome to pull a fix for this, but
-please make the end result take csvs of consensus format, since I want my progs
-file to be a true csv so it will display properly on Github (trust me it
-counts!).
+If you include commas in your program descriptions, be sure to include double quotes around the whole description to ensure correct parsing.
 
 ### The script itself
 
