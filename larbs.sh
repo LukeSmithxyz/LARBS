@@ -7,9 +7,7 @@
 # You can provide a custom repository with -r or a custom programs csv with -p.
 # Otherwise, the script will use my defaults.
 
-###
 ### OPTIONS AND VARIABLES ###
-###
 
 while getopts ":a:r:p:h" o; do case "${o}" in
 	h) echo -e "Optional arguments for custom use:\\n  -r: Dotfiles repository (local file or url)\\n  -p: Dependencies and programs csv (local file or url)\\n  -a: AUR helper (must have pacman-like syntax)\\n  -h: Show this message" && exit ;;
@@ -24,9 +22,7 @@ esac done
 [ -z ${progsfile+x} ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv"
 [ -z ${aurhelper+x} ] && aurhelper="yay"
 
-###
 ### FUNCTIONS ###
-###
 
 initialcheck() { pacman -Syyu --noconfirm --needed dialog || { echo "Are you sure you're running this as the root user? Are you sure you're using an Arch-based distro? ;-) Are you sure you have an internet connection? Are you sure your Arch keyring is updated?"; exit; } ;}
 
@@ -40,7 +36,7 @@ welcomemsg() { \
 
 refreshkeys() { \
 	dialog --infobox "Refreshing Arch Keyring..." 4 40
-	pacman --noconfirm -Sy archlinux-keyring &>/dev/null
+	pacman --noconfirm -Sy archlinux-keyring >/dev/null 2>&1
 	}
 
 getuserandpass() { \
@@ -60,14 +56,14 @@ getuserandpass() { \
 	done ;}
 
 usercheck() { \
-	! (id -u "$name" &>/dev/null) ||
+	! (id -u "$name" >/dev/null) 2>&1 ||
 	dialog --colors --title "WARNING!" --yes-label "CONTINUE" --no-label "No wait..." --yesno "The user \`$name\` already exists on this system. LARBS can install for a user already existing, but it will \\Zboverwrite\\Zn any conflicting settings/dotfiles on the user account.\\n\\nLARBS will \\Zbnot\\Zn overwrite your user files, documents, videos, etc., so don't worry about that, but only click <CONTINUE> if you don't mind your settings being overwritten.\\n\\nNote also that LARBS will change $name's password to the one you just gave." 14 70
 	}
 
 adduserandpass() { \
 	# Adds user `$name` with password $pass1.
 	dialog --infobox "Adding user \"$name\"..." 4 50
-	useradd -m -g wheel -s /bin/bash "$name" &>/dev/null ||
+	useradd -m -g wheel -s /bin/bash "$name" >/dev/null 2>&1 ||
 	usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
 	echo "$name:$pass1" | chpasswd
 	unset pass1 pass2 ;}
@@ -75,21 +71,21 @@ adduserandpass() { \
 gitmakeinstall() {
 	dir=$(mktemp -d)
 	dialog --title "LARBS Installation" --infobox "Installing \`$(basename "$1")\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
-	git clone --depth 1 "$1" "$dir" &>/dev/null
+	git clone --depth 1 "$1" "$dir" >/dev/null 2>&1
 	cd "$dir" || exit
-	make &>/dev/null
-	make install &>/dev/null
+	make >/dev/null 2>&1
+	make install >/dev/null 2>&1
 	cd /tmp || return ;}
 
 maininstall() { # Installs all needed programs from main repo.
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total). $1 $2" 5 70
-	pacman --noconfirm --needed -S "$1" &>/dev/null
+	pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
 	}
 
 aurinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
 	grep "^$1$" <<< "$aurinstalled" && return
-	sudo -u "$name" $aurhelper -S --noconfirm "$1" &>/dev/null
+	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
 	}
 
 installationloop() { \
@@ -124,7 +120,7 @@ putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriti
 	dialog --infobox "Downloading and installing config files..." 4 60
 	dir=$(mktemp -d)
 	chown -R "$name":wheel "$dir"
-	sudo -u "$name" git clone --depth 1 "$1" "$dir"/gitrepo &>/dev/null &&
+	sudo -u "$name" git clone --depth 1 "$1" "$dir"/gitrepo >/dev/null 2>&1 &&
 	sudo -u "$name" mkdir -p "$2" &&
 	sudo -u "$name" cp -rT "$dir"/gitrepo "$2"
 	}
@@ -139,9 +135,9 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 	cd /tmp || exit
 	rm -rf /tmp/"$1"*
 	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz &&
-	sudo -u "$name" tar -xvf "$1".tar.gz &>/dev/null &&
+	sudo -u "$name" tar -xvf "$1".tar.gz >/dev/null 2>&1 &&
 	cd "$1" &&
-	sudo -u "$name" makepkg --noconfirm -si &>/dev/null
+	sudo -u "$name" makepkg --noconfirm -si >/dev/null 2>&1
 	cd /tmp || return) ;}
 
 finalize(){ \
@@ -150,11 +146,9 @@ finalize(){ \
 	dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1).\\n\\n.t Luke" 12 80
 	}
 
-###
 ### THE ACTUAL SCRIPT ###
-###
+
 ### This is how everything happens in an intuitive format and order.
-###
 
 # Check if user is root on Arch distro. Install dialog.
 initialcheck
@@ -183,7 +177,7 @@ refreshkeys
 newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
 
 dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
-pacman --noconfirm --needed -S base-devel git &>/dev/null
+pacman --noconfirm --needed -S base-devel git >/dev/null 2>&1
 
 manualinstall $aurhelper
 
