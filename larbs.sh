@@ -194,10 +194,11 @@ putgitrepo "$dotfilesrepo" "/home/$name"
 putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozilla/firefox"
 
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
-[[ -f /usr/bin/pulseaudio ]] && resetpulse
+[ -f /usr/bin/pulseaudio ] && resetpulse
 
 # Install vim `plugged` plugins.
 dialog --infobox "Installing vim plugins..." 4 50
+(sleep 30 && killall vim) &
 sudo -u "$name" vim -E -c "PlugUpdate|visual|q|q" >/dev/null
 
 # Enable services here.
