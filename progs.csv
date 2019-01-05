@@ -11,6 +11,7 @@
 ,calcurse,"is a lightweight terminal-based calendar."
 ,xcompmgr,"for transparency and removing screen-tearing."
 ,dosfstools,"allows your computer to access dos-like filesystems."
+,libnotify,"allows desktop notifications."
 ,dunst,"is a suckless notification system."
 ,exfat-utils,"allows management of FAT drives."
 ,sxiv,"is a minimalist image viewer."
