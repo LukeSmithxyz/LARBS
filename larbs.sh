@@ -105,9 +105,9 @@ installationloop() { \
 		n=$((n+1))
 		echo "$comment" | grep "^\".*\"$" >/dev/null 2>&1 && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 		case "$tag" in
-			"") maininstall "$program" "$comment" ;;
-			"A") aurinstall "$program" "$comment" ;;
-			"G") gitmakeinstall "$program" "$comment" ;;
+			"") maininstall "$program" "$comment" || error "Fatal error encountered while installing $program." ;;
+			"A") aurinstall "$program" "$comment" || error "Fatal error encountered while installing $program." ;;
+			"G") gitmakeinstall "$program" "$comment" || error "Fatal error encountered while installing $program." ;;
 		esac
 	done < /tmp/progs.csv ;}
 
@@ -145,35 +145,38 @@ finalize(){ \
 ### This is how everything happens in an intuitive format and order.
 
 # Check if user is root on Arch distro. Install dialog.
-initialcheck
+pacman -Syyu --noconfirm --needed dialog ||  error "Are you sure you're running this as the root user? Are you sure you're using an Arch-based distro? ;-) Are you sure you have an internet connection? Are you sure your Arch keyring is updated?"
 
 # Welcome user.
-welcomemsg || { clear; exit; }
+welcomemsg || error "User exited."
 
 # Get and verify username and password.
-getuserandpass
+getuserandpass || error "User exited."
 
 # Give warning if user already exists.
-usercheck || { clear; exit; }
+usercheck || error "User exited."
 
 # Last chance for user to back out before install.
-preinstallmsg || { clear; exit; }
+preinstallmsg || error "User exited."
 
 ### The rest of the script requires no user input.
 
-adduserandpass
+adduserandpass || error "Error adding username and/or password."
 
 # Refresh Arch keyrings.
-refreshkeys
+refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
+
+dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
+pacman --noconfirm --needed -S base-devel git >/dev/null 2>&1
 
 # Allow user to run sudo without password. Since AUR programs must be installed
 # in a fakeroot environment, this is required for all builds with AUR.
 newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
 
-dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
-pacman --noconfirm --needed -S base-devel git >/dev/null 2>&1
+# Make pacman and yay colorful because why not.
+sed -i "s/^#Color/Color/g" /etc/pacman.conf
 
-manualinstall $aurhelper
+manualinstall $aurhelper || error "Failed to install AUR helper."
 
 # The command that does all the installing. Reads the progs.csv file and
 # installs each needed program the way required. Be sure to run this only after
@@ -182,7 +185,7 @@ manualinstall $aurhelper
 installationloop
 
 # Install the dotfiles in the user's home directory
-putgitrepo "$dotfilesrepo" "/home/$name"
+putgitrepo "$dotfilesrepo" "/home/$name" || error "Programs have installed, but dotfiles failed to deploy."
 
 # Install the LARBS Firefox profile in ~/.mozilla/firefox/
 putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozilla/firefox"
@@ -204,9 +207,6 @@ systembeepoff
 # This line, overwriting the `newperms` command above will allow the user to run
 # serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
 newperms "%wheel ALL=(ALL) ALL #LARBS\\n%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
-
-# Make pacman and yay colorful because why not.
-sed -i "s/^#Color/Color/g" /etc/pacman.conf
 
 # Last message! Install complete!
 finalize
