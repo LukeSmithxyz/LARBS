@@ -29,7 +29,7 @@ welcomemsg() { \
 getuserandpass() { \
 	# Prompts user for new username an password.
 	name=$(dialog --inputbox "First, please enter a name for the user account." 10 60 3>&1 1>&2 2>&3 3>&1) || exit
-	while ! echo "$name" | grep "^[a-z_][a-z0-9_-]*$"; do
+	while ! echo "$name" | grep "^[a-z_][a-z0-9_-]*$" >/dev/null 2>&1; do
 		name=$(dialog --no-cancel --inputbox "Username not valid. Give a username beginning with a letter, with only lowercase letters, - or _." 10 60 3>&1 1>&2 2>&3 3>&1)
 	done
 	pass1=$(dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 3>&1 1>&2 2>&3 3>&1)
@@ -105,9 +105,9 @@ installationloop() { \
 		n=$((n+1))
 		echo "$comment" | grep "^\".*\"$" >/dev/null 2>&1 && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 		case "$tag" in
-			"") maininstall "$program" "$comment" || error "Fatal error encountered while installing $program." ;;
-			"A") aurinstall "$program" "$comment" || error "Fatal error encountered while installing $program." ;;
-			"G") gitmakeinstall "$program" "$comment" || error "Fatal error encountered while installing $program." ;;
+			"") maininstall "$program" "$comment" ;;
+			"A") aurinstall "$program" "$comment" ;;
+			"G") gitmakeinstall "$program" "$comment" ;;
 		esac
 	done < /tmp/progs.csv ;}
 
