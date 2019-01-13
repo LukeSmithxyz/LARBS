@@ -122,7 +122,7 @@ If you include commas in your program descriptions, be sure to include double qu
 ### The script itself
 
 The script is broken up extensively into functions for easier readability and
-trouble-shooting. Most everything should be self-explanitory.
+trouble-shooting. Most everything should be self-explanatory.
 
 The main work is done by the `installationloop` function, which iterates
 through the programs file and determines based on the tag of each program,
