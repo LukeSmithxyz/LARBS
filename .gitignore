@@ -1,5 +1,6 @@
-larbs_readme.pdf
-*.html
-testing/
-pix/
-*.css
+*
+!larbs.sh
+!LICENSE
+!progs.csv
+!README.md
+!testing
