@@ -20,7 +20,7 @@
 ,ffmpeg,"can record and splice video and audio on the command line."
 ,gnome-keyring,"serves as the system keyring."
 A,gtk-theme-arc-gruvbox-git,"gives the dark GTK theme used in LARBS."
-,gvim,"provides a build of vim with the ability to copy and paste between other programs."
+,neovim,"an tidier vim with some useful features"
 ,i3blocks,"is the status bar."
 ,i3lock,"is the screen lock."
 ,mpd,"is a lightweight music daemon."
