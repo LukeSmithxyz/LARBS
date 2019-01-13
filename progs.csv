@@ -10,7 +10,7 @@
 ,arandr,"is a UI for screen adjustment."
 ,calcurse,"is a lightweight terminal-based calendar."
 ,xcompmgr,"is for transparency and removing screen-tearing."
-,xprop,"is a tool for detecting window properties."
+,xorg-xprop,"is a tool for detecting window properties."
 ,dosfstools,"allows your computer to access dos-like filesystems."
 ,libnotify,"allows desktop notifications."
 ,dunst,"is a suckless notification system."
