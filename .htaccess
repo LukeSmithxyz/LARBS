@@ -1,6 +1,0 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.html [NC,L]
-Redirect /larbs.sh https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/larbs.sh
-Redirect /arch.sh https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/testing/arch.sh
-ErrorDocument 404 /index.html
