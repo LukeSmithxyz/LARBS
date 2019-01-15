@@ -199,8 +199,8 @@ putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozill
 
 # Install vim `plugged` plugins.
 dialog --infobox "Installing vim plugins..." 4 50
-(sleep 30 && killall vim) &
-sudo -u "$name" vim -E -c "PlugUpdate|visual|q|q" >/dev/null 2>&1
+(sleep 30 && killall nvim) &
+sudo -u "$name" nvim -E -c "PlugUpdate|visual|q|q" >/dev/null 2>&1
 
 # Enable services here.
 serviceinit NetworkManager cronie
