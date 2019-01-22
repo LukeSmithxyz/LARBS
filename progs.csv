@@ -5,6 +5,7 @@
 ,xorg-xinit,"starts the graphical server."
 ,ttf-inconsolata,"is the monospace font of LARBS."
 ,ttf-linux-libertine,"provides the sans and serif fonts for LARBS."
+,xf86-input-libinput,"adds better touch pad support. i.e touch to click."
 ,ranger,"is an extensive terminal file manager that everyone likes."
 ,vifm,"is an extensive terminal file manager that everyone likes."
 ,arandr,"is a UI for screen adjustment."
