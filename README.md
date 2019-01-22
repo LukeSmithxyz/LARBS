@@ -42,6 +42,7 @@ Here are some of the things LARBS sets up:
 - All done behind a `dialog` based user interface.
 
 ## Changes since first release
+- [CHANGES.md](CHANGES.md)
 
 - More documentation in the `getkeys` program and `mod+shift-e`.
 - Luke's build of st is now the default terminal, instead of urxvt. This
@@ -99,9 +100,9 @@ beginning of the script or giving the script one of these options:
 - `-a`: a custom AUR helper (must be able to install with `-S` unless you
   change the relevant line in the script
 ### Adding tap to click
-For this you need to modify `/etc/X11/xorg.conf.d/<synaptics-file>` where the 
+For this you need to modify `/etc/X11/xorg.conf.d/<synaptics-file>` where the
 snaptics file will be something like: `30-touchpad.conf` the basic contents should
-look like this. 
+look like this.
 ```
 /etc/X11/xorg.conf.d/30-touchpad.conf
 	Section "InputClass"
