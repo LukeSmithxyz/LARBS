@@ -98,6 +98,21 @@ beginning of the script or giving the script one of these options:
 - `-p`: custom programs list/dependencies (local file or URL)
 - `-a`: a custom AUR helper (must be able to install with `-S` unless you
   change the relevant line in the script
+### Adding tap to click
+For this you need to modify `/etc/X11/xorg.conf.d/<synaptics-file>` where the 
+snaptics file will be something like: `30-touchpad.conf` the basic contents should
+look like this. 
+	/etc/X11/xorg.conf.d/30-touchpad.conf
+		Section "InputClass"
+		Identifier "devname"
+    		Driver "libinput"
+    		...
+	EndSection
+
+**Edit that file to contain the following:**
+	Option "Tapping" "on"
+
+More information on this can be found on the [Arch wiki](https://wiki.archlinux.org/index.php/Libinput)
 
 ### The `progs.csv` list
 
@@ -141,6 +156,5 @@ several basic sudo commands without a password (`shutdown`, `reboot`,
 ## To-do list
 
 - Provide documentation on how to update dotfiles from remote repository.
-- Enable tap to click.
 - Keyboard luminosity script.
 - Add notification icons?
