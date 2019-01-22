@@ -102,15 +102,18 @@ beginning of the script or giving the script one of these options:
 For this you need to modify `/etc/X11/xorg.conf.d/<synaptics-file>` where the 
 snaptics file will be something like: `30-touchpad.conf` the basic contents should
 look like this. 
-	/etc/X11/xorg.conf.d/30-touchpad.conf
-		Section "InputClass"
-		Identifier "devname"
-    		Driver "libinput"
-    		...
-	EndSection
-
+```
+/etc/X11/xorg.conf.d/30-touchpad.conf
+	Section "InputClass"
+	Identifier "devname"
+    	Driver "libinput"
+    	...
+EndSection
+```
 **Edit that file to contain the following:**
-	Option "Tapping" "on"
+```
+Option "Tapping" "on"
+```
 
 More information on this can be found on the [Arch wiki](https://wiki.archlinux.org/index.php/Libinput)
 
