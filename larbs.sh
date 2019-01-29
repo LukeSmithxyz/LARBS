@@ -208,6 +208,20 @@ serviceinit NetworkManager cronie
 # Most important command! Get rid of the beep!
 systembeepoff
 
+# keep only latest 3 versions of packages
+cat > /etc/pacman.d/hooks/pacman-cleanup.hook << EOF
+[Trigger]
+Type = Package
+Operation = Remove
+Operation = Install
+Operation = Upgrade
+Target = *
+[Action]
+Description = Keeps only the latest 3 versions of packages
+When = PostTransaction
+Exec = /usr/bin/paccache -rk3
+EOF
+
 # This line, overwriting the `newperms` command above will allow the user to run
 # serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
 newperms "%wheel ALL=(ALL) ALL #LARBS
