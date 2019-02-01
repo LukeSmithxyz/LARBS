@@ -189,7 +189,7 @@ manualinstall $aurhelper || error "Failed to install AUR helper."
 installationloop
 
 # Install the dotfiles in the user's home directory
-putgitrepo "$dotfilesrepo" "/home/$name" || error "Programs have installed, but dotfiles failed to deploy."
+putgitrepo "$dotfilesrepo" "/home/$name" #|| error "Programs have installed, but dotfiles failed to deploy."
 
 # Install the LARBS Firefox profile in ~/.mozilla/firefox/
 putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozilla/firefox"
