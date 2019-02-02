@@ -117,7 +117,7 @@ putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriti
 	[ ! -d "$2" ] && mkdir "$2" && chown -R "$name:wheel" "$2"
 	chown -R "$name:wheel" "$dir"
 	sudo -u "$name" git clone --depth 1 "$1" "$dir/gitrepo" >/dev/null 2>&1 &&
-	sudo -u "$name" cp -rfT "$dir"/gitrepo "$2"
+	sudo -u "$name" cp -rfT "$dir/gitrepo" "$2"
 	}
 
 serviceinit() { for service in "$@"; do
