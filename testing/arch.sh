@@ -62,6 +62,7 @@ mount /dev/sda1 /mnt/boot
 mkdir -p /mnt/home
 mount /dev/sda4 /mnt/home
 
+pacman -Sy --noconfirm archlinux-keyring
 
 pacstrap /mnt base base-devel
 
