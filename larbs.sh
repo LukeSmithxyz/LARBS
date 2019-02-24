@@ -40,6 +40,17 @@ getuserandpass() { \
 		pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
 	done ;}
 
+getcredentialsforgit() { \
+	# Prompts user for username an password to github.
+	glogin=$(dialog --inputbox "If there are any private repositories in your progs.csv, please provide GitHub credentials for Git Clone\\nOtherwise just confirm without any input" 10 60 3>&1 1>&2 2>&3 3>&1) || exit
+	gpass1=$(dialog --no-cancel --passwordbox "Enter a password for GitHub profile." 10 60 3>&1 1>&2 2>&3 3>&1)
+	gpass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
+	while ! [ "$gpass1" = "$gpass2" ]; do
+		unset gpass2
+		gpass1=$(dialog --no-cancel --passwordbox "Passwords do not match.\\n\\nEnter password again." 10 60 3>&1 1>&2 2>&3 3>&1)
+		gpass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
+	done ;}
+
 usercheck() { \
 	! (id -u "$name" >/dev/null) 2>&1 ||
 	dialog --colors --title "WARNING!" --yes-label "CONTINUE" --no-label "No wait..." --yesno "The user \`$name\` already exists on this system. LARBS can install for a user already existing, but it will \\Zboverwrite\\Zn any conflicting settings/dotfiles on the user account.\\n\\nLARBS will \\Zbnot\\Zn overwrite your user files, documents, videos, etc., so don't worry about that, but only click <CONTINUE> if you don't mind your settings being overwritten.\\n\\nNote also that LARBS will change $name's password to the one you just gave." 14 70
@@ -85,7 +96,14 @@ maininstall() { # Installs all needed programs from main repo.
 gitmakeinstall() {
 	dir=$(mktemp -d)
 	dialog --title "LARBS Installation" --infobox "Installing \`$(basename "$1")\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
-	git clone --depth 1 "$1" "$dir" >/dev/null 2>&1
+	expect -c "
+		spawn git clone --depth 1 \"$1\" \"$dir\"
+		expect \"Username*\"
+		send \"$glogin\r\"
+		expect \"Password*\"
+		send \"$gpass1\r\"
+		expect eof
+		" >/dev/null 2>&1
 	cd "$dir" || exit
 	make >/dev/null 2>&1
 	make install >/dev/null 2>&1
@@ -116,7 +134,14 @@ putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriti
 	dir=$(mktemp -d)
 	[ ! -d "$2" ] && mkdir -p "$2" && chown -R "$name:wheel" "$2"
 	chown -R "$name:wheel" "$dir"
-	sudo -u "$name" git clone --depth 1 "$1" "$dir/gitrepo" >/dev/null 2>&1 &&
+	expect -c "
+		spawn sudo -u \"$name\" git clone --depth 1 \"$1\" \"$dir/gitrepo\"
+		expect \"Username*\"
+		send \"$glogin\r\"
+		expect \"Password*\"
+		send \"$gpass1\r\"
+		expect eof
+		" >/dev/null 2>&1
 	sudo -u "$name" cp -rfT "$dir/gitrepo" "$2"
 	}
 
@@ -166,7 +191,7 @@ adduserandpass || error "Error adding username and/or password."
 # Refresh Arch keyrings.
 refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
 
-dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
+dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` , \`git\` and \`expect\` for installing other software." 5 70
 pacman --noconfirm --needed -S base-devel git >/dev/null 2>&1
 [ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
 
