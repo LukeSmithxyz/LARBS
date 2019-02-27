@@ -18,6 +18,7 @@
 ,exfat-utils,"allows management of FAT drives."
 ,sxiv,"is a minimalist image viewer."
 ,xwallpaper,"sets the wallpaper."
+,Feh,"lightweight and powerful image viewer used inside Ranger for wallpaper manipulation"
 ,ffmpeg,"can record and splice video and audio on the command line."
 ,gnome-keyring,"serves as the system keyring."
 A,gtk-theme-arc-gruvbox-git,"gives the dark GTK theme used in LARBS."
