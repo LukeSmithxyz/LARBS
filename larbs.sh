@@ -97,6 +97,12 @@ aurinstall() { \
 	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
 	}
 
+pipinstall() { \
+	dialog --title "LARBS Installation" --infobox "Installing the Python package \`$1\` ($n of $total). $1 $2" 5 70
+	command -v pip || pacman -S --noconfirm --needed python-pip >/dev/null 2>&1
+	yes | pip install "$1"
+	}
+
 installationloop() { \
 	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' > /tmp/progs.csv
 	total=$(wc -l < /tmp/progs.csv)
@@ -108,6 +114,7 @@ installationloop() { \
 			"") maininstall "$program" "$comment" ;;
 			"A") aurinstall "$program" "$comment" ;;
 			"G") gitmakeinstall "$program" "$comment" ;;
+			"P") pipinstall "$program" "$comment" ;;
 		esac
 	done < /tmp/progs.csv ;}
 
