@@ -182,7 +182,8 @@ pacman --noconfirm --needed -S base-devel git >/dev/null 2>&1
 newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
 
 # Make pacman and yay colorful and adds eye candy on the progress bar because why not.
-sed -i "s/^#Color/Color/g;/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+grep "^Color" /etc/pacman.conf >/dev/null || sed -i "s/^#Color/Color/" /etc/pacman.conf
+grep "ILoveCandy" /etc/pacman.conf >/dev/null || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 
 # Use all cores for compilation.
 sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
