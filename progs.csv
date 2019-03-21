@@ -6,6 +6,7 @@
 ,ttf-inconsolata,"is the monospace font of LARBS."
 ,ttf-linux-libertine,"provides the sans and serif fonts for LARBS."
 ,vifm,"is an extensive terminal file manager that everyone likes."
+,ed,"is the standard editor!"
 ,tree,"lists directory contents like trees. Used by vifm."
 ,arandr,"is a UI for screen adjustment."
 ,bc,"is used for a dropdown calculator."
