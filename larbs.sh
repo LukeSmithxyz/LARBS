@@ -186,7 +186,10 @@ grep "^Color" /etc/pacman.conf >/dev/null || sed -i "s/^#Color/Color/" /etc/pacm
 grep "ILoveCandy" /etc/pacman.conf >/dev/null || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 
 # Use all cores for compilation.
-sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
+sed -i "s/-j2/-j$(nproc)/;
+	s/^#MAKEFLAGS/MAKEFLAGS/;
+	s/\"(xz -c -z -)\"/\"(xz -T $(nproc) -c -z -)\"/;
+	s/\"(lrzip -q)\"/\"(lrzip -p $(nproc) -q)\"/" /etc/makepkg.conf
 
 manualinstall $aurhelper || error "Failed to install AUR helper."
 
