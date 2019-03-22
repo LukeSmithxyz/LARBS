@@ -185,9 +185,13 @@ newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
 grep "^Color" /etc/pacman.conf >/dev/null || sed -i "s/^#Color/Color/" /etc/pacman.conf
 grep "ILoveCandy" /etc/pacman.conf >/dev/null || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 
-# Use all cores for compilation.
+# Use all cores for compilation and compression. Substituion starts where
+# 'COMPRESSGZ' is assigned. Bzip2 substitution assumes pbzip2(parallel bzip2).
+# Gzip substitution assumes pigs.
 sed -i "s/-j2/-j$(nproc)/;
 	s/^#MAKEFLAGS/MAKEFLAGS/;
+	s/\"(gzip -c -f -n)\"/\"(pigs -c -f -n)\"/;
+	s/\"(bzip2 -c -f)\"/\"(pbzip2 -c -f)\"/;
 	s/\"(xz -c -z -)\"/\"(xz -T $(nproc) -c -z -)\"/;
 	s/\"(lrzip -q)\"/\"(lrzip -p $(nproc) -q)\"/" /etc/makepkg.conf
 
