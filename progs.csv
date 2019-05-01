@@ -63,6 +63,7 @@ A,python-ueberzug,"generates image previews in vifm and other terminal programs.
 ,atool,"manages and gives information about archives."
 ,fzf,"is a fuzzy finder tool."
 ,highlight,"can highlight code output."
+,xautolock,"enables automatic screen locking and suspend after inactivity."
 ,xorg-xbacklight,"enables changing screen brightness levels."
 A,task-spooler,"queues commands or files for download."
 A,simple-mtpfs,"enables the mounting of cell phones."
