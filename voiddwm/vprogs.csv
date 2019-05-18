@@ -54,6 +54,7 @@
 ,sxhkd,"binds keys in and outside of dwm."
 ,setxkbmap,"allows LARBS's unique keyboard bindings."
 ,xmodmap,"allows LARBS's unique keyboard bindings."
+,xsetroot,"sets status bar and other X properies."
 ,simple-mtpfs,"enables the mounting of cell phones."
 ,xset,"allows speeding up the X rate."
 G,https://github.com/lukesmithxyz/dmenu.git,"runs commands and provides a UI for selection."
