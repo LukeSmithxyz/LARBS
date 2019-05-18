@@ -5,7 +5,7 @@
 
 ### OPTIONS AND VARIABLES ###
 
-while getopts ":r:p:h" o; do case "${o}" in
+while getopts ":r:p:b:h" o; do case "${o}" in
 	h) printf "Optional arguments for custom use:\\n  -r: Dotfiles repository (local file or url)\\n  -b: Dotfiles branch (master is assumed otherwise)\\n  -p: Dependencies and programs csv (local file or url)\\n  -h: Show this message\\n" && exit ;;
 	r) dotfilesrepo=${OPTARG} && git ls-remote "$dotfilesrepo" || exit ;;
 	b) repobranch=${OPTARG} ;;
