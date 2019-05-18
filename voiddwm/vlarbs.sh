@@ -6,8 +6,9 @@
 ### OPTIONS AND VARIABLES ###
 
 while getopts ":r:p:h" o; do case "${o}" in
-	h) printf "Optional arguments for custom use:\\n  -r: Dotfiles repository (local file or url)\\n  -p: Dependencies and programs csv (local file or url)\\n  -h: Show this message\\n" && exit ;;
+	h) printf "Optional arguments for custom use:\\n  -r: Dotfiles repository (local file or url)\\n  -b: Dotfiles branch (master is assumed otherwise)\\n  -p: Dependencies and programs csv (local file or url)\\n  -h: Show this message\\n" && exit ;;
 	r) dotfilesrepo=${OPTARG} && git ls-remote "$dotfilesrepo" || exit ;;
+	b) repobranch=${OPTARG} ;;
 	p) progsfile=${OPTARG} ;;
 	*) printf "Invalid option: -%s\\n" "$OPTARG" && exit ;;
 esac done
@@ -15,6 +16,7 @@ esac done
 # DEFAULTS:
 [ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
 [ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv"
+[ -z "$repobranch" ] && repobranch="master"
 
 ### FUNCTIONS ###
 
@@ -90,11 +92,12 @@ installationloop() { \
 	done < /tmp/progs.csv ;}
 
 putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriting conflicts
+	[ -z "$3" ] && branch="master" || branch="$repobranch"
 	dialog --infobox "Downloading and installing config files..." 4 60
 	dir=$(mktemp -d)
 	[ ! -d "$2" ] && mkdir -p "$2" && chown -R "$name:wheel" "$2"
 	chown -R "$name:wheel" "$dir"
-	sudo -u "$name" git clone --depth 1 "$1" "$dir/gitrepo" >/dev/null 2>&1 &&
+	sudo -u "$name" git clone -b "$branch" --depth 1 "$1" "$dir/gitrepo" >/dev/null 2>&1 &&
 	sudo -u "$name" cp -rfT "$dir/gitrepo" "$2"
 	}
 
@@ -147,7 +150,7 @@ xbps-install -y curl base-devel git >/dev/null 2>&1
 installationloop
 
 # Install the dotfiles in the user's home directory
-putgitrepo "$dotfilesrepo" "/home/$name"
+putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 
 # Install vim `plugged` plugins.
