@@ -122,7 +122,7 @@ finalize(){ \
 ### This is how everything happens in an intuitive format and order.
 
 # Check if user is root on Arch distro. Install dialog.
-xbps-install -Syu dialog ||  error "Are you sure you're running this as the root user? Are you sure you're using Void Linux? Are you sure you have an internet connection?"
+xbps-install -Syu dialog
 
 # Welcome user.
 welcomemsg || error "User exited."
