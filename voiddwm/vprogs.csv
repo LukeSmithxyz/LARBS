@@ -1,5 +1,4 @@
 #TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
-,i3-gaps,"is the main graphical user interface and window manager."
 ,xorg-minimal,"is the graphical server."
 ,xorg-fonts,"is what is sounds like."
 ,libX11-devel,"is required for the compilation of some programs."
@@ -56,4 +55,5 @@
 G,https://github.com/lukesmithxyz/dmenu.git,"runs commands and provides a UI for selection."
 G,https://github.com/lukesmithxyz/st.git,"is my custom build of suckless's terminal emulator."
 G,https://github.com/lukesmithxtz/surf.git,"is the suckless web browser."
+G,https://github.com/lukesmithxtz/dwm.git,"is the suckless web browser."
 ,ts,"queues commands or files for download."
