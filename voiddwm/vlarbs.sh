@@ -5,25 +5,23 @@
 
 ### OPTIONS AND VARIABLES ###
 
-while getopts ":a:r:p:h" o; do case "${o}" in
-	h) printf "Optional arguments for custom use:\\n  -r: Dotfiles repository (local file or url)\\n  -p: Dependencies and programs csv (local file or url)\\n  -a: AUR helper (must have pacman-like syntax)\\n  -h: Show this message\\n" && exit ;;
+while getopts ":r:p:h" o; do case "${o}" in
+	h) printf "Optional arguments for custom use:\\n  -r: Dotfiles repository (local file or url)\\n  -p: Dependencies and programs csv (local file or url)\\n  -h: Show this message\\n" && exit ;;
 	r) dotfilesrepo=${OPTARG} && git ls-remote "$dotfilesrepo" || exit ;;
 	p) progsfile=${OPTARG} ;;
-	a) aurhelper=${OPTARG} ;;
 	*) printf "Invalid option: -%s\\n" "$OPTARG" && exit ;;
 esac done
 
 # DEFAULTS:
 [ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
 [ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv"
-[ -z "$aurhelper" ] && aurhelper="yay"
 
 ### FUNCTIONS ###
 
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
 
 welcomemsg() { \
-	dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\\n\\n-Luke" 10 60
+	dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured i3wm Void Linux desktop, which I use as my main machine.\\n\\n-Luke" 10 60
 	}
 
 getuserandpass() { \
@@ -52,50 +50,25 @@ preinstallmsg() { \
 adduserandpass() { \
 	# Adds user `$name` with password $pass1.
 	dialog --infobox "Adding user \"$name\"..." 4 50
-	useradd -m -g wheel -s /bin/bash "$name" >/dev/null 2>&1 ||
-	usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
+	useradd -m -G wheel,users,audio,video,cdrom,input -s /bin/bash "$name" >/dev/null 2>&1 ||
+	usermod -a -G wheel,users,audio,video,chrom,input "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
 	echo "$name:$pass1" | chpasswd
 	unset pass1 pass2 ;}
 
-refreshkeys() { \
-	dialog --infobox "Refreshing Arch Keyring..." 4 40
-	pacman --noconfirm -Sy archlinux-keyring >/dev/null 2>&1
-	}
-
-newperms() { # Set special sudoers settings for install (or after).
-	sed -i "/#LARBS/d" /etc/sudoers
-	echo "$* #LARBS" >> /etc/sudoers ;}
-
-manualinstall() { # Installs $1 manually if not installed. Used only for AUR helper here.
-	[ -f "/usr/bin/$1" ] || (
-	dialog --infobox "Installing \"$1\", an AUR helper..." 4 50
-	cd /tmp || exit
-	rm -rf /tmp/"$1"*
-	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz &&
-	sudo -u "$name" tar -xvf "$1".tar.gz >/dev/null 2>&1 &&
-	cd "$1" &&
-	sudo -u "$name" makepkg --noconfirm -si >/dev/null 2>&1
-	cd /tmp || return) ;}
-
 maininstall() { # Installs all needed programs from main repo.
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total). $1 $2" 5 70
-	pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
+	xbps-install -y "$1" >/dev/null 2>&1
 	}
 
 gitmakeinstall() {
-	dir=$(mktemp -d)
+	repo="$(basename "$1")"
+	repodir="/home/$name/repos/$repo"
 	dialog --title "LARBS Installation" --infobox "Installing \`$(basename "$1")\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
-	git clone --depth 1 "$1" "$dir" >/dev/null 2>&1
-	cd "$dir" || exit
-	make >/dev/null 2>&1
+	sudo -u "$name" mkdir -p "$repodir"
+	sudo -u "$name" git clone --depth 1 "$1" "/home/$name/repos/$repo" >/dev/null 2>&1
+	cd "$repodir" || exit
 	make install >/dev/null 2>&1
 	cd /tmp || return ;}
-
-aurinstall() { \
-	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
-	echo "$aurinstalled" | grep "^$1$" >/dev/null 2>&1 && return
-	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
-	}
 
 pipinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing the Python package \`$1\` ($n of $total). $1 $2" 5 70
@@ -106,13 +79,11 @@ pipinstall() { \
 installationloop() { \
 	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' > /tmp/progs.csv
 	total=$(wc -l < /tmp/progs.csv)
-	aurinstalled=$(pacman -Qm | awk '{print $1}')
 	while IFS=, read -r tag program comment; do
 		n=$((n+1))
 		echo "$comment" | grep "^\".*\"$" >/dev/null 2>&1 && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 		case "$tag" in
 			"") maininstall "$program" "$comment" ;;
-			"A") aurinstall "$program" "$comment" ;;
 			"G") gitmakeinstall "$program" "$comment" ;;
 			"P") pipinstall "$program" "$comment" ;;
 		esac
@@ -129,17 +100,13 @@ putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriti
 
 serviceinit() { for service in "$@"; do
 	dialog --infobox "Enabling \"$service\"..." 4 40
-	systemctl enable "$service"
-	systemctl start "$service"
+	ln -s "/etc/sv/$service" /var/service/
+	sv start "$service"
 	done ;}
 
 systembeepoff() { dialog --infobox "Getting rid of that retarded error beep sound..." 10 50
 	rmmod pcspkr
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;}
-
-resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
-	killall pulseaudio
-	sudo -n "$name" pulseaudio --start ;}
 
 finalize(){ \
 	dialog --infobox "Preparing welcome message..." 4 50
@@ -152,7 +119,7 @@ finalize(){ \
 ### This is how everything happens in an intuitive format and order.
 
 # Check if user is root on Arch distro. Install dialog.
-pacman -Syu --noconfirm --needed dialog ||  error "Are you sure you're running this as the root user? Are you sure you're using an Arch-based distro? ;-) Are you sure you have an internet connection? Are you sure your Arch keyring is updated?"
+xbps-install -Syu dialog ||  error "Are you sure you're running this as the root user? Are you sure you're using Void Linux? Are you sure you have an internet connection?"
 
 # Welcome user.
 welcomemsg || error "User exited."
@@ -170,25 +137,8 @@ preinstallmsg || error "User exited."
 
 adduserandpass || error "Error adding username and/or password."
 
-# Refresh Arch keyrings.
-refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
-
 dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
-pacman --noconfirm --needed -S base-devel git >/dev/null 2>&1
-[ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
-
-# Allow user to run sudo without password. Since AUR programs must be installed
-# in a fakeroot environment, this is required for all builds with AUR.
-newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
-
-# Make pacman and yay colorful and adds eye candy on the progress bar because why not.
-grep "^Color" /etc/pacman.conf >/dev/null || sed -i "s/^#Color/Color/" /etc/pacman.conf
-grep "ILoveCandy" /etc/pacman.conf >/dev/null || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
-
-# Use all cores for compilation.
-sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
-
-manualinstall $aurhelper || error "Failed to install AUR helper."
+xbps-install -y curl base-devel git >/dev/null 2>&1
 
 # The command that does all the installing. Reads the progs.csv file and
 # installs each needed program the way required. Be sure to run this only after
@@ -200,12 +150,6 @@ installationloop
 putgitrepo "$dotfilesrepo" "/home/$name"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 
-# Install the LARBS Firefox profile in ~/.mozilla/firefox/
-putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozilla/firefox"
-
-# Pulseaudio, if/when initially installed, often needs a restart to work immediately.
-[ -f /usr/bin/pulseaudio ] && resetpulse
-
 # Install vim `plugged` plugins.
 sudo -u "$name" mkdir -p "/home/$name/.config/nvim/autoload"
 curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > "/home/$name/.config/nvim/autoload/plug.vim"
@@ -214,15 +158,10 @@ dialog --infobox "Installing (neo)vim plugins..." 4 50
 sudo -u "$name" nvim -E -c "PlugUpdate|visual|q|q" >/dev/null 2>&1
 
 # Enable services here.
-serviceinit NetworkManager cronie
+serviceinit alsa NetworkManager wpa_supplicant
 
 # Most important command! Get rid of the beep!
 systembeepoff
-
-# This line, overwriting the `newperms` command above will allow the user to run
-# serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
-newperms "%wheel ALL=(ALL) ALL #LARBS
-%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
 
 # Last message! Install complete!
 finalize
