@@ -5,6 +5,7 @@
 ,libXft-devel,"is required for the compilation of some programs."
 ,webkit2gtk,"is the backend for the browser."
 ,webkit2gtk-devel,"is required for the compilation of some programs."
+,gcr-devel,"is required for the compilation of some programs."
 ,fontconfig-devel,"is required for the compilation of some programs."
 ,xwininfo,"allows querying information about windows."
 ,xinit,"starts the graphical server."
