@@ -59,6 +59,7 @@
 ,xset,"allows speeding up the X rate."
 G,https://github.com/lukesmithxyz/dmenu.git,"runs commands and provides a UI for selection."
 G,https://github.com/lukesmithxyz/st.git,"is my custom build of suckless's terminal emulator."
+,tabbed,"allows tabbing other programs like the terminal or the browser."
 G,https://github.com/lukesmithxyz/surf.git,"is the suckless web browser."
 G,https://github.com/lukesmithxyz/dwm.git,"is the window manager."
 ,ts,"queues commands or files for download."
