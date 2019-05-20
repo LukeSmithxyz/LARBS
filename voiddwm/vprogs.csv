@@ -51,7 +51,6 @@
 ,atool,"manages and gives information about archives."
 ,fzf,"is a fuzzy finder tool."
 ,highlight,"can highlight code output."
-,xorg-xbacklight,"enables changing screen brightness levels."
 ,sxhkd,"binds keys in and outside of dwm."
 ,setxkbmap,"allows LARBS's unique keyboard bindings."
 ,xmodmap,"allows LARBS's unique keyboard bindings."
