@@ -1,6 +1,6 @@
 #TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
 ,xorg-minimal,"is the graphical server."
-,xorg-fonts,"is what is sounds like."
+,xorg-fonts,"is a font package."
 ,libX11-devel,"is required for the compilation of some programs."
 ,libXft-devel,"is required for the compilation of some programs."
 ,webkit2gtk,"is the backend for the browser."
