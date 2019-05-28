@@ -117,8 +117,6 @@ preinstallmsg || error "User exited."
 
 ### The rest of the script requires no user input.
 
-adduserandpass || error "Error adding username and/or password."
-
 dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
 xbps-install -y curl base-devel git >/dev/null 2>&1
 
