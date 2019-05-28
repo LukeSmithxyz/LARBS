@@ -26,36 +26,18 @@ welcomemsg() { \
 	dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured i3wm Void Linux desktop, which I use as my main machine.\\n\\n-Luke" 10 60
 	}
 
-getuserandpass() { \
-	# Prompts user for new username an password.
-	name=$(dialog --inputbox "First, please enter a name for the user account." 10 60 3>&1 1>&2 2>&3 3>&1) || exit
+getuser() { \
+	name=$(dialog --inputbox "First, please enter a name for the user account for which you'd like to install LARBS." 10 60 3>&1 1>&2 2>&3 3>&1) || exit
 	while ! echo "$name" | grep "^[a-z_][a-z0-9_-]*$" >/dev/null 2>&1; do
 		name=$(dialog --no-cancel --inputbox "Username not valid. Give a username beginning with a letter, with only lowercase letters, - or _." 10 60 3>&1 1>&2 2>&3 3>&1)
 	done
-	pass1=$(dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 3>&1 1>&2 2>&3 3>&1)
-	pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
-	while ! [ "$pass1" = "$pass2" ]; do
-		unset pass2
-		pass1=$(dialog --no-cancel --passwordbox "Passwords do not match.\\n\\nEnter password again." 10 60 3>&1 1>&2 2>&3 3>&1)
-		pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
-	done ;}
-
-usercheck() { \
-	! (id -u "$name" >/dev/null) 2>&1 ||
-	dialog --colors --title "WARNING!" --yes-label "CONTINUE" --no-label "No wait..." --yesno "The user \`$name\` already exists on this system. LARBS can install for a user already existing, but it will \\Zboverwrite\\Zn any conflicting settings/dotfiles on the user account.\\n\\nLARBS will \\Zbnot\\Zn overwrite your user files, documents, videos, etc., so don't worry about that, but only click <CONTINUE> if you don't mind your settings being overwritten.\\n\\nNote also that LARBS will change $name's password to the one you just gave." 14 70
-	}
+	! (id -u "$name" >/dev/null) 2>&1 &&
+		dialog --title "Create user first then re-run script" --msgbox "Please create your user and password before running LARBS. Note that you can use the user you created in the Void Linux installation process.\\n\\nIf you want to make a new user, you will want to run a command like this, adding your user to all the needed groups and creating a home directory:\\n\\n$ useradd -m -G wheel,users,audio,video,cdrom,input -s /bin/bash <user>\\n$ passwd <user>" 14 75 && exit
+	;}
 
 preinstallmsg() { \
 	dialog --title "Let's get this party started!" --yes-label "Let's go!" --no-label "No, nevermind!" --yesno "The rest of the installation will now be totally automated, so you can sit back and relax.\\n\\nIt will take some time, but when done, you can relax even more with your complete system.\\n\\nNow just press <Let's go!> and the system will begin installation!" 13 60 || { clear; exit; }
 	}
-
-adduserandpass() { \
-	# Adds user `$name` with password $pass1.
-	dialog --infobox "Adding user \"$name\"..." 4 50
-	useradd -m -G wheel,users,audio,video,cdrom,input -s /bin/bash "$name" >/dev/null 2>&1 ||
-	usermod -a -G wheel,users,audio,video,chrom,input "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
-	echo "$name:$pass1" | chpasswd
-	unset pass1 pass2 ;}
 
 maininstall() { # Installs all needed programs from main repo.
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total). $1 $2" 5 70
@@ -128,10 +110,7 @@ xbps-install -Syu dialog
 welcomemsg || error "User exited."
 
 # Get and verify username and password.
-getuserandpass || error "User exited."
-
-# Give warning if user already exists.
-usercheck || error "User exited."
+getuser || error "User exited."
 
 # Last chance for user to back out before install.
 preinstallmsg || error "User exited."
