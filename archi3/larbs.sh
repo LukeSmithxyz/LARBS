@@ -209,13 +209,6 @@ putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozill
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [ -f /usr/bin/pulseaudio ] && resetpulse
 
-# Install vim `plugged` plugins.
-sudo -u "$name" mkdir -p "/home/$name/.config/nvim/autoload"
-curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > "/home/$name/.config/nvim/autoload/plug.vim"
-dialog --infobox "Installing (neo)vim plugins..." 4 50
-(sleep 30 && killall nvim) &
-sudo -u "$name" nvim -E -c "PlugUpdate|visual|q|q" >/dev/null 2>&1
-
 # Enable services here.
 serviceinit NetworkManager cronie
 
