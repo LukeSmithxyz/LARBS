@@ -131,7 +131,7 @@ putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 
 # Enable services here.
-serviceinit alsa NetworkManager wpa_supplicant
+serviceinit alsa wpa_supplicant dbus
 
 # Most important command! Get rid of the beep!
 systembeepoff

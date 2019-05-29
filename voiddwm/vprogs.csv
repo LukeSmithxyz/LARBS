@@ -18,6 +18,7 @@
 ,xcompmgr,"is for transparency and removing screen-tearing."
 ,xprop,"is a tool for detecting window properties."
 ,libnotify,"allows desktop notifications."
+,dbus,"facilitates inter-process communication."
 ,dunst,"is a suckless notification system."
 ,sxiv,"is a minimalist image viewer."
 ,xwallpaper,"sets the wallpaper."
