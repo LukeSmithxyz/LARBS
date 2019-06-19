@@ -56,7 +56,7 @@ gitmakeinstall() {
 
 pipinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing the Python package \`$1\` ($n of $total). $1 $2" 5 70
-	command -v pip || pacman -S --noconfirm --needed python-pip >/dev/null 2>&1
+	command -v pip || xbps-install -Sy python-pip >/dev/null 2>&1
 	yes | pip install "$1"
 	}
 
