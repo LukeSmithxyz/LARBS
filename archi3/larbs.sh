@@ -15,8 +15,8 @@ while getopts ":a:r:b:p:h" o; do case "${o}" in
 esac done
 
 # DEFAULTS:
-[ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" && repobranch="archi3"
-[ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/archi3/progs.csv"
+[ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/jimbarrett/arch-configs.git"
+[ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/jimbarrett/LARBS/master/archi3/progs.csv"
 [ -z "$aurhelper" ] && aurhelper="yay"
 [ -z "$repobranch" ] && repobranch="master"
 
@@ -146,7 +146,6 @@ resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
 
 finalize(){ \
 	dialog --infobox "Preparing welcome message..." 4 50
-	echo "exec_always --no-startup-id notify-send -i ~/.local/share/larbs/larbs.png 'Welcome to LARBS:' 'Press Super+F1 for the manual.' -t 10000"  >> "/home/$name/.config/i3/config"
 	dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1).\\n\\n.t Luke" 12 80
 	}
 
@@ -203,9 +202,6 @@ installationloop
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 
-# Install the LARBS Firefox profile in ~/.mozilla/firefox/
-putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozilla/firefox"
-
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [ -f /usr/bin/pulseaudio ] && resetpulse
 
@@ -214,11 +210,6 @@ serviceinit NetworkManager cronie
 
 # Most important command! Get rid of the beep!
 systembeepoff
-
-# This line, overwriting the `newperms` command above will allow the user to run
-# serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
-newperms "%wheel ALL=(ALL) ALL #LARBS
-%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
 
 # Last message! Install complete!
 finalize
