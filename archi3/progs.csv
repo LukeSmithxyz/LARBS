@@ -10,6 +10,7 @@
 ,sysstat,"is used to fetch information about cpu, etc."
 ,compton,"is the screen compositor"
 ,arandr,"is a UI for screen adjustment."
+,pacman-contrib,"contains contrib/ tools for pacman"
 ,xcompmgr,"is for transparency and removing screen-tearing."
 ,xorg-xprop,"is a tool for detecting window properties."
 ,dosfstools,"allows your computer to access dos-like filesystems."
