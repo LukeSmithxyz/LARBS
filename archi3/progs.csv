@@ -14,7 +14,7 @@
 ,xorg-xprop,"is a tool for detecting window properties."
 ,dosfstools,"allows your computer to access dos-like filesystems."
 ,libnotify,"allows desktop notifications."
-,feh,"handles wallpapers and image previews":
+,feh,"handles wallpapers and image previews"
 ,dunst,"is a suckless notification system."
 ,exfat-utils,"allows management of FAT drives."
 ,sxiv,"is a minimalist image viewer."
