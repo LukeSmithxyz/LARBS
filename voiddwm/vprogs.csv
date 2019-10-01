@@ -7,6 +7,7 @@
 ,webkit2gtk-devel,"is required for the compilation of some programs."
 ,gcr-devel,"is required for the compilation of some programs."
 ,fontconfig-devel,"is required for the compilation of some programs."
+,void-repo-nonfree,"is required for unrar and some other nonfree programs."
 ,xwininfo,"allows querying information about windows."
 ,xinit,"starts the graphical server."
 ,font-inconsolata-otf,"is the monospace font of LARBS."
