@@ -129,6 +129,7 @@ putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriti
 
 case "$(readlink /sbin/init)" in
 	runit*) serviceinit(){ ln -s "/etc/runit/sv/$1" /run/runit/service; sv restart "$1" ;} ;;
+	openrc*) serviceinit() { rc-update add "$1" default ;} ;;
 	*) serviceinit(){ systemctl enable "$1"; systemctl start "$1" ;} ;;
 esac
 
