@@ -217,7 +217,8 @@ newperms "%wheel ALL=(ALL) ALL #LARBS
 # Make zsh the default shell for the user
 sed "s/^$name:\(.*\):\/bin\/.*/$name:\1:\/bin\/zsh/" /etc/passwd
 
-# dbus-uuidgen > /var/lib/dbus/machine-id
+# dbus UUID must be generated for Artix runit
+dbus-uuidgen > /var/lib/dbus/machine-id
 
 # Last message! Install complete!
 finalize
