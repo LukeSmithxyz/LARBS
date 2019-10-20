@@ -134,6 +134,10 @@ resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
 	sudo -n "$name" pulseaudio --start ;
 	}
 
+changebgprog() { dialog --infobox "Use feh instead of xwallpaper" 10 50
+	sed -i 's/xwallpaper --zoom/feh --bg-scale/g' ~/.local/bin/tools/setbg
+	}
+
 finalize(){ \
 	dialog --infobox "Preparing welcome message..." 4 50
 	echo "exec_always --no-startup-id notify-send -i ~/.local/share/larbs/larbs.png 'Welcome to LARBS:' 'Press Super+F1 for the manual.' -t 10000"  >> "/home/$name/.config/i3/config"
@@ -188,6 +192,10 @@ putgitrepo "https://github.com/LukeSmithxyz/mozillarbs.git" "/home/$name/.mozill
 
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [ -f /usr/bin/pulseaudio ] && resetpulse 
+
+# Change program to display wallpaper from xwallpaper to feh
+# Ubuntu 18.04 doesn't provide xwallpaper anymore
+changebgprog
 
 # Enable services here.
 serviceinit NetworkManager cronie

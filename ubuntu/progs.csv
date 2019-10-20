@@ -60,6 +60,7 @@ P,python-ueberzug,"generates image previews in vifm and other terminal programs.
 ,atool,"manages and gives information about archives.",
 ,fzf,"is a fuzzy finder tool.",
 ,highlight,"can highlight code output.",
+,feh,"displays a wallpaper.",
 ,libx11-dev,"lib required by st",
 ,libxft-dev,"lib required by st",
 ,xorg-xbacklight,"enables changing screen brightness levels.",
