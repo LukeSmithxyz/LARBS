@@ -135,7 +135,7 @@ resetpulse() { dialog --infobox "Reseting Pulseaudio..." 4 50
 	}
 
 changebgprog() { dialog --infobox "Use feh instead of xwallpaper" 10 50
-	sed -i 's/xwallpaper --zoom/feh --bg-scale/g' ~/.local/bin/tools/setbg
+	sed -i 's/xwallpaper --zoom/feh --bg-scale/g' "/home/$name/.local/bin/tools/setbg"
 	}
 
 finalize(){ \
