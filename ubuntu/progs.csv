@@ -54,7 +54,7 @@ X,i3-gaps,"is the main graphical user interface and window manager.","ppa:kgilme
 ,zathura,"is a pdf viewer with vim-like bindings.",
 ,zathura-djvu,"gives zathura the ability to read .djvu files.",
 ,zathura-pdf-mupdf,"allows mupdf pdf compatibility in zathura.",
-P,python-ueberzug,"generates image previews in vifm and other terminal programs.",
+P,ueberzug,"generates image previews in vifm and other terminal programs.",
 ,poppler,"manipulates .pdfs and gives .pdf previews and other .pdf functions.",
 ,mediainfo,"shows audio and video information and is used by vifm as well.",
 ,atool,"manages and gives information about archives.",

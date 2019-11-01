@@ -88,8 +88,8 @@ ppainstall() { \
 
 pipinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing the Python package \`$1\` ($n of $total). $1 $2" 5 70
-	command -v pip || sudo apt install python-pip >/dev/null 2>&1
-	yes | pip install "$1"
+	command -v pip3 || sudo apt install python3-pip >/dev/null 2>&1
+	yes | pip3 install "$1"
 	}
 
 installationloop() { \
