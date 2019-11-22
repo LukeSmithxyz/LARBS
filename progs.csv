@@ -5,7 +5,7 @@
 ,sxhkd,"binds keys."
 ,ttf-inconsolata,"is the monospace font of LARBS."
 ,ttf-linux-libertine,"provides the sans and serif fonts for LARBS."
-,lf,"is an extensive terminal file manager that everyone likes."
+A,lf-bin,"is an extensive terminal file manager that everyone likes."
 ,arandr,"is a UI for screen adjustment."
 ,bc,"is used for a dropdown calculator."
 ,calcurse,"is a lightweight terminal-based calendar."
