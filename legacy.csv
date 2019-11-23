@@ -3,7 +3,7 @@
 ,xorg-server,"is the graphical server."
 ,xorg-xwininfo,"allows querying information about windows."
 ,xorg-xinit,"starts the graphical server."
-,sxhkd,"binds key."
+,sxhkd,"binds keys."
 ,ttf-inconsolata,"is the monospace font of LARBS."
 ,ttf-linux-libertine,"provides the sans and serif fonts for LARBS."
 A,ranger-git,"is an extensive terminal file manager that everyone likes."
