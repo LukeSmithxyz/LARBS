@@ -29,7 +29,7 @@ selectdotfiles() { \
 	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to install:" 12 70 2 dwm "The current version of LARBS using suckless's dwm." i3 "The legacy version of LARBS using i3." both "Install both versions for good measure!" custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)"
 	case "$edition" in
 		dwm) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv" ;;
-		i3) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="archi3" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/legacy.csv" ;;
+		i3) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/legacy.csv" ;;
 		both) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/legacy.csv\\nhttps://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv" ;;
 	esac ;}
 
