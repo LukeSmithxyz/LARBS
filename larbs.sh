@@ -26,10 +26,18 @@ welcomemsg() { \
 	}
 
 selectdotfiles() { \
-	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to install." 10 70 2 dwm "The current version of LARBS using suckless's dwm." i3 "The legacy version of LARBS using i3." custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)"
+	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to install:" 12 70 2 dwm "The current version of LARBS using suckless's dwm." i3 "The legacy version of LARBS using i3." both "Install both versions for good measure!" custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)"
 	case "$edition" in
 		dwm) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv" ;;
 		i3) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="archi3" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/legacy.csv" ;;
+		both) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/legacy.csv\\nhttps://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv" ;;
+	esac ;}
+
+selectdefault() { \
+	edition="$(dialog --nocancel --title "Which should be default?" --menu "Excellent! Which version do you want to start off as the default? This can be changed at any time afterwards." 11 50 2 dwm "dwm" i3 "i3" 3>&1 1>&2 2>&3 3>&1)"
+	case
+		dwm) edition="dwm" ;;
+		i3) edition="i3" ;;
 	esac ;}
 
 getuserandpass() { \
@@ -110,7 +118,7 @@ pipinstall() { \
 	}
 
 installationloop() { \
-	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' > /tmp/progs.csv
+	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || ( rm -f /tmp/progs.csv; { echo "$progsfile" | xargs -I {} curl -Ls {} } | sed '/^#d' | sort -uR | shuf >> /tmp/progs.csv)
 	total=$(wc -l < /tmp/progs.csv)
 	aurinstalled=$(pacman -Qm | awk '{print $1}')
 	while IFS=, read -r tag program comment; do
@@ -165,6 +173,7 @@ pacman -Syu --noconfirm --needed dialog ||  error "Are you sure you're running t
 # Welcome user and pick dotfiles.
 welcomemsg || error "User exited."
 selectdotfiles || error "User exited."
+[ "$edition" = "both" ] && selectdefault
 
 # Get and verify username and password.
 getuserandpass || error "User exited."
@@ -225,6 +234,9 @@ sed -i "s/^$name:\(.*\):\/bin\/.*/$name:\1:\/bin\/zsh/" /etc/passwd
 
 # dbus UUID must be generated for Artix runit
 dbus-uuidgen > /var/lib/dbus/machine-id
+
+# Let LARBS know the WM it's supposed to run.
+echo "$edition" > "/home/$name/.local/share/larbs/wm"; chown "$name:wheel" "/home/$name/.local/share/larbs/wm"
 
 # Last message! Install complete!
 finalize
