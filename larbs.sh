@@ -14,6 +14,8 @@ while getopts ":a:r:b:p:h" o; do case "${o}" in
 	*) printf "Invalid option: -%s\\n" "$OPTARG" && exit ;;
 esac done
 
+[ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
+[ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv"
 [ -z "$aurhelper" ] && aurhelper="yay"
 [ -z "$repobranch" ] && repobranch="master"
 
@@ -21,10 +23,13 @@ esac done
 
 if type xbps-install >/dev/null 2>&1; then
 	installpkg(){ xbps-install -y "$1" >/dev/null 2>&1 ;}
+	grepseq="\"^[PGV]*,\""
 elif type apt >/dev/null 2>&1; then
 	installpkg(){ apt-get install -y "$1" >/dev/null 2>&1 ;}
+	grepseq="\"^[PGU]*,\""
 else
 	installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
+	grepseq="\"^[PGA]*,\""
 fi
 
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
@@ -34,19 +39,8 @@ welcomemsg() { \
 	}
 
 selectdotfiles() { \
-	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to install:" 12 70 2 dwm "The current version of LARBS using suckless's dwm." i3 "The legacy version of LARBS using i3." both "Install both versions for good measure!" custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)" || error "User exited."
-	case "$edition" in
-		dwm) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv" ;;
-		i3) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/legacy.csv" ;;
-		both) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/legacy.csv\\nhttps://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv" ;;
-	esac ;}
-
-selectdefault() { \
-	edition="$(dialog --nocancel --title "Which should be default?" --menu "Excellent! Which version do you want to start off as the default? This can be changed at any time afterwards." 11 50 2 dwm "dwm" i3 "i3" 3>&1 1>&2 2>&3 3>&1)"
-	case "$edition" in
-		dwm) edition="dwm" ;;
-		i3) edition="i3" ;;
-	esac ;}
+	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to have as default:" 10 70 2 i3 "The classic version of LARBS using i3." dwm "The version of LARBS using suckless's dwm." custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)" || error "User exited."
+	}
 
 getuserandpass() { \
 	# Prompts user for new username an password.
@@ -126,17 +120,17 @@ pipinstall() { \
 	}
 
 installationloop() { \
-	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || ( rm -f /tmp/progs.csv; { echo "$progsfile" | xargs -I {} curl -Ls {} ;} | sed '/^#/d' | sort -uR | shuf >> /tmp/progs.csv)
+	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' | eval grep "$grepseq" > /tmp/progs.csv
 	total=$(wc -l < /tmp/progs.csv)
 	aurinstalled=$(pacman -Qm | awk '{print $1}')
 	while IFS=, read -r tag program comment; do
 		n=$((n+1))
 		echo "$comment" | grep "^\".*\"$" >/dev/null 2>&1 && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 		case "$tag" in
-			"") maininstall "$program" "$comment" ;;
 			"A") aurinstall "$program" "$comment" ;;
 			"G") gitmakeinstall "$program" "$comment" ;;
 			"P") pipinstall "$program" "$comment" ;;
+			*) maininstall "$program" "$comment" ;;
 		esac
 	done < /tmp/progs.csv ;}
 
@@ -170,7 +164,6 @@ installpkg dialog ||  error "Are you sure you're running this as the root user a
 # Welcome user and pick dotfiles.
 welcomemsg || error "User exited."
 selectdotfiles || error "User exited."
-[ "$edition" = "both" ] && selectdefault
 
 # Get and verify username and password.
 getuserandpass || error "User exited."
