@@ -35,7 +35,7 @@ selectdotfiles() { \
 
 selectdefault() { \
 	edition="$(dialog --nocancel --title "Which should be default?" --menu "Excellent! Which version do you want to start off as the default? This can be changed at any time afterwards." 11 50 2 dwm "dwm" i3 "i3" 3>&1 1>&2 2>&3 3>&1)"
-	case
+	case "$edition" in
 		dwm) edition="dwm" ;;
 		i3) edition="i3" ;;
 	esac ;}
