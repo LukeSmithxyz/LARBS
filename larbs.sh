@@ -19,6 +19,14 @@ esac done
 
 ### FUNCTIONS ###
 
+if type xbps-install >/dev/null 2>&1; then
+	installpkg(){ xbps-install -y "$1" >/dev/null 2>&1 ;}
+elif type apt >/dev/null 2>&1; then
+	installpkg(){ apt-get install -y "$1" >/dev/null 2>&1 ;}
+else
+	installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
+fi
+
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
 
 welcomemsg() { \
@@ -26,7 +34,7 @@ welcomemsg() { \
 	}
 
 selectdotfiles() { \
-	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to install:" 12 70 2 dwm "The current version of LARBS using suckless's dwm." i3 "The legacy version of LARBS using i3." both "Install both versions for good measure!" custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)"
+	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to install:" 12 70 2 dwm "The current version of LARBS using suckless's dwm." i3 "The legacy version of LARBS using i3." both "Install both versions for good measure!" custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)" || error "User exited."
 	case "$edition" in
 		dwm) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv" ;;
 		i3) dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git" ; repobranch="master" ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/legacy.csv" ;;
@@ -93,7 +101,7 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 
 maininstall() { # Installs all needed programs from main repo.
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total). $1 $2" 5 70
-	pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
+	installpkg "$1"
 	}
 
 gitmakeinstall() {
@@ -113,7 +121,7 @@ aurinstall() { \
 
 pipinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing the Python package \`$1\` ($n of $total). $1 $2" 5 70
-	command -v pip || pacman -S --noconfirm --needed python-pip >/dev/null 2>&1
+	command -v pip || installpkg python-pip >/dev/null 2>&1
 	yes | pip install "$1"
 	}
 
@@ -157,7 +165,7 @@ finalize(){ \
 ### This is how everything happens in an intuitive format and order.
 
 # Check if user is root on Arch distro. Install dialog.
-pacman -Syu --noconfirm --needed dialog ||  error "Are you sure you're running this as the root user? Are you sure you're using an Arch-based distro? ;-) Are you sure you have an internet connection? Are you sure your Arch keyring is updated?"
+installpkg dialog ||  error "Are you sure you're running this as the root user and have an internet connection?"
 
 # Welcome user and pick dotfiles.
 welcomemsg || error "User exited."
@@ -181,7 +189,8 @@ adduserandpass || error "Error adding username and/or password."
 refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
 
 dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
-pacman --noconfirm --needed -S base-devel git >/dev/null 2>&1
+installpkg base-devel
+installpkg git
 [ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
 
 # Allow user to run sudo without password. Since AUR programs must be installed
