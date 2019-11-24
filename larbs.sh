@@ -142,17 +142,6 @@ putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriti
 	sudo -u "$name" cp -rfT "$dir/gitrepo" "$2"
 	}
 
-case "$(readlink /sbin/init)" in
-	runit*) serviceinit(){ ln -s "/etc/runit/sv/$1" /run/runit/service; sv restart "$1" ;} ;;
-	openrc*) serviceinit() { rc-update add "$1" default ;} ;;
-	*) serviceinit(){ systemctl enable "$1"; systemctl start "$1" ;} ;;
-esac
-
-serviceinitwrap() { for service in "$@"; do
-	dialog --infobox "Enabling \"$service\"..." 4 40
-	serviceinit "$service"
-	done ;}
-
 systembeepoff() { dialog --infobox "Getting rid of that retarded error beep sound..." 10 50
 	rmmod pcspkr
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;}
@@ -217,9 +206,6 @@ installationloop
 # Install the dotfiles in the user's home directory
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
-
-# Enable services here.
-serviceinitwrap NetworkManager cronie
 
 # Most important command! Get rid of the beep!
 systembeepoff
