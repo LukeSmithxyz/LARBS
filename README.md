@@ -26,7 +26,7 @@ programs).
 
 ## Customization
 
-By default, LARBS uses the programs [here in progs.csv](archi3/progs.csv) and installs
+By default, LARBS uses the programs [here in progs.csv](progs.csv) and installs
 [my dotfiles repo (voidrice) here](https://github.com/lukesmithxyz/voidrice),
 but you can easily change this by either modifying the default variables at the
 beginning of the script or giving the script one of these options:
