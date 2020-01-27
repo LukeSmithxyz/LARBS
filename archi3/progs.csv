@@ -51,3 +51,8 @@ A,st,"is another terminal emulator"
 ,man-db,"implements man on arch."
 ,man-pages,"provides linux man pages."
 ,w3m,"terminal web browser that also provides tools we need for image previews."
+,ffmpeg,"record and slice video and audio on the command line"
+,ffmpegthumbnailer,"generates image preview of video",
+,mpd,"is a lightweight music daemon."
+,mpc,"is a terminal interface for mpd."
+,mpv,"is a video player"
