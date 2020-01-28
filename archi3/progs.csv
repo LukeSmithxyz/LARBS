@@ -7,6 +7,7 @@
 ,sxhkd,"binds key."
 ,ttf-inconsolata,"is the monospace font of LARBS."
 ,ttf-linux-libertine,"provides the sans and serif fonts for LARBS."
+,ttf-hack,"is another monospace font."
 ,acpi,"is used to fetch battery info."
 ,sysstat,"is used to fetch information about cpu, etc."
 ,compton,"is the screen compositor"
