@@ -25,7 +25,7 @@ esac done
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
 
 welcomemsg() { \
-	dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\\n\\n-Luke" 10 60
+	dialog --title "Welcome!" --msgbox "This is my fork of LARBS by Luke Smith. This is tailored for my specific needs and may or may not work for you. Use with caution." 10 60
 	}
 
 getuserandpass() { \
@@ -201,6 +201,13 @@ installationloop
 # Install the dotfiles in the user's home directory
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
+
+# create a few directories that I'll want to have by default.
+docsdir = "/home/$name/documents"
+mkdir "$docsdir"
+mkdir "$docsdir/Downloads"
+mkdir "$docsdir/mnt"
+chown -R "$name:wheel" "$docsdir"
 
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [ -f /usr/bin/pulseaudio ] && resetpulse
