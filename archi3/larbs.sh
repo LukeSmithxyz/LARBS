@@ -202,13 +202,6 @@ installationloop
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 
-# create a few directories that I'll want to have by default.
-docsdir = "/home/$name/documents"
-mkdir "$docsdir"
-mkdir "$docsdir/Downloads"
-mkdir "$docsdir/mnt"
-chown -R "$name:wheel" "$docsdir"
-
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [ -f /usr/bin/pulseaudio ] && resetpulse
 
