@@ -19,6 +19,7 @@
 ,libnotify,"allows desktop notifications."
 ,feh,"handles wallpapers and image previews"
 ,dunst,"is a suckless notification system."
+,ranger,"is a terminal file manager."
 ,exfat-utils,"allows management of FAT drives."
 ,sxiv,"is a minimalist image viewer."
 ,gnome-keyring,"serves as the system keyring."
