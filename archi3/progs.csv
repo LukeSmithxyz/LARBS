@@ -10,6 +10,7 @@
 ,ttf-hack,"is another monospace font."
 ,acpi,"is used to fetch battery info."
 ,sysstat,"is used to fetch information about cpu, etc."
+,wireless_tools,"is used to fetch wireless network info."
 ,compton,"is the screen compositor"
 ,arandr,"is a UI for screen adjustment."
 ,pacman-contrib,"contains contrib/ tools for pacman"
