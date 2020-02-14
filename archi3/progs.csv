@@ -5,6 +5,7 @@
 ,xorg-xwininfo,"allows querying information about windows."
 ,xorg-xinit,"starts the graphical server."
 ,sxhkd,"binds key."
+,zsh,"is my shell. for now?"
 A,ttf-font-awesome-4,"is for icons."
 ,ttf-linux-libertine,"provides the sans and serif fonts for LARBS."
 ,ttf-hack,"is another monospace font."
