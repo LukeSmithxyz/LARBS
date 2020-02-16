@@ -202,6 +202,16 @@ installationloop
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 
+#add cache directories and config files that I need for some of my blocks
+mkdir "/home/$name/.cache"
+mkdir "/home/$name/.cache/connections"
+mkdir "/home/$name/.cache/connections/ovpn"
+touch "/home/$name/.cache/connections/mysql"
+touch "/home/$name/.cache/connections/openvpn"
+touch "/home/$name/.cache/connections/ssh"
+mkdir "/home/$name/.cache/screenlayouts"
+touch "/home/$name/.cache/screenlayouts/config"
+
 # Pulseaudio, if/when initially installed, often needs a restart to work immediately.
 [ -f /usr/bin/pulseaudio ] && resetpulse
 
