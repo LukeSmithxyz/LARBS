@@ -184,6 +184,7 @@ adduserandpass || error "Error adding username and/or password."
 # refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
 
 dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software." 5 70
+installpkg curl
 installpkg base-devel
 installpkg git
 [ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
