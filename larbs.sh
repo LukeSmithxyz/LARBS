@@ -45,7 +45,7 @@ selectdotfiles() { \
 getuserandpass() { \
 	# Prompts user for new username an password.
 	name=$(dialog --inputbox "First, please enter a name for the user account." 10 60 3>&1 1>&2 2>&3 3>&1) || exit
-	repodir="/home/$name/.local/src"; mkdir -p "$repodir"
+	repodir="/home/$name/.local/src"; mkdir -p "$repodir"; chown -R "$name:wheel" "$repodir"
 	while ! echo "$name" | grep "^[a-z_][a-z0-9_-]*$" >/dev/null 2>&1; do
 		name=$(dialog --no-cancel --inputbox "Username not valid. Give a username beginning with a letter, with only lowercase letters, - or _." 10 60 3>&1 1>&2 2>&3 3>&1)
 	done
@@ -103,7 +103,7 @@ gitmakeinstall() {
 	progname="$(basename "$1")"
 	dir="$repodir/$progname"
 	dialog --title "LARBS Installation" --infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
-	git clone --depth 1 "$1" "$dir" >/dev/null 2>&1 || { cd "$dir" || return ; git pull --force origin master;}
+	sudo -u "$name" git clone --depth 1 "$1" "$dir" >/dev/null 2>&1 || { cd "$dir" || return ; sudo -u "$name" git pull --force origin master;}
 	cd "$dir" || exit
 	make >/dev/null 2>&1
 	make install >/dev/null 2>&1
@@ -140,10 +140,10 @@ putgitrepo() { # Downloads a gitrepo $1 and places the files in $2 only overwrit
 	dialog --infobox "Downloading and installing config files..." 4 60
 	[ -z "$3" ] && branch="master" || branch="$repobranch"
 	dir=$(mktemp -d)
-	[ ! -d "$2" ] && mkdir -p "$2" && chown -R "$name:wheel" "$2"
-	chown -R "$name:wheel" "$dir"
-	sudo -u "$name" git clone -b "$branch" --depth 1 "$1" "$dir/gitrepo" >/dev/null 2>&1
-	sudo -u "$name" cp -rfT "$dir/gitrepo" "$2"
+	[ ! -d "$2" ] && mkdir -p "$2"
+	chown -R "$name:wheel" "$dir" "$2"
+	sudo -u "$name" git clone -b "$branch" --depth 1 "$1" "$dir" >/dev/null 2>&1
+	sudo -u "$name" cp -rfT "$dir" "$2"
 	}
 
 systembeepoff() { dialog --infobox "Getting rid of that retarded error beep sound..." 10 50
