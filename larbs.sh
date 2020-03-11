@@ -112,7 +112,7 @@ gitmakeinstall() {
 aurinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
 	echo "$aurinstalled" | grep "^$1$" >/dev/null 2>&1 && return
-	sudo -u "$name" yes | $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
+	yes | sudo -u "$name" $aurhelper -S "$1" >/dev/null 2>&1
 	}
 
 pipinstall() { \
