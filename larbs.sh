@@ -227,7 +227,7 @@ sed -i "s/^$name:\(.*\):\/bin\/.*/$name:\1:\/bin\/zsh/" /etc/passwd
 dbus-uuidgen > /var/lib/dbus/machine-id
 
 # Let LARBS know the WM it's supposed to run.
-echo "$edition" > "/home/$name/.local/share/larbs/wm"; chown "$name:wheel" "/home/$name/.local/share/larbs/wm"
+echo "$edition" > "/home/$name/.local/share/larbs/wm"; chown -R "$name:wheel" "/home/$name/.local"
 
 # Last message! Install complete!
 finalize
