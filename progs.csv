@@ -2,7 +2,6 @@
 ,xorg-server,"is the graphical server."
 ,xorg-xwininfo,"allows querying information about windows."
 ,xorg-xinit,"starts the graphical server."
-A,libxft-bgra,"helps rendering color emojis in suckless software."
 V,xorg-minimal,"is the graphical server."
 V,xorg-fonts,"is a font package."
 V,libX11-devel,"is required for the compilation of some programs."

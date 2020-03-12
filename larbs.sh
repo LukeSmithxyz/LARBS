@@ -112,7 +112,7 @@ gitmakeinstall() {
 aurinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
 	echo "$aurinstalled" | grep "^$1$" >/dev/null 2>&1 && return
-	yes | sudo -u "$name" $aurhelper -S "$1" >/dev/null 2>&1
+	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
 	}
 
 pipinstall() { \
@@ -207,6 +207,9 @@ manualinstall $aurhelper || error "Failed to install AUR helper."
 # the user has been created and has priviledges to run sudo without a password
 # and all build dependencies are installed.
 installationloop
+
+dialog --title "LARBS Installation" --infobox "Finally, installing \`libxft-bgra\` to enable color emomis in suckless software without crashes." 5 70
+yes | sudo -u "$name" $aurhelper -S libxft-bgra >/dev/null 2>&1
 
 # Install the dotfiles in the user's home directory
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
