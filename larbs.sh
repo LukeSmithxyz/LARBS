@@ -28,6 +28,7 @@ elif type apt >/dev/null 2>&1; then
 	installpkg(){ apt-get install -y "$1" >/dev/null 2>&1 ;}
 	grepseq="\"^[PGU]*,\""
 else
+	distro="arch"
 	installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
 	grepseq="\"^[PGA]*,\""
 fi
@@ -187,20 +188,23 @@ dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`gi
 installpkg curl
 installpkg base-devel
 installpkg git
-[ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
 
-# Allow user to run sudo without password. Since AUR programs must be installed
-# in a fakeroot environment, this is required for all builds with AUR.
-newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
+[ "$distro" = arch ] && { \
+	[ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
 
-# Make pacman and yay colorful and adds eye candy on the progress bar because why not.
-grep "^Color" /etc/pacman.conf >/dev/null || sed -i "s/^#Color$/Color/" /etc/pacman.conf
-grep "ILoveCandy" /etc/pacman.conf >/dev/null || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+	# Allow user to run sudo without password. Since AUR programs must be installed
+	# in a fakeroot environment, this is required for all builds with AUR.
+	newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
 
-# Use all cores for compilation.
-sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
+	# Make pacman and yay colorful and adds eye candy on the progress bar because why not.
+	grep "^Color" /etc/pacman.conf >/dev/null || sed -i "s/^#Color$/Color/" /etc/pacman.conf
+	grep "ILoveCandy" /etc/pacman.conf >/dev/null || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 
-manualinstall $aurhelper || error "Failed to install AUR helper."
+	# Use all cores for compilation.
+	sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
+
+	manualinstall $aurhelper || error "Failed to install AUR helper."
+	}
 
 # The command that does all the installing. Reads the progs.csv file and
 # installs each needed program the way required. Be sure to run this only after
@@ -218,11 +222,6 @@ rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 # Most important command! Get rid of the beep!
 systembeepoff
 
-# This line, overwriting the `newperms` command above will allow the user to run
-# serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
-newperms "%wheel ALL=(ALL) ALL #LARBS
-%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
-
 # Make zsh the default shell for the user.
 sed -i "s/^$name:\(.*\):\/bin\/.*/$name:\1:\/bin\/zsh/" /etc/passwd
 
@@ -231,6 +230,11 @@ dbus-uuidgen > /var/lib/dbus/machine-id
 
 # Let LARBS know the WM it's supposed to run.
 echo "$edition" > "/home/$name/.local/share/larbs/wm"; chown -R "$name":wheel "/home/$name/.local"
+
+# This line, overwriting the `newperms` command above will allow the user to run
+# serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
+[ "$distro" = arch ] && newperms "%wheel ALL=(ALL) ALL #LARBS
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
 
 # Last message! Install complete!
 finalize
