@@ -188,6 +188,10 @@ dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`gi
 installpkg curl
 installpkg base-devel
 installpkg git
+installpkg ntp
+
+dialog --title "LARBS Installation" --infobox "Synchronizing system time to ensure successful and secure installation of software..." 4 70
+ntp 0.us.pool.ntp.org >/dev/null 2>&1
 
 [ "$distro" = arch ] && { \
 	[ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
