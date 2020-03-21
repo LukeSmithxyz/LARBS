@@ -40,7 +40,7 @@ welcomemsg() { \
 	}
 
 selectdotfiles() { \
-	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to have as default:" 10 70 2 i3 "The classic version of LARBS using i3." dwm "The version of LARBS using suckless's dwm." custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)" || error "User exited."
+	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to have as default:" 10 70 2 dwm "The version of LARBS using suckless's dwm." i3 "The classic version of LARBS using i3." custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)" || error "User exited."
 	}
 
 getuserandpass() { \
