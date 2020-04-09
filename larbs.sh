@@ -239,6 +239,9 @@ grep -q "laptop-updates.brave.com" /etc/hosts || echo "0.0.0.0 laptop-updates.br
 # Let LARBS know the WM it's supposed to run.
 echo "$edition" > "/home/$name/.local/share/larbs/wm"; chown -R "$name":wheel "/home/$name/.local"
 
+# Start/restart PulseAudio.
+killall pulseaudio; sudo -n "$name" pulseaudio --start
+
 # This line, overwriting the `newperms` command above will allow the user to run
 # serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
 [ "$distro" = arch ] && newperms "%wheel ALL=(ALL) ALL #LARBS
