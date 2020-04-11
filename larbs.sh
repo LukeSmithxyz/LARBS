@@ -236,8 +236,8 @@ dbus-uuidgen > /var/lib/dbus/machine-id
 grep -q "laptop-updates.brave.com" /etc/hosts || echo "0.0.0.0 laptop-updates.brave.com
 0.0.0.0 go-updater.brave.com" >> /etc/hosts
 
-# Let LARBS know the WM it's supposed to run.
-echo "$edition" > "/home/$name/.local/share/larbs/wm"; chown -R "$name":wheel "/home/$name/.local"
+# If user chose i3, start i3 on startx by default.
+[ "$edition" = "i3" ] && sed -i "s/^exec dwm/# exec dwm/;s/^#\s*exec i3/exec i3/;s/#\s*export STATUSBAR=\"\?i3blocks\"\?/export STATUSBAR=\"i3blocks\"/" "/home/$name/.xinitrc"
 
 # Start/restart PulseAudio.
 killall pulseaudio; sudo -n "$name" pulseaudio --start
