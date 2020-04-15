@@ -233,8 +233,7 @@ sed -i "s/^$name:\(.*\):\/bin\/.*/$name:\1:\/bin\/zsh/" /etc/passwd
 dbus-uuidgen > /var/lib/dbus/machine-id
 
 # Block Brave autoupdates just in case. (I don't know if these even exist on Linux, but whatever.)
-grep -q "laptop-updates.brave.com" /etc/hosts || echo "0.0.0.0 laptop-updates.brave.com
-0.0.0.0 go-updater.brave.com" >> /etc/hosts
+grep -q "laptop-updates.brave.com" /etc/hosts || echo "0.0.0.0 laptop-updates.brave.com" >> /etc/hosts
 
 # If user chose i3, start i3 on startx by default.
 [ "$edition" = "i3" ] && sed -i "s/^exec dwm/# exec dwm/;s/^#\s*exec i3/exec i3/;s/#\s*export STATUSBAR=\"\?i3blocks\"\?/export STATUSBAR=\"i3blocks\"/" "/home/$name/.xinitrc"
