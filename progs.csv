@@ -81,3 +81,8 @@ G,https://github.com/lukesmithxyz/st.git,"is my custom build of suckless's termi
 G,https://github.com/lukesmithxyz/dwm.git,"is the window manager."
 A,mutt-wizard-git,"is a light-weight terminal-based email system."
 ,slock,"allows you to lock your computer, and quickly unlock with your password."
+#Personal
+R,calibre,"Book and kindle management."
+R,amdvlk,"Amdvlk."
+R,blender,"3D editor."
+R,discord,"Comunication app."
