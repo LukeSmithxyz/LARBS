@@ -1,4 +1,3 @@
-# Luke's Auto-Rice Bootstraping Scripts (LARBS)
 
 
 ## Installation:
@@ -6,16 +5,11 @@
 On an Arch based distribution as root, run the following:
 
 ```
-curl -LO larbs.xyz/larbs.sh
+git clone https://github.com/AlexSyssoyev/LARBS && cd LARBS
 sh larbs.sh
 ```
 
 That's it.
-
-## What is LARBS?
-
-LARBS is a script that autoinstalls and autoconfigures a fully-functioning
-and minimal terminal-and-vim-based Arch Linux environment.
 
 LARBS was originally intended to be run on a fresh install of Arch Linux, and
 provides you with a fully configured diving-board for work or more
