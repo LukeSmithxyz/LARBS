@@ -239,7 +239,7 @@ grep -q "laptop-updates.brave.com" /etc/hosts || echo "0.0.0.0 laptop-updates.br
 [ "$edition" = "i3" ] && sed -i "s/^exec dwm/# exec dwm/;s/^#\s*exec i3/exec i3/;s/#\s*export STATUSBAR=\"\?i3blocks\"\?/export STATUSBAR=\"i3blocks\"/" "/home/$name/.xinitrc"
 
 # Start/restart PulseAudio.
-killall pulseaudio; sudo -n "$name" pulseaudio --start
+killall pulseaudio; sudo -u "$name" pulseaudio --start
 
 # This line, overwriting the `newperms` command above will allow the user to run
 # serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
