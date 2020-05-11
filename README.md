@@ -55,21 +55,21 @@ your program file. LARBS will install vertically down the file.
 
 If you include commas in your program descriptions, be sure to include double quotes around the whole description to ensure correct parsing.
 
-### The script itself
+### The Script Itself
 
 The script is extensively divided into functions for easier readability and
-trouble-shooting. Most everything should be self-explanatory.
+trouble-shooting. Most of everything should be self-explanatory.
 
 The main work is done by the `installationloop` function, which iterates
-through the programs file and determines based on the tag of each program,
+over the program file and determines based on the tag of each program,
 which commands to run to install it. You can easily add new methods of
 installations and tags as well.
 
 Note that programs from the AUR can only be built by a non-root user. What
-LARBS does to bypass this by default is to temporarily allow the newly created
+LARBS does to bypass this, by default, is to temporarily allow the newly created
 user to use `sudo` without a password (so the user won't be prompted for a
 password multiple times in installation). This is done ad-hocly, but
-effectively with the `newperms` function. At the end of installation,
+effectively, with the `newperms` function. At the end of installation,
 `newperms` removes those settings, giving the user the ability to run only
 several basic sudo commands without a password (`shutdown`, `reboot`,
 `pacman -Syu`).
