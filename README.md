@@ -40,8 +40,8 @@ LARBS will parse the given program list and install all given programs. Note
 that the program file must be a three column `.csv`.
 
 The first column is a "tag" that determines how the program is installed, ""
-(blank) for the main repository, `A` for via the AUR or `G` if the program is a
-git repository that is meant to be `make && sudo make install`ed. `V`if it's for
+(blank) for the main repository, `A`, for via the AUR, or `G`, if the program is a
+git repository that is meant to be `make && sudo make install`ed. `V`, if it's for
 the void linux distribution's xbps package manager.
 
 The second column is the name of the program in the repository, or the link to
