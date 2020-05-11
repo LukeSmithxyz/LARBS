@@ -44,14 +44,14 @@ The first column is a "tag" that determines how the program is installed, ""
 git repository that is meant to be `make && sudo make install`ed. `V`, if it's for
 the void linux distribution's xbps package manager.
 
-The second column is the name of the program in the repository, or the link to
-the git repository, and the third comment is a description (should be a verb
+The second column is the name of the program in the repository or the link to
+the git repository. The third comment is a description (should be a verb
 phrase) that describes the program. During installation, LARBS will print out
 this information in a grammatical sentence. It also doubles as documentation
 for people who read the csv or who want to install my dotfiles manually.
 
 Depending on your own build, you may want to tactically order the programs in
-your programs file. LARBS will install from the top to the bottom.
+your program file. LARBS will install vertically down the file.
 
 If you include commas in your program descriptions, be sure to include double quotes around the whole description to ensure correct parsing.
 
