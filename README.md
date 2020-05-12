@@ -19,7 +19,7 @@ LARBS is a script that automatically installs and automatically configures a ful
 LARBS was originally intended to be run on a fresh installation of Arch Linux, and
 provides you with a fully configured diving-board for work or more
 customization. But, LARBS also works on preconfigured systems *and* other
-Arch-based distrobutions such as Manjaro and Parabola (although Parabola,
+Arch-based distributions such as Manjaro and Parabola (although Parabola,
 which uses slightly different repositories, might miss one or two minor
 programs).
 
