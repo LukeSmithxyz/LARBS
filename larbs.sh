@@ -182,7 +182,7 @@ preinstallmsg || error "User exited."
 adduserandpass || error "Error adding username and/or password."
 
 # Refresh Arch keyrings.
-# refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
+refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
 
 dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software required for the installation of other programs." 5 70
 installpkg curl
@@ -230,7 +230,7 @@ git update-index --assume-unchanged "/home/$name/LICENSE"
 systembeepoff
 
 # Make zsh the default shell for the user.
-sed -i "s/^$name:\(.*\):\/bin\/.*/$name:\1:\/bin\/zsh/" /etc/passwd
+sed -i "s/^$name:\(.*\):\/bin\/\S*/$name:\1:\/bin\/zsh/" /etc/passwd
 
 # dbus UUID must be generated for Artix runit.
 dbus-uuidgen > /var/lib/dbus/machine-id
