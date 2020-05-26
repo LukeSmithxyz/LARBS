@@ -233,6 +233,7 @@ systembeepoff
 
 # Make zsh the default shell for the user.
 chsh -s /bin/zsh $name >/dev/null 2>&1
+sudo -u "$name" mkdir -p "/home/$name/.cache/zsh/"
 
 # dbus UUID must be generated for Artix runit.
 dbus-uuidgen > /var/lib/dbus/machine-id
