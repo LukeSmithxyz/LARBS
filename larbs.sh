@@ -232,7 +232,7 @@ git update-index --assume-unchanged "/home/$name/LICENSE"
 systembeepoff
 
 # Make zsh the default shell for the user.
-sed -i "s/^$name:\(.*\):\/bin\/\S*/$name:\1:\/bin\/zsh/" /etc/passwd
+chsh -s /bin/zsh $name >/dev/null 2>&1
 
 # dbus UUID must be generated for Artix runit.
 dbus-uuidgen > /var/lib/dbus/machine-id
