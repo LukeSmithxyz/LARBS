@@ -34,9 +34,9 @@ else
 fi
 
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
-larbs_install_info() { dialog --title "LARBS Installation" --infobox "$1" ${2:-5} ${3:-70} }
-input_box() { dialog --inputbox "$1" 10 60 3>&1 1>&2 2>&3 3>&1 }
-password_box() { dialog --no-cancel --passwordbox "$1" 10 60 3>&1 1>&2 2>&3 3>&1 }
+larbs_install_info() { dialog --title "LARBS Installation" --infobox "$1" "${2:-5}" "${3:-70}";}
+input_box() { dialog --inputbox "$1" 10 60 3>&1 1>&2 2>&3 3>&1; }
+password_box() { dialog --no-cancel --passwordbox "$1" 10 60 3>&1 1>&2 2>&3 3>&1; }
 
 welcomemsg() { \
 	dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured Linux desktop, which I use as my main machine.\\n\\n-Luke" 10 60
@@ -76,7 +76,7 @@ adduserandpass() { \
 	dialog --infobox "Adding user \"$name\"..." 4 50
 	useradd -m -g wheel -s /bin/bash "$name" >/dev/null 2>&1 ||
 	usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
-	repodir="/home/$name/.local/src"; mkdir -p "$repodir"; chown -R "$name":wheel $(dirname "$repodir")
+	repodir="/home/$name/.local/src"; mkdir -p "$repodir"; chown -R "$name":wheel "$(dirname "$repodir")"
 	echo "$name:$pass1" | chpasswd
 	unset pass1 pass2 ;}
 
@@ -235,7 +235,7 @@ git update-index --assume-unchanged "/home/$name/LICENSE"
 systembeepoff
 
 # Make zsh the default shell for the user.
-chsh -s /bin/zsh $name >/dev/null 2>&1
+chsh -s /bin/zsh "$name" >/dev/null 2>&1
 sudo -u "$name" mkdir -p "/home/$name/.cache/zsh/"
 
 # dbus UUID must be generated for Artix runit.
