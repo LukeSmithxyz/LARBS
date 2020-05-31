@@ -34,8 +34,6 @@ else
 fi
 
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
-input_box() { dialog --inputbox "$1" 10 60 3>&1 1>&2 2>&3 3>&1 }
-password_box() { dialog --no-cancel --passwordbox "$1" 10 60 3>&1 1>&2 2>&3 3>&1 }
 
 welcomemsg() { \
 	dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured Linux desktop, which I use as my main machine.\\n\\n-Luke" 10 60
@@ -49,16 +47,16 @@ selectdotfiles() { \
 
 getuserandpass() { \
 	# Prompts user for new username an password.
-	name=$(input_box "First, please enter a name for the user account.") || exit
+	name=$(dialog --inputbox "First, please enter a name for the user account." 10 60 3>&1 1>&2 2>&3 3>&1) || exit
 	while ! echo "$name" | grep "^[a-z_][a-z0-9_-]*$" >/dev/null 2>&1; do
-		name=$(input_box "Username not valid. Give a username beginning with a letter, with only lowercase letters, - or _.")
+		name=$(dialog --no-cancel --inputbox "Username not valid. Give a username beginning with a letter, with only lowercase letters, - or _." 10 60 3>&1 1>&2 2>&3 3>&1)
 	done
-	pass1=$(password_box "Enter a password for that user.")
-	pass2=$(password_box "Retype password.")
+	pass1=$(dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 3>&1 1>&2 2>&3 3>&1)
+	pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
 	while ! [ "$pass1" = "$pass2" ]; do
 		unset pass2
-		pass1=$(password_box "Passwords do not match.\\n\\nEnter password again.")
-		pass2=$(password_box "Retype password.")
+		pass1=$(dialog --no-cancel --passwordbox "Passwords do not match.\\n\\nEnter password again." 10 60 3>&1 1>&2 2>&3 3>&1)
+		pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
 	done ;}
 
 usercheck() { \
