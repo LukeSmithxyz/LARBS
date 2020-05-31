@@ -34,6 +34,7 @@ else
 fi
 
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
+larbs_install_info() { dialog --title "LARBS Installation" --infobox "$1" ${2:-5} ${3:-70} }
 input_box() { dialog --inputbox "$1" 10 60 3>&1 1>&2 2>&3 3>&1 }
 password_box() { dialog --no-cancel --passwordbox "$1" 10 60 3>&1 1>&2 2>&3 3>&1 }
 
@@ -100,14 +101,14 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 	cd /tmp || return) ;}
 
 maininstall() { # Installs all needed programs from main repo.
-	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total). $1 $2" 5 70
+	larbs_install_info "Installing \`$1\` ($n of $total). $1 $2"
 	installpkg "$1"
 	}
 
 gitmakeinstall() {
 	progname="$(basename "$1" .git)"
 	dir="$repodir/$progname"
-	dialog --title "LARBS Installation" --infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
+	larbs_install_info "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2"
 	sudo -u "$name" git clone --depth 1 "$1" "$dir" >/dev/null 2>&1 || { cd "$dir" || return ; sudo -u "$name" git pull --force origin master;}
 	cd "$dir" || exit
 	make >/dev/null 2>&1
@@ -115,13 +116,13 @@ gitmakeinstall() {
 	cd /tmp || return ;}
 
 aurinstall() { \
-	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
+	larbs_install_info "Installing \`$1\` ($n of $total) from the AUR. $1 $2"
 	echo "$aurinstalled" | grep "^$1$" >/dev/null 2>&1 && return
 	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
 	}
 
 pipinstall() { \
-	dialog --title "LARBS Installation" --infobox "Installing the Python package \`$1\` ($n of $total). $1 $2" 5 70
+	larbs_install_info "Installing the Python package \`$1\` ($n of $total). $1 $2"
 	command -v pip || installpkg python-pip >/dev/null 2>&1
 	yes | pip install "$1"
 	}
@@ -142,7 +143,7 @@ installationloop() { \
 	done < /tmp/progs.csv ;}
 
 putgitrepo() { # Downloads a gitrepo $1 and places the files in $2 only overwriting conflicts
-	dialog --infobox "Downloading and installing config files..." 4 60
+	larbs_install_info "Downloading and installing config files..." 4 60
 	[ -z "$3" ] && branch="master" || branch="$repobranch"
 	dir=$(mktemp -d)
 	[ ! -d "$2" ] && mkdir -p "$2"
@@ -151,12 +152,12 @@ putgitrepo() { # Downloads a gitrepo $1 and places the files in $2 only overwrit
 	sudo -u "$name" cp -rfT "$dir" "$2"
 	}
 
-systembeepoff() { dialog --infobox "Getting rid of that retarded error beep sound..." 10 50
+systembeepoff() { larbs_install_info "Getting rid of that retarded error beep sound..." 10 50
 	rmmod pcspkr
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;}
 
 finalize(){ \
-	dialog --infobox "Preparing welcome message..." 4 50
+	larbs_install_info "Preparing welcome message..." 4 50
 	echo "exec_always --no-startup-id notify-send -i ~/.local/share/larbs/larbs.png 'Welcome to LARBS:' 'Press Super+F1 for the manual.' -t 10000"  >> "/home/$name/.config/i3/config"
 	dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1).\\n\\n.t Luke" 12 80
 	}
@@ -188,13 +189,13 @@ adduserandpass || error "Error adding username and/or password."
 # Refresh Arch keyrings.
 refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
 
-dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software required for the installation of other programs." 5 70
+larbs_install_info "Installing \`basedevel\` and \`git\` for installing other software required for the installation of other programs."
 installpkg curl
 installpkg base-devel
 installpkg git
 installpkg ntp
 
-dialog --title "LARBS Installation" --infobox "Synchronizing system time to ensure successful and secure installation of software..." 4 70
+larbs_install_info "Synchronizing system time to ensure successful and secure installation of software..." 4
 ntpdate 0.us.pool.ntp.org >/dev/null 2>&1
 
 [ "$distro" = arch ] && { \
@@ -220,7 +221,7 @@ ntpdate 0.us.pool.ntp.org >/dev/null 2>&1
 # and all build dependencies are installed.
 installationloop
 
-dialog --title "LARBS Installation" --infobox "Finally, installing \`libxft-bgra\` to enable color emoji in suckless software without crashes." 5 70
+larbs_install_info "Finally, installing \`libxft-bgra\` to enable color emoji in suckless software without crashes."
 yes | sudo -u "$name" $aurhelper -S libxft-bgra >/dev/null 2>&1
 
 # Install the dotfiles in the user's home directory
