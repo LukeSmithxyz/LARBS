@@ -153,6 +153,35 @@ systembeepoff() { dialog --infobox "Getting rid of that retarded error beep soun
 	rmmod pcspkr
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;}
 
+addtodm(){ # creates the desktop files if there are other DEs on the system
+	desktopfilepath="/usr/share/xsessions"
+	if [ $(ls -l $desktopfilepath 2>/dev/null | wc -l) -gt 0 ]; then
+		dialog --title "Add to Display Manager?" --yes-label "Yes, add it!" --no-label "No, nevermind!" --yesno "The script has detected that you have already installed another Desktop Environment.\\n\\nAt this point it is time for you to decide if you want to add the $edition to the Display Manager." 13 60
+		
+		if [ $? -eq 0 ]; then
+			{
+				echo '[Desktop Entry]'
+				echo 'Encoding=UTF-8'
+				echo 'Name=dwm'
+				echo 'Comment=dwm window manager'
+				echo 'Exec=/usr/local/bin/dwm'
+				echo 'Type=Application'
+			} >> "$desktopfilepath/dwm.desktop"
+			
+			{
+				echo '[Desktop Entry]'
+				echo 'Encoding=UTF-8'
+				echo 'Name=dwm'
+				echo 'Comment=dwm window manager'
+				echo 'Exec=/usr/bin/i3'
+				echo 'Type=Application'
+			} >> "$desktopfilepath/i3.desktop"
+			
+			dialog --title "Add to Display Manager?" --msgbox "The $edition was successfully added to the Display manager." 12 80
+		fi
+	fi
+}
+
 finalize(){ \
 	dialog --infobox "Preparing welcome message..." 4 50
 	echo "exec_always --no-startup-id notify-send -i ~/.local/share/larbs/larbs.png 'Welcome to LARBS:' 'Press Super+F1 for the manual.' -t 10000"  >> "/home/$name/.config/i3/config"
@@ -251,6 +280,9 @@ killall pulseaudio; sudo -u "$name" pulseaudio --start
 # serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
 [ "$distro" = arch ] && newperms "%wheel ALL=(ALL) ALL #LARBS
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
+
+# create the desktop files
+addtodm
 
 # Last message! Install complete!
 finalize
