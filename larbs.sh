@@ -171,8 +171,8 @@ addtodm(){ # creates the desktop files if there are other DEs on the system
 			{
 				echo '[Desktop Entry]'
 				echo 'Encoding=UTF-8'
-				echo 'Name=dwm'
-				echo 'Comment=dwm window manager'
+				echo 'Name=i3'
+				echo 'Comment=i3 window manager'
 				echo 'Exec=/usr/bin/i3'
 				echo 'Type=Application'
 			} >> "$desktopfilepath/i3.desktop"
