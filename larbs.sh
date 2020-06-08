@@ -41,10 +41,6 @@ welcomemsg() { \
 	dialog --colors --title "Important Note!" --yes-label "All ready!" --no-label "Return..." --yesno "Be sure the computer you are using has current pacman updates and refreshed Arch keyrings.\\n\\nIf it does not, the installation of some programs might fail." 8 70
 	}
 
-selectdotfiles() { \
-	edition="$(dialog --title "Select LARBS version." --menu "Select which version of LARBS you wish to have as default:" 10 70 2 dwm "The version of LARBS using suckless's dwm." i3 "The classic version of LARBS using i3." custom "If you are supplying commandline options for LARBS." 3>&1 1>&2 2>&3 3>&1)" || error "User exited."
-	}
-
 getuserandpass() { \
 	# Prompts user for new username an password.
 	name=$(dialog --inputbox "First, please enter a name for the user account." 10 60 3>&1 1>&2 2>&3 3>&1) || exit
@@ -155,7 +151,6 @@ systembeepoff() { dialog --infobox "Getting rid of that retarded error beep soun
 
 finalize(){ \
 	dialog --infobox "Preparing welcome message..." 4 50
-	echo "exec_always --no-startup-id notify-send -i ~/.local/share/larbs/larbs.png 'Welcome to LARBS:' 'Press Super+F1 for the manual.' -t 10000"  >> "/home/$name/.config/i3/config"
 	dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1).\\n\\n.t Luke" 12 80
 	}
 
@@ -168,7 +163,6 @@ installpkg dialog || error "Are you sure you're running this as the root user an
 
 # Welcome user and pick dotfiles.
 welcomemsg || error "User exited."
-selectdotfiles || error "User exited."
 
 # Get and verify username and password.
 getuserandpass || error "User exited."
@@ -240,9 +234,6 @@ dbus-uuidgen > /var/lib/dbus/machine-id
 
 # Block Brave autoupdates just in case. (I don't know if these even exist on Linux, but whatever.)
 grep -q "laptop-updates.brave.com" /etc/hosts || echo "0.0.0.0 laptop-updates.brave.com" >> /etc/hosts
-
-# If user chose i3, start i3 on startx by default.
-[ "$edition" = "i3" ] && sed -i "s/^ssh-agent dwm/# ssh-agent dwm/;s/^#\s*ssh-agent i3/ssh-agent i3/;s/#\s*export STATUSBAR=\"\?i3blocks\"\?/export STATUSBAR=\"i3blocks\"/" "/home/$name/.xinitrc"
 
 # Start/restart PulseAudio.
 killall pulseaudio; sudo -u "$name" pulseaudio --start
