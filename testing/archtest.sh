@@ -81,7 +81,7 @@ pacstrap /mnt base base-devel
 genfstab -U /mnt >> /mnt/etc/fstab
 cp tz.tmp /mnt/tzfinal.tmp
 rm tz.tmp
-curl https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/testing/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
+curl https://raw.githubusercontent.com/mini890/LARBS/master/testing/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
 
 ### BEGIN
 arch-chroot /mnt echo "root:$pass" | chpasswd
@@ -103,7 +103,7 @@ systemctl start NetworkManager
 pacman --noconfirm --needed -S grub && grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman --noconfirm --needed -S dialog
-larbs() { curl -O https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/src/larbs.sh && bash larbs.sh ;}
+larbs() { curl -O https://raw.githubusercontent.com/mini890/LARBS/master/src/larbs.sh && bash larbs.sh ;}
 dialog --title "Install Luke's Rice" --yesno "This install script will easily let you access Luke's Auto-Rice Boostrapping Scripts (LARBS) which automatically install a full Arch Linux i3-gaps desktop environment.\n\nIf you'd like to install this, select yes, otherwise select no.\n\nLuke"  15 60 && larbs
 ### END
 

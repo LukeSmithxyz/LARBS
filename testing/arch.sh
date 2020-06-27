@@ -26,6 +26,8 @@ fi
 
 timedatectl set-ntp true
 
+# Check this fdisk and think about how to create new partitions
+
 cat <<EOF | fdisk /dev/sda
 o
 n
@@ -70,7 +72,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat tz.tmp > /mnt/tzfinal.tmp
 rm tz.tmp
 mv comp /mnt/etc/hostname
-curl https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/testing/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
+curl https://raw.githubusercontent.com/mini890/LARBS/master/testing/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
 
 
 dialog --defaultno --title "Final Qs" --yesno "Reboot computer?"  5 30 && reboot
