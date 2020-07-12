@@ -107,6 +107,15 @@ gitmakeinstall() {
 	make >/dev/null 2>&1
 	make install >/dev/null 2>&1
 	cd /tmp || return ;}
+	
+gitshinstall() {
+	progname="$(basename "$1" .git)"
+	dir="$repodir/$progname"
+	dialog --title "LARBS Installation" --infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`install.sh\`. $(basename "$1") $2" 5 70
+	sudo -u "$name" git clone --depth 1 "$1" "$dir" >/dev/null 2>&1 || { cd "$dir" || return ; sudo -u "$name" git pull --force origin master;}
+	cd "$dir" || exit
+	bash ./install.sh >/dev/null 2>&1
+	cd /tmp || return ;}
 
 aurinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
@@ -130,6 +139,7 @@ installationloop() { \
 		case "$tag" in
 			"A") aurinstall "$program" "$comment" ;;
 			"G") gitmakeinstall "$program" "$comment" ;;
+			"Gsh") gitshinstall  "$program" "$comment" ;;
 			"P") pipinstall "$program" "$comment" ;;
 			*) maininstall "$program" "$comment" ;;
 		esac
