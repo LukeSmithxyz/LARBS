@@ -1,7 +1,7 @@
 #!/bin/sh
+# shellcheck shell=sh # Written to be posix compatible
 # Luke's Auto Rice Boostrapping Script (LARBS)
-# by Luke Smith <luke@lukesmith.xyz>
-# License: GNU GPLv3
+# Created by Luke Smith <luke@lukesmith.xyz> under the terms of GNU GPLv3
 
 # Simplified Assertion
 die() {
