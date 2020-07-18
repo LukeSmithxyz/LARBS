@@ -15,18 +15,18 @@ die() {
 ### OPTIONS AND VARIABLES ###
 
 while getopts ":a:r:b:p:h" o; do case "${o}" in
-	h) printf "Optional arguments for custom use:\\n  -r: Dotfiles repository (local file or url)\\n  -p: Dependencies and programs csv (local file or url)\\n  -a: AUR helper (must have pacman-like syntax)\\n  -h: Show this message\\n" && exit ;;
-	r) dotfilesrepo=${OPTARG} && git ls-remote "$dotfilesrepo" || exit ;;
+	h) printf "Optional arguments for custom use:\\n  -r: Dotfiles repository (local file or url)\\n  -p: Dependencies and programs csv (local file or url)\\n  -a: AUR helper (must have pacman-like syntax)\\n  -h: Show this message\\n" ; exit ;;
+	r) dotfilesrepo=${OPTARG} ; git ls-remote "$dotfilesrepo" || exit ;;
 	b) repobranch=${OPTARG} ;;
 	p) progsfile=${OPTARG} ;;
 	a) aurhelper=${OPTARG} ;;
-	*) printf "Invalid option: -%s\\n" "$OPTARG" && exit ;;
+	*) printf "Invalid option: -%s\\n" "$OPTARG" ; exit ;;
 esac done
 
-[ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
-[ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv"
-[ -z "$aurhelper" ] && aurhelper="yay"
-[ -z "$repobranch" ] && repobranch="master"
+[ -z "$dotfilesrepo" ] ; dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
+[ -z "$progsfile" ] ; progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv"
+[ -z "$aurhelper" ] ; aurhelper="yay"
+[ -z "$repobranch" ] ; repobranch="master"
 
 ### FUNCTIONS ###
 
@@ -79,7 +79,7 @@ adduserandpass() { \
 	# Adds user `$name` with password $pass1.
 	dialog --infobox "Adding user \"$name\"..." 4 50
 	useradd -m -g wheel -s /bin/bash "$name" >/dev/null 2>&1 ||
-	usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
+	usermod -a -G wheel "$name" ; mkdir -p /home/"$name" ; chown "$name":wheel /home/"$name"
 	repodir="/home/$name/.local/src"; mkdir -p "$repodir"; chown -R "$name":wheel "$(dirname "$repodir")"
 	echo "$name:$pass1" | chpasswd
 	unset pass1 pass2 ;}
@@ -98,10 +98,9 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 	dialog --infobox "Installing \"$1\", an AUR helper..." 4 50
 	cd /tmp || exit
 	rm -rf /tmp/"$1"*
-	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz &&
-	sudo -u "$name" tar -xvf "$1".tar.gz >/dev/null 2>&1 &&
-	cd "$1" &&
-	sudo -u "$name" makepkg --noconfirm -si >/dev/null 2>&1
+	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz ;
+	sudo -u "$name" tar -xvf "$1".tar.gz >/dev/null 2>&1 ;
+	cd "$1" || exit ; sudo -u "$name" makepkg --noconfirm -si >/dev/null 2>&1
 	cd /tmp || return) ;}
 
 maininstall() { # Installs all needed programs from main repo.
@@ -121,7 +120,7 @@ gitmakeinstall() {
 
 aurinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
-	echo "$aurinstalled" | grep "^$1$" >/dev/null 2>&1 && return
+	echo "$aurinstalled" | grep "^$1$" >/dev/null 2>&1 ; return
 	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
 	}
 
@@ -132,12 +131,12 @@ pipinstall() { \
 	}
 
 installationloop() { \
-	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' | eval grep "$grepseq" > /tmp/progs.csv
+	([ -f "$progsfile" ] ; cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' | eval grep "$grepseq" > /tmp/progs.csv
 	total=$(wc -l < /tmp/progs.csv)
 	aurinstalled=$(pacman -Qqm)
 	while IFS=, read -r tag program comment; do
 		n=$((n+1))
-		echo "$comment" | grep "^\".*\"$" >/dev/null 2>&1 && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
+		echo "$comment" | grep "^\".*\"$" >/dev/null 2>&1 ; comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 		case "$tag" in
 			"A") aurinstall "$program" "$comment" ;;
 			"G") gitmakeinstall "$program" "$comment" ;;
@@ -148,9 +147,9 @@ installationloop() { \
 
 putgitrepo() { # Downloads a gitrepo $1 and places the files in $2 only overwriting conflicts
 	dialog --infobox "Downloading and installing config files..." 4 60
-	[ -z "$3" ] && branch="master" || branch="$repobranch"
+	[ -z "$3" ] ; branch="master" || branch="$repobranch"
 	dir=$(mktemp -d)
-	[ ! -d "$2" ] && mkdir -p "$2"
+	[ ! -d "$2" ] ; mkdir -p "$2"
 	chown -R "$name":wheel "$dir" "$2"
 	sudo -u "$name" git clone --recursive -b "$branch" --depth 1 "$1" "$dir" >/dev/null 2>&1
 	sudo -u "$name" cp -rfT "$dir" "$2"
@@ -200,8 +199,8 @@ installpkg ntp
 dialog --title "LARBS Installation" --infobox "Synchronizing system time to ensure successful and secure installation of software..." 4 70
 ntpdate 0.us.pool.ntp.org >/dev/null 2>&1
 
-[ "$distro" = arch ] && { \
-	[ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
+[ "$distro" = arch ] ; { \
+	[ -f /etc/sudoers.pacnew ] ; cp /etc/sudoers.pacnew /etc/sudoers # Just in case
 
 	# Allow user to run sudo without password. Since AUR programs must be installed
 	# in a fakeroot environment, this is required for all builds with AUR.
@@ -251,7 +250,7 @@ killall pulseaudio; sudo -u "$name" pulseaudio --start
 
 # This line, overwriting the `newperms` command above will allow the user to run
 # serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
-[ "$distro" = arch ] && newperms "%wheel ALL=(ALL) ALL #LARBS
+[ "$distro" = arch ] ; newperms "%wheel ALL=(ALL) ALL #LARBS
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
 
 # Last message! Install complete!
