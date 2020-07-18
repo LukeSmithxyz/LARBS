@@ -3,6 +3,15 @@
 # by Luke Smith <luke@lukesmith.xyz>
 # License: GNU GPLv3
 
+# Simplified Assertion
+die() {
+	case "$2" in
+		*) printf "FATAL: %s\n" "$3 $1"
+	esac
+	
+	exit "$2"
+}
+
 ### OPTIONS AND VARIABLES ###
 
 while getopts ":a:r:b:p:h" o; do case "${o}" in
@@ -21,16 +30,18 @@ esac done
 
 ### FUNCTIONS ###
 
-if type xbps-install >/dev/null 2>&1; then
+if command -v xbps-install >/dev/null; then
 	installpkg(){ xbps-install -y "$1" >/dev/null 2>&1 ;}
 	grepseq="\"^[PGV]*,\""
-elif type apt >/dev/null 2>&1; then
+elif command -v apt >/dev/null; then
 	installpkg(){ apt-get install -y "$1" >/dev/null 2>&1 ;}
 	grepseq="\"^[PGU]*,\""
-else
+elif command -v pacman >/dev/null; then
 	distro="arch"
 	installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
 	grepseq="\"^[PGA]*,\""
+else
+	die 1 "Any of xbps-install, apt and pacman is not executable on this system!"
 fi
 
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
