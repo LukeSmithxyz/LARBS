@@ -209,7 +209,7 @@ chsh -s /usr/bin/zsh $name
 [ -f /usr/bin/pulseaudio ] && resetpulse
 
 # Enable services here.
-serviceinit NetworkManager cronie
+serviceinit NetworkManager cronie org.cups.cupsd.service
 
 # Most important command! Get rid of the beep!
 systembeepoff
