@@ -21,17 +21,7 @@ esac done
 
 ### FUNCTIONS ###
 
-if type xbps-install >/dev/null 2>&1; then
-	installpkg(){ xbps-install -y "$1" >/dev/null 2>&1 ;}
-	grepseq="\"^[PGV]*,\""
-elif type apt >/dev/null 2>&1; then
-	installpkg(){ apt-get install -y "$1" >/dev/null 2>&1 ;}
-	grepseq="\"^[PGU]*,\""
-else
-	distro="arch"
-	installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
-	grepseq="\"^[PGA]*,\""
-fi
+installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
 
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
 
@@ -44,7 +34,7 @@ welcomemsg() { \
 getuserandpass() { \
 	# Prompts user for new username an password.
 	name=$(dialog --inputbox "First, please enter a name for the user account." 10 60 3>&1 1>&2 2>&3 3>&1) || exit
-	while ! echo "$name" | grep "^[a-z_][a-z0-9_-]*$" >/dev/null 2>&1; do
+	while ! echo "$name" | grep -q "^[a-z_][a-z0-9_-]*$"; do
 		name=$(dialog --no-cancel --inputbox "Username not valid. Give a username beginning with a letter, with only lowercase letters, - or _." 10 60 3>&1 1>&2 2>&3 3>&1)
 	done
 	pass1=$(dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 3>&1 1>&2 2>&3 3>&1)
@@ -67,9 +57,9 @@ preinstallmsg() { \
 adduserandpass() { \
 	# Adds user `$name` with password $pass1.
 	dialog --infobox "Adding user \"$name\"..." 4 50
-	useradd -m -g wheel -s /bin/bash "$name" >/dev/null 2>&1 ||
+	useradd -m -g wheel -s /bin/zsh "$name" >/dev/null 2>&1 ||
 	usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
-	repodir="/home/$name/.local/src"; mkdir -p "$repodir"; chown -R "$name":wheel $(dirname "$repodir")
+	repodir="/home/$name/.local/src"; mkdir -p "$repodir"; chown -R "$name":wheel "$(dirname "$repodir")"
 	echo "$name:$pass1" | chpasswd
 	unset pass1 pass2 ;}
 
@@ -110,7 +100,7 @@ gitmakeinstall() {
 
 aurinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
-	echo "$aurinstalled" | grep "^$1$" >/dev/null 2>&1 && return
+	echo "$aurinstalled" | grep -q "^$1$" && return
 	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
 	}
 
@@ -121,12 +111,12 @@ pipinstall() { \
 	}
 
 installationloop() { \
-	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' | eval grep "$grepseq" > /tmp/progs.csv
+	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' > /tmp/progs.csv
 	total=$(wc -l < /tmp/progs.csv)
 	aurinstalled=$(pacman -Qqm)
 	while IFS=, read -r tag program comment; do
 		n=$((n+1))
-		echo "$comment" | grep "^\".*\"$" >/dev/null 2>&1 && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
+		echo "$comment" | grep -q "^\".*\"$" && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 		case "$tag" in
 			"A") aurinstall "$program" "$comment" ;;
 			"G") gitmakeinstall "$program" "$comment" ;;
@@ -159,7 +149,7 @@ finalize(){ \
 ### This is how everything happens in an intuitive format and order.
 
 # Check if user is root on Arch distro. Install dialog.
-installpkg dialog || error "Are you sure you're running this as the root user and have an internet connection?"
+installpkg dialog || error "Are you sure you're running this as the root user, are on an Arch-based distribution and have an internet connection?"
 
 # Welcome user and pick dotfiles.
 welcomemsg || error "User exited."
@@ -175,36 +165,33 @@ preinstallmsg || error "User exited."
 
 ### The rest of the script requires no user input.
 
-adduserandpass || error "Error adding username and/or password."
-
 # Refresh Arch keyrings.
 refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
 
-dialog --title "LARBS Installation" --infobox "Installing \`basedevel\` and \`git\` for installing other software required for the installation of other programs." 5 70
-installpkg curl
-installpkg base-devel
-installpkg git
-installpkg ntp
+for x in curl base-devel git ntp zsh; do
+	dialog --title "LARBS Installation" --infobox "Installing \`x\` which is required to install and configure other programs." 5 70
+	installpkg "$x"
+done
 
 dialog --title "LARBS Installation" --infobox "Synchronizing system time to ensure successful and secure installation of software..." 4 70
 ntpdate 0.us.pool.ntp.org >/dev/null 2>&1
 
-[ "$distro" = arch ] && { \
-	[ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
+adduserandpass || error "Error adding username and/or password."
 
-	# Allow user to run sudo without password. Since AUR programs must be installed
-	# in a fakeroot environment, this is required for all builds with AUR.
-	newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
+[ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
 
-	# Make pacman and yay colorful and adds eye candy on the progress bar because why not.
-	grep "^Color" /etc/pacman.conf >/dev/null || sed -i "s/^#Color$/Color/" /etc/pacman.conf
-	grep "ILoveCandy" /etc/pacman.conf >/dev/null || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+# Allow user to run sudo without password. Since AUR programs must be installed
+# in a fakeroot environment, this is required for all builds with AUR.
+newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
 
-	# Use all cores for compilation.
-	sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
+# Make pacman and yay colorful and adds eye candy on the progress bar because why not.
+grep -q "^Color" /etc/pacman.conf || sed -i "s/^#Color$/Color/" /etc/pacman.conf
+grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 
-	manualinstall $aurhelper || error "Failed to install AUR helper."
-	}
+# Use all cores for compilation.
+sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
+
+manualinstall $aurhelper || error "Failed to install AUR helper."
 
 # The command that does all the installing. Reads the progs.csv file and
 # installs each needed program the way required. Be sure to run this only after
@@ -226,7 +213,7 @@ git update-index --assume-unchanged "/home/$name/LICENSE"
 systembeepoff
 
 # Make zsh the default shell for the user.
-chsh -s /bin/zsh $name >/dev/null 2>&1
+chsh -s /bin/zsh "$name" >/dev/null 2>&1
 sudo -u "$name" mkdir -p "/home/$name/.cache/zsh/"
 
 # dbus UUID must be generated for Artix runit.
@@ -240,7 +227,7 @@ killall pulseaudio; sudo -u "$name" pulseaudio --start
 
 # This line, overwriting the `newperms` command above will allow the user to run
 # serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
-[ "$distro" = arch ] && newperms "%wheel ALL=(ALL) ALL #LARBS
+newperms "%wheel ALL=(ALL) ALL #LARBS
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
 
 # Last message! Install complete!

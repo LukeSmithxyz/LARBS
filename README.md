@@ -55,7 +55,8 @@ for people who read the csv or who want to install my dotfiles manually.
 Depending on your own build, you may want to tactically order the programs in
 your programs file. LARBS will install from the top to the bottom.
 
-If you include commas in your program descriptions, be sure to include double quotes around the whole description to ensure correct parsing.
+If you include commas in your program descriptions, be sure to include double
+quotes around the whole description to ensure correct parsing.
 
 ### The script itself
 
