@@ -13,9 +13,10 @@ while getopts ":a:r:b:p:h" o; do case "${o}" in
 	a) aurhelper=${OPTARG} ;;
 	*) printf "Invalid option: -%s\\n" "$OPTARG" && exit ;;
 esac done
-
-[ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
-[ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/progs.csv"
+#These are variables for which dotfiles (configuration files) get used. You can change these to your own.
+[ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/ChuMutt/voidrice.git"
+[ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/ChuMutt/LARBS/master/progs.csv"
+#I like yay (a program that easily downloads from the Arch User Repository) so we'll be using that.
 [ -z "$aurhelper" ] && aurhelper="yay"
 [ -z "$repobranch" ] && repobranch="master"
 
@@ -111,7 +112,7 @@ pipinstall() { \
 	}
 
 installationloop() { \
-	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' > /tmp/progs.csv
+	([ -f "file" ] && cp "$progsfile" /tmp/progs.csv) || curl -Ls "$progsfile" | sed '/^#/d' > /tmp/progs.csv
 	total=$(wc -l < /tmp/progs.csv)
 	aurinstalled=$(pacman -Qqm)
 	while IFS=, read -r tag program comment; do
