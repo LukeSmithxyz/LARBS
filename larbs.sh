@@ -65,8 +65,8 @@ adduserandpass() { \
 
 refreshkeys() { \
 	dialog --infobox "Refreshing Arch Keyring..." 4 40
-	pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 	pacman -Q artix-keyring >/dev/null 2>&1 && pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
+	pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 	}
 
 newperms() { # Set special sudoers settings for install (or after).
