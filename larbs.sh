@@ -46,7 +46,7 @@ getuserandpass() { \
 	done ;}
 
 usercheck() { \
-	! (id -u "$name" >/dev/null) 2>&1 ||
+	! { id -u "$name" >/dev/null 2>&1; } ||
 	dialog --colors --title "WARNING!" --yes-label "CONTINUE" --no-label "No wait..." --yesno "The user \`$name\` already exists on this system. LARBS can install for a user already existing, but it will \\Zboverwrite\\Zn any conflicting settings/dotfiles on the user account.\\n\\nLARBS will \\Zbnot\\Zn overwrite your user files, documents, videos, etc., so don't worry about that, but only click <CONTINUE> if you don't mind your settings being overwritten.\\n\\nNote also that LARBS will change $name's password to the one you just gave." 14 70
 	}
 
