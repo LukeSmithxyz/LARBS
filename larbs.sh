@@ -82,7 +82,7 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 	sudo -u "$name" tar -xvf "$1".tar.gz >/dev/null 2>&1 &&
 	cd "$1" &&
 	sudo -u "$name" makepkg --noconfirm -si >/dev/null 2>&1
-	cd /tmp || return) ;}
+	cd /tmp || return 1) ;}
 
 maininstall() { # Installs all needed programs from main repo.
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total). $1 $2" 5 70
@@ -93,15 +93,15 @@ gitmakeinstall() {
 	progname="$(basename "$1" .git)"
 	dir="$repodir/$progname"
 	dialog --title "LARBS Installation" --infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
-	sudo -u "$name" git clone --depth 1 "$1" "$dir" >/dev/null 2>&1 || { cd "$dir" || return ; sudo -u "$name" git pull --force origin master;}
+	sudo -u "$name" git clone --depth 1 "$1" "$dir" >/dev/null 2>&1 || { cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin master;}
 	cd "$dir" || exit 1
 	make >/dev/null 2>&1
 	make install >/dev/null 2>&1
-	cd /tmp || return ;}
+	cd /tmp || return 1 ;}
 
 aurinstall() { \
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
-	echo "$aurinstalled" | grep -q "^$1$" && return
+	echo "$aurinstalled" | grep -q "^$1$" && return 1
 	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
 	}
 
