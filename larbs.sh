@@ -220,10 +220,10 @@ sudo -u "$name" mkdir -p "/home/$name/.cache/zsh/"
 dbus-uuidgen > /var/lib/dbus/machine-id
 
 # Tap to click
-T2C_PATCH="/etc/X11/xorg.conf.d/40-libinput.conf"
+touch_patch="/etc/X11/xorg.conf.d/40-libinput.conf"
 
-[ ! -f "$T2C_PATH" ] && {
-    tee "$T2C_PATCH" <<! >/dev/null
+[ ! -f "$touch_patch" ] && {
+    tee "$touch_patch" <<! >/dev/null
 Section "InputClass"
     Identifier "libinput touchpad catchall"
     MatchIsTouchpad "on"
