@@ -149,6 +149,10 @@ finalize(){ \
 
 ### This is how everything happens in an intuitive format and order.
 
+# Backs-up the RSS `urls` file
+
+mv /home/"$name"/.config/newsboat/urls /home/"$name"/.config/newsboat/urls$(date +%s)
+
 # Check if user is root on Arch distro. Install dialog.
 pacman --noconfirm --needed -Sy dialog || error "Are you sure you're running this as the root user, are on an Arch-based distribution and have an internet connection?"
 
