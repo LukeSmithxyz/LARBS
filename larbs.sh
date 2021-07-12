@@ -65,7 +65,7 @@ adduserandpass() { \
 
 refreshkeys() { \
 	dialog --infobox "Refreshing Arch Keyring..." 4 40
-	pacman -Q artix-keyring >/dev/null 2>&1 && pacman --noconfirm -S artix-keyring >/dev/null 2>&1
+	pacman -Q artix-keyring >/dev/null 2>&1 && pacman --noconfirm -S artix-keyring artix-archlinux-support >/dev/null 2>&1
 	pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 	}
 
