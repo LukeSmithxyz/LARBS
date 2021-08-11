@@ -140,6 +140,15 @@ systembeepoff() { dialog --infobox "Getting rid of that retarded error beep soun
 	rmmod pcspkr
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;}
 
+
+wpalog() { # Stop wpa_supplicant from logging to stdout on runit
+	wpafile='/usr/share/dbus-1/system-services/fi.w1.wpa_supplicant1.service'
+	pidof -s runit &&
+		dialog --infobox "Stopping wpa_supplicant from logging to stdout..." 10 50 &&
+		! grep '/usr/bin/wpa_supplicant -u -s' $wpafile >/dev/null 2>&1 &&
+		sed -i 's|/usr/bin/wpa_supplicant -u|/usr/bin/wpa_supplicant -u -s|' $wpafile >/dev/null 2>&1
+	}
+
 finalize(){ \
 	dialog --infobox "Preparing welcome message..." 4 50
 	dialog --title "All done!" --msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1).\\n\\n.t Luke" 12 80
@@ -216,6 +225,9 @@ git update-index --assume-unchanged "/home/$name/README.md" "/home/$name/LICENSE
 
 # Most important command! Get rid of the beep!
 systembeepoff
+
+# Make wpa_supplicant not log to stdout on runit
+wpalog
 
 # Make zsh the default shell for the user.
 chsh -s /bin/zsh "$name" >/dev/null 2>&1
