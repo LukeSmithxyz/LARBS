@@ -78,11 +78,7 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 	dialog --infobox "Installing \"$1\", an AUR helper..." 4 50
 	cd /tmp || exit 1
 	rm -rf /tmp/"$1"*
-	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz &&
-	sudo -u "$name" tar -xvf "$1".tar.gz >/dev/null 2>&1 &&
-	cd "$1" &&
-	sudo -u "$name" makepkg --noconfirm -si >/dev/null 2>&1 || return 1
-	cd /tmp || return 1) ;}
+	git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 maininstall() { # Installs all needed programs from main repo.
 	dialog --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total). $1 $2" 5 70
