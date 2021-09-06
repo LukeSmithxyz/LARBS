@@ -23,7 +23,7 @@ esac done
 
 installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
 
-error() { echo "ERROR: $1" ; exit 1;}
+error() { printf "%s\n" "$1" >&2; exit 1; }
 
 welcomemsg() { \
 	dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured Linux desktop, which I use as my main machine.\\n\\n-Luke" 10 60
@@ -241,7 +241,7 @@ grep -q "OTHER_OPTS='-a pulseaudio -m alsa_seq -r 48000'" /etc/conf.d/fluidsynth
 	echo "OTHER_OPTS='-a pulseaudio -m alsa_seq -r 48000'" >> /etc/conf.d/fluidsynth
 
 # Start/restart PulseAudio.
-killall pulseaudio; sudo -u "$name" pulseaudio --start
+pkill -15 -x 'pulseaudio'; sudo -u "$name" pulseaudio --start
 
 # This line, overwriting the `newperms` command above will allow the user to run
 # serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
