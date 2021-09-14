@@ -1,4 +1,4 @@
-# Luke's Auto-Rice Bootstrapping Scripts (LARBS)
+# Luke's Auto-Rice Bootstrapping Scripts (LARBS) but elwolf rice
 
 ## Installation:
 
