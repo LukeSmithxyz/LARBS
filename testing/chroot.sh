@@ -12,9 +12,10 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
 mkinitcpio -P
 
-passwd
-
-TZuser=$(cat tzfinal.tmp)
+passwd << EOF
+123
+123
+EOF
 
 pacman --noconfirm --needed -S networkmanager
 systemctl enable NetworkManager
