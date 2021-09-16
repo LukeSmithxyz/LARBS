@@ -51,20 +51,18 @@ w
 EOF
 partprobe
 
-yes | mkfs.ext4 /dev/sda4
-yes | mkfs.ext4 /dev/sda3
-yes | mkfs.ext4 /dev/sda1
+yes | mkfs.fat -F32 /dev/sda1
 mkswap /dev/sda2
-swapon /dev/sda2
+yes | mkfs.ext4 /dev/sda3
+
 mount /dev/sda3 /mnt
+swapon /dev/sda2
 mkdir -p /mnt/boot
 mount /dev/sda1 /mnt/boot
-mkdir -p /mnt/home
-mount /dev/sda4 /mnt/home
 
 pacman -Sy --noconfirm archlinux-keyring
 
-pacstrap /mnt base base-devel
+pacstrap /mnt base base-devel linux linux-firmware
 
 genfstab -U /mnt >> /mnt/etc/fstab
 cat tz.tmp > /mnt/tzfinal.tmp
