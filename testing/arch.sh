@@ -15,7 +15,7 @@ dialog --no-cancel --inputbox "Enter a name for your computer." 10 60 2> comp
 
 dialog --defaultno --title "Time Zone select" --yesno "Do you want use the default time zone(America/New_York)?.\n\nPress no for select your own time zone"  10 60 && echo "America/New_York" > tz.tmp || tzselect > tz.tmp
 
-dialog --no-cancel --inputbox "Enter partitionsize in gb, separated by space (swap & root)." 10 60 2>psize
+dialog --no-cancel --inputbox "Enter partitionsize in gb, separated by space (1st swap then root)." 10 60 2>psize
 
 IFS=' ' read -ra SIZE <<< $(cat psize)
 
@@ -27,12 +27,12 @@ fi
 timedatectl set-ntp true
 
 cat <<EOF | fdisk /dev/sda
-o
+g
 n
 p
 
 
-+200M
++512M
 n
 p
 
