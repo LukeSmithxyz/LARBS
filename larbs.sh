@@ -251,7 +251,8 @@ pkill -15 -x 'pulseaudio'; sudo -u "$name" pulseaudio --start
 newperms "%wheel ALL=(ALL) ALL #LARBS
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm"
 
-betterdiscordctl install
+sudo -u "$name" betterdiscordctl install
+systemctl enable ckb-next-daemon
 
 # Last message! Install complete!
 finalize
