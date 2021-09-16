@@ -26,28 +26,32 @@ fi
 
 timedatectl set-ntp true
 
-cat <<EOF | fdisk /dev/sda
-g
+cat <<EOF | gdisk /dev/sda
+o
+y
 n
-p
 
 
-+512M
+512M
+ef00
+
 n
-p
 
 
-+${SIZE[0]}G
+4G
+8200
+
 n
-p
 
 
-+${SIZE[1]}G
-n
-p
+
+
+
+
 
 
 w
+y
 EOF
 partprobe
 
