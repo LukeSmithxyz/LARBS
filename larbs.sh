@@ -315,6 +315,11 @@ pkill -15 -x 'pulseaudio'; sudo -u "$name" pulseaudio --start
 newperms "%wheel ALL=(ALL) ALL #LARBS
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm"
 
+sudo -u "$name" pamixer --set-volume 80
+sudo -u "$name" pamixer -u
+sudo -u "$name" pamixer --source 2 -u --set-volume 50
+
+sudo -u "$name" discord
 sudo -u "$name" betterdiscordctl install
 sudo -u "$name" setbg "~/Pictures/wallpaper.png"
 
