@@ -315,6 +315,8 @@ pkill -15 -x 'pulseaudio'; sudo -u "$name" pulseaudio --start
 newperms "%wheel ALL=(ALL) ALL #LARBS
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm"
 
+sudo -u "$name" git config --global user.name elwolf6
+sudo -u "$name" git config --global user.email elwolf6@protonmail.com
 sudo -u "$name" setbg "/home/$name/Pictures/wallpaper.png"
 
 systemctl enable ckb-next-daemon
