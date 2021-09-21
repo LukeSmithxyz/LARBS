@@ -321,7 +321,7 @@ sudo -u "$name" pamixer --source 2 -u --set-volume 50
 
 sudo -u "$name" discord
 sudo -u "$name" betterdiscordctl install
-sudo -u "$name" setbg "~/Pictures/wallpaper.png"
+sudo -u "$name" setbg "/home/$name/Pictures/wallpaper.png"
 
 systemctl enable ckb-next-daemon
 systemctl start ckb-next-daemon
