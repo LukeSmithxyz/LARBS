@@ -317,7 +317,6 @@ newperms "%wheel ALL=(ALL) ALL #LARBS
 
 sudo -u "$name" git config --global user.name elwolf6
 sudo -u "$name" git config --global user.email elwolf6@protonmail.com
-sudo -u "$name" setbg "/home/$name/Pictures/wallpaper.png"
 
 systemctl enable ckb-next-daemon
 systemctl start ckb-next-daemon
