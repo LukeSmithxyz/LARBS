@@ -17,7 +17,7 @@ passwd << EOF
 123
 EOF
 
-pacman --noconfirm --needed -S networkmanager
+pacman --noconfirm --needed -S networkmanager networkmanager-runit
 ln -s /etc/runit/sv/NetworkManager /run/runit/service
 sv up NetworkManager
 
