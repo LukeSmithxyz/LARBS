@@ -49,7 +49,7 @@ mount /dev/sda1 /mnt/boot
 
 pacman -Sy --noconfirm archlinux-keyring
 
-basestrap /mnt base base-devel linux linux-firmware
+basestrap /mnt base base-devel runit linux linux-firmware
 
 genfstab -U /mnt >> /mnt/etc/fstab
 cat tz.tmp > /mnt/tzfinal.tmp
