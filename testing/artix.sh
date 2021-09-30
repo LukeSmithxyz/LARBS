@@ -61,5 +61,5 @@ curl https://raw.githubusercontent.com/elwolf6/LARBS/master/testing/chroot-runit
 
 
 dialog --defaultno --title "Final Qs" --yesno "Reboot computer?"  5 30 && reboot
-dialog --defaultno --title "Final Qs" --yesno "Return to chroot environment?"  6 30 && arch-chroot /mnt
+dialog --defaultno --title "Final Qs" --yesno "Return to chroot environment?"  6 30 && artix-chroot /mnt
 clear
