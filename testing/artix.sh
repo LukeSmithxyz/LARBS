@@ -57,7 +57,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat tz.tmp > /mnt/tzfinal.tmp
 rm tz.tmp
 mv comp /mnt/etc/hostname
-curl https://raw.githubusercontent.com/elwolf6/LARBS/master/testing/chroot.sh > /mnt/chroot.sh && artix-chroot /mnt bash chroot-runit.sh && rm /mnt/chroot-runit.sh
+curl https://raw.githubusercontent.com/elwolf6/LARBS/master/testing/chroot-runit.sh > /mnt/chroot.sh && artix-chroot /mnt bash chroot-runit.sh && rm /mnt/chroot-runit.sh
 
 
 dialog --defaultno --title "Final Qs" --yesno "Reboot computer?"  5 30 && reboot
