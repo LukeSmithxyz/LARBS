@@ -20,6 +20,7 @@ EOF
 pacman --noconfirm --needed -S networkmanager-runit grub efibootmgr && grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB && grub-mkconfig -o /boot/grub/grub.cfg
 
 ln -s /etc/runit/sv/NetworkManager /run/runit/service
+sv up NetworkManager
 
 pacman --noconfirm --needed -S dialog git
 larbs() { curl -O https://raw.githubusercontent.com/elwolf6/LARBS/master/larbs-runit.sh && bash larbs-runit.sh;}
