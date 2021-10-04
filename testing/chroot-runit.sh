@@ -19,6 +19,9 @@ EOF
 
 pacman --noconfirm --needed -S networkmanager-runit grub efibootmgr && grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB && grub-mkconfig -o /boot/grub/grub.cfg
 
+NetworkManager
+ckb-next-daemon &
+
 ln -s /etc/runit/sv/NetworkManager /run/runit/service
 sv up NetworkManager
 mkdir -p /etc/runit/sv/ckb-next-daemon
