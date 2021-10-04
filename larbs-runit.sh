@@ -180,10 +180,6 @@ preinstallmsg || error "User exited."
 # Refresh Arch keyrings.
 refreshkeys || error "Error automatically refreshing Arch keyring. Consider doing so manually."
 
-#enable multilib
-sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
-pacman -Syu
-
 for x in curl ca-certificates base-devel git ntp zsh ; do
 	dialog --title "LARBS Installation" --infobox "Installing \`$x\` which is required to install and configure other programs." 5 70
 	installpkg "$x"
@@ -324,13 +320,13 @@ sudo -u "$name" git config --global user.email elwolf6@protonmail.com
 NetworkManager
 ckb-next-daemon > /dev/null 2>&1 && killall ckb-next-daemon
 
-ln -s /etc/runit/sv/NetworkManager /run/runit/service
+ln -sf /etc/runit/sv/NetworkManager /run/runit/service
 sv up NetworkManager
 mkdir -p /etc/runit/sv/ckb-next-daemon
 printf '#!/bin/sh
 exec ckb-next-daemon > /dev/null 2>&1' > /etc/runit/sv/ckb-next-daemon/run
 chmod +x /etc/runit/sv/ckb-next-daemon/run
-ln -s /etc/runit/sv/ckb-next-daemon /run/runit/service
+ln -sf /etc/runit/sv/ckb-next-daemon /run/runit/service
 sv up ckb-next-daemon
 
 # Last message! Install complete!
