@@ -320,13 +320,13 @@ sudo -u "$name" git config --global user.email elwolf6@protonmail.com
 NetworkManager
 ckb-next-daemon > /dev/null 2>&1 && killall ckb-next-daemon
 
-ln -sf /etc/runit/sv/NetworkManager /run/runit/service
+ln -s /etc/runit/sv/NetworkManager /run/runit/service
 sv up NetworkManager
 mkdir -p /etc/runit/sv/ckb-next-daemon
 printf '#!/bin/sh
 exec ckb-next-daemon > /dev/null 2>&1' > /etc/runit/sv/ckb-next-daemon/run
 chmod +x /etc/runit/sv/ckb-next-daemon/run
-ln -sf /etc/runit/sv/ckb-next-daemon /run/runit/service
+ln -s /etc/runit/sv/ckb-next-daemon /run/runit/service
 sv up ckb-next-daemon
 
 # Last message! Install complete!
