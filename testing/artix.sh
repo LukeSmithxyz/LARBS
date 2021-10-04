@@ -51,7 +51,7 @@ pacman -Sy --noconfirm archlinux-keyring
 
 basestrap /mnt base base-devel runit elogind-runit linux linux-firmware
 
-genfstab -U /mnt >> /mnt/etc/fstab
+fstabgen -U /mnt >> /mnt/etc/fstab
 cat tz.tmp > /mnt/tzfinal.tmp
 rm tz.tmp
 mv comp /mnt/etc/hostname
