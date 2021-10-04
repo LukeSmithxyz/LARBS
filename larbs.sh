@@ -321,6 +321,8 @@ newperms "%wheel ALL=(ALL) ALL #LARBS
 sudo -u "$name" git config --global user.name elwolf6
 sudo -u "$name" git config --global user.email elwolf6@protonmail.com
 
+systemctl enable ckb-next-daemon
+
 # Last message! Install complete!
 finalize
 clear
