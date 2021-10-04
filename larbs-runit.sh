@@ -322,7 +322,7 @@ sudo -u "$name" git config --global user.name elwolf6
 sudo -u "$name" git config --global user.email elwolf6@protonmail.com
 
 NetworkManager
-ckb-next-daemon > /dev/null 2>&1 &
+ckb-next-daemon > /dev/null 2>&1 && killall ckb-next-daemon
 
 ln -s /etc/runit/sv/NetworkManager /run/runit/service
 sv up NetworkManager
