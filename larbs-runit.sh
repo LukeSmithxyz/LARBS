@@ -321,6 +321,9 @@ sudo -u "$name" git config --global user.email elwolf6@protonmail.com
 
 NetworkManager
 
+mkdir -p /run/runit
+mkdir -p /run/runit/service
+
 ln -s /etc/runit/sv/NetworkManager /run/runit/service
 sv up NetworkManager
 mkdir -p /etc/runit/sv/ckb-next-daemon
