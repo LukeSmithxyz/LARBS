@@ -319,6 +319,7 @@ newperms "%wheel ALL=(ALL) ALL #LARBS
 sudo -u "$name" git config --global user.name elwolf6
 sudo -u "$name" git config --global user.email elwolf6@protonmail.com
 
+mkdir /etc/runit/sv/ckb-next-daemon
 printf '#!/bin/sh
 exec ckb-next-daemon > /dev/null 2>&1' > /etc/runit/sv/ckb-next-daemon/run
 chmod +x /etc/runit/sv/ckb-next-daemon/run
