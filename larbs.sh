@@ -72,8 +72,8 @@ refreshkeys() { \
 		*)
 			dialog --infobox "Enabling Arch Repositories..." 4 40
 			pacman --noconfirm --needed -S artix-keyring artix-archlinux-support >/dev/null 2>&1
-			for repo in extra community multilib; do
-				grep -q "^[$repo]" /etc/pacman.conf ||
+			for repo in extra community; do
+				grep -q "^\[$repo\]" /etc/pacman.conf ||
 					echo "[$repo]
 Include = /etc/pacman.d/mirrorlist-arch" >> /etc/pacman.conf
 			done
