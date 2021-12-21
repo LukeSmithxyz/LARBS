@@ -203,7 +203,7 @@ sed -i "s/^#ParallelDownloads = 8$/ParallelDownloads = 5/;s/^#Color$/Color/" /et
 # Use all cores for compilation.
 sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
 
-manualinstall yay-bin || error "Failed to install AUR helper."
+manualinstall yay || error "Failed to install AUR helper."
 
 # The command that does all the installing. Reads the progs.csv file and
 # installs each needed program the way required. Be sure to run this only after
@@ -219,8 +219,11 @@ putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml"
 # Create default urls file if none exists.
 [ ! -f "/home/$name/.config/newsboat/urls" ] && echo "http://lukesmith.xyz/rss.xml
-https://notrelated.libsyn.com/rss
+https://videos.lukesmith.xyz/feeds/videos.xml?videoChannelId=2
+https://lindypress.net/rss.xml
+https://notrelated.xyz/rss.xml
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA \"~Luke Smith (YouTube)\"
+https://artixlinux.org/feed.php "tech"
 https://www.archlinux.org/feeds/news/" > "/home/$name/.config/newsboat/urls"
 # make git ignore deleted LICENSE & README.md files
 git update-index --assume-unchanged "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml"
