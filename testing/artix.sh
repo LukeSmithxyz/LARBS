@@ -15,7 +15,7 @@ dialog --no-cancel --inputbox "Enter a name for your computer." 10 60 2> comp
 
 dialog --defaultno --title "Time Zone select" --yesno "Do you want use the default time zone(America/New_York)?.\n\nPress no for select your own time zone"  10 60 && echo "America/New_York" > tz.tmp || tzselect > tz.tmp
 
-cat <<EOF | gdisk /dev/sda
+cat <<EOF | gdisk /dev/nvme0n1
 o
 y
 n
@@ -38,14 +38,14 @@ y
 EOF
 partprobe
 
-yes | mkfs.fat -F32 /dev/sda1
-mkswap /dev/sda2
-yes | mkfs.ext4 /dev/sda3
+yes | mkfs.fat -F32 /dev/nvme0n1p1
+mkswap /dev/nvme0n1p2
+yes | mkfs.ext4 /dev/nvme0n1p3
 
-mount /dev/sda3 /mnt
-swapon /dev/sda2
+mount /dev/nvme0n1p3 /mnt
+swapon /dev/nvme0n1p2
 mkdir -p /mnt/boot
-mount /dev/sda1 /mnt/boot
+mount /dev/nvme0n1p1 /mnt/boot
 
 pacman -Sy --noconfirm archlinux-keyring
 
