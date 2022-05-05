@@ -9,7 +9,7 @@ Use vim keys (`h`/`j`/`k`/`l`) to navigate this document. Pressing `s` will fit 
 
 **FAQs** are at the end of this document.
 
-## Welcome!
+<!-- ## Welcome! -->
 
 ### Basic goals and principles of this system:
 
@@ -20,8 +20,8 @@ Use vim keys (`h`/`j`/`k`/`l`) to navigate this document. Pressing `s` will fit 
 
 ### General keyboard changes
 
-- Capslock is a useless key in high quality space. It’s now remapped. If you press it alone, it will function as escape, making vimcraft much more natural, but you can also hold it down and it will act as another Windows/super/mod key.
-- The menu button (usually between the right Alt and Ctrl) is an alternative Super/Mod button.This is to make one-handing on laptops easier.
+- Capslock is a useless key in high quality space. It’s now remapped. If you press it alone, it will function as escape, making vimcraft much more natural, but you can also hold it down and it will act as another `Windows/super/mod` key.
+- The menu button (usually between the `right Alt` and `Ctrl`) is an alternative `Super/Mod` button.This is to make one-handing on laptops easier.
 
 > If you’d like to change any of these keyboard changes, you need only open and change the remaps script. All custom scripts in LARBS are located in `˜/.local/bin/`. Actually, this should go without saying, but everything here can easily be changed. Below in this document, there is information about where to change programs/components.
 
@@ -29,9 +29,9 @@ Use vim keys (`h`/`j`/`k`/`l`) to navigate this document. Pressing `s` will fit 
 
 ## The Status Bar
 
-To the left, you’ll see the numbers of your current workspace/tag(s). On the right, you’ll see various system status notifiers, the date, volume, even music and local weather if possible, etc. Each module on the right of the statusbar is a script located in ˜/.local/bin/statusbar/. You can see what they do and modify them from there. I’m sure you can figure it out. You can also right click on the module to see what it does.
+To the left, you’ll see the numbers of your current workspace/tag(s). On the right, you’ll see various system status notifiers, the date, volume, even music and local weather if possible, etc. Each module on the right of the statusbar is a script located in `˜/.local/bin/statusbar/`. You can see what they do and modify them from there. I’m sure you can figure it out. You can also right click on the module to see what it does.
 
-The program dwmblocks is what is run to generate the statusbar from those scripts. You can edit its config/source code in ˜/.local/src/dwmblocks/ to tell it what scripts/commands
+The program dwmblocks is what is run to generate the statusbar from those scripts. You can edit its `config/source` code in `˜/.local/src/dwmblocks/` to tell it what `scripts/commands`
 you want it to display.
 
 ## Deeper Tutorials
@@ -40,101 +40,101 @@ Press `mod+F2` at any time to get a menu of programs to watch videos about strea
 
 ## Key Bindings
 
-The window manager dwm abstractly orders all of your windows into a stack from most important to least based on when you last manipulated it. dwm is an easy to use window manager, but you should understand that it makes use of that stack layout. If you’re not familiar, I recommend you press Mod+F2 and select the “dwm” option to watch my brief tutorial (note that the bindings I discuss in the video are the default dwm binds, which are different (inferior) to those here).
+The window manager **dwm** abstractly orders all of your windows into a stack from most important to least based on when you last manipulated it. dwm is an easy to use window manager, but you should understand that it makes use of that stack layout. If you’re not familiar, I recommend you press`Mod`+`F2` and select the “dwm” option to watch my brief tutorial (note that the bindings I discuss in the video are the default dwm binds, which are different (inferior) to those here).
 
 > Notice also the case sensitivity of the shortcuts* , Be sure you play around with these. Be flexible with the basic commands and the system will grow on you quick.
 
-- Mod+Enter – Spawn terminal (the default terminal is st; run man st for more.)
-- Mod+q – Close window
-- Mod+d – dmenu (For running commands or programs without shortcuts)
-- Mod+j/k – Cycle thru windows by their stack order
-- Mod+Space – Make selected window the master (or switch master with 2nd)
-- Mod+h/l – Change width of master window
-- Mod+z/x – Increase/decrease gaps (may also hold Mod and scroll mouse)
-- Mod+a – Toggle gaps
-- Mod+A – Gaps return to default values (may also hold Mod and middle click)
-- Mod+Shift+Space – Make a window float (move and resize with Mod+left/right click).
+- `Mod`+`Enter` – Spawn terminal (the default terminal is st; run man st for more.)
+-`Mod`+`q` – Close window
+-`Mod`+`d` – dmenu (For running commands or programs without shortcuts)
+-`Mod`+`j/k` – Cycle thru windows by their stack order
+-`Mod`+`Space` – Make selected window the master (or switch master with 2nd)
+-`Mod`+`h/l` – Change width of master window
+-`Mod`+`z/x` – Increase/decrease gaps (may also hold Mod and scroll mouse)
+-`Mod`+`a` – Toggle gaps
+-`Mod`+`A` – Gaps return to default values (may also hold Mod and middle click)
+-`Mod`+`Shift+Space` – Make a window float (move and resize with`Mod`+`left/right` click).
 
 > To type capital letters, hold down the Shift key—that might sound like an obvious and condescending thing to tell you, but there have literally been multiple people (Boomers) who have emailed me asking how to type a capital letter since caps lock isn’t enabled.
 
-- Mod+s – Make/unmake a window “sticky” (follows you from tag to tag)
-- Mod+b – Toggle statusbar (may also middle click on desktop)
-- Mod+v – Jump to master window
+-`Mod`+`s` – Make/unmake a window “sticky” (follows you from tag to tag)
+-`Mod`+`b` – Toggle statusbar (may also middle click on desktop)
+-`Mod`+`v` – Jump to master window
 
 ## Window layouts
 
-- Mod+t – Tiling mode (active by default)
-- Mod+T – Bottom stack mode (just like tiling, but master is on top)
-- Mod+f – Fullscreen mode
-- Mod+F – Floating (AKA normie) mode
-- Mod+y – Fibbonacci spiral mode
-- Mod+Y – Dwindle mode (similar to Fibonacci)
-- Mod+u – Master on left, other windows in monocle mode
-- Mod+U – Monocle mode (all windows fullscreen and cycle through)
-- Mod+i – Center the master window
-- Mod+I – Center and float the master window
-- Mod+o/O – Increase/decrease the number of master windows
+-`Mod`+`t` – Tiling mode (active by default)
+-`Mod`+`T` – Bottom stack mode (just like tiling, but master is on top)
+-`Mod`+`f` – Fullscreen mode
+-`Mod`+`F` – Floating (AKA normie) mode
+-`Mod`+`y` – Fibbonacci spiral mode
+-`Mod`+`Y` – Dwindle mode (similar to Fibonacci)
+-`Mod`+`u` – Master on left, other windows in monocle mode
+-`Mod`+`U` – Monocle mode (all windows fullscreen and cycle through)
+-`Mod`+`i` – Center the master window
+-`Mod`+`I` – Center and float the master window
+-`Mod`+`o/O` – Increase/decrease the number of master windows
 
 ## Basic Programs
 
-- Mod+r – lf (file browser/manager)
-- Mod+R – htop (task manager, system monitor that R*dditors use to look cool)
-- Mod+e – neomutt (email) – Must be first configured by running mw add.
-- Mod+E – abook (contacts, addressbook, emails)
-- Mod+m – ncmpcpp (music player)
-- Mod+w – Web browser (Brave by default)
-- Mod+W – nmtui (for connecting to wireless internet)
-- Mod+n – vimwiki (for notes)
-- Mod+N – newsboat (RSS feed reader)
-- Mod+F4 – pulsemixer (audio system control)
-- Mod+Shift+Enter – Show/hide dropdown terminal
-- Mod+’ – Show/hide dropdown calculator
-- Mod+D – passmenu (password manager)
+-`Mod`+`r` – lf (file browser/manager)
+-`Mod`+`R` – htop (task manager, system monitor that R*dditors use to look cool)
+-`Mod`+`e` – neomutt (email) – Must be first configured by running mw add.
+-`Mod`+`E` – abook (contacts, addressbook, emails)
+-`Mod`+`m` – ncmpcpp (music player)
+-`Mod`+`w` – Web browser (Brave by default)
+-`Mod`+`W` – nmtui (for connecting to wireless internet)
+-`Mod`+`n` – vimwiki (for notes)
+-`Mod`+`N` – newsboat (RSS feed reader)
+-`Mod`+`F4` – pulsemixer (audio system control)
+-`Mod`+`Shift+Enter` – Show/hide dropdown terminal
+-`Mod`+`’` – Show/hide dropdown calculator
+-`Mod`+`D` – passmenu (password manager)
 
 ## Tags/Workspaces
 
 There are nine tags, active tags are highlighted in the top left.
 
-- Mod+(Number) – Go to that number tag
-- Mod+Shift+(Number) – Send window to that tag
-- Mod+Tab – Go to previous tag (may also use \ for Tab)
-- Mod+g – Go to left tag (hold shift to send window there)
-- Mod+; – Go to right tag (hold shift to send window there)
-- Mod+Left/Right – Go to another display
-- Mod+Shift+Left/+Right – Move window to another display
+-`Mod`+`(Number)` – Go to that number tag
+-`Mod`+`Shift+(Number)` – Send window to that tag
+-`Mod`+`Tab` – Go to previous tag (may also use \ for Tab)
+-`Mod`+`g` – Go to left tag (hold shift to send window there)
+-`Mod`+`;` – Go to right tag (hold shift to send window there)
+-`Mod`+`Left/Right` – Go to another display
+-`Mod`+`Shift+Left/+Right` – Move window to another display
 System
-- Mod+BackSpace –Choose to lock screen, logout, shutdown, reboot, etc.
-- Mod+F1 – Show this document
-- Mod+F2 – Watch tutorial videos on a subject
-- Mod+F3 – Select screen/display to use
-- Mod+F4 – pulsemixer (audio control)
-- Mod+F6 – Transmission torrent client (not installed by default)
-- Mod+F7 – Toggle on/off transmission client via dmenu
-- Mod+F8 – Check mail, if mutt-wizard is configured. (Run mw add to set up.)
-- Mod+F9 – Mount a USB drive/hard drive or Android
-- Mod+F10 – Unmount a non-essential drive or Android
-- Mod+F11 – View webcam
-- Mod+F12 – Rerun kayboard mapping scripts if new keyboard is attached
-- Mod+‘ – Select an emoji to copy to clipboard
-- Mod+Insert – Show contents of clipboard/primary selection
+-`Mod`+`BackSpace` –Choose to lock screen, logout, shutdown, reboot, etc.
+-`Mod`+`F1` – Show this document
+-`Mod`+`F2` – Watch tutorial videos on a subject
+-`Mod`+`F3` – Select screen/display to use
+-`Mod`+`F4` – pulsemixer (audio control)
+-`Mod`+`F6` – Transmission torrent client (not installed by default)
+-`Mod`+`F7` – Toggle on/off transmission client via dmenu
+-`Mod`+`F8` – Check mail, if mutt-wizard is configured. (Run mw add to set up.)
+-`Mod`+`F9` – Mount a USB drive/hard drive or Android
+-`Mod`+`F10` – Unmount a non-essential drive or Android
+-`Mod`+`F11` – View webcam
+-`Mod`+`F12` – Rerun kayboard mapping scripts if new keyboard is attached
+-`Mod`+`‘` – Select an emoji to copy to clipboard
+-`Mod`+`Insert` – Show contents of clipboard/primary selection
 
 ## Audio
 
 I use ncmpcpp as a music player, which is a front end for mpd.
 
-- Mod+m – ncmpcpp, the music player
-- Mod+. – Next track
-- Mod+, – Previous track
-- Mod+< – Restart track
-- Mod+> – Toggle playlist looping
-- Mod+p – Toggle pause
-- Mod+p – Force pause music player daemon and all mpv videos
-- Mod+M – Mute all audio
-- Mod+- – Decrease volume (holding shift increases amount)
-- Mod++ – Increase volume (holding shift increases amount)
-- Mod+[ – Back 10 seconds (holding shift moves by one minute)
-- Mod+] – Forward 10 seconds (holding shift moves by one minute)
-- Mod+F4 – pulsemixer (general audio/volume sink/source control)
+-`Mod`+`m` – ncmpcpp, the music player
+-`Mod`+`.` – Next track
+-`Mod`+`,` – Previous track
+-`Mod`+`<` – Restart track
+-`Mod`+`>` – Toggle playlist looping
+-`Mod`+`p` – Toggle pause
+-`Mod`+`p` – Force pause music player daemon and all mpv videos
+-`Mod`+`M` – Mute all audio
+-`Mod`+`-` – Decrease volume (holding shift increases amount)
+-`Mod`+`+` – Increase volume (holding shift increases amount)
+-`Mod`+`[` – Back 10 seconds (holding shift moves by one minute)
+-`Mod`+`]` – Forward 10 seconds (holding shift moves by one minute)
+-`Mod`+`F4` – pulsemixer (general audio/volume sink/source control)
 
 ## Recording
 
@@ -143,10 +143,10 @@ are based on their exact times.
 
 - PrintScreen – Take a screenshot
 - Shift+PrintScreen – Select area to screenshot
-- Mod+PrintScreen – Opens dmenu menu to select kind of audio/video recording
-- Mod+Delete – Kills any recording started in the above way.
-- Mod+Shift+c – Toggles a webcam in the bottom right for screencasting.
-- Mod+ScrollLock – Toggle screenkey (if installed) to show keypresses
+-`Mod`+`PrintScreen` – Opens dmenu menu to select kind of audio/video recording
+-`Mod`+`Delete` – Kills any recording started in the above way.
+-`Mod`+`Shift+c` – Toggles a webcam in the bottom right for screencasting.
+-`Mod`+`ScrollLock` – Toggle screenkey (if installed) to show keypresses
 
 ## Other buttons
 
@@ -188,14 +188,14 @@ LARBS no longer deploys Xresources by default, but check ˜/.config/x11/xresourc
 
 LARBS comes with mutt-wizard, which gives the ability to receive and send all your email and keep an offline store of it all in your terminal, without the need for browser. You can add email accounts by running mw -a your@email.com. See man mw for all the information you need about mutt-wizard. 
 
-Once you have successfully added your email address(es), you can open your mail with neomutt which is also bound to Mod+e. You can sync your mail by pressing Mod+F8 and you can set a cronjob to sync mail every 10 minutes by running mw -t 10.
+Once you have successfully added your email address(es), you can open your mail with neomutt which is also bound to`Mod`+`e`. You can sync your mail by pressing`Mod`+`F8` and you can set a cronjob to sync mail every 10 minutes by running mw -t 10.
 
 You may also want to install pam-gnupg-git, which can be set up to automatically unlock your GPG key on login, which will allow you avoid having put in a password to sync and send, all while keeping your password safe and encypted on your machine.
 
 ### How do I set up my music?
 
 By default, mpd, the music daemon assumes that ˜/Music is your music directory. This can be changed in ˜/.config/mpd/mpd.conf. When you add music to your music folder, you may have to run mpc up in the terminal to update the database. mpd is controlled by ncmpcpp,
-which is accessible by Mod+m.
+which is accessible by`Mod`+`m`.
 
 ## How do I update LARBS?
 
