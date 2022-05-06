@@ -20,12 +20,12 @@ Use vim keys (`h`/`j`/`k`/`l`) to navigate this document. Pressing `s` will fit 
 
 ### General keyboard changes
 
-- Capslock is a useless key in high quality space. It’s now remapped. If you press it alone, it will function as escape, making vimcraft much more natural, but you can also hold it down and it will act as another `Windows/super/mod` key.
+- `Capslock` is a useless key in high quality space. It’s now remapped. If you press it alone, it will function as `escape`, making vimcraft much more natural, but you can also hold it down and it will act as another `Windows/super/mod` key.
 - The menu button (usually between the `right Alt` and `Ctrl`) is an alternative `Super/Mod` button.This is to make one-handing on laptops easier.
 
 > If you’d like to change any of these keyboard changes, you need only open and change the remaps script. All custom scripts in LARBS are located in `˜/.local/bin/`. Actually, this should go without saying, but everything here can easily be changed. Below in this document, there is information about where to change programs/components.
 
-> Additionally, while this isn’t a part of the desktop environment, the default editing mode in the shell is using vi bindings. If you want to learn more of this, run `Mod+F2` and type and select the option for “vi mode in shell”. This setting can be changed if you don’t like it by deleting or commenting out the contents of `˜/.config/shell/inputrc`.
+> Additionally, while this isn’t a part of the desktop environment, the default editing mode in the shell is using `vi` bindings. If you want to learn more of this, run `Mod`+`F2` and type and select the option for “vi mode in shell”. This setting can be changed if you don’t like it by deleting or commenting out the contents of `˜/.config/shell/inputrc`.
 
 ## The Status Bar
 
@@ -36,7 +36,7 @@ you want it to display.
 
 ## Deeper Tutorials
 
-Press `mod+F2` at any time to get a menu of programs to watch videos about streaming directly from YouTube. You can also check the config files for programs which detail a lot of the specific bindings.
+Press `mod`+`F2` at any time to get a menu of programs to watch videos about streaming directly from YouTube. You can also check the config files for programs which detail a lot of the specific bindings.
 
 ## Key Bindings
 
@@ -101,8 +101,7 @@ There are nine tags, active tags are highlighted in the top left.
 -`Mod`+`g` – Go to left tag (hold shift to send window there)
 -`Mod`+`;` – Go to right tag (hold shift to send window there)
 -`Mod`+`Left/Right` – Go to another display
--`Mod`+`Shift+Left/+Right` – Move window to another display
-System
+-`Mod`+`Shift+Left/+Right` – Move window to another display System
 -`Mod`+`BackSpace` –Choose to lock screen, logout, shutdown, reboot, etc.
 -`Mod`+`F1` – Show this document
 -`Mod`+`F2` – Watch tutorial videos on a subject
@@ -138,11 +137,10 @@ I use ncmpcpp as a music player, which is a front end for mpd.
 
 ## Recording
 
-I use maim and ffmpeg to make different recordings of the desktop and audio. All of these recording shortcuts will output into ˜, and will not overwrite previous recordings as their names
-are based on their exact times.
+I use maim and ffmpeg to make different recordings of the desktop and audio. All of these recording shortcuts will output into ˜, and will not overwrite previous recordings as their names are based on their exact times.
 
-- PrintScreen – Take a screenshot
-- Shift+PrintScreen – Select area to screenshot
+- `PrintScreen` – Take a screenshot
+- `Shift`+`PrintScreen` – Select area to screenshot
 -`Mod`+`PrintScreen` – Opens dmenu menu to select kind of audio/video recording
 -`Mod`+`Delete` – Kills any recording started in the above way.
 -`Mod`+`Shift+c` – Toggles a webcam in the bottom right for screencasting.
@@ -154,17 +152,17 @@ I’ve mapped those extra buttons that some keyboards have (play and pause butto
 
 ## Configuration
 
-Dotfiles/settings files are located in ˜/.config/.
+Dotfiles/settings files are located in `˜/.config/`.
 
-Suckless programs, dwm (the window manager), st (the terminal) and dmenu among others do not have traditional config files, but have their source code location in ˜/.local/src/ (press rr to jump to that directory). There you can modify their config.h files or other source code, then sudo make install to reinstall.
+Suckless programs, **dwm** (the window manager), **st** (the terminal) and **dmenu** among others do not have traditional config files, but have their source code location in `˜/.local/src/` (press `rr` to jump to that directory). There you can modify their `config.h` files or other source code, then sudo make install to reinstall.
 
-vim is set to automatically recompile and install these programs whenever you save changes to any config.h file (compilation will be nearly instantaneous). You’ll have to restart the program to see its effects obviously.
+**vim** is set to automatically recompile and install these programs whenever you save changes to any `config.h` file (compilation will be nearly instantaneous). You’ll have to restart the program to see its effects obviously.
 
 ## Frequently Asked Questions (FAQs)
 
 ### My keyboard isn’t working as expected!
 
-As mentioned above, LARBS makes some keyboard changes with the remaps script. These settings may override your preferred settings, so you should open this file and comment out troublesome lines if you have issues.
+As mentioned above, **LARBS** makes some keyboard changes with the remaps script. These settings may override your preferred settings, so you should open this file and comment out troublesome lines if you have issues.
 
 ### My audio isn’t working!
 
@@ -172,34 +170,33 @@ On fresh install, the Linux audio system often mutes outputs. You may also need 
 
 ### How do I copy and paste?
 
-Copying and pasting is always program-specific on any system. In most graphical programs, copy and paste will be the same as they are on Windows: ctrl-c and ctrl-v. In the Linux terminal, those binds have other more important purposes, so you can run man st to see how to copy and paste in my terminal build.
+Copying and pasting is always program-specific on any system. In most graphical programs, copy and paste will be the same as they are on Windows: `ctrl-c` and `ctrl-v`. In the Linux terminal, those binds have other more important purposes, so you can run man st to see how to copy and paste in my terminal build.
 
-Additionally, I’ve set vim to use the clipboard as the default buffer, which means when you yank or delete something in vim, it will be in your system clipboard as well, so you can ctrl-v it into your browser instance, etc. You can also paste material copied from other programs into vim with the typical vim bindings.
+Additionally, I’ve set vim to use the clipboard as the default buffer, which means when you yank or delete something in vim, it will be in your system clipboard as well, so you can `ctrl-v` it into your browser instance, etc. You can also paste material copied from other programs into vim with the typical vim bindings.
 
 ### How do I change the background/wallpaper?
 
-The system will always read the file ˜/.config/wall.png as the wallpaper. The script setbg, if run on an image will set it as the persistent background. When using the file manager, you can simply hover over an image name and type b and this will run setbg.
+The system will always read the file `˜/.config/wall.png` as the wallpaper. The script setbg, if run on an image will set it as the persistent background. When using the file manager, you can simply hover over an image name and type b and this will run setbg.
 
 ## How I change the colorscheme?
 
-LARBS no longer deploys Xresources by default, but check ˜/.config/x11/xresources for a list of color schemes you can activate or add your own. When you save the file, vim will automatically update the colorscheme. If you’d like these colors activated by default on login, there is a line in ˜/.config/x11/xprofile you can uncomment to allow that. Or, if you want to use wal to automatically generate colorschemes from your wallpapers, just install it and setbg will automatically detect and run it on startup and wallpaper change.
+**LARBS** no longer deploys Xresources by default, but check `˜/.config/x11/xresources` for a list of color schemes you can activate or add your own. When you save the file, vim will automatically update the colorscheme. If you’d like these colors activated by default on login, there is a line in `˜/.config/x11/xprofile` you can uncomment to allow that. Or, if you want to use wal to automatically generate colorschemes from your wallpapers, just install it and setbg will automatically detect and run it on startup and wallpaper change.
 
 ## How do I set up my email?
 
-LARBS comes with mutt-wizard, which gives the ability to receive and send all your email and keep an offline store of it all in your terminal, without the need for browser. You can add email accounts by running mw -a your@email.com. See man mw for all the information you need about mutt-wizard. 
+**LARBS** comes with **mutt-wizard**, which gives the ability to receive and send all your email and keep an offline store of it all in your terminal, without the need for browser. You can add email accounts by running `mw -a your@email.com`. See `man mw` for all the information you need about **mutt-wizard**. 
 
-Once you have successfully added your email address(es), you can open your mail with neomutt which is also bound to`Mod`+`e`. You can sync your mail by pressing`Mod`+`F8` and you can set a cronjob to sync mail every 10 minutes by running mw -t 10.
+Once you have successfully added your email address(es), you can open your mail with neomutt which is also bound to`Mod`+`e`. You can sync your mail by pressing`Mod`+`F8` and you can set a cronjob to sync mail every 10 minutes by running `mw -t 10`.
 
-You may also want to install pam-gnupg-git, which can be set up to automatically unlock your GPG key on login, which will allow you avoid having put in a password to sync and send, all while keeping your password safe and encypted on your machine.
+You may also want to install **pam-gnupg-git**, which can be set up to automatically unlock your GPG key on login, which will allow you avoid having put in a password to sync and send, all while keeping your password safe and encypted on your machine.
 
 ### How do I set up my music?
 
-By default, mpd, the music daemon assumes that ˜/Music is your music directory. This can be changed in ˜/.config/mpd/mpd.conf. When you add music to your music folder, you may have to run mpc up in the terminal to update the database. mpd is controlled by ncmpcpp,
-which is accessible by`Mod`+`m`.
+By default, mpd, the music daemon assumes that `˜/Music` is your music directory. This can be changed in `˜/.config/mpd/mpd.conf`. When you add music to your music folder, you may have to run `mpc up` in the terminal to update the database. mpd is controlled by ncmpcpp, which is accessible by`Mod`+`m`.
 
 ## How do I update LARBS?
 
-LARBS is deployed as a git repository in your home directory. You can use it as such to fetch, diff and merge changes from the remote repository. If you don’t want to do that or don’t know how to use git, you can actually just rerun the script (as root) and reinstall LARBS and it will automatically update an existing install if you select the same username. This will overwrite the original config files though, including changes you made for them, but this is an easier brute force approach that will also install any new dependencies.
+**LARBS** is deployed as a git repository in your home directory. You can use it as such to fetch, diff and merge changes from the remote repository. If you don’t want to do that or don’t know how to use git, you can actually just rerun the script (as root) and reinstall **LARBS** and it will automatically update an existing install if you select the same username. This will overwrite the original config files though, including changes you made for them, but this is an easier brute force approach that will also install any new dependencies.
 
 ## Important Links
 
