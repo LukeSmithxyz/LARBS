@@ -5,6 +5,8 @@
 ,ttf-linux-libertine,"provides the sans and serif fonts for LARBS."
 A,lf-git,"is an extensive terminal file manager that everyone likes."
 ,ueberzug,"enables previews in the lf file manager."
+,odt2txt,"extracts the text out of OpenDocument Texts"
+,ffmpegthumbnailer,"video thumbnailer that can be used by file managers"
 ,bc,"is used for a dropdown calculator."
 ,xcompmgr,"is for transparency and removing screen-tearing."
 ,xorg-xprop,"is a tool for detecting window properties."
