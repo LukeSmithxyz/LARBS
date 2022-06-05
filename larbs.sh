@@ -67,7 +67,7 @@ refreshkeys() { \
 	case "$(readlink -f /sbin/init)" in
 		*systemd* )
 			dialog --infobox "Refreshing Arch Keyring..." 4 40
-			pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
+			pacman --noconfirm -S archlinux-keyring polkit >/dev/null 2>&1
 			;;
 		*)
 			dialog --infobox "Enabling Arch Repositories..." 4 40
