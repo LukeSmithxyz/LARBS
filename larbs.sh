@@ -102,7 +102,7 @@ manualinstall() { # Installs $1 manually. Used only for AUR helper here.
 	sudo -u "$name" mkdir -p "$repodir/$1"
 	sudo -u "$name" git clone --depth 1 "https://aur.archlinux.org/$1.git" "$repodir/$1" >/dev/null 2>&1 ||
 		{ cd "$repodir/$1" || return 1 ; sudo -u "$name" git pull --force origin master;}
-	cd "$repodir/$1"
+	cd "$repodir/$1" || exit 1
 	sudo -u "$name" -D "$repodir/$1" makepkg --noconfirm -si >/dev/null 2>&1 || return 1
 }
 
@@ -234,7 +234,7 @@ https://videos.lukesmith.xyz/feeds/videos.xml?videoChannelId=2
 https://lindypress.net/rss.xml
 https://notrelated.xyz/rss.xml
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA \"~Luke Smith (YouTube)\"
-https://artixlinux.org/feed.php "tech"
+https://artixlinux.org/feed.php \"tech\"
 https://www.archlinux.org/feeds/news/" > "/home/$name/.config/newsboat/urls"
 # make git ignore deleted LICENSE & README.md files
 git update-index --assume-unchanged "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml"
