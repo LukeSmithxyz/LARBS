@@ -15,11 +15,6 @@ repobranch="master"
 
 installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
 
-gitclonefast() {
-	# Wrapper around `git clone` for minimal and silent clone.
-	git clone --depth 1 --single-branch --no-tags -q "${@}"
-}
-
 error() { printf "%s\n" "$1" >&2; exit 1; }
 
 welcomemsg() { \
@@ -97,7 +92,7 @@ manualinstall() { # Installs $1 manually. Used only for AUR helper here.
 	# Should be run after repodir is created and var is set.
 	dialog --infobox "Installing \"$1\", an AUR helper..." 4 50
 	sudo -u "$name" mkdir -p "$repodir/$1"
-	sudo -u "$name" gitclonefast "https://aur.archlinux.org/$1.git" "$repodir/$1" \
+	sudo -u "$name" git clone -C "$repodir/$1" --depth 1 --single-branch --no-tags -q "https://aur.archlinux.org/$1.git" "$repodir/$1" \
 		|| { cd "$repodir/$1" || return 1 ; sudo -u "$name" git pull --force origin master ;}
 	cd "$repodir/$1" || exit 1
 	sudo -u "$name" -D "$repodir/$1" makepkg --noconfirm -si >/dev/null 2>&1 || return 1
@@ -112,7 +107,7 @@ gitmakeinstall() {
 	progname="$(basename "$1" .git)"
 	dir="$repodir/$progname"
 	dialog --title "LARBS Installation" --infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
-	sudo -u "$name" gitclonefast "$1" "$dir" || { cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin master ;}
+	sudo -u "$name" git clone -C "$repodir/$1" --depth 1 --single-branch --no-tags -q "$1" "$dir" || { cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin master ;}
 	cd "$dir" || exit 1
 	make >/dev/null 2>&1
 	make install >/dev/null 2>&1
@@ -151,7 +146,7 @@ putgitrepo() { # Downloads a gitrepo $1 and places the files in $2 only overwrit
 	dir=$(mktemp -d)
 	[ ! -d "$2" ] && mkdir -p "$2"
 	chown "$name":wheel "$dir" "$2"
-	sudo -u "$name" gitclonefast --recursive -b "$branch" --recurse-submodules "$1" "$dir"
+	sudo -u "$name" git clone -C "$repodir/$1" --depth 1 --single-branch --no-tags -q --recursive -b "$branch" --recurse-submodules "$1" "$dir"
 	sudo -u "$name" cp -rfT "$dir" "$2"
 	}
 
