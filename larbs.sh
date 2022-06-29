@@ -140,14 +140,14 @@ installationloop() { \
 		esac
 	done < /tmp/progs.csv ;}
 
-putgitrepo() { # Downloads a gitrepo $1 and places the files in $2 only overwriting conflicts
+putgitrepo() { # Downloads the dotfiles gitrepo and places the files in users HOME only overwriting conflicts
 	dialog --infobox "Downloading and installing config files..." 4 60
-	[ -z "$3" ] && branch="master" || branch="$repobranch"
+	[ -z "$repobranch" ] && branch="master" || branch="$repobranch"
 	dir=$(mktemp -d)
-	[ ! -d "$2" ] && mkdir -p "$2"
-	chown "$name":wheel "$dir" "$2"
-	sudo -u "$name" git clone -C "$repodir/$1" --depth 1 --single-branch --no-tags -q --recursive -b "$branch" --recurse-submodules "$1" "$dir"
-	sudo -u "$name" cp -rfT "$dir" "$2"
+	[ ! -d "/home/$name" ] && mkdir -p "/home/$name"
+	chown "$name":wheel "$dir" "/home/$name"
+	sudo -u "$name" git clone -C "$repodir/$dotfilesrepo" --depth 1 --single-branch --no-tags -q --recursive -b "$branch" --recurse-submodules "$dotfilesrepo" "$dir"
+	sudo -u "$name" cp -rfT "$dir" "/home/$name"
 	}
 
 systembeepoff() { dialog --infobox "Getting rid of that retarded error beep sound..." 10 50
@@ -218,7 +218,7 @@ dialog --title "LARBS Installation" --infobox "Finally, installing \`libxft-bgra
 yes | sudo -u "$name" $aurhelper -S libxft-bgra-git >/dev/null 2>&1
 
 # Install the dotfiles in the user's home directory
-putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
+putgitrepo
 rm -f "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml"
 # Create default urls file if none exists.
 [ ! -f "/home/$name/.config/newsboat/urls" ] && echo "http://lukesmith.xyz/rss.xml
