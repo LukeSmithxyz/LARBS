@@ -129,10 +129,11 @@ maininstall() {
 gitmakeinstall() {
 	progname="$(basename "$1" .git)"
 	dir="$repodir/$progname"
-	dialog --title "LARBS Installation" --infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
-	sudo -u "$name" git -C "$repodir/$1" clone --depth 1 --single-branch \
-		--no-tags -q "$1" "$dir" ||
-		{ cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin master ;}
+	dialog --title "LARBS Installation" \
+		--infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 5 70
+	sudo -u "$name" git clone -C "$repodir/$1" \
+		--depth 1 --single-branch --no-tags -q "$1" "$dir" \
+		|| { cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin master ;}
 	cd "$dir" || exit 1
 	make >/dev/null 2>&1
 	make install >/dev/null 2>&1
