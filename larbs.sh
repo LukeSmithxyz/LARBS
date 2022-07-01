@@ -138,14 +138,14 @@ gitmakeinstall() {
 
 aurinstall() {
 	whiptail --title "LARBS Installation" \
-		--infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
+		--infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 9 70
 	echo "$aurinstalled" | grep -q "^$1$" && return 1
 	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
 }
 
 pipinstall() {
 	whiptail --title "LARBS Installation" \
-		--infobox "Installing the Python package \`$1\` ($n of $total). $1 $2" 5 70
+		--infobox "Installing the Python package \`$1\` ($n of $total). $1 $2" 9 70
 	[ -x "$(command -v "pip")" ] || installpkg python-pip >/dev/null 2>&1
 	yes | pip install "$1"
 }
