@@ -76,7 +76,7 @@ refreshkeys() {
 	case "$(readlink -f /sbin/init)" in
 		*systemd* )
 			whiptail --infobox "Refreshing Arch Keyring..." 7 40
-			pacman --noconfirm -S archlinux-keyring polkit >/dev/null 2>&1
+			pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 			;;
 		*)
 			whiptail --infobox "Enabling Arch Repositories..." 7 40

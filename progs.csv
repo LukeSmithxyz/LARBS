@@ -2,6 +2,7 @@
 ,xorg-server,"is the graphical server."
 ,xorg-xwininfo,"allows querying information about windows."
 ,xorg-xinit,"starts the graphical server."
+,polkit,"manages user policies."
 ,ttf-linux-libertine,"provides the sans and serif fonts for LARBS."
 A,lf-git,"is an extensive terminal file manager that everyone likes."
 ,ueberzug,"enables previews in the lf file manager."
