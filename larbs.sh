@@ -108,7 +108,7 @@ manualinstall() {
 	# Should be run after repodir is created and var is set.
 	whiptail --infobox "Installing \"$1\", an AUR helper..." 7 50
 	sudo -u "$name" mkdir -p "$repodir/$1"
-	sudo -u "$name" git -C "$repodir/$1" clone --depth 1 --single-branch \
+	sudo -u "$name" git -C "$repodir" clone --depth 1 --single-branch \
 		--no-tags -q "https://aur.archlinux.org/$1.git" "$repodir/$1" ||
 		{ cd "$repodir/$1" || return 1 ; sudo -u "$name" git pull --force origin master ;}
 	cd "$repodir/$1" || exit 1
@@ -123,11 +123,12 @@ maininstall() {
 }
 
 gitmakeinstall() {
-	progname="$(basename "$1" .git)"
+	progname="${1##*/}"
+	progname="${progname%.git}"
 	dir="$repodir/$progname"
 	whiptail --title "LARBS Installation" \
 		--infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 8 70
-	sudo -u "$name" git -C "$repodir/$1" clone --depth 1 --single-branch \
+	sudo -u "$name" git -C "$repodir" clone --depth 1 --single-branch \
 		--no-tags -q "$1" "$dir" ||
 		{ cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin master ;}
 	cd "$dir" || exit 1
@@ -248,7 +249,8 @@ installationloop
 
 whiptail --title "LARBS Installation" \
 	--infobox "Finally, installing \`libxft-bgra\` to enable color emoji in suckless software without crashes." 8 70
-yes | sudo -u "$name" $aurhelper -S libxft-bgra-git >/dev/null 2>&1
+pacman -Qs libxft-bgra ||
+	yes | sudo -u "$name" $aurhelper -S libxft-bgra-git >/dev/null 2>&1
 
 # Install the dotfiles in the user's home directory, but remove .git dir and
 # other unnecessary files.
