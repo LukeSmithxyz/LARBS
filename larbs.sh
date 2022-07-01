@@ -214,12 +214,12 @@ refreshkeys ||
 
 for x in curl ca-certificates base-devel git ntp zsh ; do
 	whiptail --title "LARBS Installation" \
-		--msgbox "Installing \`$x\` which is required to install and configure other programs." 8 70
+		--infobox "Installing \`$x\` which is required to install and configure other programs." 8 70
 	installpkg "$x"
 done
 
 whiptail --title "LARBS Installation" \
-	--msgbox "Synchronizing system time to ensure successful and secure installation of software..." 8 70
+	--infobox "Synchronizing system time to ensure successful and secure installation of software..." 8 70
 ntpdate 0.us.pool.ntp.org >/dev/null 2>&1
 
 adduserandpass || error "Error adding username and/or password."
@@ -247,7 +247,7 @@ manualinstall yay || error "Failed to install AUR helper."
 installationloop
 
 whiptail --title "LARBS Installation" \
-	--msgbox "Finally, installing \`libxft-bgra\` to enable color emoji in suckless software without crashes." 8 70
+	--infobox "Finally, installing \`libxft-bgra\` to enable color emoji in suckless software without crashes." 8 70
 yes | sudo -u "$name" $aurhelper -S libxft-bgra-git >/dev/null 2>&1
 
 # Install the dotfiles in the user's home directory, but remove .git dir and
