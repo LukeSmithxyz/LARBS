@@ -62,7 +62,7 @@ preinstallmsg() {
 
 adduserandpass() {
 	# Adds user `$name` with password $pass1.
-	whiptail --msgbox "Adding user \"$name\"..." 7 50
+	whiptail --infobox "Adding user \"$name\"..." 7 50
 	useradd -m -g wheel -s /bin/zsh "$name" >/dev/null 2>&1 \
 		|| usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
 	export repodir="/home/$name/.local/src"
@@ -75,11 +75,11 @@ adduserandpass() {
 refreshkeys() {
 	case "$(readlink -f /sbin/init)" in
 		*systemd* )
-			whiptail --msgbox "Refreshing Arch Keyring..." 7 40
+			whiptail --infobox "Refreshing Arch Keyring..." 7 40
 			pacman --noconfirm -S archlinux-keyring polkit >/dev/null 2>&1
 			;;
 		*)
-			whiptail --msgbox "Enabling Arch Repositories..." 7 40
+			whiptail --infobox "Enabling Arch Repositories..." 7 40
 			if ! grep -q "^\[universe\]" /etc/pacman.conf; then
 				echo "[universe]
 Server = https://universe.artixlinux.org/\$arch
@@ -106,7 +106,7 @@ Include = /etc/pacman.d/mirrorlist-arch" >> /etc/pacman.conf
 manualinstall() {
 	# Installs $1 manually. Used only for AUR helper here.
 	# Should be run after repodir is created and var is set.
-	whiptail --msgbox "Installing \"$1\", an AUR helper..." 7 50
+	whiptail --infobox "Installing \"$1\", an AUR helper..." 7 50
 	sudo -u "$name" mkdir -p "$repodir/$1"
 	sudo -u "$name" git -C "$repodir/$1" clone --depth 1 --single-branch \
 		--no-tags -q "https://aur.archlinux.org/$1.git" "$repodir/$1" ||
@@ -118,7 +118,7 @@ manualinstall() {
 
 maininstall() {
 	# Installs all needed programs from main repo.
-	whiptail --title "LARBS Installation" --msgbox "Installing \`$1\` ($n of $total). $1 $2" 9 70
+	whiptail --title "LARBS Installation" --infobox "Installing \`$1\` ($n of $total). $1 $2" 9 70
 	installpkg "$1"
 }
 
@@ -126,7 +126,7 @@ gitmakeinstall() {
 	progname="$(basename "$1" .git)"
 	dir="$repodir/$progname"
 	whiptail --title "LARBS Installation" \
-		--msgbox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 8 70
+		--infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 8 70
 	sudo -u "$name" git -C "$repodir/$1" clone --depth 1 --single-branch \
 		--no-tags -q "$1" "$dir" ||
 		{ cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin master ;}
@@ -138,14 +138,14 @@ gitmakeinstall() {
 
 aurinstall() {
 	whiptail --title "LARBS Installation" \
-		--msgbox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
+		--infobox "Installing \`$1\` ($n of $total) from the AUR. $1 $2" 5 70
 	echo "$aurinstalled" | grep -q "^$1$" && return 1
 	sudo -u "$name" $aurhelper -S --noconfirm "$1" >/dev/null 2>&1
 }
 
 pipinstall() {
 	whiptail --title "LARBS Installation" \
-		--msgbox "Installing the Python package \`$1\` ($n of $total). $1 $2" 5 70
+		--infobox "Installing the Python package \`$1\` ($n of $total). $1 $2" 5 70
 	[ -x "$(command -v "pip")" ] || installpkg python-pip >/dev/null 2>&1
 	yes | pip install "$1"
 }
@@ -170,7 +170,7 @@ installationloop() {
 
 putgitrepo() {
 	# Downloads a gitrepo $1 and places the files in $2 only overwriting conflicts
-	whiptail --msgbox "Downloading and installing config files..." 7 60
+	whiptail --infobox "Downloading and installing config files..." 7 60
 	[ -z "$3" ] && branch="master" || branch="$repobranch"
 	dir=$(mktemp -d)
 	[ ! -d "$2" ] && mkdir -p "$2"
