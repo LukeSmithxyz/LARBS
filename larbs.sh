@@ -57,14 +57,17 @@ usercheck() {
 preinstallmsg() {
 	whiptail --title "Let's get this party started!" --yes-button "Let's go!" \
 		--no-button "No, nevermind!" \
-		--yesno "The rest of the installation will now be totally automated, so you can sit back and relax.\\n\\nIt will take some time, but when done, you can relax even more with your complete system.\\n\\nNow just press <Let's go!> and the system will begin installation!" 13 60 || { clear; exit 1; }
+		--yesno "The rest of the installation will now be totally automated, so you can sit back and relax.\\n\\nIt will take some time, but when done, you can relax even more with your complete system.\\n\\nNow just press <Let's go!> and the system will begin installation!" 13 60 || {
+		clear
+		exit 1
+	}
 }
 
 adduserandpass() {
 	# Adds user `$name` with password $pass1.
 	whiptail --infobox "Adding user \"$name\"..." 7 50
-	useradd -m -g wheel -s /bin/zsh "$name" >/dev/null 2>&1 \
-		|| usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
+	useradd -m -g wheel -s /bin/zsh "$name" >/dev/null 2>&1 ||
+		usermod -a -G wheel "$name" && mkdir -p /home/"$name" && chown "$name":wheel /home/"$name"
 	export repodir="/home/$name/.local/src"
 	mkdir -p "$repodir"
 	chown -R "$name":wheel "$(dirname "$repodir")"
@@ -74,32 +77,32 @@ adduserandpass() {
 
 refreshkeys() {
 	case "$(readlink -f /sbin/init)" in
-		*systemd* )
-			whiptail --infobox "Refreshing Arch Keyring..." 7 40
-			pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
-			;;
-		*)
-			whiptail --infobox "Enabling Arch Repositories..." 7 40
-			if ! grep -q "^\[universe\]" /etc/pacman.conf; then
-				echo "[universe]
+	*systemd*)
+		whiptail --infobox "Refreshing Arch Keyring..." 7 40
+		pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
+		;;
+	*)
+		whiptail --infobox "Enabling Arch Repositories..." 7 40
+		if ! grep -q "^\[universe\]" /etc/pacman.conf; then
+			echo "[universe]
 Server = https://universe.artixlinux.org/\$arch
 Server = https://mirror1.artixlinux.org/universe/\$arch
 Server = https://mirror.pascalpuffke.de/artix-universe/\$arch
 Server = https://artixlinux.qontinuum.space/artixlinux/universe/os/\$arch
 Server = https://mirror1.cl.netactuate.com/artix/universe/\$arch
-Server = https://ftp.crifo.org/artix-universe/" >> /etc/pacman.conf
-				pacman -Sy
-			fi
-			pacman --noconfirm --needed -S \
-				artix-keyring artix-archlinux-support >/dev/null 2>&1
-			for repo in extra community; do
-				grep -q "^\[$repo\]" /etc/pacman.conf ||
-					echo "[$repo]
-Include = /etc/pacman.d/mirrorlist-arch" >> /etc/pacman.conf
-			done
-			pacman -Sy >/dev/null 2>&1
-			pacman-key --populate archlinux >/dev/null 2>&1
-			;;
+Server = https://ftp.crifo.org/artix-universe/" >>/etc/pacman.conf
+			pacman -Sy
+		fi
+		pacman --noconfirm --needed -S \
+			artix-keyring artix-archlinux-support >/dev/null 2>&1
+		for repo in extra community; do
+			grep -q "^\[$repo\]" /etc/pacman.conf ||
+				echo "[$repo]
+Include = /etc/pacman.d/mirrorlist-arch" >>/etc/pacman.conf
+		done
+		pacman -Sy >/dev/null 2>&1
+		pacman-key --populate archlinux >/dev/null 2>&1
+		;;
 	esac
 }
 
@@ -110,7 +113,10 @@ manualinstall() {
 	sudo -u "$name" mkdir -p "$repodir/$1"
 	sudo -u "$name" git -C "$repodir" clone --depth 1 --single-branch \
 		--no-tags -q "https://aur.archlinux.org/$1.git" "$repodir/$1" ||
-		{ cd "$repodir/$1" || return 1 ; sudo -u "$name" git pull --force origin master ;}
+		{
+			cd "$repodir/$1" || return 1
+			sudo -u "$name" git pull --force origin master
+		}
 	cd "$repodir/$1" || exit 1
 	sudo -u "$name" -D "$repodir/$1" \
 		makepkg --noconfirm -si >/dev/null 2>&1 || return 1
@@ -130,7 +136,10 @@ gitmakeinstall() {
 		--infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 8 70
 	sudo -u "$name" git -C "$repodir" clone --depth 1 --single-branch \
 		--no-tags -q "$1" "$dir" ||
-		{ cd "$dir" || return 1 ; sudo -u "$name" git pull --force origin master ;}
+		{
+			cd "$dir" || return 1
+			sudo -u "$name" git pull --force origin master
+		}
 	cd "$dir" || exit 1
 	make >/dev/null 2>&1
 	make install >/dev/null 2>&1
@@ -152,21 +161,21 @@ pipinstall() {
 }
 
 installationloop() {
-	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) \
-		|| curl -Ls "$progsfile" | sed '/^#/d' > /tmp/progs.csv
-	total=$(wc -l < /tmp/progs.csv)
+	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) ||
+		curl -Ls "$progsfile" | sed '/^#/d' >/tmp/progs.csv
+	total=$(wc -l </tmp/progs.csv)
 	aurinstalled=$(pacman -Qqm)
 	while IFS=, read -r tag program comment; do
-		n=$((n+1))
-		echo "$comment" | grep -q "^\".*\"$" \
-			&& comment="$(echo "$comment" | sed -E "s/(^\"|\"$)//g")"
+		n=$((n + 1))
+		echo "$comment" | grep -q "^\".*\"$" &&
+			comment="$(echo "$comment" | sed -E "s/(^\"|\"$)//g")"
 		case "$tag" in
-			"A") aurinstall "$program" "$comment" ;;
-			"G") gitmakeinstall "$program" "$comment" ;;
-			"P") pipinstall "$program" "$comment" ;;
-			*) maininstall "$program" "$comment" ;;
+		"A") aurinstall "$program" "$comment" ;;
+		"G") gitmakeinstall "$program" "$comment" ;;
+		"P") pipinstall "$program" "$comment" ;;
+		*) maininstall "$program" "$comment" ;;
 		esac
-	done < /tmp/progs.csv
+	done </tmp/progs.csv
 }
 
 putgitrepo() {
@@ -182,7 +191,7 @@ putgitrepo() {
 	sudo -u "$name" cp -rfT "$dir" "$2"
 }
 
-finalize(){
+finalize() {
 	whiptail --title "All done!" \
 		--msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1).\\n\\n.t Luke" 13 80
 }
@@ -213,7 +222,7 @@ preinstallmsg || error "User exited."
 refreshkeys ||
 	error "Error automatically refreshing Arch keyring. Consider doing so manually."
 
-for x in curl ca-certificates base-devel git ntp zsh ; do
+for x in curl ca-certificates base-devel git ntp zsh; do
 	whiptail --title "LARBS Installation" \
 		--infobox "Installing \`$x\` which is required to install and configure other programs." 8 70
 	installpkg "$x"
@@ -230,7 +239,7 @@ adduserandpass || error "Error adding username and/or password."
 # Allow user to run sudo without password. Since AUR programs must be installed
 # in a fakeroot environment, this is required for all builds with AUR.
 trap 'rm -f /etc/sudoers.d/larbs-temp' HUP INT QUIT TERM PWR EXIT
-echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/larbs-temp
+echo "%wheel ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/larbs-temp
 
 # Make pacman colorful, concurrent downloads and Pacman eye-candy.
 grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
@@ -259,7 +268,7 @@ rm -rf "/home/$name/.git/" "/home/$name/README.md" "/home/$name/LICENSE" "/home/
 
 # Most important command! Get rid of the beep!
 rmmod pcspkr
-echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+echo "blacklist pcspkr" >/etc/modprobe.d/nobeep.conf
 
 # Make zsh the default shell for the user.
 chsh -s /bin/zsh "$name" >/dev/null 2>&1
@@ -268,10 +277,10 @@ sudo -u "$name" mkdir -p "/home/$name/.config/abook/"
 sudo -u "$name" mkdir -p "/home/$name/.config/mpd/playlists/"
 
 # dbus UUID must be generated for Artix runit.
-dbus-uuidgen > /var/lib/dbus/machine-id
+dbus-uuidgen >/var/lib/dbus/machine-id
 
 # Use system notifications for Brave on Artix
-echo "export \$(dbus-launch)" > /etc/profile.d/dbus.sh
+echo "export \$(dbus-launch)" >/etc/profile.d/dbus.sh
 
 # Enable tap to click
 [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] && printf 'Section "InputClass"
@@ -281,12 +290,12 @@ echo "export \$(dbus-launch)" > /etc/profile.d/dbus.sh
         Driver "libinput"
 	# Enable left mouse button by tapping
 	Option "Tapping" "on"
-EndSection' > /etc/X11/xorg.conf.d/40-libinput.conf
+EndSection' >/etc/X11/xorg.conf.d/40-libinput.conf
 
 # Allow wheel users to sudo with password and allow several system commands
 # (like `shutdown` to run without password).
-echo "%wheel ALL=(ALL) ALL #LARBS" > /etc/sudoers.d/larbs-wheel-can-sudo
-echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm" > /etc/sudoers.d/larbs-cmds-without-password
+echo "%wheel ALL=(ALL) ALL #LARBS" >/etc/sudoers.d/larbs-wheel-can-sudo
+echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm" >/etc/sudoers.d/larbs-cmds-without-password
 
 # Last message! Install complete!
 finalize
