@@ -265,11 +265,6 @@ manualinstall yay || error "Failed to install AUR helper."
 # and all build dependencies are installed.
 installationloop
 
-whiptail --title "LARBS Installation" \
-       --infobox "Finally, installing the newest version of \`libxft\` to enable color emoji in suckless software without crashes." 8 70
-pacman -Qs libxft-git ||
-       yes | sudo -u "$name" $aurhelper -S libxft-git >/dev/null 2>&1
-
 # Install the dotfiles in the user's home directory, but remove .git dir and
 # other unnecessary files.
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
