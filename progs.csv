@@ -33,7 +33,7 @@ A,librewolf-bin,"the default browser of LARBS which also comes with ad-blocking 
 ,noto-fonts,"is an expansive font package."
 ,noto-fonts-emoji,"is an emoji font."
 ,ntfs-3g,"allows accessing NTFS partitions."
-,pipewire,"is the audio system."
+,wireplumber,"is the audio system."
 ,pipewire-pulse,"gives pipewire compatibility with PulseAudio programs."
 ,pulsemixer,"is an audio controller."
 ,pamixer,"is a command-line audio interface."
