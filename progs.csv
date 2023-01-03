@@ -36,6 +36,7 @@ A,librewolf-bin,"the default browser of LARBS which also comes with ad-blocking 
 ,wireplumber,"is the audio system."
 ,pipewire-pulse,"gives pipewire compatibility with PulseAudio programs."
 ,pulsemixer,"is an audio controller."
+,pamixer,"is a command-line audio interface."
 A,sc-im,"is an Excel-like terminal spreadsheet manager."
 ,maim,"can take quick screenshots at your request."
 A,abook,"is an offline addressbook usable by neomutt."
