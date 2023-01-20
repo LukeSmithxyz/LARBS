@@ -27,7 +27,7 @@ jobs:
         passphrase: ${{ secrets.larbs_pass }}
         port: 22
         script: |
-          cd larbs
+          cd larbs-src
           git stash
           git pull --force origin master
           hugo -s . -t /var/www/lugo -d ~/larbs --cacheDir ~/hugocache
