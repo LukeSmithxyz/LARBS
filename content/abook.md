@@ -1,7 +1,6 @@
 ---
 title: "Abook"
 date: 2023-01-17T11:54:20-05:00
-draft: true
 ---
 
 The address book.

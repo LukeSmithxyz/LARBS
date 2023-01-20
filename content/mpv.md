@@ -1,7 +1,6 @@
 ---
 title: "mpv"
 date: 2023-01-17T11:39:29-05:00
-draft: true
 ---
 
 mpv is a video-player so simple, it really just shows the video.
