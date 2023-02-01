@@ -212,14 +212,15 @@ makeuserjs(){
 }
 
 installffaddons(){
+	addonlist="ublock-origin decentraleyes istilldontcareaboutcookies vim-vixen"
 	addontmp="$(mktemp -d)"
 	trap "rm -fr $addontmp" HUP INT QUIT TERM PWR EXIT
-	IFS='
-'
+	IFS=' '
 	sudo -u "$name" mkdir -p "$pdir/extensions/"
 	for addon in $addonlist; do
-		file="${addon##*/}"
-		sudo -u "$name" curl -LOs "$addon" > "$addontmp/$file"
+		addonurl="$(curl --silent "https://addons.mozilla.org/en-US/firefox/addon/${addon}/" | grep -o 'https://addons.mozilla.org/firefox/downloads/file/[^"]*')"
+		file="${addonurl##*/}"
+		sudo -u "$name" curl -LOs "$addonurl" > "$addontmp/$file"
 		id="$(unzip -p "$file" manifest.json | grep "\"id\"")"
 		id="${id%\"*}"
 		id="${id##*\"}"
@@ -334,11 +335,6 @@ EndSection' >/etc/X11/xorg.conf.d/40-libinput.conf
 # All this below to get Librewolf installed with add-ons and non-bad settings.
 
 whiptail --infobox "Setting browser privacy settings and add-ons..." 7 60
-
-addonlist="https://addons.mozilla.org/firefox/downloads/file/3929378/ublock_origin-1.42.0-an+fx.xpi
-https://addons.mozilla.org/firefox/downloads/file/3902154/decentraleyes-2.0.17.xpi
-https://addons.mozilla.org/firefox/downloads/file/4035245/istilldontcareaboutcookies-1.1.0.xpi
-https://addons.mozilla.org/firefox/downloads/file/3845233/vim_vixen-1.2.3-an+fx.xpi"
 
 browserdir="/home/$name/.librewolf"
 profilesini="$browserdir/profiles.ini"
