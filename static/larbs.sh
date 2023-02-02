@@ -82,7 +82,7 @@ refreshkeys() {
 		pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 		;;
 	*)
-		whiptail --infobox "Enabling Arch Repositories..." 7 40
+		whiptail --infobox "Enabling Arch Repositories for more a more extensive software collection..." 7 40
 		if ! grep -q "^\[universe\]" /etc/pacman.conf; then
 			echo "[universe]
 Server = https://universe.artixlinux.org/\$arch
@@ -222,6 +222,7 @@ Operation = Upgrade
 Type = Package
 Target = firefox
 Target = librewolf
+Target = librewolf-bin
 [Action]
 Description=Update Arkenfox user.js
 When=PostTransaction
