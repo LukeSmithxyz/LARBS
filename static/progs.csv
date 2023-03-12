@@ -5,6 +5,7 @@
 ,polkit,"manages user policies."
 ,ttf-linux-libertine,"provides the sans and serif fonts for LARBS."
 ,ttf-font-awesome,"provides extended glyph support."
+,ttf-dejavu,"properly displays emojis."
 A,lf-git,"is an extensive terminal file manager that everyone likes."
 ,ueberzug,"enables previews in the lf file manager."
 ,bc,"is a mathematics language used for the dropdown calculator."
