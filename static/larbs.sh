@@ -228,7 +228,7 @@ Target = librewolf-bin
 Description=Update Arkenfox user.js
 When=PostTransaction
 Depends=arkenfox-user.js
-Exec=/usr/local/lib/arkenfox-auto-update" > /etc/pacman.d/hooks/arkenfox.hook
+Exec=sudo -u \$SUDO_USER /usr/local/lib/arkenfox-auto-update" > /etc/pacman.d/hooks/arkenfox.hook
 }
 
 installffaddons(){
