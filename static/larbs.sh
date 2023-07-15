@@ -194,7 +194,6 @@ putgitrepo() {
 }
 
 vimplugininstall() {
-	# TODO remove shortcuts error message
 	# Installs vim plugins.
 	whiptail --infobox "Installing neovim plugins..." 7 60
 	mkdir -p "/home/$name/.config/nvim/autoload"

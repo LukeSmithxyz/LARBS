@@ -55,7 +55,7 @@ Here are the main programs, all with extra information here:
 - [newsboat](newsboat) -- RSS feeds and news
 - [htop](htop) -- to look cool in screencaps... err... system monitor
 - [mpv](/mpv) -- video player
-- sxiv -- image viewer
+- nsxiv -- image viewer
 
 ## Learning the system is fun and easy!
 
