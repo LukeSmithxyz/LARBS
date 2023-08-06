@@ -7,8 +7,8 @@
 
 ### OPTIONS AND VARIABLES ###
 
-dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
-progsfile="https://raw.githubusercontent.com/LukeSmithxyz/JARBS/master/static/progs.csv"
+dotfilesrepo="https://github.com/jocomol/jocorice.git"
+progsfile="https://raw.githubusercontent.com/Jocomol/JARBS/master/static/progs.csv"
 aurhelper="yay"
 repobranch="master"
 export TERM=ansi
