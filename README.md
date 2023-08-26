@@ -5,8 +5,8 @@
 On an Arch-based distribution as root, run the following:
 
 ```
-curl -LO larbs.xyz/larbs.sh
-sh larbs.sh
+curl -LO jocomol.ch/larbs.sh
+sh jarbs.sh
 ```
 
 That's it.

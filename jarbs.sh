@@ -8,7 +8,7 @@
 ### OPTIONS AND VARIABLES ###
 
 dotfilesrepo="https://github.com/jocomol/jocorice.git"
-progsfile="https://raw.githubusercontent.com/Jocomol/JARBS/master/static/progs.csv"
+progsfile="https://raw.githubusercontent.com/Jocomol/JARBS/master/progs.csv"
 aurhelper="yay"
 repobranch="master"
 export TERM=ansi
