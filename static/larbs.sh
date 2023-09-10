@@ -84,25 +84,12 @@ refreshkeys() {
 		;;
 	*)
 		whiptail --infobox "Enabling Arch Repositories for more a more extensive software collection..." 7 40
-		if ! grep -q "^\[universe\]" /etc/pacman.conf; then
-			echo "[universe]
-Server = https://universe.artixlinux.org/\$arch
-Server = https://mirror1.artixlinux.org/universe/\$arch
-Server = https://mirror.pascalpuffke.de/artix-universe/\$arch
-Server = https://mirrors.qontinuum.space/artixlinux-universe/\$arch
-Server = https://mirror1.cl.netactuate.com/artix/universe/\$arch
-Server = https://ftp.crifo.org/artix-universe/\$arch
-Server = https://artix.sakamoto.pl/universe/\$arch" >>/etc/pacman.conf
-			pacman -Sy --noconfirm >/dev/null 2>&1
-		fi
 		pacman --noconfirm --needed -S \
 			artix-keyring artix-archlinux-support >/dev/null 2>&1
-		for repo in extra community; do
-			grep -q "^\[$repo\]" /etc/pacman.conf ||
-				echo "[$repo]
+		grep -q "^\[extra\]" /etc/pacman.conf ||
+			echo "[extra]
 Include = /etc/pacman.d/mirrorlist-arch" >>/etc/pacman.conf
-		done
-		pacman -Sy >/dev/null 2>&1
+		pacman -Sy --noconfirm >/dev/null 2>&1
 		pacman-key --populate archlinux >/dev/null 2>&1
 		;;
 	esac
