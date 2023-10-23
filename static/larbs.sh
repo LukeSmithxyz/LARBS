@@ -225,14 +225,19 @@ installffaddons(){
 	IFS=' '
 	sudo -u "$name" mkdir -p "$pdir/extensions/"
 	for addon in $addonlist; do
-		addonurl="$(curl --silent "https://addons.mozilla.org/en-US/firefox/addon/${addon}/" | grep -o 'https://addons.mozilla.org/firefox/downloads/file/[^"]*')"
+		if [ "$addon" = "ublock-origin" ]; then
+			addonurl="$(curl -sL https://api.github.com/repos/gorhill/uBlock/releases/latest | grep -E 'browser_download_url.*\.firefox\.xpi' | cut -d '"' -f 4)"
+		else
+			addonurl="$(curl --silent "https://addons.mozilla.org/en-US/firefox/addon/${addon}/" | grep -o 'https://addons.mozilla.org/firefox/downloads/file/[^"]*')"
+		fi
 		file="${addonurl##*/}"
 		sudo -u "$name" curl -LOs "$addonurl" > "$addontmp/$file"
 		id="$(unzip -p "$file" manifest.json | grep "\"id\"")"
 		id="${id%\"*}"
 		id="${id##*\"}"
-		sudo -u "$name" mv "$file" "$pdir/extensions/$id.xpi"
+		mv "$file" "$pdir/extensions/$id.xpi"
 	done
+	chown -R "$name:$name" "$pdir/extensions"
 	# Fix a Vim Vixen bug with dark mode not fixed on upstream:
 	sudo -u "$name" mkdir -p "$pdir/chrome"
 	[ ! -f  "$pdir/chrome/userContent.css" ] && sudo -u "$name" echo ".vimvixen-console-frame { color-scheme: light !important; }
