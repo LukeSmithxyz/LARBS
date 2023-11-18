@@ -275,7 +275,7 @@ preinstallmsg || error "User exited."
 refreshkeys ||
 	error "Error automatically refreshing Arch keyring. Consider doing so manually."
 
-for x in curl ca-certificates base-devel git ntp zsh; do
+for x in curl ca-certificates base-devel git ntp zsh dash; do
 	whiptail --title "LARBS Installation" \
 		--infobox "Installing \`$x\` which is required to install and configure other programs." 8 70
 	installpkg "$x"
