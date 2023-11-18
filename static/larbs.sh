@@ -330,6 +330,9 @@ sudo -u "$name" mkdir -p "/home/$name/.cache/zsh/"
 sudo -u "$name" mkdir -p "/home/$name/.config/abook/"
 sudo -u "$name" mkdir -p "/home/$name/.config/mpd/playlists/"
 
+# Make Dash the default #!/bin/sh symlink.
+ln -sfT /bin/dash /bin/sh >/dev/null 2>&1
+
 # dbus UUID must be generated for Artix runit.
 dbus-uuidgen >/var/lib/dbus/machine-id
 
