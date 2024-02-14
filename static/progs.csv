@@ -1,71 +1,98 @@
 #TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
-,xorg-server,"is the graphical server. This first one may take a while as it pulls many other dependencies first on clean installs."
-,xorg-xwininfo,"allows querying information about windows."
-,xorg-xinit,"starts the graphical server."
-,polkit,"manages user policies."
-,libertinus-font,"provides the sans and serif fonts for LARBS."
-,ttf-font-awesome,"provides extended glyph support."
-,ttf-dejavu,"properly displays emojis."
-A,lf-git,"is an extensive terminal file manager that everyone likes."
-,ueberzug,"enables previews in the lf file manager."
-,bc,"is a mathematics language used for the dropdown calculator."
-,xcompmgr,"is for transparency and removing screen-tearing."
-,xorg-xprop,"is a tool for detecting window properties."
-,arandr,"allows the user to customize monitor arrangements."
-,dosfstools,"allows your computer to access dos-like filesystems."
-,libnotify,"allows desktop notifications."
-,dunst,"is a suckless notification system."
-,calcurse,"terminal-based organizer for interactive and command line use"
-,exfat-utils,"allows management of FAT drives."
-,nsxiv,"is a minimalist image viewer."
-,xwallpaper,"sets the wallpaper."
-,ffmpeg,"can record and splice video and audio on the command line."
-,ffmpegthumbnailer,"creates thumbnail previews of video files."
-,gnome-keyring,"serves as the system keyring."
-A,gtk-theme-arc-gruvbox-git,"gives the dark GTK theme used in LARBS."
-,python-qdarkstyle,"provides a dark Qt theme."
-,neovim,"a tidier vim with some useful features"
-,mpd,"is a lightweight music daemon."
-,mpc,"is a terminal interface for mpd."
-,mpv,"is the patrician's choice video player."
-,man-db,"lets you read man pages of programs."
-,ncmpcpp,"a ncurses interface for music with multiple formats and a powerful tag editor."
-,newsboat,"is a terminal RSS client."
-A,librewolf-bin,"is the default browser of LARBS which also comes with ad-blocking and other sensible and necessary features by default."
-A,arkenfox-user.js,"provides hardened security settings for Firefox and Librewolf to avoid Mozilla spyware and general web fingerprinting."
-,noto-fonts,"is an expansive font package."
-,noto-fonts-emoji,"is an emoji font."
-,ntfs-3g,"allows accessing NTFS partitions."
-,wireplumber,"is the audio system."
-,pipewire-pulse,"gives pipewire compatibility with PulseAudio programs."
-,pulsemixer,"is an audio controller."
-A,sc-im,"is an Excel-like terminal spreadsheet manager."
-,maim,"can take quick screenshots at your request."
-A,abook,"is an offline addressbook usable by neomutt."
-,unclutter,"hides an inactive mouse."
-,unzip,"unzips zips."
+,xorg-server,is the graphical server. This first one may take a while as it pulls many other dependencies first on clean installs.
+,xorg-xwininfo,allows querying information about windows.
+,xorg-xinit,starts the graphical server.
+,polkit,manages user policies.
+,libertinus-font,provides the sans and serif fonts for LARBS.
+,ttf-font-awesome,provides extended glyph support.
+,ttf-dejavu,properly displays emojis.
+A,lf-git,is an extensive terminal file manager that everyone likes.
+,ueberzug,enables previews in the lf file manager.
+,bc,is a mathematics language used for the dropdown calculator.
+,xcompmgr,is for transparency and removing screen-tearing.
+,xorg-xprop,is a tool for detecting window properties.
+,arandr,allows the user to customize monitor arrangements.
+,dosfstools,allows your computer to access dos-like filesystems.
+,libnotify,allows desktop notifications.
+,dunst,is a suckless notification system.
+,calcurse,terminal-based organizer for interactive and command line use
+,exfat-utils,allows management of FAT drives.
+,nsxiv,is a minimalist image viewer.
+,xwallpaper,sets the wallpaper.
+,ffmpeg,can record and splice video and audio on the command line.
+,ffmpegthumbnailer,creates thumbnail previews of video files.
+,gnome-keyring,serves as the system keyring.
+A,gtk-theme-arc-gruvbox-git,gives the dark GTK theme used in LARBS.
+,python-qdarkstyle,provides a dark Qt theme.
+,neovim,a tidier vim with some useful features
+,mpv,is the patrician's choice video player.
+,man-db,lets you read man pages of programs.
+A,librewolf-bin,is the default browser of LARBS which also comes with ad-blocking and other sensible and necessary features by default.
+A,arkenfox-user.js,provides hardened security settings for Firefox and Librewolf to avoid Mozilla spyware and general web fingerprinting.
+,noto-fonts,is an expansive font package.
+,noto-fonts-emoji,is an emoji font.
+,ntfs-3g,allows accessing NTFS partitions.
+,wireplumber,is the audio system.
+,pipewire-pulse,gives pipewire compatibility with PulseAudio programs.
+A,sc-im,is an Excel-like terminal spreadsheet manager.
+,maim,can take quick screenshots at your request.
+A,abook,is an offline addressbook usable by neomutt.
+,unclutter,hides an inactive mouse.
+,unzip,unzips zips.
 ,lynx,"is a terminal browser also used in LARBS for generating in-terminal previews of websites, emails and HTML files."
-,xcape,"gives the special escape/super mappings of LARBS."
-,xclip,"allows for copying and pasting from the command line."
-,xdotool,"provides window action utilities on the command line."
-,yt-dlp,"can download any YouTube video (or playlist or channel) when given the link."
-,zathura,"is a pdf viewer with vim-like bindings."
-,zathura-pdf-mupdf,"allows mupdf pdf compatibility in zathura."
-,poppler,"manipulates .pdfs and gives .pdf previews and other .pdf functions."
-,mediainfo,"shows audio and video information and is used in the file browser."
-,atool,"manages and gives information about archives."
-,fzf,"is a fuzzy finder tool used for easy selection and location of files."
-,bat,"can highlight code output and display files and is used to generate previews in the file browser."
-,xorg-xbacklight,"enables changing screen brightness levels."
-A,zsh-fast-syntax-highlighting-git,"provides syntax highlighting in the shell."
-A,task-spooler,"queues commands or files for download."
-A,simple-mtpfs,"enables the mounting of cell phones."
-A,htop-vim,"is a graphical and colorful system monitor."
-G,https://github.com/LukeSmithxyz/dwmblocks.git,"serves as the modular status bar."
-G,https://github.com/lukesmithxyz/dmenu.git,"runs commands and provides a UI for selection."
-G,https://github.com/lukesmithxyz/st.git,"is my custom build of suckless's terminal emulator."
-G,https://github.com/lukesmithxyz/dwm.git,"is the window manager."
-A,mutt-wizard-git,"is a light-weight terminal-based email system."
+,xcape,gives the special escape/super mappings of LARBS.
+,xclip,allows for copying and pasting from the command line.
+,xdotool,provides window action utilities on the command line.
+,yt-dlp,can download any YouTube video (or playlist or channel) when given the link.
+,zathura,is a pdf viewer with vim-like bindings.
+,zathura-pdf-mupdf,allows mupdf pdf compatibility in zathura.
+,poppler,manipulates .pdfs and gives .pdf previews and other .pdf functions.
+,mediainfo,shows audio and video information and is used in the file browser.
+,atool,manages and gives information about archives.
+,fzf,is a fuzzy finder tool used for easy selection and location of files.
+,bat,can highlight code output and display files and is used to generate previews in the file browser.
+,xorg-xbacklight,enables changing screen brightness levels.
+A,zsh-fast-syntax-highlighting-git,provides syntax highlighting in the shell.
+A,task-spooler,queues commands or files for download.
+A,simple-mtpfs,enables the mounting of cell phones.
+A,htop-vim,is a graphical and colorful system monitor.
+G,https://github.com/lukesmithxyz/dwmblocks.git,serves as the modular status bar.
+G,https://github.com/lukesmithxyz/dmenu.git,runs commands and provides a UI for selection.
+G,https://github.com/lukesmithxyz/st.git,is my custom build of suckless's terminal emulator.
+G,https://github.com/ZachWWalden/dwm.git,is the window manager.
 ,slock,"allows you to lock your computer, and quickly unlock with your password."
-,socat,"is a utility which establishes two byte streams and transfers data between them."
-,moreutils,"is a collection of useful unix tools."
+,socat,is a utility which establishes two byte streams and transfers data between them.
+,moreutils,is a collection of useful unix tools.
+A,jellyfin-media-player,Jellyfin client
+,pcmanfm,GUI File Manager
+,keepassxc,GUI Password Manager
+,pavucontrol,"Sound Manager, works with pulse backend"
+A,brave-bin,"Brave Browser, Just used t it at this point"
+,kicad,pcb design software
+,kicad-library,Footprint library for Kicad
+,kicad-library-3d,3d Models for Kicad
+,gimp,image manipulation tool
+,grub-customizer,Tool to customize bootloader appearance
+,inkscape,vectorgraphics program
+,iverilog,Verilog compiler
+,gtkwave,Waveform viewer writtin in gtk
+A,logisim-evolution-bin,Digital Circuit Simulator
+,octave,GNU Matlab
+,obs-studio,Recording/streaming
+,pacman-contrib,Pacman dev utils
+A,python-cocotb,Python HDL Testbench Framework
+A,python-cocotb-bus,Python HDL Testbench Framework
+A,python-cocotbext-axi,Python HDL Testbench Framework axi extention
+A,python-cocotbext-eth,Python HDL Testbench Framework ethernet extension
+A,python-cocotbext-pcie,Python HDL Testbench Framework pcie extension
+A,python-cocotbext-uart,Python HDL Testbench Framework uart
+,qdirstat,Qt Directory visualizer
+,signal-desktop,Signal Client
+,transmission-gtk,Torrent Client
+,tigervnc,vnc client and server
+A,uctags-git,Tag generator for easily navigating a codebase
+,ttf-ancient-fonts,ancient fonts
+,ttf-linux-libertine,Linux fonts
+,wireshark-qt,Packet Sniffer
+,yosys,"fpga tool, look into nextpnr"
+A,ytarchive-bin,youtube livestream downloader
