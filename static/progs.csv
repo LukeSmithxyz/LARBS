@@ -71,6 +71,7 @@ A,brave-bin,"Brave Browser, Just used t it at this point"
 ,kicad,pcb design software
 ,kicad-library,Footprint library for Kicad
 ,kicad-library-3d,3d Models for Kicad
+A,pcbdraw,Python script for creating 2d drawings of kicad boards.
 ,gimp,image manipulation tool
 ,grub-customizer,Tool to customize bootloader appearance
 ,inkscape,vectorgraphics program
@@ -86,13 +87,45 @@ A,python-cocotbext-axi,Python HDL Testbench Framework axi extention
 A,python-cocotbext-eth,Python HDL Testbench Framework ethernet extension
 A,python-cocotbext-pcie,Python HDL Testbench Framework pcie extension
 A,python-cocotbext-uart,Python HDL Testbench Framework uart
-,qdirstat,Qt Directory visualizer
+A,qdirstat-bin,Qt Directory visualizer
 ,signal-desktop,Signal Client
 ,transmission-gtk,Torrent Client
 ,tigervnc,vnc client and server
 A,uctags-git,Tag generator for easily navigating a codebase
 ,ttf-ancient-fonts,ancient fonts
 ,ttf-linux-libertine,Linux fonts
+,adobe-source-han-sans-otc-fonts,Asian Character font
+,adobe-source-han-serif-otc-fonts,Asian Character font
 ,wireshark-qt,Packet Sniffer
 ,yosys,"fpga tool, look into nextpnr"
+,openfpgaloader,FPGA Progamming tool
 A,ytarchive-bin,youtube livestream downloader
+,blueman,Userspace Bluetooth control package
+,asunder,Cd Ripper
+,audacity,Audio editing
+A,cpupower-gui,Cpu clock control
+,cups,C Unix Printing System
+,deadbeef,Music Player
+,freecad,FOSS Cad Package
+,librecad,2D Cad Package
+,openscad,Code Based Parametric Cad
+,gnome-font-viewer,Font viewer
+A,gtypist,GNU typing trainer
+,gzip,Gzip
+,hexedit,Hex editor
+,hplip,HP Printer drivers
+,iperf3,Internet Performace tool
+A,localsend-bin,"Wifi File sharing, similar to apple air drop"
+,ngspice,Circuit simulator
+A,qucs-s,"Circuit simulator, uses ngspice"
+,minuet,Classical Ear Trainer
+,musescore,Digital score system
+,neofetch,Show off to fellow internet virgins
+,nitrogen,Wallpaper manager for X window system
+A,orca-slicer-bin,Best FDM Slicer
+A,pokemon-colorscripts-git,Prints Pokemon sprites to terminal
+,rawtherapee,"Raw photo editor, similar to Adobe Lightroom"
+,ripgrep,Fuzzy finder
+A,rpi-imager-bin,"Raspberry pi os flasher, also works for any os image"
+,libreoffice,FOSS Office suite
+,texlive,LaTeX typesetting software
