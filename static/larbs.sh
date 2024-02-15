@@ -84,8 +84,6 @@ refreshkeys() {
 		;;
 	*)
 		whiptail --infobox "Enabling Arch Repositories for more a more extensive software collection..." 7 40
-		pacman --noconfirm --needed -S \
-			artix-keyring artix-archlinux-support >/dev/null 2>&1
 		grep -q "^\[extra\]" /etc/pacman.conf ||
 			echo "[extra]
 Include = /etc/pacman.d/mirrorlist-arch" >>/etc/pacman.conf
@@ -180,14 +178,11 @@ putgitrepo() {
 		--recurse-submodules "$1" "$dir"
 	sudo -u "$name" cp -rfT "$dir" "$2"
 }
-
+# TODO Make work with lazy.nvim
 vimplugininstall() {
 	# Installs vim plugins.
 	whiptail --infobox "Installing neovim plugins..." 7 60
-	mkdir -p "/home/$name/.config/nvim/autoload"
-	curl -Ls "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" >  "/home/$name/.config/nvim/autoload/plug.vim"
-	chown -R "$name:wheel" "/home/$name/.config/nvim"
-	sudo -u "$name" nvim -c "PlugInstall|q|q"
+
 }
 
 makeuserjs(){
@@ -301,7 +296,7 @@ sed -Ei "s/^#(ParallelDownloads).*/\1 = 5/;/^#Color$/s/#//" /etc/pacman.conf
 # Use all cores for compilation.
 sed -i "s/-j2/-j$(nproc)/;/^#MAKEFLAGS/s/^#//" /etc/makepkg.conf
 
-manualinstall $aurhelper || error "Failed to install AUR helper."
+manualinstall "$aurhelper-bin" || error "Failed to install AUR helper."
 
 # Make sure .*-git AUR packages get updated automatically.
 $aurhelper -Y --save --devel
@@ -315,7 +310,7 @@ installationloop
 # Install the dotfiles in the user's home directory, but remove .git dir and
 # other unnecessary files.
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
-rm -rf "/home/$name/.git/" "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml"
+rm -rf "/home/$name/.git/" "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml" "/home/$name/deploy"
 
 # Install vim plugins if not alread present.
 [ ! -f "/home/$name/.config/nvim/autoload/plug.vim" ] && vimplugininstall
@@ -328,13 +323,6 @@ echo "blacklist pcspkr" >/etc/modprobe.d/nobeep.conf
 chsh -s /bin/zsh "$name" >/dev/null 2>&1
 sudo -u "$name" mkdir -p "/home/$name/.cache/zsh/"
 sudo -u "$name" mkdir -p "/home/$name/.config/abook/"
-sudo -u "$name" mkdir -p "/home/$name/.config/mpd/playlists/"
-
-# dbus UUID must be generated for Artix runit.
-dbus-uuidgen >/var/lib/dbus/machine-id
-
-# Use system notifications for Brave on Artix
-echo "export \$(dbus-launch)" >/etc/profile.d/dbus.sh
 
 # Enable tap to click
 [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] && printf 'Section "InputClass"
