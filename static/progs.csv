@@ -131,3 +131,4 @@ A,rpi-imager-bin,"Raspberry pi os flasher, also works for any os image"
 ,libreoffice,FOSS Office suite
 ,texlive,LaTeX typesetting software
 ,powerline-fonts,Cool icons for styling neovim or your terminal
+,rust,Rust language
