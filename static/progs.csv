@@ -6,6 +6,7 @@
 ,libertinus-font,provides the sans and serif fonts for LARBS.
 ,ttf-font-awesome,provides extended glyph support.
 ,ttf-dejavu,properly displays emojis.
+,node,Node JS
 A,lf-git,is an extensive terminal file manager that everyone likes.
 ,ueberzug,enables previews in the lf file manager.
 ,bc,is a mathematics language used for the dropdown calculator.
@@ -129,3 +130,4 @@ A,pokemon-colorscripts-git,Prints Pokemon sprites to terminal
 A,rpi-imager-bin,"Raspberry pi os flasher, also works for any os image"
 ,libreoffice,FOSS Office suite
 ,texlive,LaTeX typesetting software
+,powerline-fonts,Cool icons for styling neovim or your terminal
