@@ -3,6 +3,7 @@
 ,xorg-xwininfo,allows querying information about windows.
 ,xorg-xinit,starts the graphical server.
 ,polkit,manages user policies.
+,libxft,Renders glyphs in the terminal
 ,libertinus-font,provides the sans and serif fonts for LARBS.
 ,ttf-font-awesome,provides extended glyph support.
 ,ttf-dejavu,properly displays emojis.
