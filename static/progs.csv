@@ -131,5 +131,5 @@ A,pokemon-colorscripts-git,Prints Pokemon sprites to terminal
 A,rpi-imager-bin,"Raspberry pi os flasher, also works for any os image"
 ,libreoffice,FOSS Office suite
 ,texlive,LaTeX typesetting software
-,powerline-fonts,Cool icons for styling neovim or your terminal
+,ttf-nerd-fonts-symbols-mono,Cool icons for styling neovim or your terminal
 ,rust,Rust language
