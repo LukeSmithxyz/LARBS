@@ -133,3 +133,4 @@ A,rpi-imager-bin,"Raspberry pi os flasher, also works for any os image"
 ,texlive,LaTeX typesetting software
 ,ttf-nerd-fonts-symbols-mono,Cool icons for styling neovim or your terminal
 ,rust,Rust language
+,tmux,Is a terminal sessionizer and multiplexor. Necessary for development
