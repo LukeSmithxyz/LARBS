@@ -8,6 +8,7 @@
 ,ttf-font-awesome,provides extended glyph support.
 ,ttf-dejavu,properly displays emojis.
 ,node,Node JS
+,npm,Is the package manage for node. This is required to install many Neovim extensions
 A,lf-git,is an extensive terminal file manager that everyone likes.
 ,ueberzug,enables previews in the lf file manager.
 ,bc,is a mathematics language used for the dropdown calculator.
@@ -125,7 +126,6 @@ A,qucs-s,"Circuit simulator, uses ngspice"
 ,neofetch,Show off to fellow internet virgins
 ,nitrogen,Wallpaper manager for X window system
 A,orca-slicer-bin,Best FDM Slicer
-A,pokemon-colorscripts-git,Prints Pokemon sprites to terminal
 ,rawtherapee,"Raw photo editor, similar to Adobe Lightroom"
 ,ripgrep,Fuzzy finder
 A,rpi-imager-bin,"Raspberry pi os flasher, also works for any os image"
@@ -133,4 +133,8 @@ A,rpi-imager-bin,"Raspberry pi os flasher, also works for any os image"
 ,texlive,LaTeX typesetting software
 ,ttf-nerd-fonts-symbols-mono,Cool icons for styling neovim or your terminal
 ,rust,Rust language
+<<<<<<< HEAD
 ,tmux,Is a terminal sessionizer and multiplexor. Necessary for development
+=======
+A,pokeget, Is a Rust program that displays pokemon sprites to the terminal blazingly fast.
+>>>>>>> f2898591c37d62aa518bb6adfb29c09a22d1d244
