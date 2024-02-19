@@ -133,8 +133,5 @@ A,rpi-imager-bin,"Raspberry pi os flasher, also works for any os image"
 ,texlive,LaTeX typesetting software
 ,ttf-nerd-fonts-symbols-mono,Cool icons for styling neovim or your terminal
 ,rust,Rust language
-<<<<<<< HEAD
 ,tmux,Is a terminal sessionizer and multiplexor. Necessary for development
-=======
 A,pokeget, Is a Rust program that displays pokemon sprites to the terminal blazingly fast.
->>>>>>> f2898591c37d62aa518bb6adfb29c09a22d1d244
