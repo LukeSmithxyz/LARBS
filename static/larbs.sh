@@ -375,5 +375,8 @@ echo "Defaults editor=/usr/bin/nvim" >/etc/sudoers.d/02-larbs-visudo-editor
 mkdir -p /etc/sysctl.d
 echo "kernel.dmesg_restrict = 0" > /etc/sysctl.d/dmesg.conf
 
+#Zsh base dir
+echo 'ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"' > /etc/zsh/zshenv
+
 # Last message! Install complete!
 finalize
