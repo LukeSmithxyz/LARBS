@@ -1,0 +1,26 @@
+#TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
+,kicad,pcb design software
+,kicad-library,Footprint library for Kicad
+,kicad-library-3d,3d Models for Kicad
+A,pcbdraw,Python script for creating 2d drawings of kicad boards.
+,iverilog,Verilog compiler
+,gtkwave,Waveform viewer writtin in gtk
+A,logisim-evolution-bin,Digital Circuit Simulator
+,octave,GNU Matlab
+A,python-cocotb,Python HDL Testbench Framework
+A,python-cocotb-bus,Python HDL Testbench Framework
+A,python-cocotbext-axi,Python HDL Testbench Framework axi extention
+A,python-cocotbext-eth,Python HDL Testbench Framework ethernet extension
+A,python-cocotbext-pcie,Python HDL Testbench Framework pcie extension
+A,python-cocotbext-uart,Python HDL Testbench Framework uart
+A,uctags-git,Tag generator for easily navigating a codebase
+,wireshark-qt,Packet Sniffer
+,yosys,"fpga tool, look into nextpnr"
+,openfpgaloader,FPGA Progamming tool
+,freecad,FOSS Cad Package
+,librecad,2D Cad Package
+,openscad,Code Based Parametric Cad
+,hexedit,Hex editor
+,ngspice,Circuit simulator
+A,qucs-s,"Circuit simulator, uses ngspice"
+A,orca-slicer-bin,Best FDM Slicer
