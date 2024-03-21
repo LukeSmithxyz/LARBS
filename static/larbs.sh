@@ -7,7 +7,9 @@
 ### OPTIONS AND VARIABLES ###
 
 dotfilesrepo="https://github.com/ZachWWalden/archrice.git"
-progsfile="https://raw.githubusercontent.com/ZachWWalden/LARBS/master/static/progs.csv"
+progsfile="https://raw.githubusercontent.com/ZachWWalden/LARBS/master/static/prog_groups/base.csv"
+engfile="https://raw.githubusercontent.com/ZachWWalden/LARBS/master/static/prog_groups/eng.csv"
+gamingfile="https://raw.githubusercontent.com/ZachWWalden/LARBS/master/static/prog_groups/gaming.csv"
 aurhelper="yay"
 repobranch="master"
 export TERM=ansi
@@ -46,6 +48,12 @@ getuserandpass() {
 		pass1=$(whiptail --nocancel --passwordbox "Passwords do not match.\\n\\nEnter password again." 10 60 3>&1 1>&2 2>&3 3>&1)
 		pass2=$(whiptail --nocancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
 	done
+}
+
+getprogramgroups() {
+	proggroups=$(whiptail --separate-output --checklist "Choose Program Groups" 10 35 5 \
+		"1" "ECE, Cad & 3D Printing" OFF \
+		"2" "Windows Games & Nintendo Emulation" OFF 3>&1 1>&2 2>&3)
 }
 
 usercheck() {
@@ -149,8 +157,8 @@ pipinstall() {
 }
 
 installationloop() {
-	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) ||
-		curl -Ls "$progsfile" | sed '/^#/d' >/tmp/progs.csv
+	([ -f "$1" ] && cp "$1" /tmp/progs.csv) ||
+		curl -Ls "$1" | sed '/^#/d' >/tmp/progs.csv
 	total=$(wc -l </tmp/progs.csv)
 	aurinstalled=$(pacman -Qqm)
 	while IFS=, read -r tag program comment; do
@@ -255,6 +263,9 @@ getuserandpass || error "User exited."
 # Give warning if user already exists.
 usercheck || error "User exited."
 
+# Let User select Program Groups
+getprogramgroups || error "User exited."
+
 # Last chance for user to back out before install.
 preinstallmsg || error "User exited."
 
@@ -300,7 +311,26 @@ $aurhelper -Y --save --devel
 # installs each needed program the way required. Be sure to run this only after
 # the user has been created and has priviledges to run sudo without a password
 # and all build dependencies are installed.
-installationloop
+installationloop $progsfile
+
+if [ -z "$proggroups" ]; then
+  echo "Only the base system will be installed"
+else
+  for CHOICE in $CHOICES; do
+    case "$CHOICE" in
+    "1")
+		installationloop $engfile
+      ;;
+    "2")
+		installationloop $gamingfile
+      ;;
+    *)
+      echo "Unsupported item $CHOICE!" >&2
+      exit 1
+      ;;
+    esac
+  done
+fi
 
 # Install the dotfiles in the user's home directory, but remove .git dir and
 # other unnecessary files.
