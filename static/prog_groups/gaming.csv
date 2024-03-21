@@ -1,0 +1,19 @@
+#TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
+,discord,allows you to communicate with your firends PROPRIETARY
+,steam,allows you to play windows games PROPRIETARY
+,wine,helps with running windows programs in Linux
+A,vkd3d,translates DirectX 12 Calls to Vulkan
+A,dxvk-bin, translates DirectX 9/10/11 calls to Vulkan
+A,protonup-qt-bin, Qt gui to help with managing proton installations
+A,protontricks,is simple wrapper that does winetricks things for Proton enabled games
+,winetricks, is a script to install various redistributable runtime libraries in Wine.
+,lutris, is an open gaming platform
+A,heroic-games-launcher-bin, is an Open source Launcher for Epic, Amazon and GOG Games
+,gamemode,is a daemon/lib combo that allows games to request a set of optimisations be temporarily applied to the host OS
+,desmume, is a Nintendo DS Emulator
+,mgba-qt,is a Nintendo Gameboy Advance Emulator focusing on both speed and accuracy. Qt5 UI.
+,mupen64plus,is a Nintendo 64 Emulator
+A,cemu-bin,is a Nintendo Wii U emulator
+,dolphin-emu, is a Gamecube and Wii emulator
+A,citra-appimage, is a Nintendo 3DS emulator
+A,ryujinx-bin, is a Nintendo Switch emulator
