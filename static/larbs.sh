@@ -12,6 +12,17 @@ aurhelper="yay"
 repobranch="master"
 export TERM=ansi
 
+rssurls="https://lukesmith.xyz/rss.xml
+https://videos.lukesmith.xyz/feeds/videos.xml?videoChannelId=2 \"~Luke Smith (Videos)\"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA \"~Luke Smith (YouTube)\"
+https://lindypress.net/rss
+https://notrelated.xyz/rss
+https://landchad.net/rss.xml
+https://based.cooking/index.xml
+https://artixlinux.org/feed.php \"tech\"
+https://www.archlinux.org/feeds/news/ \"tech\"
+https://github.com/LukeSmithxyz/voidrice/commits/master.atom \"~LARBS dotfiles\""
+
 ### FUNCTIONS ###
 
 installpkg() {
@@ -316,6 +327,8 @@ installationloop
 # Install the dotfiles in the user's home directory, but remove .git dir and
 # other unnecessary files.
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
+[ -z "/home/$name/.config/newsboat/urls" ] &&
+	echo "$rssurls" > "/home/$name/.config/newsboat/urls"
 rm -rf "/home/$name/.git/" "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml"
 
 # Install vim plugins if not alread present.
