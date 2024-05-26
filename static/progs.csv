@@ -7,7 +7,7 @@
 ,ttf-font-awesome,"provides extended glyph support."
 ,ttf-dejavu,"properly displays emojis."
 A,lf-git,"is an extensive terminal file manager that everyone likes."
-,ueberzug,"enables previews in the lf file manager."
+A,ueberzugpp,"enables previews in the lf file manager."
 ,bc,"is a mathematics language used for the dropdown calculator."
 ,xcompmgr,"is for transparency and removing screen-tearing."
 ,xorg-xprop,"is a tool for detecting window properties."
