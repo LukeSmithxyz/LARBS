@@ -330,7 +330,7 @@ putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -rf "/home/$name/.git/" "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml"
 
 # Write urls for newsboat if it doesn't already exist
-grep -qs '\S' "/home/$name/.config/newsboat/urls" ||
+[ -s "/home/$name/.config/newsboat/urls" ] ||
 	sudo -u "$name" echo "$rssurls" > "/home/$name/.config/newsboat/urls"
 
 # Install vim plugins if not alread present.
