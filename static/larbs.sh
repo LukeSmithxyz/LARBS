@@ -232,7 +232,7 @@ Exec=/usr/local/lib/arkenfox-auto-update" > /etc/pacman.d/hooks/arkenfox.hook
 installffaddons(){
 	addonlist="ublock-origin decentraleyes istilldontcareaboutcookies vim-vixen"
 	addontmp="$(mktemp -d)"
-	trap "rm -fr $addontmp" HUP INT QUIT TERM PWR EXIT
+	trap 'rm -fr $addontmp' HUP INT QUIT TERM PWR EXIT
 	IFS=' '
 	sudo -u "$name" mkdir -p "$pdir/extensions/"
 	for addon in $addonlist; do
@@ -242,7 +242,7 @@ installffaddons(){
 			addonurl="$(curl --silent "https://addons.mozilla.org/en-US/firefox/addon/${addon}/" | grep -o 'https://addons.mozilla.org/firefox/downloads/file/[^"]*')"
 		fi
 		file="${addonurl##*/}"
-		sudo -u "$name" curl -LOs "$addonurl" > "$addontmp/$file"
+		curl -LOs "$addonurl" | sudo -u "$name" tee "$addontmp/$file" >/dev/null
 		id="$(unzip -p "$file" manifest.json | grep "\"id\"")"
 		id="${id%\"*}"
 		id="${id##*\"}"
@@ -251,8 +251,8 @@ installffaddons(){
 	chown -R "$name:$name" "$pdir/extensions"
 	# Fix a Vim Vixen bug with dark mode not fixed on upstream:
 	sudo -u "$name" mkdir -p "$pdir/chrome"
-	[ ! -f  "$pdir/chrome/userContent.css" ] && sudo -u "$name" echo ".vimvixen-console-frame { color-scheme: light !important; }
-#category-more-from-mozilla { display: none !important }" > "$pdir/chrome/userContent.css"
+	[ ! -f  "$pdir/chrome/userContent.css" ] && echo ".vimvixen-console-frame { color-scheme: light !important; }
+#category-more-from-mozilla { display: none !important }" | sudo -u "$name" tee "$pdir/chrome/userContent.css" >/dev/null
 }
 
 finalize() {
@@ -331,7 +331,7 @@ rm -rf "/home/$name/.git/" "/home/$name/README.md" "/home/$name/LICENSE" "/home/
 
 # Write urls for newsboat if it doesn't already exist
 [ -s "/home/$name/.config/newsboat/urls" ] ||
-	sudo -u "$name" echo "$rssurls" > "/home/$name/.config/newsboat/urls"
+	echo "$rssurls" | sudo -u "$name" tee "/home/$name/.config/newsboat/urls" >/dev/null
 
 # Install vim plugins if not alread present.
 [ ! -f "/home/$name/.config/nvim/autoload/plug.vim" ] && vimplugininstall
