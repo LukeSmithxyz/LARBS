@@ -288,7 +288,7 @@ rm -rf "/home/$name/.git/" "/home/$name/README.md" "/home/$name/LICENSE" "/home/
 
 # Write urls for newsboat if it doesn't already exist
 [ -s "/home/$name/.config/newsboat/urls" ] ||
-	sudo -u "$name" echo "$rssurls" > "/home/$name/.config/newsboat/urls"
+	echo "$rssurls" | sudo -u "$name" tee "/home/$name/.config/newsboat/urls" >/dev/null
 
 # Install vim plugins if not alread present.
 [ ! -f "/home/$name/.config/nvim/autoload/plug.vim" ] && vimplugininstall
