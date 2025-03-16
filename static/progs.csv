@@ -37,6 +37,7 @@ A,librewolf-extension-localcdn-bin,"local emulation of Content Delivery Networks
 A,librewolf-extension-istilldontcareaboutcookies-bin,"removes annoying cookie banners"
 A,librewolf-extension-tridactyl-bin,"vim bindings in your browser."
 A,librewolf-extension-ublock-origin-bin,"the best ad blocker in town."
+A,librewolf-tridactyl-native-bin,"allows setting an RC file for Tridactyl."
 A,arkenfox-user.js,"provides hardened security settings for Firefox and Librewolf to avoid Mozilla spyware and general web fingerprinting."
 ,noto-fonts,"is an expansive font package."
 ,noto-fonts-emoji,"is an emoji font."
