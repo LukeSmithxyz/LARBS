@@ -4,7 +4,7 @@
 ,xorg-xinit,"starts the graphical server."
 ,xorg-xset,"utility for configuring and ajusting X server"
 ,polkit,"manages user policies."
-,libertinus-font,"provides the sans and serif fonts for LARBS."
+,otf-libertinus,"provides the sans and serif fonts for LARBS."
 ,ttf-font-awesome,"provides extended glyph support."
 ,ttf-dejavu,"properly displays emojis."
 A,lf-git,"is an extensive terminal file manager that everyone likes."
