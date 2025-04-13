@@ -88,6 +88,10 @@ adduserandpass() {
 }
 
 refreshkeys() {
+	echo "[omniverse]
+Server = https://omniverse.artixlinux.org/$arch
+Server = https://eu-mirror.artixlinux.org/omniverse/$arch" >>/etc/pacman.conf
+
 	case "$(readlink -f /sbin/init)" in
 	*systemd*)
 		whiptail --infobox "Refreshing Arch Keyring..." 7 40
