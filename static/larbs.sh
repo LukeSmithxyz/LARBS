@@ -7,7 +7,7 @@
 ### OPTIONS AND VARIABLES ###
 
 #dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
-dotfilesrepo="https://github.com/lukesmithxyz/voidrice.git"
+dotfilesrepo="https://github.com/Gehirnreaktor/voidrice"
 #progsfile="https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/static/progs.csv"
 progsfile="https://github.com/Gehirnreaktor/LARBS_ref/blob/LARBS_ghrn/static/progs.csv"
 aurhelper="yay"
