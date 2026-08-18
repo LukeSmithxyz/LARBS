@@ -6,7 +6,7 @@ date: 2023-01-17T11:54:20-05:00
 The address book.
 
 Why let Google or Apple keep your contacts? Keep an archive on your computer and export them when you need them.
-Abook is a minimal and local store of your contacts, including emails, phone numbers, addressess and whatever you might need.
+Abook is a minimal and local store of your contacts, including emails, phone numbers, addresses and whatever you might need.
 Abook integrates with neomutt's autofill as well and you can script more functionality into it.
 
 ## Documentation

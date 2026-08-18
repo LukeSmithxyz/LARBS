@@ -18,7 +18,7 @@ For ncmpcpp to run, you should have [mpd](/mpd) set up and have audio files in y
 
 ## Bindings
 
-Firstly, ncmpcpp has many different screens accessible through the number keys <kbd>1</kbd> to <kbd>8</kbd>. The most important of these have also been mapped to mneumonic letter keys:
+Firstly, ncmpcpp has many different screens accessible through the number keys <kbd>1</kbd> to <kbd>8</kbd>. The most important of these have also been mapped to mnemonic letter keys:
 
 - <kbd>m</kbd> -- main music library (press key again to alternate album/album artist views).
 - <kbd>v</kbd> -- visualizer.

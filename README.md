@@ -29,7 +29,7 @@ beginning of the script or giving the script one of these options:
 - `-r`: custom dotfiles repository (URL)
 - `-p`: custom programs list/dependencies (local file or URL)
 - `-a`: a custom AUR helper (must be able to install with `-S` unless you
-  change the relevant line in the script
+  change the relevant line in the script)
 
 ### The `progs.csv` list
 
@@ -55,12 +55,12 @@ quotes around the whole description to ensure correct parsing.
 ### The script itself
 
 The script is extensively divided into functions for easier readability and
-trouble-shooting. Most everything should be self-explanatory.
+troubleshooting. Most everything should be self-explanatory.
 
 The main work is done by the `installationloop` function, which iterates
 through the programs file and determines based on the tag of each program,
 which commands to run to install it. You can easily add new methods of
-installations and tags as well.
+installation and tags as well.
 
 Note that programs from the AUR can only be built by a non-root user. What
 LARBS does to bypass this by default is to temporarily allow the newly created
