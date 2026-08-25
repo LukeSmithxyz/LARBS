@@ -9,7 +9,7 @@ Neomutt is a fast terminal-based email client.
 
 ## Setup with Mutt Wizard
 
-Use [mutt-wizard](https://muttwizard.com) (`mw`) to add mail accounts. This is already installed on LARBS. Added accounts will be accessible from neomutt. To add your first account, just run the following:
+Use [mutt-wizard](https://muttwizard.com) (`mw`) to add mail accounts. This is already installed in LARBS. Added accounts will be accessible from neomutt. To add your first account, just run the following:
 
 ```fish
 mw -a your@email.com

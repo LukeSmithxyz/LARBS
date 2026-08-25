@@ -4,19 +4,19 @@ date: 2022-12-21T17:07:04-05:00
 ---
 
 lf is the file manager used in LARBS.
-It was original inspired by the program ranger, but unlike ranger, lf is written in Go instead of Python, so is significantly snappier and adds better features for interaction between different lf instances.
+It was originally inspired by the program ranger, but unlike ranger, lf is written in Go instead of Python, so is significantly snappier and adds better features for interaction between different lf instances.
 
 {{< img src="/pix/lf.png" class=normal caption="Note that lf uses ueberzug to produce previews of images, or here, a .pdf." >}}
 
 ## Running
 
-Run lf by pressing <kbd>super + r</kbd>, or type `lf` manually in the termianl.
+Run lf by pressing <kbd>super + r</kbd>, or type `lf` manually in the terminal.
 
 ## Bindings
 
-- <kbd>h</kbd>, <kbd>j</kbd>, <kbd>k</kbd> <kbd>l</kbd> (vim keys) to move around and enter directories and open files.
+- <kbd>h</kbd>, <kbd>j</kbd>, <kbd>k</kbd>, <kbd>l</kbd> (vim keys) to move around and enter directories and open files.
 - <kbd>g</kbd>, <kbd>G</kbd>, <kbd>ctrl-d</kbd>,  <kbd>ctrl-u</kbd> -- movement like in vim.
-- <kbd>w</kbd> -- drop into a terminal in the current directory. If you `exit` or press <kbd>ctrl-d</kbd> in the termianl, you will return to `lf`.
+- <kbd>w</kbd> -- drop into a terminal in the current directory. If you `exit` or press <kbd>ctrl-d</kbd> in the terminal, you will return to `lf`.
 - <kbd>ctrl-n</kbd> -- new directory.
 - <kbd>V</kbd> -- new file with `nvim`.
 - <kbd>space</kbd> -- select files:
@@ -40,8 +40,8 @@ This list is not necessarily exhaustive. See `man lf` and the lf configuration f
 
 ## lf's configuration files
 
-- `~/.confif/lf/lfrc` -- The main lf configuration.
-- `~/.config/lf/scope` -- The file that determines which commands generates previews for files.
+- `~/.config/lf/lfrc` -- The main lf configuration.
+- `~/.config/lf/scope` -- The file that determines which commands generate previews for files.
 
 The other files in the `~/.config/lf/` directory are run automatically when needed.
 

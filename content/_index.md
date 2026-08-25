@@ -16,7 +16,7 @@ Is LARBS for you? Probably yes. I don't know how else you would've found this si
 
 
 No actual phonies allowed though.
-The goal of the system for novices is helping you understand how a good Unix system works and how it is modified.
+The goal of the system for novices is to help you understand how a good Unix system works and how it is modified.
 I give huge amounts of documentation for this, but this is not a hand-holding distro that does things automatically for you.
 Instead, you realize how easy it is to set things up automatically yourself.
 
@@ -59,7 +59,7 @@ Here are the main programs, all with extra information here:
 
 ## Learning the system is fun and easy!
 
-You can figure out about the system in a lot of different ways:
+You can figure out the system in a lot of different ways:
 
 - LARBS has a built-in readme document and list of all the many efficient keybindings that you can read [here](/larbs-dwm.pdf). By pressing <kbd>super + F1</kbd> at any time while in the system you can read this document.
 - The many illustrative videos on [Luke's YouTube channel](https://youtube.com/lukesmithxyz), some of which are easily watchable in LARBS by pressing <kbd>super + F2</kbd>.

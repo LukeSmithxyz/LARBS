@@ -3,11 +3,11 @@ title: "dwm"
 date: 2023-01-19T09:55:19-05:00
 ---
 
-dwm (the dynamic window manager) is the backbones of LARBS and its graphical environment.
+dwm (the dynamic window manager) is the backbone of LARBS and its graphical environment.
 
 ## Using
 
-LARBS has built-in documentation for dwm, which can be obtain by pressing `super + F1` or by clicking the small ❓ in the top right corner.
+LARBS has built-in documentation for dwm, which can be obtained by pressing `super + F1` or by clicking the small ❓ in the top right corner.
 
 If you're viewing this online, [click here to see the pdf](/larbs-dwm.pdf) which is a full guide to dwm.
 

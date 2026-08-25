@@ -13,13 +13,13 @@ dwmblocks runs automatically when dwm starts, appearing as many modules in the t
 
 Right click on the active modules for an informational message about them.
 
-Left and middle clicking, and sometime scrolling, often have some functional reaction, like bringing up a relevant program.
+Left and middle clicking, and sometimes scrolling, often have some functional reaction, like bringing up a relevant program.
 
 ## Modules
 
 There are modules for time and date, laptop battery, internet and volume that should be self-explanatory.
 
-There are also modules a three-day weather forecast from [wttr.in](https://wttr.in) and the module with a 🌅 even allows you to view a Doppler RADAR of your chosen location.
+There are also modules for a three-day weather forecast from [wttr.in](https://wttr.in) and the module with a 🌅 even allows you to view a Doppler RADAR of your chosen location.
 
 There are other user-submitted modules, for IP locations, keyboard selection, memory and CPU monitoring and more.
 

@@ -9,7 +9,7 @@ zsh is the shell used by LARBS.
 
 - `~/.config/zsh/.zshrc` -- the main zshrc file. Run `cfz` in the terminal for quick access.
 - `~/.config/shell/aliasrc` -- a separate file called by the zshrc for loading aliases that might be shared in common with bash or other shells. This is kept separate merely for organizational purposes. You can add aliases to this file or the zsh file. Run `cfa` for quick access. By default, it mostly sets aliases that will yield more colorful output and verbosity in interactive shells.
-- `~/.zprofile` -- the profile file, where environmental variables are set. This is only run on login. Do not put your custom settings here unless you know what you are doing.
+- `~/.zprofile` -- the profile file, where environment variables are set. This is only run on login. Do not put your custom settings here unless you know what you are doing.
 - `~/.config/shell/inputrc` -- This file shouldn't be edited, but contains special settings for the vi-mode in zsh that allow you to clear the screen with <kbd>ctrl + l</kbd> and also to have a different cursor for each mode: a thick bar for normal mode and a thin line for insert.
 
 ## Little features

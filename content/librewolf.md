@@ -14,13 +14,13 @@ Press <kbd>super + w</kbd> or run `librewolf` in dmenu.
 ### Arkenfox's user.js
 
 With LARBS, [Arkenfox's user.js](https://github.com/arkenfox/user.js) is installed by default.
-This is a set of default settings that set settings that increase user privacy and decrease the possibility of fingerprinting.
+This is a set of default settings that increase user privacy and decrease the possibility of fingerprinting.
 
 ### Other tweaks
 
 Other annoying Firefox features have been disabled, such as push notifications and the pocket.
 
-With any of these settings or the Arkenfox ones, they can be changed in `about:config`.
+Any of these settings, or the Arkenfox ones, can be changed in `about:config`.
 
 ### Add-ons
 

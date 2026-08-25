@@ -35,8 +35,8 @@ To follow a visible link, use the [st](st) binding <kbd>alt + l</kbd>, or to jus
 
 ## Files
 
-- `~/.config/newsboat/urls` -- the file holding your RSS feeds. Add URLs here to make them appear in newsboat. Open itquickly by typing `cfu` in the terminal.
-- `~/.config/newsboat/config` -- the general newsboat config. Type `cfn` in the terminal. You can set granulated coloring and effects here, as well as change key bindings.
+- `~/.config/newsboat/urls` -- the file holding your RSS feeds. Add URLs here to make them appear in newsboat. Open it quickly by typing `cfu` in the terminal.
+- `~/.config/newsboat/config` -- the general newsboat config. Type `cfn` in the terminal. You can set granular coloring and effects here, as well as change key bindings.
 - `~/.local/bin/linkhandler` -- the opener file used by newsboat for dealing with URLs with the <kbd>,,</kbd> binding. This can be modified as needed. By default, it opens normal URLs in a browser, opens videos with [mpv](mpv), downloads audio/podcast files and downloads and opens images with [sxiv](sxiv), etc.
 
 ## Links

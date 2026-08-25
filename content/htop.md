@@ -27,9 +27,9 @@ Look at how stupid this image looks.
 
 All sensible questions that a person naturally asks when he sees the familiar world of Windows.
 
-Yet for newfriends who HECKIN' LOVE GNU/LINUX, for what ever reason, they do the same stuff, take a screencap of it and post it.
+Yet for newfriends who HECKIN' LOVE GNU/LINUX, for whatever reason, they do the same stuff, take a screencap of it and post it.
 
-This is only possible because even of those people use use GNU/Linux, even in a fancy tiling window manager, so many of them are still struggling to figure things out, so a couple htop windows and a silly file manager open and the brain degrades to a lower, confusion-induced operating level which makes it fawn at the mystery of it.
+This is only possible because even of those people who use GNU/Linux, even in a fancy tiling window manager, so many of them are still struggling to figure things out, so a couple htop windows and a silly file manager open and the brain degrades to a lower, confusion-induced operating level which makes it fawn at the mystery of it.
 
 I mean really---obviously I think tiling window managers are useful, that's what LARBS is about, but when you are *actually working on something* do you *ever* have more than three windows tiled on the same workspace at one time?
 
