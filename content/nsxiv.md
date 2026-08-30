@@ -26,9 +26,9 @@ read/write to standard input/output.
 	- <kbd>f</kbd> -- flips the image.
 	- <kbd>y</kbd> -- copies the image name to clipboard.
 	- <kbd>Y</kbd> -- copies the image path to clipboard.
-	- <kbd>x</kbd> -- copies the image to clipboard.
+	- <kbd>x</kbd> -- copies the image file to clipboard.
 	- <kbd>g</kbd> -- opens the image in Gimp.
-	- <kbd>w</kbd> -- set the image as a wallpaper.
+	- <kbd>w</kbd> -- set the image as the wallpaper.
 	- <kbd>i</kbd> -- shows image information.
 
 ## Configuration
