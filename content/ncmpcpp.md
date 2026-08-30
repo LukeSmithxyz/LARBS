@@ -32,7 +32,9 @@ Firstly, ncmpcpp has many different screens accessible through the number keys <
 - <kbd>h</kbd>/<kbd>j</kbd>/<kbd>k</kbd>/<kbd>l</kbd> -- navigate the music library view or select directories and songs.
 - <kbd>enter</kbd> -- add selected to playlist and play now.
 - <kbd>space</kbd> -- add to end of playlist.
+- <kbd>p</kbd> -- pause playlist.
 - <kbd>x</kbd> -- remove song from playlist.
+- <kbd>c</kbd> -- clear playlist.
 - <kbd>\<</kbd>/<kbd>></kbd> -- skip back or forward a track.
 - <kbd>e</kbd> -- edit tags.
 - <kbd>.</kbd> -- show/download lyrics.
