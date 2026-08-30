@@ -24,20 +24,29 @@ Press <kbd>super + shift + n</kbd> or run `newsboat` in the terminal.
 - <kbd>q</kbd> -- return to previous screen or quit.
 - <kbd>h</kbd>/<kbd>l</kbd> -- open feed or return (same as <kbd>q</kbd> and <kbd>enter</kbd>).
 - <kbd>a</kbd> -- mark as read.
-- <kbd>n</kbd> -- go to next unread.
 - <kbd>A</kbd> -- mark all as read.
-- <kbd>,,</kbd> -- open the main link of an article. (Usually opens in a browser, or if a video, will play the video in [mpv](mpv).)
+- <kbd>n</kbd>/<kbd>N</kbd> -- go to next or previous unread.
 - <kbd>u</kbd>/<kbd>d</kbd> -- page up and down.
 - <kbd>g</kbd>/<kbd>G</kbd> -- go to top or bottom of screen.
+- <kbd>,</kbd> -- combines with one of the following:
+	- <kbd>,</kbd> -- open the main link of an article. (Usually opens in a browser, or play a video in [mpv](mpv).)
+	- <kbd>t</kbd> -- queues video download with yt-dlp.
+	- <kbd>a</kbd> -- queues audio download with yt-dlp.
+	- <kbd>v</kbd> -- opens in mpv.
+	- <kbd>w</kbd> -- opens in lynx.
+	- <kbd>d</kbd> -- opens with dmenuhandler.
+	- <kbd>c</kbd> -- copies link to the system clipboard.
+	- <kbd>C</kbd> -- shows comments with youtube-viewer.
+	- <kbd>p</kbd> -- torrent PeerTube video (480p).
+	- <kbd>P</kbd> -- torrent PeerTube video (1080p).
 
 To follow a visible link, use the [st](st) binding <kbd>alt + l</kbd>, or to just copy it, <kbd>alt + k</kbd>.
-
 
 ## Files
 
 - `~/.config/newsboat/urls` -- the file holding your RSS feeds. Add URLs here to make them appear in newsboat. Open it quickly by typing `cfu` in the terminal.
 - `~/.config/newsboat/config` -- the general newsboat config. Type `cfn` in the terminal. You can set granular coloring and effects here, as well as change key bindings.
-- `~/.local/bin/linkhandler` -- the opener file used by newsboat for dealing with URLs with the <kbd>,,</kbd> binding. This can be modified as needed. By default, it opens normal URLs in a browser, opens videos with [mpv](mpv), downloads audio/podcast files and downloads and opens images with [sxiv](sxiv), etc.
+- `~/.local/bin/linkhandler` -- the opener file used by newsboat for dealing with URLs with the <kbd>,,</kbd> binding. This can be modified as needed. By default, it opens normal URLs in a browser, opens videos with [mpv](mpv), downloads audio/podcast files and downloads and opens images with [nsxiv](nsxiv), etc.
 
 ## Links
 

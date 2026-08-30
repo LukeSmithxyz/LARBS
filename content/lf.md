@@ -4,7 +4,9 @@ date: 2022-12-21T17:07:04-05:00
 ---
 
 lf is the file manager used in LARBS.
-It was originally inspired by the program ranger, but unlike ranger, lf is written in Go instead of Python, so is significantly snappier and adds better features for interaction between different lf instances.
+It was originally inspired by the program ranger, but unlike ranger, lf is
+written in Go instead of Python, so is significantly snappier and adds better
+features for interaction between different lf instances.
 
 {{< img src="/pix/lf.png" class=normal caption="Note that lf uses ueberzug to produce previews of images, or here, a .pdf." >}}
 
@@ -25,7 +27,9 @@ Run lf by pressing <kbd>super + r</kbd>, or type `lf` manually in the terminal.
 	- <kbd>p</kbd> -- paste/move copied/cut files.
 	- <kbd>C</kbd> -- copy selected files to a bookmarked directory.
 	- <kbd>M</kbd> -- move selected files to a bookmarked directory.
-	- <kbd>Y</kbd> -- copy text names of selected files to the system clipboard.
+	- <kbd>u</kbd> -- copy text names of selected files to the system clipboard.
+	- <kbd>U</kbd> -- copy text paths of selected files to the system clipboard.
+	- <kbd>ctrl-l</kbd> -- unselect all files.
 - Renaming files:
 	- <kbd>c</kbd> -- rename the selected file.
 	- <kbd>A</kbd> -- rename the selected file, starting at end.
@@ -35,6 +39,10 @@ Run lf by pressing <kbd>super + r</kbd>, or type `lf` manually in the terminal.
 	- <kbd>B</kbd> -- **bulk rename**: use vidir to mass edit all files in the directory.
 - <kbd>s</kbd> -- sort files by a different metric.
 - <kbd>z</kbd> -- show extra data or hidden files.
+- <kbd>J</kbd> -- select a bookmarked directory to open.
+- <kbd>H</kbd> -- return to home directory.
+- <kbd>b</kbd> -- set file/directory as the wallpaper.
+- <kbd>T</kbd> -- open thumbnail mode with [nsxiv](/nsxiv).
 
 This list is not necessarily exhaustive. See `man lf` and the lf configuration file for more.
 
