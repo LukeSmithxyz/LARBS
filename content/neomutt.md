@@ -28,14 +28,18 @@ Note also that neomutt automatically documents itself: you can press <kbd>?</kbd
 
 ### In the mail index...
 
-- <kbd>j</kbd>, <kbd>k</kbd> -- move up and down in mail.
-- <kbd>l</kbd> or <kbd>enter</kbd> -- open mail, or return to index.
-- <kbd>h</kbd> or <kbd>esc</kbd> -- return from mail to index.
+- <kbd>j</kbd>/<kbd>k</kbd> -- move up and down in mail.
+- <kbd>h</kbd>/<kbd>l</kbd> -- open mail/return to index.
 - <kbd>m</kbd> -- compose new mail.
 - <kbd>r</kbd> -- reply to selected mail.
 - <kbd>R</kbd> -- reply all to selected mail.
+- <kbd>ctrl-r</kbd> -- mark all as read.
+- <kbd>ctrl-f</kbd> -- search mail indexed with notmuch.
 - <kbd>ctrl-j</kbd>/<kbd>ctrl-k</kbd> -- move up or down in the sidebar.
 - <kbd>ctrl-o</kbd> -- open the box highlighted in the sidebar.
+- <kbd>o</kbd>/<kbd>O</kbd> -- sync mail for current/all accounts.
+- <kbd>B</kbd> -- hide/reveal the sidebar.
+- <kbd>D</kbd>/<kbd>U</kbd> -- mark/unmark mail for deletion.
 - <kbd>space</kbd> -- select mail. (See below).
 
 mutt-wizard automatically sets automatic binds to move to or move mail to other boxes. Press one of these keys:
