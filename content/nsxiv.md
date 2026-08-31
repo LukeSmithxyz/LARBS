@@ -3,16 +3,14 @@ title: "nsxiv"
 date: 2026-08-30T10:16:02-04:00
 ---
 
-## Documentation
-
-`man nsxiv`
-
-## Running
-
 nsxiv is opened automatically when you select an image file to open from
 [lf](/lf) or another program. Handles images, animated gifs, has additional
 thumbnail and slideshow modes and allows you to run custom scripts and
 read/write to standard input/output.
+
+## Documentation
+
+`man nsxiv`
 
 ## Bindings
 
