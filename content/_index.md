@@ -56,6 +56,7 @@ Here are the main programs, all with extra information here:
 - [htop](htop) -- to look cool in screencaps... err... system monitor
 - [mpv](/mpv) -- video player
 - [nsxiv](/nsxiv) -- image viewer
+- [zathura](/zathura) -- document reader
 
 ## Learning the system is fun and easy!
 
