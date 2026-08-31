@@ -1,5 +1,5 @@
 ---
-title: "Ncmpcpp"
+title: "ncmpcpp"
 date: 2023-01-16T22:24:03-05:00
 ---
 
